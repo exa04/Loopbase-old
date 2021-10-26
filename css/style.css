@@ -249,7 +249,7 @@ svg.feather{
     padding: 32px;
     border-radius: 8px;
 }
-#filter .mode-toggle, #filter select{
+#filter .mode-toggle, #filter select, #filter #big-search-button{
     width: fit-content;
     padding: 8px;
     border-radius: 8px;
@@ -261,11 +261,15 @@ svg.feather{
     border: 2px solid var(--bg3);
     color: var(--foreground);
 }
-#filter .mode-toggle:hover{
+#filter #big-search-button{
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+#filter .mode-toggle:hover, #filter #big-search-button:hover{
     background-color: var(--bg3);
     border: 2px solid var(--fg2);
 }
-#filter .mode-toggle:active{
+#filter .mode-toggle:active, #filter #big-search-button:hover{
     background-color: var(--fg2);
     color: var(--bg1);
 }
@@ -352,12 +356,8 @@ svg.feather{
     border-radius: 8px;
 }
 
-.audio-result:hover .fg-layer{
-    background: var(--fg1);
-    border-radius: 8px;
-}
 .audio-result:hover .bg-layer{
-    opacity: 0;
+    opacity: 0.5;
 }
 .audio-result:hover .actions > svg.feather:hover{
     stroke: var(--foreground);
