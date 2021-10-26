@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Looperman Desktop</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="rSlider.css">
+    <link rel="stylesheet" href="loading.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="rSlider.min.js"></script>
+</head>
+<body>
+    <div id="window-container">
+        <div id="navbar">
+            <div id="navigation">
+                <h3>Common Library</h3>
+                <a selected>Loops and Samples</a>
+                <a>Acapellas</a>
+                <a>Software</a>
+                <br>
+                <h3>Your Collection</h3>
+                <a>Downloads</a>
+                <a>Likes</a>
+                <a>Uploads</a>
+            </div>
+            <div id="profile-banner">
+                <div id="profile-user">
+                    <img src="https://www.looperman.com/media/avatars/med/looperman-avatar-02420154.jpg" id="profile-picture">
+                    <span id="profile-name">stxarixdust</span>
+                </div>
+                <div id="profile-icons">
+                    <i data-feather="sliders"></i>
+                    <i data-feather="upload"></i>
+                </div>
+            </div>
+        </div>
+        <div id="browser">
+            <div id="topbar">
+                <a class="topnav">
+                    <i data-feather="chevron-left"></i>
+                </a>
+                <a class="topnav" deactivated>
+                    <i data-feather="chevron-right"></i>
+                </a>
+                <div id="top-search">
+                    <i data-feather="search"></i>
+                    <input type="search" placeholder="Search all of Looperman...">
+                </div>
+            </div>
+            <div id="content">
+                <div id="audios">
+                    <div id="top-area">
+                        <form id="main-search-form" onsubmit="event.preventDefault(); search()">
+                        <h1>Loops and Samples</h1>
+                        <div id="search-bar">
+                            <i data-feather="search"></i>
+                            <input type="search" placeholder="Search for loops" id="filter-search">
+                        </div>
+                    </form>
+                    </div>
+                    <div id="results">
+                        <div id="results-contents">
+                            <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="filter">
+                    <h1>Filter</h1>
+                    <hr>
+                    <h2>Tempo</h2>
+                    <div id="tempo-mode-toggle" class="mode-toggle" onclick="toggleTempoSliderMode()">
+                        BPM Range
+                    </div>
+                    <div id="tempo-container">
+                        <input type="text" id="tempo-range"/>
+                    </div>
+                    <h2>Key</h2>
+                    <div id="key-mode-toggle" class="mode-toggle" onclick="toggleKeyMode()">
+                        Major Key
+                    </div>
+                    <div id="keys">
+                        <div class="keys-row">
+                            <div class="key" onclick="selectkey('cs')" id="cs">C#</div>
+                            <div class="key" onclick="selectkey('ds')" id="ds">D#</div>
+                            <div class="key-spacer"></div>
+                            <div class="key" onclick="selectkey('fs')" id="fs">F#</div>
+                            <div class="key" onclick="selectkey('gs')" id="gs">G#</div>
+                            <div class="key" onclick="selectkey('as')" id="as">A#</div>
+                        </div>
+                        <div class="keys-row">
+                            <div class="key" onclick="selectkey('c')" id="c">C</div>
+                            <div class="key" onclick="selectkey('d')" id="d">D</div>
+                            <div class="key" onclick="selectkey('e')" id="e">E</div>
+                            <div class="key" onclick="selectkey('f')" id="f">F</div>
+                            <div class="key" onclick="selectkey('g')" id="g">G</div>
+                            <div class="key" onclick="selectkey('a')" id="a">A</div>
+                            <div class="key" onclick="selectkey('b')" id="b">B</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+
+    let query = {
+        category:       'loops',
+        keys:           '',
+        order:          ['date', 'd'],
+        tempo:          [0,200],
+        page:           1,
+        key:            ['c', ''],
+        filterByKey:    false
+    };
+
+    var pref = {
+        tempoRange: true,
+        contentDir: "/home/ari/looperman/",
+        appendContent: false
+    }
+
+    var tempoSlider = new rSlider({
+        target: '#tempo-range',
+        values: {min: 0, max: 200},
+        step: 1,
+        range: pref.tempoRange,
+        tooltip: true,
+        scale: false,
+        labels: false,
+        set: [0, 200]
+    });
+
+    search();
+    feather.replace();
+
+    function toggleTempoSliderMode(){
+        let min = [parseInt(tempoSlider.getValue().split(/[ ,]+/)[0]), 200];
+        
+        pref.tempoRange = !pref.tempoRange;
+
+        document.getElementById("tempo-mode-toggle").innerHTML = pref.tempoRange ? "BPM Range" : "Single BPM"
+
+        tempoSlider.destroy();
+        tempoSlider = new rSlider({
+            target: '#tempo-range',
+            values: {min: 0, max: 200},
+            step: 1,
+            range: pref.tempoRange,
+            tooltip: true,
+            scale: false,
+            labels: false,
+            set: min
+        });
+    }
+
+    function toggleKeyMode(){
+        query.key[1] = (query.key[1] == "m") ? "" : "m";
+        document.getElementById("key-mode-toggle").innerHTML = (query.key[1] == "m") ? "Minor Key" : "Major Key";
+    }
+
+    function appendResults(results){
+        resultsContainer = document.querySelector("#results-contents");
+        results.forEach(result => {
+            console.log(result.author);
+            html = "<div class='audio-result'><div class='fg-layer'><div class='info'><img src='"+result.profile_pic+"' class='profile_picture_sample'><div class='sample-info-txt'><div class='sample-title'>"+result.title+"</div><div class='sample-author'>"+result.author+" - "+result.tempo+" - Key: "+result.key+"</div></div></div><div class='actions'>"+feather.icons["download-cloud"].toSvg()+feather.icons["more-vertical"].toSvg()+"</div></div><div class='bg-layer'><img src='"+result.waveform+"' class='bg-waveform'></div></div>";
+            resultsContainer.innerHTML += html;
+        });
+    }
+    
+    function search(){
+        resultsContainer = document.querySelector("#results-contents");
+        resultsContainer.innerHTML = '<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>';
+
+        let min = parseInt(tempoSlider.getValue().split(/[ ,]+/)[0]);
+        let max = pref.tempoRange ? parseInt(tempoSlider.getValue().split(/[ ,]+/)[1]) : min;
+        console.log([min,max]);
+
+        query.keys = document.querySelector("#filter-search").value;
+        query.tempo = [min,max];
+        query.page = 1;
+
+        ipcRenderer.invoke('search', query).then((results) => {
+            resultsContainer.innerHTML = '';
+            appendResults(results);
+        });
+    }
+
+    function loadNewContent(){
+        query.page += 1;
+
+        ipcRenderer.invoke('search', query).then((results) => {
+            resultsContainer.lastChild.remove();
+            appendResults(results);
+            pref.appendContent = false;
+        });
+    }
+
+    function selectkey(key){
+        document.querySelectorAll("#keys .key").forEach((el)=>{
+            if(el.classList.contains("selected")) el.classList.remove("selected");
+        });
+
+        if(query.filterByKey && query.key[0] == key){
+            document.querySelector('#keys #'+key).classList.remove("selected");
+            query.filterByKey = false;
+        } else {
+            document.querySelector('#keys #'+key).classList.add("selected");
+            query.filterByKey = true;
+        }
+
+        query.key[0] = key;
+    }
+
+    var r = document.querySelector("#results");
+
+    r.onscroll = function(ev) {
+        resultsContainer = document.querySelector("#results-contents");
+        if (Math.ceil(r.scrollTop + r.clientHeight) >= r.scrollHeight - 200
+        && !resultsContainer.lastChild.classList.contains("lds-ellipsis")) {
+            resultsContainer.innerHTML += '<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>';
+            if(!pref.appendContent){
+                pref.appendContent = true;
+                loadNewContent();
+            }
+        }
+    };
+</script>
