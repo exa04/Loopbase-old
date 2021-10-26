@@ -97,7 +97,11 @@ function search(){
 
     ipcRenderer.invoke('search', query).then((results) => {
         resultsContainer.innerHTML = '';
-        appendResults(results);
+        if(results.length > 0){
+            appendResults(results);
+            pref.appendContent = false;
+        }
+        else resultsContainer.innerHTML = '<p id="nothing-found">Nothing was found.</p>';
     });
 }
 
@@ -105,9 +109,12 @@ function loadNewContent(){
     query.page += 1;
 
     ipcRenderer.invoke('search', query).then((results) => {
+        console.log(resultsContainer.lastChild);
         resultsContainer.lastChild.remove();
-        appendResults(results);
-        pref.appendContent = false;
+        if(results.length > 0){
+            pref.appendContent = false;
+            appendResults(results);
+        }
     });
 }
 
@@ -133,9 +140,10 @@ r.onscroll = function(ev) {
     resultsContainer = document.querySelector("#results-contents");
     if (Math.ceil(r.scrollTop + r.clientHeight) >= r.scrollHeight - 200
     && !resultsContainer.lastChild.classList.contains("lds-ellipsis")) {
-        resultsContainer.innerHTML += '<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>';
+        console.log("ohayo onii chan");
         if(!pref.appendContent){
             pref.appendContent = true;
+            resultsContainer.innerHTML += '<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>';
             loadNewContent();
         }
     }
