@@ -11,7 +11,8 @@ let query = {
 var pref = {
     tempoRange: true,
     contentDir: "/home/ari/looperman/",
-    appendContent: false
+    appendContent: false,
+    direction: "d"
 }
 
 var tempoSlider = new rSlider({
@@ -27,6 +28,8 @@ var tempoSlider = new rSlider({
 
 search();
 feather.replace();
+
+document.querySelector("#direction-toggle").firstElementChild.style.display = "none";
 
 function toggleTempoSliderMode(){
     let min = [parseInt(tempoSlider.getValue().split(/[ ,]+/)[0]), 200];
@@ -53,6 +56,18 @@ function toggleKeyMode(){
     document.getElementById("key-mode-toggle").innerHTML = (query.key[1] == "m") ? "Minor Key" : "Major Key";
 }
 
+function toggleDirection(){
+    if(pref.direction == "d"){
+        pref.direction = "a";
+        document.querySelector("#direction-toggle .feather-chevrons-down").style.display = "none";
+        document.querySelector("#direction-toggle .feather-chevrons-up").style.display = "inline";
+    } else {
+        pref.direction = "d";
+        document.querySelector("#direction-toggle .feather-chevrons-down").style.display = "inline";
+        document.querySelector("#direction-toggle .feather-chevrons-up").style.display = "none";
+    }
+}
+
 function appendResults(results){
     resultsContainer = document.querySelector("#results-contents");
     results.forEach(result => {
@@ -73,6 +88,8 @@ function search(){
     query.keys = document.querySelector("#filter-search").value;
     query.tempo = [min,max];
     query.page = 1;
+    query.order[0] = document.querySelector("#order").value;
+    query.order[1] = pref.direction;
 
     ipcRenderer.invoke('search', query).then((results) => {
         resultsContainer.innerHTML = '';

@@ -244,12 +244,12 @@ svg.feather{
     border-style: solid;
     margin-bottom: 8px;
 }
-#filter #tempo-container{
+#filter #tempo-container, #filter #order-container{
     background-color: var(--bg2);
     padding: 32px;
     border-radius: 8px;
 }
-#filter .mode-toggle{
+#filter .mode-toggle, #filter select{
     width: fit-content;
     padding: 8px;
     border-radius: 8px;
@@ -259,6 +259,7 @@ svg.feather{
     margin: auto;
     margin-bottom: 8px;
     border: 2px solid var(--bg3);
+    color: var(--foreground);
 }
 #filter .mode-toggle:hover{
     background-color: var(--bg3);
@@ -303,6 +304,15 @@ svg.feather{
     aspect-ratio: 1;
     margin: 4px;
     opacity: 0;
+}
+#filter select{
+    cursor: default;
+    margin-bottom: 0;
+}
+#filter #direction-toggle svg{
+    height: 21px;
+    width: 21px;
+    vertical-align: middle;
 }
 #top-area h1{
     font-size: 36px;

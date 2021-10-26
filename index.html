@@ -97,6 +97,21 @@
                             <div class="key" onclick="selectkey('b')" id="b">B</div>
                         </div>
                     </div>
+                    <h2>Order</h2>
+                    <div id="order-container">
+                        <select id="order">
+                            <option value="date" selected>Date</option>
+                            <option value="name">Title</option>
+                            <option value="author">Author</option>
+                            <option value="tempo">Tempo</option>
+                            <option value="downloads">Downloads</option>
+                            <option value="comments">Comments</option>
+                        </select>
+                        <a id="direction-toggle" onclick="toggleDirection()">
+                            <i data-feather="chevrons-up"></i>
+                            <i data-feather="chevrons-down"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
