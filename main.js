@@ -36,6 +36,7 @@ function search(args){
                 + '?page='+ args.page
                 + '&keys=' + args.keys
                 + '&order=' + args.order[0]
+                + '&when=' + args.date
                 + "&dir="+args.order[1]
                 + key
                 + "&ftempo="+args.tempo[0]
