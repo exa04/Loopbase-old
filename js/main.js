@@ -6,6 +6,7 @@ let query = {
     page:           1,
     key:            ['c', ''],
     date:           0,
+    genre:          0,
     filterByKey:    false
 };
 
@@ -92,6 +93,7 @@ function search(){
     query.order[0] = document.querySelector("#order").value;
     query.order[1] = pref.direction;
     query.date = document.querySelector("#date").value;
+    query.genre = document.querySelector("#genre").value;
 
     ipcRenderer.invoke('search', query).then((results) => {
         resultsContainer.innerHTML = '';

@@ -31,13 +31,15 @@ function search(args){
     return new Promise(reply => {
         results = [];
         key = args.filterByKey ? ("&mkey="+args.key[0]+args.key[1]) : "";
-        var date = args.date == 0 ? '' : '&when=' + args.date
+        var date = args.date == 0 ? '' : '&when=' + args.date;
+        var genre = args.genre == 0 ? '' : '&gid=' + args.genre;
         request({
             url: 'https://looperman.com/' + args.category
                 + '?page='+ args.page
                 + '&keys=' + args.keys
                 + '&order=' + args.order[0]
                 + date
+                + genre
                 + "&dir="+args.order[1]
                 + key
                 + "&ftempo="+args.tempo[0]

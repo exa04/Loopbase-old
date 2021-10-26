@@ -244,7 +244,7 @@ svg.feather{
     border-style: solid;
     margin-bottom: 8px;
 }
-#filter #tempo-container, #filter #order-container{
+#filter #tempo-container, #filter #order-container, #filter #date-container, #filter #genre-container{
     background-color: var(--bg2);
     padding: 32px;
     border-radius: 8px;
