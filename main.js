@@ -31,12 +31,13 @@ function search(args){
     return new Promise(reply => {
         results = [];
         key = args.filterByKey ? ("&mkey="+args.key[0]+args.key[1]) : "";
+        var date = args.date == 0 ? '' : '&when=' + args.date
         request({
             url: 'https://looperman.com/' + args.category
                 + '?page='+ args.page
                 + '&keys=' + args.keys
                 + '&order=' + args.order[0]
-                + '&when=' + args.date
+                + date
                 + "&dir="+args.order[1]
                 + key
                 + "&ftempo="+args.tempo[0]
