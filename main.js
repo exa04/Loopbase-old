@@ -1,8 +1,18 @@
 const {app, BrowserWindow, ipcMain} = require('electron');
 const path = require('path');
+const os = require('os');
 
 var request = require('request');
 const cheerio = require('cheerio');
+
+const pref = {
+    dir : {
+        content:        os.homedir() + "/loopermanContent",
+        loops:          os.homedir() + "/loopermanContent/loops"
+    }
+}
+
+console.log(pref.dir.loops)
 
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -26,6 +36,9 @@ app.whenReady().then(() => {
 app.on('window-all-closed', ()=>{
     if(process.platform !== 'darwin') app.quit();
 });
+
+
+
 
 function search(args){
     return new Promise(reply => {

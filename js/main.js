@@ -10,9 +10,8 @@ let query = {
     filterByKey:    false
 };
 
-var pref = {
+var searchSession = {
     tempoRange: true,
-    contentDir: "/home/ari/looperman/",
     appendContent: false,
     direction: "d"
 }
@@ -21,7 +20,7 @@ var tempoSlider = new rSlider({
     target: '#tempo-range',
     values: {min: 0, max: 200},
     step: 1,
-    range: pref.tempoRange,
+    range: searchSession.tempoRange,
     tooltip: true,
     scale: false,
     labels: false,
@@ -36,16 +35,16 @@ document.querySelector("#direction-toggle").firstElementChild.style.display = "n
 function toggleTempoSliderMode(){
     let min = [parseInt(tempoSlider.getValue().split(/[ ,]+/)[0]), 200];
     
-    pref.tempoRange = !pref.tempoRange;
+    searchSession.tempoRange = !searchSession.tempoRange;
 
-    document.getElementById("tempo-mode-toggle").innerHTML = pref.tempoRange ? "BPM Range" : "Single BPM"
+    document.getElementById("tempo-mode-toggle").innerHTML = searchSession.tempoRange ? "BPM Range" : "Single BPM"
 
     tempoSlider.destroy();
     tempoSlider = new rSlider({
         target: '#tempo-range',
         values: {min: 0, max: 200},
         step: 1,
-        range: pref.tempoRange,
+        range: searchSession.tempoRange,
         tooltip: true,
         scale: false,
         labels: false,
@@ -59,12 +58,12 @@ function toggleKeyMode(){
 }
 
 function toggleDirection(){
-    if(pref.direction == "d"){
-        pref.direction = "a";
+    if(searchSession.direction == "d"){
+        searchSession.direction = "a";
         document.querySelector("#direction-toggle .feather-chevrons-down").style.display = "none";
         document.querySelector("#direction-toggle .feather-chevrons-up").style.display = "inline";
     } else {
-        pref.direction = "d";
+        searchSession.direction = "d";
         document.querySelector("#direction-toggle .feather-chevrons-down").style.display = "inline";
         document.querySelector("#direction-toggle .feather-chevrons-up").style.display = "none";
     }
@@ -84,14 +83,14 @@ function search(){
     resultsContainer.innerHTML = '<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>';
 
     let min = parseInt(tempoSlider.getValue().split(/[ ,]+/)[0]);
-    let max = pref.tempoRange ? parseInt(tempoSlider.getValue().split(/[ ,]+/)[1]) : min;
+    let max = searchSession.tempoRange ? parseInt(tempoSlider.getValue().split(/[ ,]+/)[1]) : min;
     console.log([min,max]);
 
     query.keys = document.querySelector("#filter-search").value;
     query.tempo = [min,max];
     query.page = 1;
     query.order[0] = document.querySelector("#order").value;
-    query.order[1] = pref.direction;
+    query.order[1] = searchSession.direction;
     query.date = document.querySelector("#date").value;
     query.genre = document.querySelector("#genre").value;
 
@@ -99,7 +98,7 @@ function search(){
         resultsContainer.innerHTML = '';
         if(results.length > 0){
             appendResults(results);
-            pref.appendContent = false;
+            searchSession.appendContent = false;
         }
         else resultsContainer.innerHTML = '<p id="nothing-found">Nothing was found.</p>';
     });
@@ -112,7 +111,7 @@ function loadNewContent(){
         console.log(resultsContainer.lastChild);
         resultsContainer.lastChild.remove();
         if(results.length > 0){
-            pref.appendContent = false;
+            searchSession.appendContent = false;
             appendResults(results);
         }
     });
@@ -141,8 +140,8 @@ r.onscroll = function(ev) {
     if (Math.ceil(r.scrollTop + r.clientHeight) >= r.scrollHeight - 200
     && !resultsContainer.lastChild.classList.contains("lds-ellipsis")) {
         console.log("ohayo onii chan");
-        if(!pref.appendContent){
-            pref.appendContent = true;
+        if(!searchSession.appendContent){
+            searchSession.appendContent = true;
             resultsContainer.innerHTML += '<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>';
             loadNewContent();
         }
