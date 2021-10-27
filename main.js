@@ -1,6 +1,7 @@
 const {app, BrowserWindow, ipcMain} = require('electron');
 const path = require('path');
 const os = require('os');
+const fs = require('fs');
 
 var request = require('request');
 const cheerio = require('cheerio');
@@ -37,8 +38,22 @@ app.on('window-all-closed', ()=>{
     if(process.platform !== 'darwin') app.quit();
 });
 
-
-
+async function downloadMP3(url, dest){
+    return new Promise((resolve, reject) => {
+        let file = fs.createWriteStream(dest); 
+        let stream = request({
+            uri: url,
+            timeout: 60000
+        })
+        .pipe(file)
+        .on('finish', () => {
+            resolve();
+        })
+        .on('error', (error) => {
+            reject(error);
+        })
+    })
+}
 
 function search(args){
     return new Promise(reply => {
@@ -79,4 +94,8 @@ function search(args){
 
 ipcMain.handle('search', async (event, args) => {
     return await search(args);
+})
+
+ipcMain.handle('downloadMP3', async (event, args) => {
+    return await downloadMP3(args.url, args.dest);
 })
