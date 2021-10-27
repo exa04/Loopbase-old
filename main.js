@@ -1,8 +1,17 @@
 const {app, BrowserWindow, ipcMain} = require('electron');
 const path = require('path');
+const os = require('os');
+const fs = require('fs');
 
 var request = require('request');
 const cheerio = require('cheerio');
+
+const pref = {
+    dir : {
+        content:        os.homedir() + "/loopermanContent",
+        loops:          os.homedir() + "/loopermanContent/loops"
+    }
+}
 
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -27,6 +36,23 @@ app.on('window-all-closed', ()=>{
     if(process.platform !== 'darwin') app.quit();
 });
 
+async function downloadMP3(url, dest){
+    return new Promise((resolve, reject) => {
+        let file = fs.createWriteStream(dest); 
+        let stream = request({
+            uri: url,
+            timeout: 60000
+        })
+        .pipe(file)
+        .on('finish', () => {
+            resolve();
+        })
+        .on('error', (error) => {
+            reject(error);
+        })
+    })
+}
+
 function search(args){
     return new Promise(reply => {
         results = [];
@@ -50,6 +76,7 @@ function search(args){
             $('#body-left .player-wrapper').each(function(i, elm) {
                 results.push({
                     title: $(this).find(".player-title").text(),
+                    mp3_url: $(this).prop("rel"),
                     author: $(this).find(".icon-user").text(),
                     profile_pic: $(this).find(".player-avatar a img").prop("src"),
                     waveform: $(this).find(".player-waveform-image").prop("src"),
@@ -66,4 +93,4 @@ function search(args){
 
 ipcMain.handle('search', async (event, args) => {
     return await search(args);
-})
+});
