@@ -80,9 +80,9 @@ function appendResults(results){
         <div class='audio-result'>
             <div class='fg-layer'>
                 <div class='info'>
-                    <div class='pp-area' onclick='preview("`+result.mp3_url+`")'>
+                    <div class='pp-area' onclick='preview("`+result.mp3_url+`")' id='`+result.mp3_url+`'>
                         <img src='`+result.profile_pic+`' class='profile_picture_sample'>
-                        <div class='pp-playbutton'>`+feather.icons[`play`].toSvg()/*+feather.icons[`pause`].toSvg()+feather.icons[`clock`].toSvg()*/+`</div>
+                        <div class='pp-playbutton'>`+feather.icons[`play`].toSvg()+feather.icons[`pause`].toSvg()+`</div>
                     </div>
                     <div class='sample-info-txt'>
                         <div class='sample-title'>`+result.title+`</div>
@@ -153,10 +153,26 @@ function selectkey(key){
 }
 
 function preview(url){
-    audioPreviewPlayer.pause();
-    if(url != audioPreviewPlayer.url){
+    var oldUrl = audioPreviewPlayer.src;
+    if(url != oldUrl){
+        audioPreviewPlayer.pause();
+        if(oldUrl != ""){
+            document.getElementById(oldUrl).querySelector(".feather-pause").style.display = "none";
+            document.getElementById(oldUrl).querySelector(".feather-play").style.display = "block";
+        }
+        document.getElementById(url).querySelector(".feather-pause").style.display = "block";
+        document.getElementById(url).querySelector(".feather-play").style.display = "none";
         audioPreviewPlayer = new Audio(url);
         audioPreviewPlayer.play();
+        document.getElementById(url);
+    }else{
+        if(audioPreviewPlayer.paused){
+            audioPreviewPlayer.play();
+        }else{
+            document.getElementById(url).querySelector(".feather-pause").style.display = "none";
+            document.getElementById(url).querySelector(".feather-play").style.display = "block";
+            audioPreviewPlayer.pause();
+        }
     }
 }
 

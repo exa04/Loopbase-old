@@ -126,7 +126,7 @@ svg.feather{
     height: 32px;
     border-radius: 50%;
 }
-#profile-icons > svg.feather{
+#profile-icons > svg.feather, .actions > svg.feather{
     margin-left: 8px;
 }
 #profile-icons > svg.feather:hover, .actions > svg.feather:hover{
@@ -396,14 +396,15 @@ svg.feather{
     border-radius: 8px;
 }
 .pp-area:hover > .profile_picture_sample,
-.pp-area.pending-playback > .profile_picture_sample,
 .pp-area.playing > .profile_picture_sample{
     display: none;
 }
 .pp-area:hover > .pp-playbutton,
-.pp-area.pending-playback > .pp-playbutton,
 .pp-area.playing > .pp-playbutton{
     display: flex;
+}
+.pp-playbutton .feather-pause{
+    display: none;
 }
 .pp-playbutton{
     display: flex;
