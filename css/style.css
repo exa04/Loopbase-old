@@ -360,13 +360,8 @@ svg.feather{
     margin-bottom: 16px;
     border-radius: 8px;
 }
-
 .audio-result:hover .bg-layer{
     opacity: 0.5;
-}
-.audio-result:hover .actions > svg.feather:hover{
-    stroke: var(--foreground);
-    transform: scale(1.2);
 }
 .audio-result .fg-layer{
     position: relative;
@@ -379,7 +374,6 @@ svg.feather{
     transition: 120ms;
     background: linear-gradient(90deg, rgba(38,0,64,1) 0%, rgba(38,0,64,0.5) 50%, rgba(38,0,64,0.5) 75%, rgba(38,0,64,1) 100%);
 }
-
 .audio-result .fg-layer .info{
     display: flex;
     align-items: center;
@@ -395,9 +389,29 @@ svg.feather{
     font-weight: 700;
     opacity: .75;
 }
-.profile_picture_sample{
+.profile_picture_sample, .pp-area, .pp-playbutton{
+    aspect-ratio: 1;
+    object-fit: cover;
     height: 48px;
     border-radius: 8px;
+}
+.pp-area:hover > .profile_picture_sample,
+.pp-area.pending-playback > .profile_picture_sample,
+.pp-area.playing > .profile_picture_sample{
+    display: none;
+}
+.pp-area:hover > .pp-playbutton,
+.pp-area.pending-playback > .pp-playbutton,
+.pp-area.playing > .pp-playbutton{
+    display: flex;
+}
+.pp-playbutton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: var(--fg1);
+    display: none;
 }
 .bg-layer{
     position: relative;

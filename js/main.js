@@ -72,7 +72,25 @@ function toggleDirection(){
 function appendResults(results){
     resultsContainer = document.querySelector("#results-contents");
     results.forEach(result => {
-        html = "<div class='audio-result'><div class='fg-layer'><div class='info'><img src='"+result.profile_pic+"' class='profile_picture_sample'><div class='sample-info-txt'><div class='sample-title'>"+result.title+"</div><div class='sample-author'>"+result.author+" - "+result.tempo+" - Key: "+result.key+"</div></div></div><div class='actions'>"+feather.icons["download-cloud"].toSvg()+feather.icons["more-vertical"].toSvg()+"</div></div><div class='bg-layer'><img src='"+result.waveform+"' class='bg-waveform'></div></div>";
+        html = `
+        <div class='audio-result'>
+            <div class='fg-layer'>
+                <div class='info'>
+                    <div class='pp-area' onclick='preview(`+result.mp3_url+`)'>
+                        <img src='`+result.profile_pic+`' class='profile_picture_sample'>
+                        <div class='pp-playbutton'>`+feather.icons[`play`].toSvg()/*+feather.icons[`pause`].toSvg()+feather.icons[`clock`].toSvg()*/+`</div>
+                    </div>
+                    <div class='sample-info-txt'>
+                        <div class='sample-title'>`+result.title+`</div>
+                        <div class='sample-author'>`+result.author+` - `+result.tempo+` - Key: `+result.key+`</div>
+                    </div>
+                </div>
+                <div class='actions'>`+feather.icons[`download-cloud`].toSvg()+feather.icons[`more-vertical`].toSvg()+`</div>
+            </div>
+            <div class='bg-layer'>
+                <img src='`+result.waveform+`' class='bg-waveform'></div>
+            </div>
+        </div>`;
         resultsContainer.innerHTML += html;
     });
 }
@@ -135,7 +153,7 @@ var r = document.querySelector("#results");
 r.onscroll = function(ev) {
     resultsContainer = document.querySelector("#results-contents");
     if (Math.ceil(r.scrollTop + r.clientHeight) >= r.scrollHeight - 200
-    && !resultsContainer.lastChild.classList.contains("lds-ellipsis")) {
+    && !resultsContainer.lastElementChild.classList.contains("lds-ellipsis")) {
         if(!searchSession.appendContent){
             searchSession.appendContent = true;
             resultsContainer.innerHTML += '<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>';
