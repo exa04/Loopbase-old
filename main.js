@@ -55,16 +55,6 @@ async function downloadMP3(url, dest){
     })
 }
 
-async function tmpMp3(url){
-    return new Promise((resolve, reject) => {
-        tmp.file({ prefix: 'preview_', postfix: '.mp3' }, function _tempFileCreated(error, filepath, fd, cleanupCallback) {
-            if (error) reject(error);
-            downloadMP3(url, filepath);
-            resolve(filepath);
-        });
-    });
-}
-
 function search(args){
     return new Promise(reply => {
         results = [];
@@ -105,8 +95,4 @@ function search(args){
 
 ipcMain.handle('search', async (event, args) => {
     return await search(args);
-});
-
-ipcMain.handle('tempMP3', async (event, args) => {
-    return await tmpMp3('https://www.looperman.com/media/loops/4698955/looperman-l-4698955-0270695-808bass-a-bpm183.mp3');
 });

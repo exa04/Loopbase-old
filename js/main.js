@@ -27,6 +27,10 @@ var tempoSlider = new rSlider({
     set: [0, 200]
 });
 
+var loadedPreviewContent = {}
+
+var audioPreviewPlayer = new Audio();
+
 search();
 feather.replace();
 
@@ -76,7 +80,7 @@ function appendResults(results){
         <div class='audio-result'>
             <div class='fg-layer'>
                 <div class='info'>
-                    <div class='pp-area' onclick='preview(`+result.mp3_url+`)'>
+                    <div class='pp-area' onclick='preview("`+result.mp3_url+`")'>
                         <img src='`+result.profile_pic+`' class='profile_picture_sample'>
                         <div class='pp-playbutton'>`+feather.icons[`play`].toSvg()/*+feather.icons[`pause`].toSvg()+feather.icons[`clock`].toSvg()*/+`</div>
                     </div>
@@ -146,6 +150,14 @@ function selectkey(key){
     }
 
     query.key[0] = key;
+}
+
+function preview(url){
+    audioPreviewPlayer.pause();
+    if(url != audioPreviewPlayer.url){
+        audioPreviewPlayer = new Audio(url);
+        audioPreviewPlayer.play();
+    }
 }
 
 var r = document.querySelector("#results");
