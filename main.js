@@ -1,7 +1,5 @@
 const {app, BrowserWindow, ipcMain} = require('electron');
 const path = require('path');
-const tmp = require('tmp');
-tmp.setGracefulCleanup();
 const os = require('os');
 const fs = require('fs');
 
