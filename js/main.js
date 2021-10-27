@@ -167,6 +167,8 @@ function preview(url){
         document.getElementById(url);
     }else{
         if(audioPreviewPlayer.paused){
+            document.getElementById(url).querySelector(".feather-pause").style.display = "block";
+            document.getElementById(url).querySelector(".feather-play").style.display = "none";
             audioPreviewPlayer.play();
         }else{
             document.getElementById(url).querySelector(".feather-pause").style.display = "none";
