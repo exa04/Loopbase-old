@@ -136,7 +136,7 @@ function selectkey(key){
 
 var r = document.querySelector("#results");
 
-r.onscroll = function(ev) {
+r.onscroll = (ev) => {
     resultsContainer = document.querySelector("#results-contents");
     if (Math.ceil(r.scrollTop + r.clientHeight) >= r.scrollHeight - 200
     && !resultsContainer.lastChild.classList.contains("lds-ellipsis")) {
