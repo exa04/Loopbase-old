@@ -72,7 +72,6 @@ function toggleDirection(){
 function appendResults(results){
     resultsContainer = document.querySelector("#results-contents");
     results.forEach(result => {
-        console.log(result.author);
         html = "<div class='audio-result'><div class='fg-layer'><div class='info'><img src='"+result.profile_pic+"' class='profile_picture_sample'><div class='sample-info-txt'><div class='sample-title'>"+result.title+"</div><div class='sample-author'>"+result.author+" - "+result.tempo+" - Key: "+result.key+"</div></div></div><div class='actions'>"+feather.icons["download-cloud"].toSvg()+feather.icons["more-vertical"].toSvg()+"</div></div><div class='bg-layer'><img src='"+result.waveform+"' class='bg-waveform'></div></div>";
         resultsContainer.innerHTML += html;
     });
@@ -84,7 +83,6 @@ function search(){
 
     let min = parseInt(tempoSlider.getValue().split(/[ ,]+/)[0]);
     let max = searchSession.tempoRange ? parseInt(tempoSlider.getValue().split(/[ ,]+/)[1]) : min;
-    console.log([min,max]);
 
     query.keys = document.querySelector("#filter-search").value;
     query.tempo = [min,max];
@@ -108,7 +106,6 @@ function loadNewContent(){
     query.page += 1;
 
     ipcRenderer.invoke('search', query).then((results) => {
-        console.log(resultsContainer.lastChild);
         resultsContainer.lastChild.remove();
         if(results.length > 0){
             searchSession.appendContent = false;
@@ -139,7 +136,6 @@ r.onscroll = function(ev) {
     resultsContainer = document.querySelector("#results-contents");
     if (Math.ceil(r.scrollTop + r.clientHeight) >= r.scrollHeight - 200
     && !resultsContainer.lastChild.classList.contains("lds-ellipsis")) {
-        console.log("ohayo onii chan");
         if(!searchSession.appendContent){
             searchSession.appendContent = true;
             resultsContainer.innerHTML += '<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>';
