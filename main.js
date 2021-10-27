@@ -88,6 +88,7 @@ function search(args){
             $('#body-left .player-wrapper').each(function(i, elm) {
                 results.push({
                     title: $(this).find(".player-title").text(),
+                    mp3_url: $(this).prop("rel"),
                     author: $(this).find(".icon-user").text(),
                     profile_pic: $(this).find(".player-avatar a img").prop("src"),
                     waveform: $(this).find(".player-waveform-image").prop("src"),
@@ -104,8 +105,8 @@ function search(args){
 
 ipcMain.handle('search', async (event, args) => {
     return await search(args);
-})
+});
 
 ipcMain.handle('tempMP3', async (event, args) => {
     return await tmpMp3('https://www.looperman.com/media/loops/4698955/looperman-l-4698955-0270695-808bass-a-bpm183.mp3');
-})
+});
