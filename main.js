@@ -1,4 +1,5 @@
-const {app, BrowserWindow, ipcMain} = require('electron');
+const {app, BrowserWindow, ipcMain, shell} = require('electron');
+
 const path = require('path');
 const os = require('os');
 const fs = require('fs');
@@ -84,6 +85,7 @@ function search(args){
                     author: $(this).find(".icon-user").text(),
                     profile_pic: $(this).find(".player-avatar a img").prop("src"),
                     waveform: $(this).find(".player-waveform-image").prop("src"),
+                    web_link: $(this).find(".player-top > a").prop("href")
                 });
             });
             $('#body-left .tag-wrapper').each(function(i, elm) {
@@ -104,6 +106,17 @@ async function fileExists(path){
     })
 }
 
+async function fileDelete(path){
+    return new Promise((resolve, reject) => {
+        try {
+            fs.unlinkSync(path);
+            resolve();
+        } catch (err) {
+            reject(err);
+        }
+    })
+}
+
 ipcMain.handle('search', async (event, args) => {
     return await search(args);
 });
@@ -112,6 +125,25 @@ ipcMain.handle('downloadMP3', async (event, args) => {
     return await downloadMP3(args.url, pref.dir.content + "/" + args.dest);
 });
 
+ipcMain.handle('getDir', async (event, dir) => {
+    return pref.dir[dir];
+});
+
 ipcMain.handle('fileExists', async (event, path) =>{
     return await fileExists(pref.dir.content + "/" + path);
+});
+
+ipcMain.handle('fileDelete', async (event, path) =>{
+    return await fileDelete(pref.dir.content + "/" + path);
+});
+
+ipcMain.handle('openLink', async (event, url) =>{
+    shell.openExternal(url);
+});
+
+ipcMain.on('ondragstart', (event, filePath) => {
+    event.sender.startDrag({
+      file: path.join(pref.dir.content, filePath),
+      icon: path.join(__dirname, 'img/dragAndDrop.png')
+    });
 });

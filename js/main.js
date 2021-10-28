@@ -28,8 +28,9 @@ var tempoSlider = new rSlider({
 });
 
 var loadedPreviewContent = {}
-
 var audioPreviewPlayer = new Audio();
+var currentCtxMenu;
+
 
 search();
 feather.replace();
@@ -85,12 +86,33 @@ function appendResults(results){
                                 + result.tempo.replace(' ', '_') + '_'
                                 + (result.key != "Unknown" ? result.key.toLowerCase() + '_' : '')
                                 + filename;
-
         ipcRenderer.invoke('fileExists', localSampleFilePath).then((exists) => {
-            console.log(exists);
+            var filename = result.mp3_url.split("/").splice(-1)[0].split("?")[0];
+            localSampleFilePath = "loops/"
+                                    + result.category.toLowerCase() + '/'
+                                    + result.tempo.replace(' ', '_') + '_'
+                                    + (result.key !="Unknown" ? result.key.toLowerCase() + '_' : '')
+                                    + filename;
+            if(!exists){
+                var action_1 =
+                `<a onclick='downloadFile("`+result.mp3_url+`","`+localSampleFilePath+`")'>
+                    ` + feather.icons[`download-cloud`].toSvg() + `
+                </a>`;
+                var actions_ctx = ``;
+            }
+            else {
+                var action_1 =
+                `<a ondragstart="event.preventDefault(); startDrag('`+localSampleFilePath+`');" draggable="true"'>
+                    ` + feather.icons[`copy`].toSvg() + `
+                </a>`;
 
-            if(!exists) var action_1 = `downloadFile("`+result.mp3_url+`","`+localSampleFilePath+`")`;
-            else var action_1 = ``;
+                var actions_ctx =  
+                `<a onclick='deleteFile("`+localSampleFilePath+`", this)'>
+                    `+ feather.icons[`trash`].toSvg() + `
+                    <span>Delete</span>
+                </a>`;
+            }
+
             html = `
             <div class='audio-result `+(exists ? `downloaded` : ``)+`'>
                 <div class='fg-layer'>
@@ -105,12 +127,15 @@ function appendResults(results){
                         </div>
                     </div>
                     <div class='actions'>
-                        <a onclick='`+action_1+`'>
-                            ` + feather.icons[(exists ? `copy` : `download-cloud`)].toSvg() + `
-                        </a>
-                        <a>
+                        `+action_1+`
+                        <a onclick='showCtxMenu(this.parentElement.querySelector(".ctx-menu"))'>
                             ` + feather.icons[`more-vertical`].toSvg() + `
                         </a>
+                        <div class='ctx-menu'>
+                            <a onclick='openBrowser("`+result.web_link+`"); hideCtxMenu();'>` + feather.icons[`link`].toSvg() + `<span>View in browser</span></a>
+                            `+actions_ctx+`
+                            <a onclick='hideCtxMenu()'>` + feather.icons[`x`].toSvg() + `</a>
+                        </div>
                     </div>
                 </div>
                 <div class='bg-layer'>
@@ -120,6 +145,28 @@ function appendResults(results){
             resultsContainer.innerHTML += html;
         });
     });
+}
+
+function showCtxMenu(el){
+    try {
+        currentCtxMenu.style.display = 'none';
+    } catch (err) { }
+    currentCtxMenu = el;
+    currentCtxMenu.style.display = 'block';
+}
+
+function hideCtxMenu(el){
+    currentCtxMenu.style.display = 'none';
+}
+
+function startDrag(path){
+    ipcRenderer.invoke('getDir', 'loop').then(dir => {
+        window.electron.startDrag(path);
+    });
+}
+
+function openBrowser(url){
+    ipcRenderer.invoke('openLink', url);
 }
 
 function search(){
@@ -205,11 +252,16 @@ function preview(url){
 
 function downloadFile(url, dest){
     ipcRenderer.invoke('downloadMP3', {url, dest}).then(() => {
-        console.log(document.getElementById(url).parentElement.parentElement.parentElement.classList.add("downloaded"));
-        console.log("Downloaded.");
+        document.getElementById(url).parentElement.parentElement.parentElement.classList.add("downloaded")
     });
 }
 
+function deleteFile(path, el){
+    hideCtxMenu(el);
+    ipcRenderer.invoke('fileDelete', path).then(() => {
+        el.parentElement.parentElement.parentElement.parentElement.classList.remove("downloaded");
+    });
+}
 var r = document.querySelector("#results");
 
 r.onscroll = (ev) => {
