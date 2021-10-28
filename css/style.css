@@ -138,6 +138,7 @@ svg.feather{
     height: 100%;
 }
 #topbar{
+    cursor: not-allowed !important;     /*TODO Remove this once proper functionality is given to top bar. */
     display: flex;
     padding-top: 8px;
     padding-left: 16px;
