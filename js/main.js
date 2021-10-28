@@ -28,8 +28,9 @@ var tempoSlider = new rSlider({
 });
 
 var loadedPreviewContent = {}
-
 var audioPreviewPlayer = new Audio();
+var currentCtxMenu;
+
 
 search();
 feather.replace();
@@ -87,7 +88,6 @@ function appendResults(results){
                                 + filename;
 
         ipcRenderer.invoke('fileExists', localSampleFilePath).then((exists) => {
-            console.log(exists);
 
             if(!exists) var action_1 = `downloadFile("`+result.mp3_url+`","`+localSampleFilePath+`")`;
             else var action_1 = ``;
@@ -108,9 +108,15 @@ function appendResults(results){
                         <a onclick='`+action_1+`'>
                             ` + feather.icons[(exists ? `copy` : `download-cloud`)].toSvg() + `
                         </a>
-                        <a>
+                        <a onclick='showCtxMenu(this.parentElement.querySelector(".ctx-menu"))'>
                             ` + feather.icons[`more-vertical`].toSvg() + `
                         </a>
+                        <div class='ctx-menu'>
+                            <a>` + feather.icons[`link`].toSvg() + `<span>View in browser</span></a>
+                            <a>` + feather.icons[`clipboard`].toSvg() + `<span>Copy file path</span></a>
+                            <a>` + feather.icons[`trash`].toSvg() + `<span>Delete</span></a>
+                            <a>` + feather.icons[`x`].toSvg() + `</a>
+                        </div>
                     </div>
                 </div>
                 <div class='bg-layer'>
@@ -120,6 +126,15 @@ function appendResults(results){
             resultsContainer.innerHTML += html;
         });
     });
+}
+
+function showCtxMenu(el){
+    try {
+        currentCtxMenu.style.display = 'none';
+    } catch (err) {
+    }
+    currentCtxMenu = el;
+    currentCtxMenu.style.display = 'block';
 }
 
 function search(){
@@ -203,8 +218,7 @@ function preview(url){
 
 function downloadFile(url, dest){
     ipcRenderer.invoke('downloadMP3', {url, dest}).then(() => {
-        console.log(document.getElementById(url).parentElement.parentElement.parentElement.classList.add("downloaded"));
-        console.log("Downloaded.");
+        document.getElementById(url).parentElement.parentElement.parentElement.classList.add("downloaded")
     });
 }
 
