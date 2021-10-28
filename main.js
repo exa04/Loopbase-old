@@ -1,4 +1,5 @@
-const {app, BrowserWindow, ipcMain} = require('electron');
+const {app, BrowserWindow, ipcMain, shell} = require('electron');
+
 const path = require('path');
 const os = require('os');
 const fs = require('fs');
@@ -134,6 +135,10 @@ ipcMain.handle('fileExists', async (event, path) =>{
 
 ipcMain.handle('fileDelete', async (event, path) =>{
     return await fileDelete(pref.dir.content + "/" + path);
+});
+
+ipcMain.handle('openLink', async (event, url) =>{
+    shell.openExternal(url);
 });
 
 ipcMain.on('ondragstart', (event, filePath) => {

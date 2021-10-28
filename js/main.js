@@ -136,7 +136,7 @@ function appendResults(results){
                             ` + feather.icons[`more-vertical`].toSvg() + `
                         </a>
                         <div class='ctx-menu'>
-                            <a onclick='openBrowser("`+result.web_link+`")'>` + feather.icons[`link`].toSvg() + `<span>View in browser</span></a>
+                            <a onclick='openBrowser("`+result.web_link+`"); hideCtxMenu();'>` + feather.icons[`link`].toSvg() + `<span>View in browser</span></a>
                             `+actions_ctx+`
                             <a onclick='hideCtxMenu()'>` + feather.icons[`x`].toSvg() + `</a>
                         </div>
@@ -167,6 +167,10 @@ function startDrag(path){
     ipcRenderer.invoke('getDir', 'loop').then(dir => {
         window.electron.startDrag(path);
     });
+}
+
+function openBrowser(url){
+    ipcRenderer.invoke('openLink', url);
 }
 
 function search(){
