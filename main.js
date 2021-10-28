@@ -84,6 +84,7 @@ function search(args){
                     author: $(this).find(".icon-user").text(),
                     profile_pic: $(this).find(".player-avatar a img").prop("src"),
                     waveform: $(this).find(".player-waveform-image").prop("src"),
+                    web_link: $(this).find(".player-top > a").prop("href")
                 });
             });
             $('#body-left .tag-wrapper').each(function(i, elm) {
@@ -104,6 +105,17 @@ async function fileExists(path){
     })
 }
 
+async function fileDelete(path){
+    return new Promise((resolve, reject) => {
+        try {
+            fs.unlinkSync(path);
+            resolve();
+        } catch (err) {
+            reject(err);
+        }
+    })
+}
+
 ipcMain.handle('search', async (event, args) => {
     return await search(args);
 });
@@ -114,4 +126,8 @@ ipcMain.handle('downloadMP3', async (event, args) => {
 
 ipcMain.handle('fileExists', async (event, path) =>{
     return await fileExists(pref.dir.content + "/" + path);
+});
+
+ipcMain.handle('fileDelete', async (event, path) =>{
+    return await fileDelete(pref.dir.content + "/" + path);
 });

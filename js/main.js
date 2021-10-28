@@ -86,11 +86,30 @@ function appendResults(results){
                                 + result.tempo.replace(' ', '_') + '_'
                                 + (result.key != "Unknown" ? result.key.toLowerCase() + '_' : '')
                                 + filename;
-
         ipcRenderer.invoke('fileExists', localSampleFilePath).then((exists) => {
+            var filename = result.mp3_url.split("/").splice(-1)[0].split("?")[0];
+            localSampleFilePath = "loops/"
+                                    + result.category.toLowerCase() + '/'
+                                    + result.tempo.replace(' ', '_') + '_'
+                                    + (result.key !="Unknown" ? result.key.toLowerCase() + '_' : '')
+                                    + filename;
+            if(!exists){
+                var action_1 = `downloadFile("`+result.mp3_url+`","`+localSampleFilePath+`")`;
+                var actions_ctx = '';
+            }
+            else {
+                var action_1 = ``;
+                var actions_ctx =  
+                `<a onclick='deleteFile("`+localSampleFilePath+`", this)'>
+                    `+ feather.icons[`trash`].toSvg() + `
+                    <span>Delete</span>
+                </a>
+                <a onclick='copy("`+localSampleFilePath+`")'>
+                    ` + feather.icons[`clipboard`].toSvg() + `
+                    <span>Copy file path</span>
+                </a>`;
+            }
 
-            if(!exists) var action_1 = `downloadFile("`+result.mp3_url+`","`+localSampleFilePath+`")`;
-            else var action_1 = ``;
             html = `
             <div class='audio-result `+(exists ? `downloaded` : ``)+`'>
                 <div class='fg-layer'>
@@ -112,10 +131,9 @@ function appendResults(results){
                             ` + feather.icons[`more-vertical`].toSvg() + `
                         </a>
                         <div class='ctx-menu'>
-                            <a>` + feather.icons[`link`].toSvg() + `<span>View in browser</span></a>
-                            <a>` + feather.icons[`clipboard`].toSvg() + `<span>Copy file path</span></a>
-                            <a>` + feather.icons[`trash`].toSvg() + `<span>Delete</span></a>
-                            <a>` + feather.icons[`x`].toSvg() + `</a>
+                            <a onclick='openBrowser("`+result.web_link+`")'>` + feather.icons[`link`].toSvg() + `<span>View in browser</span></a>
+                            `+actions_ctx+`
+                            <a onclick='hideCtxMenu()'>` + feather.icons[`x`].toSvg() + `</a>
                         </div>
                     </div>
                 </div>
@@ -131,10 +149,13 @@ function appendResults(results){
 function showCtxMenu(el){
     try {
         currentCtxMenu.style.display = 'none';
-    } catch (err) {
-    }
+    } catch (err) { }
     currentCtxMenu = el;
     currentCtxMenu.style.display = 'block';
+}
+
+function hideCtxMenu(el){
+    currentCtxMenu.style.display = 'none';
 }
 
 function search(){
@@ -222,6 +243,12 @@ function downloadFile(url, dest){
     });
 }
 
+function deleteFile(path, el){
+    hideCtxMenu(el);
+    ipcRenderer.invoke('fileDelete', path).then(() => {
+        el.parentElement.parentElement.parentElement.parentElement.classList.remove("downloaded");
+    });
+}
 var r = document.querySelector("#results");
 
 r.onscroll = (ev) => {
