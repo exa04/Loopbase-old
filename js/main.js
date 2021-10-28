@@ -179,9 +179,11 @@ function preview(url){
     var oldUrl = audioPreviewPlayer.src;
     if(url != oldUrl){
         audioPreviewPlayer.pause();
-        if(oldUrl != ""){
+        try{
             document.getElementById(oldUrl).querySelector(".feather-pause").style.display = "none";
             document.getElementById(oldUrl).querySelector(".feather-play").style.display = "block";
+        }catch{
+            
         }
         document.getElementById(url).querySelector(".feather-pause").style.display = "block";
         document.getElementById(url).querySelector(".feather-play").style.display = "none";
