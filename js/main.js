@@ -98,6 +98,7 @@ function appendResults(results){
                 `<a onclick='downloadFile("`+result.mp3_url+`","`+localSampleFilePath+`")'>
                     ` + feather.icons[`download-cloud`].toSvg() + `
                 </a>`;
+                var actions_ctx = ``;
             }
             else {
                 var action_1 =
