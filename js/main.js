@@ -76,26 +76,49 @@ function toggleDirection(){
 function appendResults(results){
     resultsContainer = document.querySelector("#results-contents");
     results.forEach(result => {
-        html = `
-        <div class='audio-result'>
-            <div class='fg-layer'>
-                <div class='info'>
-                    <div class='pp-area' onclick='preview("`+result.mp3_url+`")' id='`+result.mp3_url+`'>
-                        <img src='`+result.profile_pic+`' class='profile_picture_sample'>
-                        <div class='pp-playbutton'>`+feather.icons[`play`].toSvg()+feather.icons[`pause`].toSvg()+`</div>
+        // Removes everything before the last slash, as
+        // well as everything after the last question mark
+        var filename = result.mp3_url.split("/").splice(-1)[0].split("?")[0];
+
+        localSampleFilePath = "loops/"
+                                + result.category.toLowerCase() + '/'
+                                + result.tempo.replace(' ', '_') + '_'
+                                + (result.key != "Unknown" ? result.key.toLowerCase() + '_' : '')
+                                + filename;
+
+        ipcRenderer.invoke('fileExists', localSampleFilePath).then((exists) => {
+            console.log(exists);
+
+            if(!exists) var action_1 = `downloadFile("`+result.mp3_url+`","`+localSampleFilePath+`")`;
+            else var action_1 = ``;
+            html = `
+            <div class='audio-result `+(exists ? `downloaded` : ``)+`'>
+                <div class='fg-layer'>
+                    <div class='info'>
+                        <div class='pp-area' onclick='preview("`+result.mp3_url+`")' id='`+result.mp3_url+`'>
+                            <img src='`+result.profile_pic+`' class='profile_picture_sample'>
+                            <div class='pp-playbutton'>`+feather.icons[`play`].toSvg()+feather.icons[`pause`].toSvg()+`</div>
+                        </div>
+                        <div class='sample-info-txt'>
+                            <div class='sample-title'>`+result.title+`</div>
+                            <div class='sample-author'>`+result.author+` - `+result.tempo+` - Key: `+result.key+`</div>
+                        </div>
                     </div>
-                    <div class='sample-info-txt'>
-                        <div class='sample-title'>`+result.title+`</div>
-                        <div class='sample-author'>`+result.author+` - `+result.tempo+` - Key: `+result.key+`</div>
+                    <div class='actions'>
+                        <a onclick='`+action_1+`'>
+                            ` + feather.icons[(exists ? `copy` : `download-cloud`)].toSvg() + `
+                        </a>
+                        <a>
+                            ` + feather.icons[`more-vertical`].toSvg() + `
+                        </a>
                     </div>
                 </div>
-                <div class='actions'>`+feather.icons[`download-cloud`].toSvg()+feather.icons[`more-vertical`].toSvg()+`</div>
-            </div>
-            <div class='bg-layer'>
-                <img src='`+result.waveform+`' class='bg-waveform'></div>
-            </div>
-        </div>`;
-        resultsContainer.innerHTML += html;
+                <div class='bg-layer'>
+                    <img src='`+result.waveform+`' class='bg-waveform'></div>
+                </div>
+            </div>`;
+            resultsContainer.innerHTML += html;
+        });
     });
 }
 
@@ -176,6 +199,13 @@ function preview(url){
             audioPreviewPlayer.pause();
         }
     }
+}
+
+function downloadFile(url, dest){
+    ipcRenderer.invoke('downloadMP3', {url, dest}).then(() => {
+        console.log(document.getElementById(url).parentElement.parentElement.parentElement.classList.add("downloaded"));
+        console.log("Downloaded.");
+    });
 }
 
 var r = document.querySelector("#results");

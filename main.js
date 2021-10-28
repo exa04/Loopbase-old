@@ -8,8 +8,7 @@ const cheerio = require('cheerio');
 
 const pref = {
     dir : {
-        content:        os.homedir() + "/loopermanContent",
-        loops:          os.homedir() + "/loopermanContent/loops"
+        content:        os.homedir() + "/loopermanContent"
     }
 }
 
@@ -38,7 +37,12 @@ app.on('window-all-closed', ()=>{
 
 async function downloadMP3(url, dest){
     return new Promise((resolve, reject) => {
-        let file = fs.createWriteStream(dest); 
+        var file = fs.createWriteStream(dest);
+        var dir = path.dirname(dest);
+
+        if (!fs.existsSync(dir)){
+            fs.mkdirSync(dir, { recursive: true });
+        }
         let stream = request({
             uri: url,
             timeout: 60000
@@ -84,6 +88,8 @@ function search(args){
             });
             $('#body-left .tag-wrapper').each(function(i, elm) {
                 results[i].tempo = $($(this).find("a")[0]).text();
+                results[i].genre = $($(this).find("a")[1]).text().slice(0, -6);
+                results[i].category = $($(this).find("a")[2]).text().slice(0, -6);
                 results[i].key = $($(this).find("a")[5]).text().slice(6);
             });
             reply(results);
@@ -91,6 +97,21 @@ function search(args){
     });
 }
 
+async function fileExists(path){
+    return new Promise((resolve, reject) => {
+        if(fs.existsSync(path)) resolve(true);
+        else resolve(false);
+    })
+}
+
 ipcMain.handle('search', async (event, args) => {
     return await search(args);
+});
+
+ipcMain.handle('downloadMP3', async (event, args) => {
+    return await downloadMP3(args.url, pref.dir.content + "/" + args.dest);
+});
+
+ipcMain.handle('fileExists', async (event, path) =>{
+    return await fileExists(pref.dir.content + "/" + path);
 });

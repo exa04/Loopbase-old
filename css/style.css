@@ -129,7 +129,7 @@ svg.feather{
 #profile-icons > svg.feather, .actions > svg.feather{
     margin-left: 8px;
 }
-#profile-icons > svg.feather:hover, .actions > svg.feather:hover{
+#profile-icons > svg.feather:hover, .actions svg.feather:hover{
     stroke: var(--fg1);
 }
 #browser{
@@ -414,7 +414,7 @@ svg.feather{
     background-color: var(--fg1);
     display: none;
 }
-.bg-layer{
+.audio-result .bg-layer{
     position: relative;
     top: -64px;
     width: calc(100% + 16px);
@@ -422,6 +422,9 @@ svg.feather{
     background-color: var(--fg1);
     z-index: 1;
     transition: 120ms;
+}
+.audio-result.downloaded .bg-layer{
+    background-color: var(--fg2);
 }
 .bg-waveform{
     width: 100%;
