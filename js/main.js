@@ -110,11 +110,6 @@ function appendResults(results){
                 `<a onclick='deleteFile("`+localSampleFilePath+`", this)'>
                     `+ feather.icons[`trash`].toSvg() + `
                     <span>Delete</span>
-                </a>
-
-                <a onclick='copy("`+localSampleFilePath+`")'>
-                    ` + feather.icons[`clipboard`].toSvg() + `
-                    <span>Copy file path</span>
                 </a>`;
             }
 
