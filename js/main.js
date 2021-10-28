@@ -94,16 +94,23 @@ function appendResults(results){
                                     + (result.key !="Unknown" ? result.key.toLowerCase() + '_' : '')
                                     + filename;
             if(!exists){
-                var action_1 = `downloadFile("`+result.mp3_url+`","`+localSampleFilePath+`")`;
-                var actions_ctx = '';
+                var action_1 =
+                `<a onclick='downloadFile("`+result.mp3_url+`","`+localSampleFilePath+`")'>
+                    ` + feather.icons[`download-cloud`].toSvg() + `
+                </a>`;
             }
             else {
-                var action_1 = ``;
+                var action_1 =
+                `<a ondragstart="event.preventDefault(); startDrag('`+localSampleFilePath+`');" draggable="true"'>
+                    ` + feather.icons[`copy`].toSvg() + `
+                </a>`;
+
                 var actions_ctx =  
                 `<a onclick='deleteFile("`+localSampleFilePath+`", this)'>
                     `+ feather.icons[`trash`].toSvg() + `
                     <span>Delete</span>
                 </a>
+
                 <a onclick='copy("`+localSampleFilePath+`")'>
                     ` + feather.icons[`clipboard`].toSvg() + `
                     <span>Copy file path</span>
@@ -124,9 +131,7 @@ function appendResults(results){
                         </div>
                     </div>
                     <div class='actions'>
-                        <a onclick='`+action_1+`'>
-                            ` + feather.icons[(exists ? `copy` : `download-cloud`)].toSvg() + `
-                        </a>
+                        `+action_1+`
                         <a onclick='showCtxMenu(this.parentElement.querySelector(".ctx-menu"))'>
                             ` + feather.icons[`more-vertical`].toSvg() + `
                         </a>
@@ -156,6 +161,12 @@ function showCtxMenu(el){
 
 function hideCtxMenu(el){
     currentCtxMenu.style.display = 'none';
+}
+
+function startDrag(path){
+    ipcRenderer.invoke('getDir', 'loop').then(dir => {
+        window.electron.startDrag(path);
+    });
 }
 
 function search(){

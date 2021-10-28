@@ -124,10 +124,21 @@ ipcMain.handle('downloadMP3', async (event, args) => {
     return await downloadMP3(args.url, pref.dir.content + "/" + args.dest);
 });
 
+ipcMain.handle('getDir', async (event, dir) => {
+    return pref.dir[dir];
+});
+
 ipcMain.handle('fileExists', async (event, path) =>{
     return await fileExists(pref.dir.content + "/" + path);
 });
 
 ipcMain.handle('fileDelete', async (event, path) =>{
     return await fileDelete(pref.dir.content + "/" + path);
+});
+
+ipcMain.on('ondragstart', (event, filePath) => {
+    event.sender.startDrag({
+      file: path.join(pref.dir.content, filePath),
+      icon: path.join(__dirname, 'img/dragAndDrop.png')
+    });
 });
