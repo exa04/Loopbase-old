@@ -74,6 +74,24 @@ function toggleDirection(){
     }
 }
 
+function ctxMenuHTML(web_link, exists, localSampleFilePath){
+    if(!exists){
+        var actions_ctx = ``;
+    } else {
+        var actions_ctx =  
+        `<a onclick='deleteFile("`+localSampleFilePath+`", this)'>
+            `+ feather.icons[`trash`].toSvg() + `
+            <span>Delete</span>
+        </a>`;
+    }
+
+    return `
+                <a onclick='openBrowser("`+web_link+`"); hideCtxMenu();'>` + feather.icons[`link`].toSvg() + `<span>View in browser</span></a>
+                `+actions_ctx+`
+                <a onclick='hideCtxMenu()'>` + feather.icons[`x`].toSvg() + `</a>
+            `
+}
+
 function appendResults(results){
     resultsContainer = document.querySelector("#results-contents");
     results.forEach(result => {
@@ -93,23 +111,16 @@ function appendResults(results){
                                     + result.tempo.replace(' ', '_') + '_'
                                     + (result.key !="Unknown" ? result.key.toLowerCase() + '_' : '')
                                     + filename;
+
             if(!exists){
                 var action_1 =
-                `<a onclick='downloadFile("`+result.mp3_url+`","`+localSampleFilePath+`")'>
+                `<a onclick='downloadResult("`+result.mp3_url+`","`+localSampleFilePath+`", this)'>
                     ` + feather.icons[`download-cloud`].toSvg() + `
                 </a>`;
-                var actions_ctx = ``;
-            }
-            else {
+            } else {
                 var action_1 =
                 `<a ondragstart="event.preventDefault(); startDrag('`+localSampleFilePath+`');" draggable="true"'>
                     ` + feather.icons[`copy`].toSvg() + `
-                </a>`;
-
-                var actions_ctx =  
-                `<a onclick='deleteFile("`+localSampleFilePath+`", this)'>
-                    `+ feather.icons[`trash`].toSvg() + `
-                    <span>Delete</span>
                 </a>`;
             }
 
@@ -129,17 +140,13 @@ function appendResults(results){
                     <div class='actions'>
                         `+action_1+`
                         <a onclick='showCtxMenu(this.parentElement.querySelector(".ctx-menu"))'>
-                            ` + feather.icons[`more-vertical`].toSvg() + `
+                            `+feather.icons[`more-vertical`].toSvg()+`
                         </a>
-                        <div class='ctx-menu'>
-                            <a onclick='openBrowser("`+result.web_link+`"); hideCtxMenu();'>` + feather.icons[`link`].toSvg() + `<span>View in browser</span></a>
-                            `+actions_ctx+`
-                            <a onclick='hideCtxMenu()'>` + feather.icons[`x`].toSvg() + `</a>
-                        </div>
+                        <div class='ctx-menu' rel='`+result.web_link+`'>`+ctxMenuHTML(result.web_link, exists, localSampleFilePath)+`</div>
                     </div>
                 </div>
                 <div class='bg-layer'>
-                    <img src='`+result.waveform+`' class='bg-waveform'></div>
+                    <img src='` + result.waveform + `' class='bg-waveform'></div>
                 </div>
             </div>`;
             resultsContainer.innerHTML += html;
@@ -250,9 +257,15 @@ function preview(url){
     }
 }
 
-function downloadFile(url, dest){
+function downloadResult(url, dest, el){
     ipcRenderer.invoke('downloadMP3', {url, dest}).then(() => {
-        document.getElementById(url).parentElement.parentElement.parentElement.classList.add("downloaded")
+        el.parentElement.parentElement.parentElement.classList.add("downloaded");
+        el.setAttribute('ondragstart',`event.preventDefault(); startDrag('`+dest+`');`);
+        el.setAttribute('draggable','true');
+        el.setAttribute('onclick','');
+        el.innerHTML = feather.icons[`copy`].toSvg();
+        var web_link = el.parentElement.querySelector('.ctx-menu').getAttribute('rel');
+        el.parentElement.querySelector('.ctx-menu').innerHTML = ctxMenuHTML(web_link,true,dest);
     });
 }
 
@@ -260,6 +273,14 @@ function deleteFile(path, el){
     hideCtxMenu(el);
     ipcRenderer.invoke('fileDelete', path).then(() => {
         el.parentElement.parentElement.parentElement.parentElement.classList.remove("downloaded");
+        mp3_url = el.parentElement.parentElement.parentElement.querySelector('.pp-area').id;
+        var web_link = el.parentElement.getAttribute('rel');
+        var mp3_url = el.parentElement.getAttribute('rel');
+        el.parentElement.parentElement.querySelector('a').setAttribute('onclick',`downloadResult("`+mp3_url+`","`+path+`", this)`);
+        el.parentElement.parentElement.querySelector('a').setAttribute('ondragstart','');
+        el.parentElement.parentElement.querySelector('a').setAttribute('draggable','false');
+        el.parentElement.parentElement.querySelector('a').innerHTML = feather.icons[`download-cloud`].toSvg();
+        el.parentElement.innerHTML = ctxMenuHTML(web_link,false,path);
     });
 }
 var r = document.querySelector("#results");
