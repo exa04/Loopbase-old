@@ -29,6 +29,7 @@ var tempoSlider = new rSlider({
 
 var loadedPreviewContent = {}
 var audioPreviewPlayer = new Audio();
+audioPreviewPlayer.volume = 1;
 var currentCtxMenu;
 
 
@@ -229,8 +230,17 @@ function selectkey(key){
     query.key[0] = key;
 }
 
+function volumeChange(){
+    var volume = document.getElementById("volume-slider").value;
+    audioPreviewPlayer.volume = volume;
+    //console.log("Volume: " + volume);
+}
+
 function preview(url){
     var oldUrl = audioPreviewPlayer.src;
+    //audioPreviewPlayer.volume = 0.01;
+    var volume = document.getElementById("volume-slider").value;
+
     if(url != oldUrl){
         audioPreviewPlayer.pause();
         try{
@@ -242,6 +252,7 @@ function preview(url){
         document.getElementById(url).querySelector(".feather-pause").style.display = "block";
         document.getElementById(url).querySelector(".feather-play").style.display = "none";
         audioPreviewPlayer = new Audio(url);
+        audioPreviewPlayer.volume = volume;
         audioPreviewPlayer.play();
         document.getElementById(url);
     }else{
