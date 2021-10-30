@@ -231,14 +231,16 @@ function selectkey(key){
 }
 
 function volumeChange(){
-    var volume = document.getElementById("volume-slider").value;
+    var slider = document.getElementById("volume-slider");
+    var volume = slider.value;
+    var percentage = volume * 100;
+    var color = 'linear-gradient(90deg, var(--fg2) ' + percentage + '%, var(--bg3) ' + percentage + '%)';
+    slider.style.background = color;
     audioPreviewPlayer.volume = volume;
-    //console.log("Volume: " + volume);
 }
 
 function preview(url){
     var oldUrl = audioPreviewPlayer.src;
-    //audioPreviewPlayer.volume = 0.01;
     var volume = document.getElementById("volume-slider").value;
 
     if(url != oldUrl){
