@@ -37,6 +37,8 @@ search();
 feather.replace();
 
 document.querySelector("#direction-toggle").firstElementChild.style.display = "none";
+// document.getElementById("volume-icon").querySelector(".feather-volume").style.display = "none";
+// document.getElementById("volume-icon").querySelector(".feather-volume-1").style.display = "none";
 
 function toggleTempoSliderMode(){
     let min = [parseInt(tempoSlider.getValue().split(/[ ,]+/)[0]), 200];
@@ -230,6 +232,19 @@ function selectkey(key){
     query.key[0] = key;
 }
 
+function toggleMute(){
+    if(audioPreviewPlayer.volume == 0){
+        volumeChange();
+    }
+    else{
+        audioPreviewPlayer.volume = 0;
+        document.getElementById("volume-icon").querySelector(".feather-volume").style.display = "none";
+        document.getElementById("volume-icon").querySelector(".feather-volume-1").style.display = "none";
+        document.getElementById("volume-icon").querySelector(".feather-volume-2").style.display = "none";
+        document.getElementById("volume-icon").querySelector(".feather-volume-x").style.display = "block";
+    }
+}
+
 function volumeChange(){
     var slider = document.getElementById("volume-slider");
     var volume = slider.value;
@@ -237,11 +252,30 @@ function volumeChange(){
     var color = 'linear-gradient(90deg, var(--fg2) ' + percentage + '%, var(--bg3) ' + percentage + '%)';
     slider.style.background = color;
     audioPreviewPlayer.volume = volume;
+
+    if(percentage == 0){
+        document.getElementById("volume-icon").querySelector(".feather-volume").style.display = "block";
+        document.getElementById("volume-icon").querySelector(".feather-volume-1").style.display = "none";
+        document.getElementById("volume-icon").querySelector(".feather-volume-2").style.display = "none";
+        document.getElementById("volume-icon").querySelector(".feather-volume-x").style.display = "none";
+    }
+    else if(percentage > 0 && percentage < 50){
+        document.getElementById("volume-icon").querySelector(".feather-volume").style.display = "none";
+        document.getElementById("volume-icon").querySelector(".feather-volume-1").style.display = "block";
+        document.getElementById("volume-icon").querySelector(".feather-volume-2").style.display = "none";
+        document.getElementById("volume-icon").querySelector(".feather-volume-x").style.display = "none";
+    }
+    else if(percentage >= 50){
+        document.getElementById("volume-icon").querySelector(".feather-volume").style.display = "none";
+        document.getElementById("volume-icon").querySelector(".feather-volume-1").style.display = "none";
+        document.getElementById("volume-icon").querySelector(".feather-volume-2").style.display = "block";
+        document.getElementById("volume-icon").querySelector(".feather-volume-x").style.display = "none";
+    }
 }
 
 function preview(url){
     var oldUrl = audioPreviewPlayer.src;
-    var volume = document.getElementById("volume-slider").value;
+    var volume = audioPreviewPlayer.volume;
 
     if(url != oldUrl){
         audioPreviewPlayer.pause();

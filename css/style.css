@@ -187,6 +187,16 @@ svg.feather{
 #top-volume-slider{
     display: flex;
     align-items: center;
+    position: absolute;
+    right: 20px;
+}
+#volume-icon{
+    display: flex;
+    align-items: center;
+    margin-right: 4px;
+}
+#volume-icon .feather-volume, #volume-icon .feather-volume-1, #volume-icon .feather-volume-x{
+    display: none;
 }
 .slider{
     -webkit-appearance: none;
