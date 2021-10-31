@@ -46,6 +46,18 @@
                     <i data-feather="search"></i>
                     <input type="search" placeholder="Search all of Looperman...">
                 </div>
+                <div id="top-volume-slider" class="topnav">
+                    <!-- <p>Volume</p> -->
+                    <div id="volume-icon">
+                        <i data-feather="volume" onclick="toggleMute()"></i>
+                        <i data-feather="volume-1" onclick="toggleMute()"></i>
+                        <i data-feather="volume-2" onclick="toggleMute()"></i>
+                        <i data-feather="volume-x" onclick="toggleMute()"></i>
+                    </div>
+                    <div class="sliderContainer">
+                        <input id="volume-slider" class="slider" type="range" min="0" max="1" value="1" step="0.01" oninput="volumeChange()">
+                    </div>
+                </div>
             </div>
             <div id="content">
                 <div id="audios">
