@@ -8,7 +8,9 @@
     "request": "^2.88.2"
   },
   "devDependencies": {
-    "electron": "^15.3.0"
+    "clean-css-cli": "^5.4.2",
+    "electron": "^15.3.0",
+    "node-sass": "^6.0.1"
   },
   "scripts": {
     "start": "electron ."
