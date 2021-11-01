@@ -13,7 +13,10 @@
     "node-sass": "^6.0.1"
   },
   "scripts": {
-    "start": "electron ."
+    "compile-scss": "node-sass -r scss -o css",
+    "watch-scss": "node-sass -rw scss -o css",
+    "start": "npm run compile-scss & electron .",
+    "watch-start": "npm run watch-scss & electron ."
   },
   "author": "stxarixdust",
   "license": "GPL-3.0"
