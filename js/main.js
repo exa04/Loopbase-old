@@ -30,6 +30,7 @@ var tempoSlider = new rSlider({
 var loadedPreviewContent = {}
 var audioPreviewPlayer = new Audio();
 audioPreviewPlayer.volume = 1;
+audioPreviewPlayer.pause()
 var currentCtxMenu;
 
 
@@ -276,32 +277,31 @@ function volumeChange(){
 function preview(url){
     var oldUrl = audioPreviewPlayer.src;
     var volume = audioPreviewPlayer.volume;
+    var playing = false;
 
     if(url != oldUrl){
+        playing = true;
         audioPreviewPlayer.pause();
-        try{
-            document.getElementById(oldUrl).querySelector(".feather-pause").style.display = "none";
-            document.getElementById(oldUrl).querySelector(".feather-play").style.display = "block";
-        }catch{
-            
-        }
-        document.getElementById(url).querySelector(".feather-pause").style.display = "block";
-        document.getElementById(url).querySelector(".feather-play").style.display = "none";
         audioPreviewPlayer = new Audio(url);
         audioPreviewPlayer.volume = volume;
         audioPreviewPlayer.play();
         document.getElementById(url);
     }else{
-        if(audioPreviewPlayer.paused){
-            document.getElementById(url).querySelector(".feather-pause").style.display = "block";
-            document.getElementById(url).querySelector(".feather-play").style.display = "none";
-            audioPreviewPlayer.play();
-        }else{
-            document.getElementById(url).querySelector(".feather-pause").style.display = "none";
-            document.getElementById(url).querySelector(".feather-play").style.display = "block";
+        if(audioPreviewPlayer.paused === false){
+            playing = false;
             audioPreviewPlayer.pause();
+        }else{
+            playing = true;
+            audioPreviewPlayer.play();
         }
     }
+    try {
+        document.getElementById(oldUrl).querySelector(".pp-playbutton").classList.remove("playing");
+        document.getElementById(oldUrl).querySelector(".pp-playbutton").classList.remove("paused");
+    } catch (error) {
+        
+    }
+    document.getElementById(url).querySelector(".pp-playbutton").classList.add(playing ? "playing" : "paused");
 }
 
 function downloadResult(url, dest, el){

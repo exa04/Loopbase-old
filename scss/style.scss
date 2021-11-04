@@ -305,9 +305,6 @@ svg.feather {
 										height: 48px;
 										border-radius: 8px;
 										&:hover {
-											.profile_picture_sample {
-												display: none;
-											}
 											.pp-playbutton {
 												display: flex;
 											}
@@ -323,12 +320,22 @@ svg.feather {
 											object-fit: cover;
 											height: 48px;
 											border-radius: 8px;
-											display: flex;
+											transform: translateY(-54px);
 											align-items: center;
 											justify-content: center;
 											cursor: pointer;
 											background-color: var(--fg1);
 											display: none;
+											&:has(svg[style*="display:block"]){
+												background-color: var(--fg1);
+											}
+											&.playing{
+												.feather-play{ display: none; }
+												.feather-pause{ display: block; }
+												background-color: var(--foreground);
+												svg{ stroke: var(--fg1); }
+												display: flex;
+											}
 											.feather-pause {
 												display: none;
 											}
