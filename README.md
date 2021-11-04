@@ -4,17 +4,39 @@ A third-party electron desktop client for Looperman.
 
 ![Screenshot](https://i.imgur.com/Z7Q9scj.png)
 
-> :warning: **This Project is in early development; Do not use this app yet!!**
+> :warning: **WARNING: DO NOT DOWNLOAD THIS APP YET!**
+> You should wait for the first stable release if you are a regular user.
 
-> Only a few features work and very little core functionality exists thus far.
-> Many core aspects are subject to change, even the app's title is not final.
-> At this point, no samples, loops, etc. can be downloaded in the app.
-> **Only clone this repo if you wish to contribute to it. It is not usable!**
+## Installing
 
-The roadmap for this repo can be found under its Board section.
+With the release of stable version 1.0.0, an installer will be provided for it.
+In the meantime, you can check up on progress under the
+[projects](https://github.com/stxarixdust/looperman-desktop/projects/1)
+section. If you want, feel free to contribute to the issues listed there to speed
+up development of this release! If you want to download the bleeding-edge
+**unstable** version to contribute to it, do the following:
 
-## Installation
+```sh
+git clone https://github.com/stxarixdust/looperman-desktop
+npm i
+```
 
-> TODO: Provide Installer
+You can then run a launch script.
 
-Currently, the only way to install this app is to compile it yourself, or to execute it via `npm start`
+```sh
+# You have two options: You can start the app...
+npm run start
+# ...Or continuously watch its scss files for changes and recompile to css.
+# Useful for tasks like UI design: You'll only need to reload from within the app
+# Note that non-renderer files (like the main.js entry point) will not update.
+npm run start
+```
+
+## How to contribute
+
+If you want to tackle an issue that is yet to be assigned, just comment on it and
+start a pull request. If you're unsure which one to pick, there are probably some
+tagged "help wanted" or "good first issue". Also, the current most relevant ones
+can be found in this project: 
+[Stable Release 1.0.0](https://github.com/stxarixdust/looperman-desktop/projects/1).
+If you find any bugs or otherwise, don't hesitate to file an issue for them, too.
