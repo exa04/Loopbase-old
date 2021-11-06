@@ -209,7 +209,7 @@ function loadNewContent(){
     query.page += 1;
 
     ipcRenderer.invoke('search', query).then((results) => {
-        resultsContainer.lastChild.remove();
+        resultsContainer.querySelector(".lds-ellipsis").remove();
         if(results.length > 0){
             searchSession.appendContent = false;
             appendResults(results);
