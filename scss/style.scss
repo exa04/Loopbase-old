@@ -7,6 +7,9 @@ $foreground : #D4D8E0;
 $accent1 	: #f00172;
 $accent2 	: #00ffb7;
 
+.blocked{
+	cursor: not-allowed !important;
+}
 ::-webkit-scrollbar {
 	width: 6px;
 	height: 2px;
