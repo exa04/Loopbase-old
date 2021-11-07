@@ -1,4 +1,4 @@
-# Looperman-Desktop
+# Loopbase
 
 A third-party electron desktop client for Looperman.
 
@@ -9,8 +9,8 @@ A third-party electron desktop client for Looperman.
 
 ## Installing
 
-With the release of stable version 1.0.0, an installer will be provided for it.
-In the meantime, you can check up on progress under the
+With the release of stable version 1.0.0, an installer will be provided for this
+app. In the meantime, you can check up on progress under the
 [projects](https://github.com/stxarixdust/looperman-desktop/projects/1)
 section. If you want, feel free to contribute to the issues listed there to speed
 up development of this release! If you want to download the bleeding-edge
