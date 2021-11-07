@@ -1,18 +1,12 @@
 @import "https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap";
-:root {
-	--foreground: #D4D8E0;
-	--bg1: #260040;
-	--bg2: #350058;
-	--bg3: #4a1570;
-	--fg1: #f00172;
-	--fg2: #00ffb7;
-}
+
 $bg1 		: #260040;
 $bg2 		: #350058;
 $bg3 		: #4a1570;
 $foreground : #D4D8E0;
 $accent1 	: #f00172;
 $accent2 	: #00ffb7;
+
 ::-webkit-scrollbar {
 	width: 6px;
 	height: 2px;
