@@ -616,6 +616,152 @@ svg.feather {
 	}
 }
 
+.rs-container {
+	* {
+		box-sizing: border-box;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+	height: 45px;
+	position: relative;
+	margin-bottom: -16px;
+	.rs-bg {
+		background-color: $bg2;
+		border: 1px solid $bg3;
+		height: 4px;
+		left: 0;
+		position: absolute;
+		top: 5px;
+		width: 100%;
+		border-radius: 3px;
+	}
+	.rs-selected {
+		background-color: $bg2;
+		border: 1px solid $bg3;
+		height: 4px;
+		left: 0;
+		position: absolute;
+		top: 5px;
+		width: 100%;
+		border-radius: 3px;
+		background-color: $accent2;
+		border: 1px solid $accent2;
+		transition: all 0.2s linear;
+		width: 0;
+	}
+	.rs-pointer {
+		background-color: $bg2;
+		border: 2px solid $accent2;
+		border-radius: 8px;
+		cursor: pointer;
+		height: 16px;
+		left: -4px;
+		position: absolute;
+		top: -2px;
+		transition: all 0.2s linear;
+		aspect-ratio: 1;
+		&::after {
+			left: auto;
+			right: 12px;
+		}
+	}
+	.rs-scale {
+		left: 0;
+		position: absolute;
+		top: 5px;
+		white-space: nowrap;
+		span {
+			float: left;
+			position: relative;
+			&::before {
+				background-color: #ededed;
+				content: "";
+				height: 8px;
+				left: 0;
+				position: absolute;
+				top: 10px;
+				width: 1px;
+			}
+			&:last-child {
+				margin-left: -1px;
+				width: 0px;
+			}
+			ins {
+				color: $foreground;
+				display: inline-block;
+				font-size: 12px;
+				margin-top: 20px;
+				text-decoration: none;
+			}
+		}
+	}
+	&.disabled {
+		.rs-selected {
+			background-color: $bg2;
+			border-color: $bg3;
+		}
+		.rs-pointer {
+			cursor: default;
+		}
+		.rs-scale {
+			span {
+				ins {
+					color: #999;
+				}
+			}
+		}
+		.rs-tooltip {
+			border-color: #ccc;
+			color: #999;
+		}
+	}
+}
+.rs-container.sliding {
+	.rs-selected {
+		transition: none;
+	}
+	.rs-pointer {
+		transition: none;
+	}
+}
+.rs-container.rs-noscale {
+	span {
+		&::before {
+			display: none;
+		}
+		&:first-child {
+			&::before {
+				display: block;
+			}
+		}
+		&:last-child {
+			&::before {
+				display: block;
+			}
+		}
+	}
+}
+.rs-tooltip {
+	color: $accent2;
+	width: auto;
+	min-width: 30px;
+	height: 30px;
+	position: relative;
+	background: $bg1;
+	border: 1px solid $bg3;
+	border-radius: 3px;
+	position: absolute;
+	transform: translate(-50%, -35px);
+	left: 6px;
+	text-align: center;
+	font-size: 13px;
+	padding: 6px 10px 0;
+}
+
 @media only screen and (max-width: 900px) {
 	#navbar{
 		width: 70px !important;
