@@ -29,7 +29,7 @@ npm run start
 # ...Or continuously watch its scss files for changes and recompile to css.
 # Useful for tasks like UI design: You'll only need to reload from within the app
 # Note that non-renderer files (like the main.js entry point) will not update.
-npm run start
+npm run watch-start
 ```
 
 ## How to contribute
