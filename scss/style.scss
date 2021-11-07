@@ -71,6 +71,9 @@ svg.feather {
 		background: var(--bg2);
 		#navigation {
 			flex: 1;
+			hr{
+				border: 1px solid var(--bg1);
+			}
 			>h3 {
 				padding: 16px;
 				margin: 0px;
@@ -102,6 +105,15 @@ svg.feather {
 			>a[selected] {
 				background: var(--fg1);
 				font-weight: 700;
+			}
+			.logo-container {
+				width: 100%;
+				padding: 16px;
+				padding-bottom: 2px;
+				box-sizing: border-box;
+				svg *{
+					fill: var(--foreground);
+				}
 			}
 		}
 		#profile-banner {
