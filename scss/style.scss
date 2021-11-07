@@ -1,12 +1,12 @@
 @import "https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap";
-:root {
-	--foreground: #D4D8E0;
-	--bg1: #260040;
-	--bg2: #350058;
-	--bg3: #4a1570;
-	--fg1: #f00172;
-	--fg2: #00ffb7;
-}
+
+$bg1 		: #260040;
+$bg2 		: #350058;
+$bg3 		: #4a1570;
+$foreground : #D4D8E0;
+$accent1 	: #f00172;
+$accent2 	: #00ffb7;
+
 ::-webkit-scrollbar {
 	width: 6px;
 	height: 2px;
@@ -16,25 +16,25 @@
 	height: 0px;
 }
 ::-webkit-scrollbar-thumb {
-	background: var(--bg2);
+	background: $bg2;
 	border: 0;
 	border-radius: 50px;
 	:hover {
-		background: var(--bg3);
+		background: $bg3;
 	}
 	:active {
-		background: var(--fg2);
+		background: $accent2;
 	}
 }
 ::-webkit-scrollbar-track {
-	background: var(--bg1);
+	background: $bg1;
 	border: 0;
 	border-radius: 50px;
 	:hover {
-		background: var(--bg2);
+		background: $bg2;
 	}
 	:active {
-		background: var(--bg2);
+		background: $bg2;
 	}
 }
 ::-webkit-scrollbar-corner {
@@ -45,7 +45,7 @@ body {
 	padding: 0;
 	width: 100vw;
 	height: 100vh;
-	color: var(--foreground);
+	color: $foreground;
 	font-family: "Poppins";
 	font-weight: 500;
 	font-size: 14px;
@@ -54,7 +54,7 @@ body {
 svg.feather {
 	height: 16px;
 	width: 16px;
-	stroke: var(--foreground);
+	stroke: $foreground;
 	cursor: pointer;
 	transition: 120ms;
 }
@@ -62,15 +62,18 @@ svg.feather {
 	display: flex;
 	width: 100%;
 	height: 100%;
-	background: var(--bg1);
+	background: $bg1;
 	#navbar {
 		display: flex;
 		flex-direction: column;
 		width: 256px;
 		height: 100%;
-		background: var(--bg2);
+		background: $bg2;
 		#navigation {
 			flex: 1;
+			hr{
+				border: 1px solid $bg1;
+			}
 			>h3 {
 				padding: 16px;
 				margin: 0px;
@@ -82,7 +85,8 @@ svg.feather {
 				cursor: default;
 			}
 			>a {
-				display: block;
+				display: flex;
+				align-items: center;
 				margin: 8px;
 				padding: 8px;
 				font-size: 14px;
@@ -91,17 +95,32 @@ svg.feather {
 				border-radius: 8px;
 				cursor: pointer;
 				transition: 120ms;
-				border: 2px var(--bg3) solid;
+				border: 2px rgba($accent1, 0.3) solid;
+				svg{
+					margin-right: 8px;
+				}
 				&:hover {
-					background: var(--bg3);
+					border: 2px $accent1 solid;
+					background: rgba($accent1, 0.1);
 				}
 				&:active {
-					background: var(--fg1);
+					border: 2px $accent1 solid;
+					background: rgba($accent1, 0.3) ;
 				}
 			}
 			>a[selected] {
-				background: var(--fg1);
+				background: rgba($accent1, 0.3);
+				border: 2px $accent1 solid;
 				font-weight: 700;
+			}
+			.logo-container {
+				width: 100%;
+				padding: 16px;
+				padding-bottom: 2px;
+				box-sizing: border-box;
+				svg *{
+					fill: $foreground;
+				}
 			}
 		}
 		#profile-banner {
@@ -109,7 +128,7 @@ svg.feather {
 			align-items: center;
 			justify-content: space-between;
 			padding: 16px;
-			border-top: 1px solid var(--bg1);
+			border-top: 1px solid $bg1;
 			#profile-user {
 				display: flex;
 				align-items: center;
@@ -127,7 +146,7 @@ svg.feather {
 				>svg.feather {
 					margin-left: 8px;
 					&:hover {
-						stroke: var(--fg1);
+						stroke: $accent1;
 					}
 				}
 			}
@@ -146,7 +165,7 @@ svg.feather {
 			padding-left: 16px;
 			padding-right: 16px;
 			padding-bottom: 8px;
-			border-bottom: 1px solid var(--bg2);
+			border-bottom: 1px solid $bg2;
 			>* {
 				margin-right: 8px;
 			}
@@ -165,7 +184,7 @@ svg.feather {
 			#top-search {
 				height: 24px;
 				width: 320px;
-				background: var(--bg2);
+				background: $bg2;
 				display: flex;
 				align-items: center;
 				border-radius: 12px;
@@ -178,12 +197,12 @@ svg.feather {
 					flex: 1;
 					border: 0 none;
 					background: transparent;
-					color: var(--foreground);
+					color: $foreground;
 					outline: 0;
 					font-family: "Poppins";
 					&::placeholder {
 						opacity: 0.5;
-						color: var(--foreground);
+						color: $foreground;
 					}
 				}
 			}
@@ -234,7 +253,7 @@ svg.feather {
 					}
 					#search-bar {
 						height: 24px;
-						background: var(--bg2);
+						background: $bg2;
 						display: flex;
 						align-items: center;
 						border-radius: 12px;
@@ -247,12 +266,12 @@ svg.feather {
 							flex: 1;
 							border: 0 none;
 							background: transparent;
-							color: var(--foreground);
+							color: $foreground;
 							outline: 0;
 							font-family: "Poppins";
 							&::placeholder {
 								opacity: 0.5;
-								color: var(--foreground);
+								color: $foreground;
 							}
 						}
 					}
@@ -323,7 +342,7 @@ svg.feather {
 											align-items: center;
 											justify-content: center;
 											cursor: pointer;
-											background-color: var(--fg1);
+											background-color: $accent1;
 											display: none;
 											&:has(svg[style*="display:block"]){
 												background-color: var(--fg1);
@@ -366,7 +385,7 @@ svg.feather {
 									}
 									svg.feather {
 										&:hover {
-											stroke: var(--fg1);
+											stroke: $accent1;
 										}
 									}
 								}
@@ -376,7 +395,7 @@ svg.feather {
 								top: -64px;
 								width: calc(100% + 16px);
 								height: 64px;
-								background-color: var(--fg1);
+								background-color: $accent1;
 								z-index: 1;
 								transition: 120ms;
 								.bg-waveform {
@@ -397,8 +416,8 @@ svg.feather {
 								top: 8px;
 								right: 8px;
 								height: 48px;
-								background-color: var(--bg1);
-								border: 1px var(--fg1) solid;
+								background-color: $bg1;
+								border: 2px $accent1 solid;
 								border-radius: 8px;
 								a {
 									display: inline-flex;
@@ -411,10 +430,10 @@ svg.feather {
 										margin-right: 8px;
 									}
 									&:hover {
-										color: var(--fg1);
+										color: $accent1;
 										cursor: pointer;
 										svg {
-											stroke: var(--fg1);
+											stroke: $accent1;
 										}
 									}
 								}
@@ -422,14 +441,14 @@ svg.feather {
 						}
 						.audio-result.downloaded {
 							.bg-layer {
-								background-color: var(--fg2);
+								background-color: $accent2;
 							}
 						}
 						#nothing-found {
 							text-align: center;
 							margin-top: 16px;
 							margin-bottom: 16px;
-							color: var(--bg3);
+							color: $bg3;
 						}
 					}
 				}
@@ -446,27 +465,27 @@ svg.feather {
 					margin-bottom: 8px;
 				}
 				hr {
-					border-color: var(--bg2);
+					border-color: $bg2;
 					border-style: solid;
 					margin-bottom: 8px;
 				}
 				#tempo-container {
-					background-color: var(--bg2);
+					background-color: $bg2;
 					padding: 32px;
 					border-radius: 8px;
 				}
 				#order-container {
-					background-color: var(--bg2);
+					background-color: $bg2;
 					padding: 32px;
 					border-radius: 8px;
 				}
 				#date-container {
-					background-color: var(--bg2);
+					background-color: $bg2;
 					padding: 32px;
 					border-radius: 8px;
 				}
 				#genre-container {
-					background-color: var(--bg2);
+					background-color: $bg2;
 					padding: 32px;
 					border-radius: 8px;
 				}
@@ -474,33 +493,38 @@ svg.feather {
 					width: fit-content;
 					padding: 8px;
 					border-radius: 8px;
-					background-color: var(--bg2);
+					background-color: rgba($accent2, .1);
 					transition: 120ms;
 					cursor: pointer;
 					margin: auto;
 					margin-bottom: 8px;
-					border: 2px solid var(--bg3);
-					color: var(--foreground);
+					border: 2px solid rgba($accent2, .3);
+					color: $foreground;
 					&:hover {
-						background-color: var(--bg3);
-						border: 2px solid var(--fg2);
+						border: 2px $accent2 solid;
+						background: rgba($accent2, 0.1);
 					}
 					&:active {
-						background-color: var(--fg2);
-						color: var(--bg1);
+						border: 2px $accent2 solid;
+						background: rgba($accent2, 0.3) ;
 					}
+					// >a[selected] {
+					// 	background: rgba($accent1, 0.3);
+					// 	border: 2px $accent1 solid;
+					// 	font-weight: 700;
+					// }
 				}
 				select {
 					width: fit-content;
 					padding: 8px;
 					border-radius: 8px;
-					background-color: var(--bg2);
+					background-color: $bg2;
 					transition: 120ms;
 					cursor: pointer;
 					margin: auto;
 					margin-bottom: 8px;
-					border: 2px solid var(--bg3);
-					color: var(--foreground);
+					border: 2px solid $bg3;
+					color: $foreground;
 					cursor: default;
 					margin-bottom: 0;
 				}
@@ -508,20 +532,20 @@ svg.feather {
 					width: fit-content;
 					padding: 8px;
 					border-radius: 8px;
-					background-color: var(--bg2);
+					background-color: $bg2;
 					transition: 120ms;
 					cursor: pointer;
 					margin: auto;
 					margin-bottom: 8px;
-					border: 2px solid var(--bg3);
-					color: var(--foreground);
+					border: 2px solid $bg3;
+					color: $foreground;
 					margin-top: 16px;
 					margin-bottom: 16px;
 					&:hover {
-						background-color: var(--bg3);
-						border: 2px solid var(--fg2);
-						background-color: var(--fg2);
-						color: var(--bg1);
+						background-color: $bg3;
+						border: 2px solid $accent2;
+						background-color: $accent2;
+						color: $bg1;
 					}
 				}
 				.keys-row {
@@ -540,23 +564,21 @@ svg.feather {
 						vertical-align: middle;
 						line-height: 28px;
 						border-radius: 50%;
-						background-color: var(--bg1);
-						border: 2px var(--bg2) solid;
+						background-color: $bg1;
+						border: 2px $bg2 solid;
 						margin: 2px;
 						&:hover {
-							background-color: var(--bg2);
-							border: 2px var(--bg3) solid;
+							background-color: rgba($accent2, .1);
+							border: 2px $accent2 solid;
 						}
 						&:active {
-							background-color: var(--fg2);
-							border: 2px var(--fg2) solid;
-							color: var(--bg1);
+							background-color: rgba($accent2, .3);
+							border: 2px $accent2 solid;
 						}
 					}
 					.key.selected {
-						background-color: var(--fg2);
-						border: 2px var(--fg2) solid;
-						color: var(--bg1);
+						background-color: rgba($accent2, .3);
+						border: 2px $accent2 solid;
 					}
 					.key-spacer {
 						height: 28px;
@@ -583,7 +605,7 @@ svg.feather {
 		-webkit-appearance: none;
 		width: 100%;
 		height: 4px;
-		background: linear-gradient(90deg, var(--fg2) 50%, var(--fg2) 50%);
+		background: linear-gradient(90deg, $accent2 50%, $accent2 50%);
 		outline: none;
 		-webkit-transition: 0.2s;
 		transition: opacity 0.2s;
@@ -593,10 +615,191 @@ svg.feather {
 			appearance: none;
 			width: 20px;
 			height: 20px;
-			background: var(--bg2);
-			border: 3px solid var(--fg2);
+			background: $bg2;
+			border: 3px solid $accent2;
 			border-radius: 50%;
 			cursor: pointer;
 		}
+	}
+}
+
+.rs-container {
+	* {
+		box-sizing: border-box;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+	height: 45px;
+	position: relative;
+	margin-bottom: -16px;
+	.rs-bg {
+		background-color: $bg2;
+		border: 1px solid $bg3;
+		height: 4px;
+		left: 0;
+		position: absolute;
+		top: 5px;
+		width: 100%;
+		border-radius: 3px;
+	}
+	.rs-selected {
+		background-color: $bg2;
+		border: 1px solid $bg3;
+		height: 4px;
+		left: 0;
+		position: absolute;
+		top: 5px;
+		width: 100%;
+		border-radius: 3px;
+		background-color: $accent2;
+		border: 1px solid $accent2;
+		transition: all 0.2s linear;
+		width: 0;
+	}
+	.rs-pointer {
+		background-color: $bg2;
+		border: 2px solid $accent2;
+		border-radius: 8px;
+		cursor: pointer;
+		height: 16px;
+		left: -4px;
+		position: absolute;
+		top: -2px;
+		transition: all 0.2s linear;
+		aspect-ratio: 1;
+		&::after {
+			left: auto;
+			right: 12px;
+		}
+	}
+	.rs-scale {
+		left: 0;
+		position: absolute;
+		top: 5px;
+		white-space: nowrap;
+		span {
+			float: left;
+			position: relative;
+			&::before {
+				background-color: #ededed;
+				content: "";
+				height: 8px;
+				left: 0;
+				position: absolute;
+				top: 10px;
+				width: 1px;
+			}
+			&:last-child {
+				margin-left: -1px;
+				width: 0px;
+			}
+			ins {
+				color: $foreground;
+				display: inline-block;
+				font-size: 12px;
+				margin-top: 20px;
+				text-decoration: none;
+			}
+		}
+	}
+	&.disabled {
+		.rs-selected {
+			background-color: $bg2;
+			border-color: $bg3;
+		}
+		.rs-pointer {
+			cursor: default;
+		}
+		.rs-scale {
+			span {
+				ins {
+					color: #999;
+				}
+			}
+		}
+		.rs-tooltip {
+			border-color: #ccc;
+			color: #999;
+		}
+	}
+}
+.rs-container.sliding {
+	.rs-selected {
+		transition: none;
+	}
+	.rs-pointer {
+		transition: none;
+	}
+}
+.rs-container.rs-noscale {
+	span {
+		&::before {
+			display: none;
+		}
+		&:first-child {
+			&::before {
+				display: block;
+			}
+		}
+		&:last-child {
+			&::before {
+				display: block;
+			}
+		}
+	}
+}
+.rs-tooltip {
+	color: $accent2;
+	width: auto;
+	min-width: 30px;
+	height: 30px;
+	position: relative;
+	background: $bg1;
+	border: 1px solid $bg3;
+	border-radius: 3px;
+	position: absolute;
+	transform: translate(-50%, -35px);
+	left: 6px;
+	text-align: center;
+	font-size: 13px;
+	padding: 6px 10px 0;
+}
+
+@media only screen and (max-width: 900px) {
+	#navbar{
+		width: 70px !important;
+		#profile-banner{
+			display: none !important;
+		}
+		#navigation > *:not(a){
+			display: none;
+		}
+		span{
+			display: none;
+		}
+		svg{
+			margin: 0 !important;
+		}
+		#navigation > a{
+			justify-content: center;
+			margin-right: 0 !important;
+			height: 32px;
+			width: 32px;
+		}
+	}
+
+}
+
+@media only screen and (max-width: 700px) {
+	#filter{ display: none; }
+	#top-volume-slider .sliderContainer{ display: none !important; }
+}
+@media only screen and (max-width: 550px){
+	#navbar{ 
+		display: none !important;
 	}
 }
