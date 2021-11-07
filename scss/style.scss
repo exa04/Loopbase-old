@@ -605,3 +605,12 @@ svg.feather {
 		}
 	}
 }
+
+@media only screen and (max-width: 900px) {
+	#navbar{ display: none !important; }
+}
+
+@media only screen and (max-width: 700px) {
+	#filter{ display: none; }
+	#top-volume-slider .sliderContainer{ display: none !important; }
+} 
