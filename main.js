@@ -9,7 +9,7 @@ const cheerio = require('cheerio');
 
 const pref = {
     dir : {
-        content:        os.homedir() + "/loopermanContent"
+        content:        os.homedir() + "/loopbaseContent"
     }
 }
 
