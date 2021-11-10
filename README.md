@@ -31,4 +31,4 @@ npm run watch-start
 
 ## How to contribute
 
-If you want to tackle an issue that is yet to be assigned, just comment on it and start a pull request. If you're unsure which one to pick, there are probably some tagged "help wanted" or "good first issue". Also, the current most relevant ones can be found in this project: Stable Release 1.0.0](https://github.com/stxarixdust/looperman-desktop/projects/1). If you find any bugs or otherwise, don't hesitate to file an issue for them, too.
+If you want to tackle an issue that is yet to be assigned, just comment on it and start a pull request. If you're unsure which one to pick, there are probably some tagged "help wanted" or "good first issue". Also, the current most relevant ones can be found in this project: [Stable Release 1.0.0](https://github.com/stxarixdust/looperman-desktop/projects/1). If you find any bugs or otherwise, don't hesitate to file an issue for them, too.
