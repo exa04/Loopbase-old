@@ -1,7 +1,7 @@
 ---
 name: Feature request
-about: Suggest an idea for this app. Keep in mind that it might time for these issues
-  to be adressed.
+about: Suggest an idea for this app. Keep in mind that it might take some time for these
+  issues to be adressed.
 title: ''
 labels: enhancement
 assignees: ''
