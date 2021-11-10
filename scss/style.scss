@@ -348,13 +348,13 @@ svg.feather {
 											background-color: $accent1;
 											display: none;
 											&:has(svg[style*="display:block"]){
-												background-color: var(--fg1);
+												background-color: $accent1;
 											}
 											&.playing{
 												.feather-play{ display: none; }
 												.feather-pause{ display: block; }
-												background-color: var(--foreground);
-												svg{ stroke: var(--fg1); }
+												background-color: $foreground;
+												svg{ stroke: $accent1; }
 												display: flex;
 											}
 											.feather-pause {
@@ -774,6 +774,7 @@ svg.feather {
 
 @media only screen and (max-width: 900px) {
 	#navbar{
+		padding-top: 4px;
 		width: 70px !important;
 		#profile-banner{
 			display: none !important;
