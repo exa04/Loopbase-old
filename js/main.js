@@ -250,7 +250,10 @@ function volumeChange(){
     var slider = document.getElementById("volume-slider");
     var volume = slider.value;
     var percentage = volume * 100;
-    var color = 'linear-gradient(90deg, var(--fg2) ' + percentage + '%, var(--bg3) ' + percentage + '%)';
+    var originalColor = getComputedStyle(slider).background;
+    var colorSlices = originalColor.split(" ");
+    var color = colorSlices[4]+colorSlices[5]+colorSlices[6]+colorSlices[7]+' ' + percentage + '%, ' + colorSlices[9]+colorSlices[10]+colorSlices[11]+ percentage + '%)';
+    console.log(color);
     slider.style.background = color;
     audioPreviewPlayer.volume = volume;
 
