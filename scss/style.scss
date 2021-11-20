@@ -209,7 +209,7 @@ svg.feather {
 					}
 				}
 			}
-			#top-volume-slider {
+			#volume-slider {
 				display: flex;
 				align-items: center;
 				position: absolute;
@@ -800,7 +800,7 @@ svg.feather {
 
 @media only screen and (max-width: 700px) {
 	#filter{ display: none; }
-	#top-volume-slider .sliderContainer{ display: none !important; }
+	#volume-slider .sliderContainer{ display: none !important; }
 }
 @media only screen and (max-width: 550px){
 	#navbar{ 

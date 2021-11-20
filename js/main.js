@@ -14,7 +14,7 @@ var searchSession = {
     tempoRange: true,
     appendContent: false,
     direction: "d"
-}
+};
 
 var tempoSlider = new rSlider({
     target: '#tempo-range',
@@ -34,7 +34,7 @@ audioPreviewPlayer.pause()
 var currentCtxMenu;
 
 
-search();
+search(false);
 feather.replace();
 
 document.querySelector("#direction-toggle").firstElementChild.style.display = "none";
@@ -180,20 +180,21 @@ function openBrowser(url){
     ipcRenderer.invoke('openLink', url);
 }
 
-function search(){
+function search(setQuery){
     resultsContainer = document.querySelector("#results-contents");
     resultsContainer.innerHTML = '<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>';
 
-    let min = parseInt(tempoSlider.getValue().split(/[ ,]+/)[0]);
-    let max = searchSession.tempoRange ? parseInt(tempoSlider.getValue().split(/[ ,]+/)[1]) : min;
-
-    query.keys = document.querySelector("#filter-search").value;
-    query.tempo = [min,max];
-    query.page = 1;
-    query.order[0] = document.querySelector("#order").value;
-    query.order[1] = searchSession.direction;
-    query.date = document.querySelector("#date").value;
-    query.genre = document.querySelector("#genre").value;
+    if(setQuery){
+        let min = parseInt(tempoSlider.getValue().split(/[ ,]+/)[0]);
+        let max = searchSession.tempoRange ? parseInt(tempoSlider.getValue().split(/[ ,]+/)[1]) : min;
+        query.keys = document.querySelector("#filter-search").value;
+        query.tempo = [min,max];
+        query.page = 1;
+        query.order[0] = document.querySelector("#order").value;
+        query.order[1] = searchSession.direction;
+        query.date = document.querySelector("#date").value;
+        query.genre = document.querySelector("#genre").value;
+    }
 
     ipcRenderer.invoke('search', query).then((results) => {
         resultsContainer.innerHTML = '';
