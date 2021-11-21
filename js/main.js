@@ -38,6 +38,13 @@ search(false);
 feather.replace();
 
 document.querySelector("#direction-toggle").firstElementChild.style.display = "none";
+
+
+ipcRenderer.invoke("getVersion").then((v) => {
+    document.getElementById("app-version").innerText = v;
+});
+
+
 // document.getElementById("volume-icon").querySelector(".feather-volume").style.display = "none";
 // document.getElementById("volume-icon").querySelector(".feather-volume-1").style.display = "none";
 

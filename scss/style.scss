@@ -74,6 +74,12 @@ svg.feather {
 		height: 100%;
 		background: $bg2;
 		#navigation {
+			#version-side{
+				padding-left: 16px;
+				margin: 0px;
+				font-size: 12px;
+				opacity: .5;
+			}
 			flex: 1;
 			hr{
 				border: 1px solid $bg1;

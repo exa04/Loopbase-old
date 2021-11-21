@@ -1,4 +1,4 @@
-const {ipcRenderer, contextBridge} = require('electron');
+const {ipcRenderer, contextBridge, app} = require('electron');
 const path = require('path')
 
 contextBridge.exposeInMainWorld("ipcRenderer",ipcRenderer);

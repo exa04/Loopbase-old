@@ -8,7 +8,7 @@ const cheerio = require('cheerio');
 
 const pref = {
     dir : {
-        content:        os.homedir() + "/loopbaseContent"
+        content: os.homedir() + "/loopbaseContent"
     }
 }
 
@@ -127,6 +127,10 @@ ipcMain.handle('downloadMP3', async (event, args) => {
 
 ipcMain.handle('getDir', async (event, dir) => {
     return pref.dir[dir];
+});
+
+ipcMain.handle('getVersion', async (event, dir) => {
+    return app.getVersion();
 });
 
 ipcMain.handle('fileExists', async (event, path) =>{
