@@ -31,6 +31,8 @@ var loadedPreviewContent = {}
 var audioPreviewPlayer = new Audio();
 audioPreviewPlayer.volume = 1;
 audioPreviewPlayer.pause()
+var audioProgressUpdateTask;
+var scrubbing = false;
 var currentCtxMenu;
 
 
@@ -261,7 +263,6 @@ function volumeChange(){
     var originalColor = getComputedStyle(slider).background;
     var colorSlices = originalColor.split(" ");
     var color = colorSlices[4]+colorSlices[5]+colorSlices[6]+colorSlices[7]+' ' + percentage + '%, ' + colorSlices[9]+colorSlices[10]+colorSlices[11]+ percentage + '%)';
-    console.log(originalColor);
     slider.style.background = color;
     audioPreviewPlayer.volume = volume;
 
@@ -285,7 +286,37 @@ function volumeChange(){
     }
 }
 
+function displayAudioProgress(){
+    var scrubber = document.getElementById("audio-scrubber");
+    var position = audioPreviewPlayer.currentTime / audioPreviewPlayer.duration;
+    if(!scrubbing){
+        scrubber.value = position;
+    }
+    var percentage = position * 100;
+    var originalColor = getComputedStyle(scrubber).background;
+    var colorSlices = originalColor.split(" ");
+    var color = colorSlices[4]+colorSlices[5]+colorSlices[6]+colorSlices[7]+' ' + percentage + '%, ' + colorSlices[9]+colorSlices[10]+colorSlices[11]+ percentage + '%)';
+    scrubber.style.background = color;
+}
+
+function scrubbingStarted(){
+    scrubbing = true
+}
+
+function audioScrub(){
+    scrubbing = false;
+    var scrubber = document.getElementById("audio-scrubber");
+    var position = scrubber.value;
+    var percentage = position * 100;
+    var originalColor = getComputedStyle(scrubber).background;
+    var colorSlices = originalColor.split(" ");
+    var color = colorSlices[4]+colorSlices[5]+colorSlices[6]+colorSlices[7]+' ' + percentage + '%, ' + colorSlices[9]+colorSlices[10]+colorSlices[11]+ percentage + '%)';
+    scrubber.style.background = color;
+    audioPreviewPlayer.currentTime = audioPreviewPlayer.duration * position;
+}
+
 function preview(url){
+    clearInterval(audioProgressUpdateTask);
     var oldUrl = audioPreviewPlayer.src;
     var volume = audioPreviewPlayer.volume;
     var playing = false;
@@ -313,6 +344,7 @@ function preview(url){
         
     }
     document.getElementById(url).querySelector(".pp-playbutton").classList.add(playing ? "playing" : "paused");
+    if(playing) audioProgressUpdateTask = setInterval(displayAudioProgress, 200);
 }
 
 function downloadResult(url, dest, el){
