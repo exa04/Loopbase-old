@@ -254,7 +254,7 @@ function volumeChange(){
     var originalColor = getComputedStyle(slider).background;
     var colorSlices = originalColor.split(" ");
     var color = colorSlices[4]+colorSlices[5]+colorSlices[6]+colorSlices[7]+' ' + percentage + '%, ' + colorSlices[9]+colorSlices[10]+colorSlices[11]+ percentage + '%)';
-    console.log(color);
+    console.log(originalColor);
     slider.style.background = color;
     audioPreviewPlayer.volume = volume;
 

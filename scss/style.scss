@@ -1,5 +1,6 @@
 @import "https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap";
 
+$bg0 		: #1a002c;
 $bg1 		: #260040;
 $bg2 		: #350058;
 $bg3 		: #4a1570;
@@ -162,13 +163,15 @@ svg.feather {
 		flex-direction: column;
 		flex: 1;
 		height: 100vh;
-		#topbar {
+		#bottombar {
+			height: 32px;
 			display: flex;
-			padding-top: 8px;
+			padding-top: 16px;
 			padding-left: 16px;
 			padding-right: 16px;
-			padding-bottom: 8px;
-			border-bottom: 1px solid $bg2;
+			padding-bottom: 16px;
+			border-top: 2px solid $bg2;
+			background: $bg1;
 			>* {
 				margin-right: 8px;
 			}
@@ -209,7 +212,7 @@ svg.feather {
 					}
 				}
 			}
-			#volume-slider {
+			#bottom-volume-slider {
 				display: flex;
 				align-items: center;
 				position: absolute;
@@ -641,7 +644,7 @@ svg.feather {
 	margin-bottom: -16px;
 	.rs-bg {
 		background-color: $bg2;
-		border: 1px solid $bg3;
+		border: 2px solid $bg3;
 		height: 4px;
 		left: 0;
 		position: absolute;
@@ -651,7 +654,7 @@ svg.feather {
 	}
 	.rs-selected {
 		background-color: $bg2;
-		border: 1px solid $bg3;
+		border: 2px solid $bg3;
 		height: 4px;
 		left: 0;
 		position: absolute;
@@ -659,7 +662,7 @@ svg.feather {
 		width: 100%;
 		border-radius: 3px;
 		background-color: $accent2;
-		border: 1px solid $accent2;
+		border: 2px solid $accent2;
 		transition: all 0.2s linear;
 		width: 0;
 	}
@@ -762,7 +765,7 @@ svg.feather {
 	height: 30px;
 	position: relative;
 	background: $bg1;
-	border: 1px solid $bg3;
+	border: 2px solid $bg3;
 	border-radius: 3px;
 	position: absolute;
 	transform: translate(-50%, -35px);
@@ -800,7 +803,7 @@ svg.feather {
 
 @media only screen and (max-width: 700px) {
 	#filter{ display: none; }
-	#volume-slider .sliderContainer{ display: none !important; }
+	#bottom-volume-slider .sliderContainer{ display: none !important; }
 }
 @media only screen and (max-width: 550px){
 	#navbar{ 
