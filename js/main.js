@@ -30,7 +30,7 @@ var tempoSlider = new rSlider({
 var loadedPreviewContent = {}
 var audioPreviewPlayer = new Audio();
 audioPreviewPlayer.volume = 1;
-audioPreviewPlayer.pause()
+audioPreviewPlayer.pause();
 var audioProgressUpdateTask;
 var scrubbing = false;
 var currentCtxMenu;
@@ -344,7 +344,29 @@ function preview(url){
         
     }
     document.getElementById(url).querySelector(".pp-playbutton").classList.add(playing ? "playing" : "paused");
-    if(playing) audioProgressUpdateTask = setInterval(displayAudioProgress, 200);
+    if(playing){
+        audioProgressUpdateTask = setInterval(displayAudioProgress, 200);
+        document.querySelector("#play-button").innerHTML = feather.icons['pause'].toSvg();
+    } else {
+        document.querySelector("#play-button").innerHTML = feather.icons['play'].toSvg();
+    }
+}
+
+function togglePlaying(){
+    if(audioPreviewPlayer.src == "") return;
+    if(audioPreviewPlayer.paused){
+        audioProgressUpdateTask = setInterval(displayAudioProgress, 200);
+        document.querySelector("#play-button").innerHTML = feather.icons['pause'].toSvg();
+        audioPreviewPlayer.play();
+        document.getElementById(audioPreviewPlayer.src).querySelector(".pp-playbutton").classList.remove("paused");
+        document.getElementById(audioPreviewPlayer.src).querySelector(".pp-playbutton").classList.add("playing");
+    } else {
+        clearInterval(audioProgressUpdateTask);
+        document.querySelector("#play-button").innerHTML = feather.icons['play'].toSvg();
+        audioPreviewPlayer.pause();
+        document.getElementById(audioPreviewPlayer.src).querySelector(".pp-playbutton").classList.remove("playing");
+        document.getElementById(audioPreviewPlayer.src).querySelector(".pp-playbutton").classList.add("paused");
+    }
 }
 
 function downloadResult(url, dest, el){

@@ -222,7 +222,7 @@
             </div>
             <div id="bottombar">
                 <div id="bottom-audio-controls" class="topnav">
-                    <i data-feather="play"></i>
+                    <i data-feather="play" id="play-button" onclick="togglePlaying()"></i>
                     <div class="sliderContainer">
                         <input id="audio-scrubber" class="slider" type="range" min="0" max="1" value="0" step="0.0001" onchange="audioScrub()" oninput="scrubbingStarted()">
                     </div>
