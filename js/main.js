@@ -34,6 +34,7 @@ audioPreviewPlayer.loop = true;
 audioPreviewPlayer.pause();
 var audioProgressUpdateTask;
 var scrubbing = false;
+var searching = false;
 var currentCtxMenu;
 
 
@@ -166,6 +167,7 @@ function appendResults(results){
             resultsContainer.innerHTML += html;
         });
     });
+    searching = false;
 }
 
 function showCtxMenu(el){
@@ -402,8 +404,9 @@ var r = document.querySelector("#results");
 r.onscroll = (ev) => {
     resultsContainer = document.querySelector("#results-contents");
     if (Math.ceil(r.scrollTop + r.clientHeight) >= r.scrollHeight - 200
-    && !resultsContainer.lastElementChild.classList.contains("lds-ellipsis")) {
+    && !searching) {
         if(!searchSession.appendContent){
+            searching = true;
             searchSession.appendContent = true;
             resultsContainer.innerHTML += '<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>';
             loadNewContent();
