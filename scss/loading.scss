@@ -1,3 +1,5 @@
+@import "variables.scss";
+
 @keyframes lds-ellipsis1 {
 	0% {
 		transform: scale(0);
@@ -37,7 +39,7 @@
 		width: 13px;
 		height: 13px;
 		border-radius: 50%;
-		background: var(--bg3);
+		background: $foreground;
 		animation-timing-function: cubic-bezier(0, 1, 1, 0);
 		&:nth-child(1) {
 			left: 8px;
