@@ -30,6 +30,7 @@ var tempoSlider = new rSlider({
 var loadedPreviewContent = {}
 var audioPreviewPlayer = new Audio();
 audioPreviewPlayer.volume = 1;
+audioPreviewPlayer.loop = true;
 audioPreviewPlayer.pause();
 var audioProgressUpdateTask;
 var scrubbing = false;
@@ -325,6 +326,7 @@ function preview(url){
         playing = true;
         audioPreviewPlayer.pause();
         audioPreviewPlayer = new Audio(url);
+        audioPreviewPlayer.loop = true;
         audioPreviewPlayer.volume = volume;
         audioPreviewPlayer.play();
         document.getElementById(url);
