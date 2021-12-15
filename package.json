@@ -3,6 +3,7 @@
   "version": "1.0.0-alpha-1",
   "description": "Desktop looperman client for downloading samples.",
   "main": "main.js",
+  "author": "Starburst Audio",
   "dependencies": {
     "cheerio": "^1.0.0-rc.10",
     "request": "^2.88.2"
@@ -10,14 +11,27 @@
   "devDependencies": {
     "clean-css-cli": "^5.4.2",
     "electron": "^15.3.0",
+    "electron-builder": "^22.14.5",
     "node-sass": "^6.0.1"
   },
   "scripts": {
     "compile-scss": "node-sass -r scss -o css",
     "watch-scss": "node-sass -rw scss -o css",
     "start": "npm run compile-scss & electron .",
-    "watch-start": "npm run watch-scss & electron ."
+    "watch-start": "npm run watch-scss & electron .",
+    "build": "npm run compile-scss & npx electron-builder --windows --linux"
   },
-  "author": "stxarixdust",
-  "license": "GPL-3.0"
+  "license": "GPL-3.0",
+  "build": {
+    "appId": "org.starburst.loopbase",
+    "productName": "Loopbase",
+    "copyright": "Licensed under GNU GPLv3",
+    "mac": {
+      "category": "public.app-category.music"
+    },
+    "linux": {
+      "maintainer": "StarburstAudio",
+      "category": "Audio"
+    }
+  }
 }
