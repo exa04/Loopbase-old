@@ -11,7 +11,7 @@
 
 With loopbase, you can browse samples on looperman and drag-and-drop them into your DAW. Use the righthand section to filter your search queries and save samples to your disk! Loopbase is not affiliated with Looperman.
 
-## Installing/Running
+## Installing
 
 You can try the current alpha version by cloning this repository.
 
@@ -35,7 +35,7 @@ And lastly, you can also build the app
 npm run build
 ```
 
-## How to contribute
+## Contributing
 
 If you want to tackle an issue that is yet to be assigned, just comment on it and start a pull request. If you're unsure on which one to pick, there are probably some tagged "help wanted" or "good first issue". If you find any bugs or otherwise, don't hesitate to file an issue for them, too.
 
