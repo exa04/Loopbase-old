@@ -9,6 +9,8 @@
 > :warning: **THIS APP IS STILL IN ITS ALPHA STAGE**
 > You may encounter bugs, some features are still missing.
 
+With loopbase, you can browse samples on looperman and drag-and-drop them into your DAW. Use the righthand section to filter your search queries and save samples to your disk! Loopbase is not affiliated with Looperman.
+
 ## Installing/Running
 
 You can try the current alpha version by cloning this repository.
