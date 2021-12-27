@@ -34,7 +34,7 @@ audioPreviewPlayer.loop = true;
 audioPreviewPlayer.pause();
 var audioProgressUpdateTask;
 var scrubbing = false;
-var searching = false;
+var searching = true;
 var currentCtxMenu;
 
 
