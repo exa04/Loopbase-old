@@ -1,5 +1,5 @@
 {
-  "name": "looperman-client",
+  "name": "loopbase",
   "version": "1.0.0-alpha-1",
   "description": "Desktop looperman client for downloading samples.",
   "main": "main.js",
