@@ -195,15 +195,6 @@ svg.feather {
 					}
 				}
 				#results {
-					&::before {
-						content: '';
-						display: block;
-						position: absolute;
-						width: calc(100% - 512px - 32px);
-						height: 16px;
-						background: linear-gradient(#260040, transparent);
-						z-index: 4;
-					}
 					flex: 1;
 					overflow: auto;
 					#results-contents {
