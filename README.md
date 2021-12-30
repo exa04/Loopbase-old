@@ -37,16 +37,10 @@ npm run build
 
 ## Contributing
 
-If you want to tackle an issue that is yet to be assigned, just comment on it and start a pull request. If you're unsure on which one to pick, there are probably some tagged "help wanted" or "good first issue". If you find any bugs or otherwise, don't hesitate to file an issue for them, too.
+You can find the issues to be tackled on [the project board](https://github.com/StarburstAudio/loopbase/projects/2). If you want to tackle an issue that is yet to be assigned, just comment on it and start a pull request. If you're unsure on which one to pick, there are probably some tagged "help wanted" or "good first issue". If you find any bugs or otherwise, don't hesitate to file an issue for them, too.
 
 There are some things that do need to be adressed before most other issues:
   - JS refactoring
   - SCSS refactoring
   - Redesign
     - Only goes for things that affect the front-end; Switch to the `visual-redesign` branch to contribute to the redesign (There's already a [prototype](https://www.figma.com/proto/uJP8u3soovR04vpmJreHnM/Loopbase-Redesign?node-id=45%3A6&scaling=min-zoom&page-id=0%3A1) to be implemented!)
-
-Switch to the bleeding-edge **unstable** version to contribute, by doing the following:
-
-```sh
-git checkout dev
-```
