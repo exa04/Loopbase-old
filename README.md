@@ -37,7 +37,7 @@ npm run build
 
 ## Contributing
 
-You can find the issues to be tackled on [the project board](https://github.com/StarburstAudio/loopbase/projects/2). If you want to tackle an issue that is yet to be assigned, just comment on it and start a pull request. If you're unsure on which one to pick, there are probably some tagged "help wanted" or "good first issue". If you find any bugs or otherwise, don't hesitate to file an issue for them, too.
+You can find the issues that are to be tackled on [the project board](https://github.com/StarburstAudio/loopbase/projects/2). If you want to work on an issue that is yet to be assigned, just comment on it and start a pull request. If you're unsure on which one to pick, there are probably some tagged "help wanted" or "good first issue". If you find any bugs or otherwise, don't hesitate to file an issue for them, too.
 
 There are some things that do need to be adressed before most other issues:
   - JS refactoring
