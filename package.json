@@ -13,8 +13,11 @@
   },
   "main": "background.js",
   "dependencies": {
+    "@fontsource/rubik": "^4.5.0",
     "core-js": "^3.6.5",
-    "vue": "^3.0.0"
+    "feather-icons": "^4.28.0",
+    "vue": "^3.0.0",
+    "vue-feather": "^2.0.0-rc.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

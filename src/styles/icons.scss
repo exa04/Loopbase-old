@@ -1,0 +1,7 @@
+@import '../styles/variables.scss';
+
+svg{
+    stroke: $foreground-100;
+    cursor: pointer;
+    transition: 120ms;
+}
