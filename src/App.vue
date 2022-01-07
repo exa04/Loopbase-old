@@ -1,26 +1,25 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <TitleBar></TitleBar>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TitleBar from './components/TitleBar.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    TitleBar
   }
 }
 </script>
 
-<style>
+<style lang="scss">
+@import 'styles/variables.scss';
+body{ margin: 0; background-color: $window-background;}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  background-color: $window-background;
 }
 </style>
