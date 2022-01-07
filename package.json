@@ -1,6 +1,6 @@
 {
   "name": "loopbase",
-  "version": "0.1.0",
+  "version": "1.0.0-alpha-2",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -26,6 +26,7 @@
     "electron-devtools-installer": "^3.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0",
+    "sass": "^1.46.0",
     "vue-cli-plugin-electron-builder": "~2.1.1"
   },
   "eslintConfig": {
