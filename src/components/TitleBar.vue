@@ -1,9 +1,9 @@
 <template>
     <div class="title-bar">
         <div class="window-btns">
-            <div id="close"></div>
-            <div id="min"></div>
-            <div id="max"></div>
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
         <SearchBar placeholder="Search for loops..."></SearchBar>
         <div class="actions">
@@ -47,20 +47,8 @@
         div{
             width: 12px;
             height: 12px;
-            background-color: $foreground-200;
+            background-color: transparent;
             border-radius: 6px;
-        }
-        div:active{
-            background-color: $foreground-100 !important;
-        }
-        #close:hover{
-            background-color: $accent-1;
-        }
-        #max:hover{
-            background-color: $accent-2;
-        }
-        #min:hover{
-            background-color: $accent-3;
         }
     }
     .actions{

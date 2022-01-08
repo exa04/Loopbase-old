@@ -15,7 +15,8 @@ async function createWindow() {
   const win = new BrowserWindow({
     width: 1000,
     height: 700,
-    frame: false,
+    titleBarStyle: 'hidden',
+    trafficLightPosition: {x: 20, y: 18},
     webPreferences: {
       
       // Use pluginOptions.nodeIntegration, leave this alone
