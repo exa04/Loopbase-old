@@ -1,5 +1,5 @@
 <template>
-    <div ref="PlayBar" class="play-bar">
+    <div ref="PlayBar" class="play-bar" v-if="title != ''">
         <div ref="InfoArea" class="info-audio">
             <img ref="ProfilePicture" :src="profile_picture" class="profile-picture">
             <div class="audio-desc">
