@@ -25,18 +25,18 @@
 </script>
 
 <style lang="scss">
-    @import '../styles/variables.scss';
-    @import '../styles/icons.scss';
+    @import '../styles/globals.scss';
     .title-bar{
         -webkit-app-region: drag;
         justify-content: space-between;
         background-color: $titlebar-background;
         color: $foreground-100;
-        padding: 0 21px;
+        padding: 0 $side-padding;
         height: 52px;
         display: flex;
         align-items: center;
-        gap: $titlebar-gap;
+        gap: $item-gap;
+        border-bottom: 1px solid $seperator;
         >*{
             -webkit-app-region: no-drag;
         }
@@ -65,7 +65,7 @@
     }
     .actions{
         display: flex;
-        gap: $titlebar-gap;
+        gap: $item-gap;
         height: 18px;
         svg{
             stroke: $foreground-200;

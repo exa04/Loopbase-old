@@ -42,7 +42,7 @@
 </script>
 
 <style lang="scss">
-@import "../../styles/variables.scss";
+@import "../../styles/globals.scss";
 
 [contentEditable=true]:not(:focus):before{
     content:attr(data-placeholder);
@@ -69,7 +69,7 @@
 }
 .SearchBar.active{
     .inner{
-        margin-left: $titlebar-gap;
+        margin-left: $item-gap;
         transform: translateX(0);
         svg{
             stroke: $foreground-100;
@@ -88,6 +88,7 @@
     transform: translateX(-50%);
     width: min-content;
     min-width: 20px;
+    max-width: 100%;
     transition-duration: $animation-duration;
     transition-timing-function: $animation-timing;
 }

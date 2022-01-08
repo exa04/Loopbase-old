@@ -1,0 +1,93 @@
+// Basic colors: All others are derivatives of these
+
+$background-100: #26002B;
+$background-200: #330039;
+$background-300: #46174B;
+
+$foreground-100: #EDE6EE;
+$foreground-200: #BCA0C0;
+
+$accent-1: #EE00AC;
+$accent-2: #00E991;
+$accent-3: #F5FE00;
+$accent-4: #7713E9;
+
+// Window colors
+
+$window-background: $background-200;
+
+$seperator: #000;
+
+$titlebar-background: $background-100;
+$playbar-background: $background-100;
+
+// Sizing
+
+$radius: 8.5px;
+$item-gap: 16px;
+$side-padding: 21px;
+$gradient-s: 32px;
+
+// Text
+
+*{
+    font-family: 'Rubik' sans-serif;
+}
+
+.desc-title{
+    font-weight: 700;
+}
+.desc-artist{
+    color: $foreground-200;
+}
+
+// Animations
+
+$animation-duration: 150ms;
+$animation-timing: ease-in-out;
+
+// Icons
+
+svg{
+    stroke: $foreground-100;
+    cursor: pointer;
+    transition: 120ms;
+}
+
+// Mixins
+
+@mixin side-gradient($direction, $color, $size: $gradient-s){
+    &::after{
+        width: $size;
+        height: 100%;
+        background: linear-gradient($direction, transparent, $color);
+        position: relative;
+        @if $direction == to right{
+            right: $size;
+            top: 0;
+            margin-right: - $size;
+        }
+        content: "";
+    }
+}
+
+// Sliders
+
+.slider-target{
+    --slider-height: 2px;
+}
+
+.slider-connect{
+    background: $accent-2;
+}
+
+.slider-base{
+    background: $background-200;
+}
+
+.slider-tooltip{
+    background: $accent-2;
+    &:before{
+        border-color: $accent-2;
+    }
+}
