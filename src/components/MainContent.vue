@@ -1,6 +1,10 @@
 <template>
     <div class="main-content">
-        <TopArea></TopArea>
+        <TopArea
+            library_name="Public library"
+            section_name="Loops"
+            search_header
+        />
     </div>
 </template>
 

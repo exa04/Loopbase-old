@@ -1,8 +1,8 @@
 <template>
     <div class="top-area">
-        <p ref="LibraryName" class="LibraryName">Public library</p>
-        <h1>Loops</h1>
-        <div class="tags-container">
+        <p ref="LibraryName" class="LibraryName">{{library_name}}</p>
+        <h1>{{section_name}}</h1>
+        <div class="tags-container" v-if="search_header">
             <div class="tags-left">
                 <div class="tag active">
                     <vue-feather type="activity" size="18"/>
@@ -24,7 +24,7 @@
                 <vue-feather type="chevron-down" size="18"/> 
             </div>
         </div>
-        <div class="results-header">
+        <div class="results-header" v-if="search_header">
             <div style="width: 52px">User</div>
             <div style="flex-grow: 1">Title</div>
             <div style="width: 68px">Key</div>
@@ -39,6 +39,11 @@
         name: "TopArea",
         components: {
             VueFeather
+        },
+        props: {
+            library_name: String,
+            section_name: String,
+            search_header: Boolean
         }
     }
 </script>
