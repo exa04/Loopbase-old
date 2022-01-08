@@ -1,7 +1,11 @@
 <template>
     <TitleBar></TitleBar>
     <MainContent></MainContent>
-    <PlayBar></PlayBar>
+    <PlayBar 
+        profile_picture="https://avatars.githubusercontent.com/u/68156346?v=4"
+        title="Midwest emo guitar - Brakence type hyperpop guitar loop"
+        info="stxarixdust - 150bpm - D# Minor"
+    ></PlayBar>
 </template>
 
 <script>
