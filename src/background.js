@@ -146,8 +146,9 @@ ipcMain.handle('openLink', async (event, url) =>{
 });
 
 ipcMain.on('ondragstart', (event, filePath) => {
+    console.log(join(pref.dir.content, filePath));
     event.sender.startDrag({
         file: join(pref.dir.content, filePath),
-        icon: join('./assets/logo.png')
+        icon: join(__static, 'dragAndDrop.png')
     });
 });

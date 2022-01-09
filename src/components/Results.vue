@@ -1,6 +1,12 @@
 <template>
     <div class="results" ref="resultsArea">
-        <div class="result" v-for="res in resultsData" :key="res.mp3_url">
+        <div
+            class="result"
+            v-for="res in resultsData"
+            :key="res.mp3_url"
+            @dragstart.prevent="if(res.downloaded) startDrag(res.localPath);"
+            draggable="true"
+        >
             <img :src="res.profile_pic" class="profile-picture-large">
             <div class="info-audio">
                 <div class="audio-desc">
@@ -8,7 +14,7 @@
                     <div ref="ArtistName" class="desc-artist">{{res.author}}</div>
                 </div>
             </div>
-            <img class="visualizer" :src="res.waveform">
+            <img class="visualizer" :src="res.waveform" draggable="false">
             <div class="mono-value secondary">{{res.duration}}</div>
             <div class="mono-value">{{res.key}}</div>
             <div class="mono-value">{{res.tempo}}</div>
@@ -156,6 +162,9 @@
             revealFile(path){
                 console.log(path);
                 electron.ipcRenderer.invoke('revealFile', path);
+            },
+            startDrag(path){
+                electron.ipcRenderer.send('ondragstart', path);
             }
         },
     }
