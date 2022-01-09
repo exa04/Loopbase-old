@@ -55,12 +55,19 @@
         padding: $side-padding;
         padding-bottom: $item-gap;
         border-bottom: 1px solid $background-300;
+        h1{
+            max-width: $max-content-width;
+            margin: auto;
+        }
     }
     .LibraryName{
-        margin: 0;
+        max-width: $max-content-width;
+        margin: auto;
         color: $foreground-200;
     }
     .tags-container{
+        max-width: $max-content-width;
+        margin: auto;
         margin-top: $item-gap;
     }
     .tags-container, .tags-left{
@@ -118,7 +125,9 @@
     .results-header{
         display: flex;
         gap: $item-gap;
-        margin-top: $item-gap;
         color: $foreground-200;
+        max-width: $max-content-width;
+        margin: auto;
+        margin-top: $item-gap;
     }
 </style>

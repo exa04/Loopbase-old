@@ -94,13 +94,16 @@
     .result{
         box-sizing: border-box;
         width: 100%;
+        max-width: $max-content-width + 2 * $item-gap;
         display: flex;
-        padding: $item-gap $side-padding;
+        margin: auto;
+        padding: $item-gap;
         gap: $item-gap;
         height: 52px + 2 * $item-gap;
         align-items: center;
         .info-audio{
             @include side-gradient(to right, $window-background);
+            flex-grow: 2;
         }
         .audio-desc{
             margin-left: 0;
@@ -117,6 +120,7 @@
     }
     .visualizer{
         height: 100%;
+        width: 100px;
         flex-shrink: 1;
         flex-grow: 1;
     }
