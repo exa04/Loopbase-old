@@ -174,17 +174,30 @@
     @import "../styles/globals.scss";
     .result{
         box-sizing: border-box;
-        width: 100%;
+        width: calc(100% - $item-gap);
         max-width: $max-content-width + 2 * $item-gap;
         display: flex;
         margin: auto;
-        padding: $item-gap;
+        margin-bottom: $item-gap / 2;
+        margin-top: $item-gap / 2;
+        padding: $item-gap / 2;
         gap: $item-gap;
-        height: 52px + 2 * $item-gap;
+        height: 52px + $item-gap;
         align-items: center;
+        border-radius: $radius;
+        transition-duration: $animation-duration;
+        transition-timing-funtion: $animation-timing;
         .info-audio{
             @include side-gradient(to right, $window-background);
             flex-grow: 2;
+            transition-duration: $animation-duration;
+            transition-timing-funtion: $animation-timing;
+        }
+        &:hover{
+            background-color: $window-hover;
+            .info-audio{
+                @include side-gradient(to right, $window-hover);
+            }
         }
         .audio-desc{
             margin-left: 0;
