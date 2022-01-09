@@ -44,9 +44,6 @@
             },
             submit(){
                 this.$emit('submitSearch');
-                this.$refs.input.value = "";
-                if((this.$refs.input.value).length == 0) this.$refs.input.style.width = '';
-                else this.$refs.input.style.width = (((this.$refs.input.value).length) + 1) + 'ch';
             }
         }
     }

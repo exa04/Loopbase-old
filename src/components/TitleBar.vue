@@ -7,7 +7,7 @@
         </div>
         <SearchBar
             placeholder="Search for loops..."
-            @submitSearch="search()"
+            @submitSearch="this.$parent.search()"
             ref="SearchBar"
         />
         <div class="actions">
@@ -25,11 +25,6 @@
         components: {
             VueFeather,
             SearchBar
-        },
-        methods: {
-            search(){
-                console.log(this.$refs.SearchBar.value)
-            }
         }
     };
 </script>
