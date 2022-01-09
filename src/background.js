@@ -28,7 +28,6 @@ async function createWindow() {
         titleBarStyle: 'hidden',
         trafficLightPosition: {x: 20, y: 18},
         webPreferences: {
-            
             // Use pluginOptions.nodeIntegration, leave this alone
             // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
             nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
@@ -145,6 +144,6 @@ ipcMain.handle('openLink', async (event, url) =>{
 ipcMain.on('ondragstart', (event, filePath) => {
     event.sender.startDrag({
         file: join(pref.dir.content, filePath),
-        icon: join(__dirname, 'img/dragAndDrop.png')
+        icon: join('./assets/logo.png')
     });
 });

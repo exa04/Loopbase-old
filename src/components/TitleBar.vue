@@ -5,7 +5,11 @@
             <div></div>
             <div></div>
         </div>
-        <SearchBar placeholder="Search for loops..."></SearchBar>
+        <SearchBar
+            placeholder="Search for loops..."
+            @submitSearch="search()"
+            ref="SearchBar"
+        />
         <div class="actions">
             <vue-feather type="folder" size="18"></vue-feather>
             <vue-feather type="settings" size="18"></vue-feather>
@@ -16,10 +20,16 @@
 <script>
     import VueFeather from 'vue-feather';
     import SearchBar from './inputs/SearchBar';
+
     export default {
         components: {
             VueFeather,
             SearchBar
+        },
+        methods: {
+            search(){
+                console.log(this.$refs.SearchBar.value)
+            }
         }
     };
 </script>

@@ -9,6 +9,8 @@
                 @focus="onFocus"
                 @keypress="resizeInput"
                 v-bind:placeholder="placeholder"
+                v-model="value"
+                v-on:keyup.enter="submit"
             >
         </div>
     </div>
@@ -20,6 +22,9 @@
         name: 'SearchBar',
         components: {
             VueFeather
+        },
+        data() {
+            return {value: ""};
         },
         props: {
             placeholder: String
@@ -36,6 +41,12 @@
             resizeInput(){
                 if((this.$refs.input.value).length == 0) this.$refs.input.style.width = '';
                 else this.$refs.input.style.width = (((this.$refs.input.value).length) + 1) + 'ch';
+            },
+            submit(){
+                this.$emit('submitSearch');
+                this.$refs.input.value = "";
+                if((this.$refs.input.value).length == 0) this.$refs.input.style.width = '';
+                else this.$refs.input.style.width = (((this.$refs.input.value).length) + 1) + 'ch';
             }
         }
     }
@@ -43,10 +54,6 @@
 
 <style lang="scss">
 @import "../../styles/globals.scss";
-
-[contentEditable=true]:not(:focus):before{
-    content:attr(data-placeholder);
-}
 
 ::-webkit-input-placeholder{
     color: $foreground-200;
