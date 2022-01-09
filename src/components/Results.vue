@@ -18,6 +18,7 @@
                     size="18"
                     v-if="res.downloaded"
                     class="icon-btn"
+                    @click="remove(res.localPath).then(res.downloaded = false)"
                 />
                 <div class="icon-spacer" v-else/>
                 <vue-feather type="folder"
@@ -144,6 +145,11 @@
             async download(mp3_url, localPath){
                 return new Promise((resolve) => {
                     electron.ipcRenderer.invoke('downloadMP3', {url: mp3_url, dest: localPath}).then(()=>{ resolve() });
+                });
+            },
+            async remove(localPath){
+                return new Promise((resolve) => {
+                    electron.ipcRenderer.invoke('fileDelete', localPath).then(()=>{ resolve() });
                 });
             }
         },
