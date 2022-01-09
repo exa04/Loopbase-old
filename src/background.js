@@ -1,22 +1,19 @@
 'use strict'
 
-import { app, protocol, BrowserWindow } from 'electron'
+import { app, protocol, BrowserWindow, ipcMain, shell } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 import { search, downloadMP3 } from './loopermanData';
+import * as fs from 'fs';
+import { homedir } from 'os';
+import { join } from 'path';
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
-let query = {
-    category:       'loops',
-    keys:           '',
-    order:          ['date', 'd'],
-    tempo:          [0,200],
-    page:           1,
-    key:            ['c', ''],
-    date:           0,
-    genre:          0,
-    filterByKey:    false
-};
+const pref = {
+    dir : {
+        content: homedir() + "/loopbaseContent"
+    }
+}
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
@@ -94,3 +91,60 @@ if (isDevelopment) {
         })
     }
 }
+
+async function fileExists(path){
+  return new Promise((resolve, reject) => {
+      try {
+          if(fs.existsSync(path)) resolve(true);
+          else resolve(false);
+      } catch {
+          reject();
+      }
+  })
+}
+
+async function fileDelete(path){
+  return new Promise((resolve, reject) => {
+      try {
+          fs.unlinkSync(path);
+          resolve();
+      } catch (err) {
+          reject(err);
+      }
+  })
+}
+
+ipcMain.handle('search', async (event, args) => {
+    return await search(args);
+});
+
+ipcMain.handle('downloadMP3', async (event, args) => {
+    return await downloadMP3(args.url, pref.dir.content + "/" + args.dest);
+});
+
+ipcMain.handle('getDir', async (event, dir) => {
+    return pref.dir[dir];
+});
+
+ipcMain.handle('getVersion', async () => {
+    return app.getVersion();
+});
+
+ipcMain.handle('fileExists', async (event, path) =>{
+    return await fileExists(pref.dir.content + "/" + path);
+});
+
+ipcMain.handle('fileDelete', async (event, path) =>{
+    return await fileDelete(pref.dir.content + "/" + path);
+});
+
+ipcMain.handle('openLink', async (event, url) =>{
+    shell.openExternal(url);
+});
+
+ipcMain.on('ondragstart', (event, filePath) => {
+    event.sender.startDrag({
+        file: join(pref.dir.content, filePath),
+        icon: join(__dirname, 'img/dragAndDrop.png')
+    });
+});
