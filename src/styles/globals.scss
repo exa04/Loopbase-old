@@ -39,13 +39,25 @@ h1{font-size: 48px;}
 
 *{
     font-family: 'Rubik' sans-serif;
+    user-select: none;
 }
 
 .desc-title{
     font-weight: 700;
 }
+
 .desc-artist{
     color: $foreground-200;
+}
+
+.mono-value{
+    font-family: monospace;
+    font-weight: 700;
+    &.secondary{
+        font-weight: 500;
+        color: $foreground-200;
+    }
+    white-space: pre;
 }
 
 // Animations
@@ -55,10 +67,19 @@ $animation-timing: ease-in-out;
 
 // Icons
 
-svg{
+.icon-btn{
     stroke: $foreground-100;
     cursor: pointer;
-    transition: 120ms;
+    svg{
+        transition-duration: $animation-duration;
+        transition-timing-function: $animation-timing;
+    }
+    &:hover svg{
+        stroke: $foreground-200;
+    }
+    &:active svg{
+        stroke: $foreground-100;
+    }
 }
 
 // Mixins

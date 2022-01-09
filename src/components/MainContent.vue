@@ -5,15 +5,18 @@
             section_name="Loops"
             search_header
         />
+        <Results/>
     </div>
 </template>
 
 <script>
 import TopArea from './TopArea';
+import Results from './Results'
 export default ({
     name: 'MainContent',
     components: {
-        TopArea
+        TopArea,
+        Results
     },
     setup() {
         
@@ -23,6 +26,9 @@ export default ({
 
 <style lang="scss">
     .main-content{
-        flex-grow: 1;
+        flex: 1 1;
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
     }
 </style>

@@ -1,11 +1,7 @@
 <template>
-    <TitleBar></TitleBar>
-    <MainContent></MainContent>
-    <PlayBar 
-        profile_picture=""
-        title=""
-        info=""
-    ></PlayBar>
+    <TitleBar/>
+    <MainContent/>
+    <PlayBar/>
 </template>
 
 <script>

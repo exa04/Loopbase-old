@@ -1,5 +1,5 @@
 <template>
-    <div ref="PlayBar" class="play-bar" v-if="title != ''">
+    <div ref="PlayBar" class="play-bar" v-if="title">
         <div ref="InfoArea" class="info-audio">
             <img ref="ProfilePicture" :src="profile_picture" class="profile-picture">
             <div class="audio-desc">
@@ -8,9 +8,9 @@
             </div>
         </div>
         <div class="playback-controls">
-            <vue-feather type="skip-back" size="18"></vue-feather>
-            <vue-feather type="play" size="18"></vue-feather>
-            <vue-feather type="skip-forward" size="18"></vue-feather>
+            <vue-feather class="icon-btn" type="skip-back" size="18"></vue-feather>
+            <vue-feather class="icon-btn" type="play" size="18"></vue-feather>
+            <vue-feather class="icon-btn" type="skip-forward" size="18"></vue-feather>
         </div>
         <Slider
             v-model="position"
@@ -20,10 +20,10 @@
             :step="0.001"
             :max="1"
         />
-        <vue-feather type="volume-x" size="18" v-if="volume==0"></vue-feather>
-        <vue-feather type="volume" size="18" v-else-if="volume < 33"></vue-feather>
-        <vue-feather type="volume-1" size="18" v-else-if="volume < 67"></vue-feather>
-        <vue-feather type="volume-2" size="18" v-else></vue-feather>
+        <vue-feather class="icon-btn" type="volume-x" size="18" v-if="volume==0"></vue-feather>
+        <vue-feather class="icon-btn" type="volume" size="18" v-else-if="volume < 33"></vue-feather>
+        <vue-feather class="icon-btn" type="volume-1" size="18" v-else-if="volume < 67"></vue-feather>
+        <vue-feather class="icon-btn" type="volume-2" size="18" v-else></vue-feather>
         <Slider
             v-model="volume"
             showTooltip="drag"
@@ -98,10 +98,10 @@
         gap: $item-gap;
         align-items: center;
     }
-    .slider-target{
-        flex-grow: 2;
-    }
     #volumeSlider{
-        flex-grow: 1;
+        width: 120px;
+    }
+    #playbackSlider{
+        flex-grow: 2;
     }
 </style>
