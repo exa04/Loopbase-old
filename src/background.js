@@ -137,6 +137,10 @@ ipcMain.handle('fileDelete', async (event, path) =>{
     return await fileDelete(pref.dir.content + "/" + path);
 });
 
+ipcMain.handle('revealFile', (event, path)=>{
+    shell.showItemInFolder(pref.dir.content + "/" + path);
+})
+
 ipcMain.handle('openLink', async (event, url) =>{
     shell.openExternal(url);
 });

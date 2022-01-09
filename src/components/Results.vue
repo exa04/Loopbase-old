@@ -25,6 +25,7 @@
                     size="18"
                     v-if="res.downloaded"
                     class="icon-btn"
+                    @click="revealFile(res.localPath)"
                 />
                 <vue-feather
                     type="download"
@@ -151,6 +152,10 @@
                 return new Promise((resolve) => {
                     electron.ipcRenderer.invoke('fileDelete', localPath).then(()=>{ resolve() });
                 });
+            },
+            revealFile(path){
+                console.log(path);
+                electron.ipcRenderer.invoke('revealFile', path);
             }
         },
     }
