@@ -8,6 +8,11 @@
             draggable="true"
         >
             <img :src="res.profile_pic" class="profile-picture-large">
+            <div class="play-btn">
+                <vue-feather type="play"
+                    size="18"
+                />
+            </div>
             <div class="info-audio">
                 <div class="audio-desc">
                     <div ref="LoopName" class="desc-title">{{res.title}}</div>
@@ -198,6 +203,10 @@
             .info-audio{
                 @include side-gradient(to right, $window-hover);
             }
+            .play-btn{
+                opacity: 1;
+                background-color: rgba($background-300,.5);
+            }
         }
         .audio-desc{
             margin-left: 0;
@@ -234,5 +243,22 @@
                 stroke: $accent-1;
             }
         }
+    }
+    .play-btn{
+        width: 52px;
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: -52px - $item-gap;
+        opacity: 0;
+        background-color: $background-300;
+        svg{
+            stroke: $foreground-100;
+        }
+        border-radius: $radius;
+        transition-duration: $animation-duration;
+        transition-timing-funtion: $animation-timing;
+        backdrop-filter: blur(8px);
     }
 </style>
