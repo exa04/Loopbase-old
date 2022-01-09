@@ -22,23 +22,70 @@
             </div>
         </div>
     </div>
+    <VueEternalLoading :load="load">
+        <!-- TODO: Add a fancy loading indicator -->
+    </VueEternalLoading>
 </template>
 
 <script>
     import VueFeather from 'vue-feather';
+    const electron = window.require("electron");
+    import { VueEternalLoading } from '@ts-pro/vue-eternal-loading';
+
     export default {
         components: {
-            VueFeather
+            VueFeather,
+            VueEternalLoading
         },
         name: 'Results',
         data() {
-            return {resultsData: []};
+            return {
+                resultsData: [],
+                page: 1
+            };
         },
         methods: {
+            load( {loaded} ) {
+                electron.ipcRenderer.invoke("search",{
+                    category:       'loops',
+                    keys:           '',
+                    order:          ['date', 'd'],
+                    tempo:          [0,200],
+                    page:           this.page,
+                    key:            ['c', ''],
+                    date:           0,
+                    genre:          0,
+                    filterByKey:    false
+                }).then(res => {
+                    // if(res.length < 0){
+                    //     return;
+                    // }
+                    res.forEach((r)=>{
+                        let oldKey = r.key;
+                        if(oldKey == "Unknown"){
+                            r.key = " Unknown";
+                        } else {
+                            r.key = oldKey[0] + (oldKey[1] == "#" ? "#" : " ");
+                            if(oldKey.substring(-1) == "m"){
+                                r.key += " Minor";
+                            }else{
+                                r.key += " Major";
+                            }
+                        }
+
+                        if(r.tempo[2].match(/\d+/g) == null){
+                            r.tempo = " " + r.tempo;
+                        }
+                        this.addResult(r);
+                    });    
+                    loaded(res.length, 10);
+                    this.page++;
+                });
+            },
             addResult(res){
                 this.resultsData.push(res);
-            }
-        }
+            },
+        },
     }
 </script>
 
