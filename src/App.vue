@@ -25,7 +25,6 @@
     @import 'styles/globals.scss';
     body{ margin: 0; background-color: $window-background;}
     #app {
-        font-family: 'Rubik', Arial, Helvetica, sans-serif;
         color: $foreground-100;
         font-size: 14px;
         -webkit-font-smoothing: antialiased;
