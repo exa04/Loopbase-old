@@ -48,7 +48,8 @@
         props: {
             title: String,
             info: String,
-            profile_picture: String
+            profile_picture: String,
+            url: String
         },
         data() {
             return {

@@ -1,12 +1,10 @@
 <template>
     <div class="results" ref="resultsArea">
-        <div
-            class="result"
+        <div class="result"
             v-for="res in resultsData"
             :key="res.mp3_url"
             @dragstart.prevent="if(res.downloaded) startDrag(res.localPath);"
-            draggable="true"
-        >
+            draggable="true">
             <img :src="res.profile_pic" class="profile-picture-large">
             <div class="play-btn">
                 <vue-feather type="play"
@@ -24,8 +22,7 @@
             <div class="mono-value">{{res.key}}</div>
             <div class="mono-value">{{res.tempo}}</div>
             <div class="actions-result">
-                <vue-feather
-                    type="trash-2"
+                <vue-feather type="trash-2"
                     size="18"
                     v-if="res.downloaded"
                     class="icon-btn"
@@ -191,12 +188,12 @@
         align-items: center;
         border-radius: $radius;
         transition-duration: $animation-duration;
-        transition-timing-funtion: $animation-timing;
+        transition-timing-function: $animation-timing;
         .info-audio{
             @include side-gradient(to right, $window-background);
             flex-grow: 2;
             transition-duration: $animation-duration;
-            transition-timing-funtion: $animation-timing;
+            transition-timing-function: $animation-timing;
         }
         &:hover{
             background-color: $window-hover;
@@ -226,6 +223,10 @@
         width: 100px;
         flex-shrink: 1;
         flex-grow: 1;
+        background: #000;
+        filter: invert(1);
+        mix-blend-mode: lighten;
+        opacity: .5;
     }
     .icon-spacer{
         width: 18px;
@@ -258,7 +259,7 @@
         }
         border-radius: $radius;
         transition-duration: $animation-duration;
-        transition-timing-funtion: $animation-timing;
+        transition-timing-function: $animation-timing;
         backdrop-filter: blur(8px);
     }
 </style>
