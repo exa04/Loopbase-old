@@ -7,5 +7,3 @@ contextBridge.exposeInMainWorld('electron', {
     ipcRenderer.send('ondragstart', fileName)
   }
 })
-
-alert("hi");

@@ -1,13 +1,14 @@
 <template>
     <TitleBar ref="TitleBar"/>
-    <MainContent/>
-    <PlayBar/>
+    <MainContent ref="MainContent"/>
+    <PlayBar ref="PlayBar"/>
 </template>
 
 <script>
     import TitleBar from './components/TitleBar.vue';
     import MainContent from './components/MainContent.vue';
     import PlayBar from './components/PlayBar.vue';
+    const electron = window.require("electron");
     import '@fontsource/rubik/400.css';
     import '@fontsource/rubik/700.css';
 
@@ -27,10 +28,9 @@
                     order:          ['date', 'd'],
                     tempo:          [0,200],
                     page:           1,
-                    key:            ['c', ''],
+                    key:            ['', ''],
                     date:           0,
-                    genre:          0,
-                    filterByKey:    false
+                    genre:          0
                 };
 
                 // This matches every ocurrence of (NUMBER) BPM in the query
@@ -45,7 +45,6 @@
                 let keyregex = /([a-g]|A-G) *[#b]? *(maj|min)(or)?(?: |$)/gi;
                 let keytext = Array.from(originalQuery.matchAll(keyregex));
                 query.keys = query.keys.replaceAll(keyregex, "");
-                console.log(keytext[0]);
 
                 if(keytext.length > 0){
                     let keymatch = keytext.pop()[0].toLowerCase();
@@ -62,10 +61,47 @@
                         keymatch.match(/(maj|min)/i)[0].toLowerCase() == "min" ? "m" : ""
                     ];
                 }
+            },
+            searchStreamBegin(){
                 
-                console.log(query);
-            }
-        }
+            },
+            searchStreamEnd(){
+                
+            },
+        },
+        mounted() {
+            electron.ipcRenderer.invoke("search",{
+                category:       'loops',
+                keys:           '',
+                order:          ['date', 'd'],
+                tempo:          [0,200],
+                page:           1,
+                key:            ['c', ''],
+                date:           0,
+                genre:          0,
+                filterByKey:    false
+            }).then(res => {
+                res.forEach((r)=>{
+                    let oldKey = r.key;
+                    if(oldKey == "Unknown"){
+                        r.key = " Unknown";
+                    } else {
+                        r.key = oldKey[0] + (oldKey[1] == "#" ? "#" : " ");
+                        if(oldKey.substring(-1) == "m"){
+                            r.key += " Minor";
+                        }else{
+                            r.key += " Major";
+                        }
+                    }
+
+                    if(r.tempo[2].match(/\d+/g) == null){
+                        r.tempo = r.tempo.substring(0,2) + "  bpm";
+                    }
+
+                    this.$refs.MainContent.$refs.Results.addResult(r);
+                });
+            })
+        },
     }
 </script>
 

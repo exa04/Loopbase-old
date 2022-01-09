@@ -5,7 +5,7 @@
             section_name="Loops"
             search_header
         />
-        <Results/>
+        <Results ref="Results"/>
     </div>
 </template>
 
