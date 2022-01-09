@@ -30,7 +30,7 @@
                     size="18"
                     v-else
                     class="icon-btn"
-                    @click="res.downloaded = download(res.mp3_url, res.localPath).then(res.downloaded = true)"
+                    @click="download(res.mp3_url, res.localPath).then(res.downloaded = true)"
                 />
                 <vue-feather
                     type="heart"
@@ -42,7 +42,7 @@
                     type="link"
                     size="18"
                     class="icon-btn"
-                    @click="res.downloaded = openLink(res.web_link)"
+                    @click="openLink(res.web_link)"
                 />
             </div>
         </div>
