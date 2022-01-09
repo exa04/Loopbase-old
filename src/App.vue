@@ -37,9 +37,10 @@
                 let bpmtext = Array.from(originalQuery.matchAll(bpmregex));
                 query.keys = originalQuery.replaceAll(bpmregex, "");
                 
-                if(bpmtext.length > 0)
+                if(bpmtext.length > 0){
                     query.tempo = bpmtext.pop()[0].match(/[1-9][0-9]*/)[0];
-                
+                    query.tempo = [Number(query.tempo), Number(query.tempo)];
+                }
                 // This matches every occurence of a key in the query
                 let keyregex = /([a-g]|A-G) *[#b]? *(maj|min)(or)?(?: |$)/gi;
                 let keytext = Array.from(originalQuery.matchAll(keyregex));
@@ -60,6 +61,8 @@
                         keymatch.match(/(maj|min)/i)[0].toLowerCase() == "min" ? "m" : ""
                     ];
                 }
+                this.$refs.MainContent.$refs.Results.$data.query = query;
+                this.$refs.MainContent.$refs.Results.reset();
             },
             searchStreamBegin(){
                 

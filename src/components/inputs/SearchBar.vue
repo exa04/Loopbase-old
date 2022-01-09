@@ -1,7 +1,7 @@
 <template>
     <div class="SearchBar" ref="SearchBar" onclick="document.querySelector('.input').focus()">
         <div class="inner">
-            <vue-feather type="search" size="12" class="search"></vue-feather>
+            <vue-feather type="search" size="12" class="search" @onclick="submit"></vue-feather>
             <input class="input"
                 ref="input"
                 contenteditable="true"

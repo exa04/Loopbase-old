@@ -13,16 +13,39 @@
             <div class="mono-value">{{res.key}}</div>
             <div class="mono-value">{{res.tempo}}</div>
             <div class="actions-result">
-                <vue-feather type="trash-2" size="18" v-if="false" class="icon-btn"></vue-feather>
+                <vue-feather
+                    type="trash-2"
+                    size="18"
+                    v-if="false"
+                    class="icon-btn"
+                />
                 <div class="icon-spacer" v-else/>
-                <vue-feather type="folder" size="18" v-if="false" class="icon-btn"></vue-feather>
-                <vue-feather type="download" size="18" v-else class="icon-btn"></vue-feather>
-                <vue-feather type="heart" size="18" id="like" v-bind:class="[{liked: false}, 'like', 'icon-btn']"></vue-feather>
-                <vue-feather type="link" size="18" class="icon-btn"></vue-feather>
+                <vue-feather type="folder"
+                    size="18"
+                    v-if="false"
+                    class="icon-btn"
+                />
+                <vue-feather
+                    type="download"
+                    size="18"
+                    v-else
+                    class="icon-btn"
+                />
+                <vue-feather
+                    type="heart"
+                    size="18"
+                    id="like"
+                    v-bind:class="[{liked: false}, 'like', 'icon-btn']"
+                />
+                <vue-feather
+                    type="link"
+                    size="18"
+                    class="icon-btn"
+                />
             </div>
         </div>
     </div>
-    <VueEternalLoading :load="load">
+    <VueEternalLoading :load="load" v-model:is-initial="isInitial">
         <!-- TODO: Add a fancy loading indicator -->
     </VueEternalLoading>
 </template>
@@ -41,21 +64,33 @@
         data() {
             return {
                 resultsData: [],
-                page: 1
-            };
-        },
-        methods: {
-            load( {loaded} ) {
-                electron.ipcRenderer.invoke("search",{
+                query: {
                     category:       'loops',
                     keys:           '',
                     order:          ['date', 'd'],
                     tempo:          [0,200],
-                    page:           this.page,
+                    page:           1,
                     key:            ['c', ''],
                     date:           0,
                     genre:          0,
                     filterByKey:    false
+                },
+                isInitial: false
+            };
+        },
+        methods: {
+            load( {loaded} ) {
+                console.log(this.query)
+                electron.ipcRenderer.invoke("search", {
+                    category:       this.query.category,
+                    keys:           this.query.keys,
+                    order:          [this.query.order[0],this.query.order[1]],
+                    tempo:          [this.query.tempo[0],this.query.tempo[1]],
+                    page:           this.query.page,
+                    key:            [this.query.key[0], this.query.key[1]],
+                    date:           this.query.date,
+                    genre:          this.query.genre,
+                    filterByKey:    this.query.filterByKey
                 }).then(res => {
                     // if(res.length < 0){
                     //     return;
@@ -82,9 +117,13 @@
                     this.page++;
                 });
             },
+            reset(){
+                this.resultsData = []
+                this.isInitial = true;
+            },
             addResult(res){
                 this.resultsData.push(res);
-            },
+            }
         },
     }
 </script>
