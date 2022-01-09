@@ -1,6 +1,6 @@
 <template>
-    <div class="results" ref="resultsArea" v-for="res in resultsData" :key="res.mp3_url">
-        <div class="result">
+    <div class="results" ref="resultsArea">
+        <div class="result" v-for="res in resultsData" :key="res.mp3_url">
             <img :src="res.profile_pic" class="profile-picture-large">
             <div class="info-audio">
                 <div class="audio-desc">
@@ -16,13 +16,13 @@
                 <vue-feather
                     type="trash-2"
                     size="18"
-                    v-if="false"
+                    v-if="res.downloaded"
                     class="icon-btn"
                 />
                 <div class="icon-spacer" v-else/>
                 <vue-feather type="folder"
                     size="18"
-                    v-if="false"
+                    v-if="res.downloaded"
                     class="icon-btn"
                 />
                 <vue-feather
@@ -30,6 +30,7 @@
                     size="18"
                     v-else
                     class="icon-btn"
+                    @click="res.downloaded = download(res.mp3_url, res.localPath).then(res.downloaded = true)"
                 />
                 <vue-feather
                     type="heart"
@@ -41,6 +42,7 @@
                     type="link"
                     size="18"
                     class="icon-btn"
+                    @click="res.downloaded = openLink(res.web_link)"
                 />
             </div>
         </div>
@@ -96,6 +98,14 @@
                     //     return;
                     // }
                     res.forEach((r)=>{
+                        r.filename = r.mp3_url.split("/").splice(-1)[0].split("?")[0];
+            
+                        r.localPath = "loops/"
+                            + r.category.toLowerCase() + '/'
+                            + r.tempo.replace(' ', '_') + '_'
+                            + (r.key !="Unknown" ? r.key.toLowerCase() + '_' : '')
+                            + r.filename;
+
                         let oldKey = r.key;
                         if(oldKey == "Unknown"){
                             r.key = " Unknown";
@@ -111,10 +121,14 @@
                         if(r.tempo[2].match(/\d+/g) == null){
                             r.tempo = " " + r.tempo;
                         }
-                        this.addResult(r);
+
+                        electron.ipcRenderer.invoke("fileExists", r.localPath).then((exists)=>{
+                            r.downloaded = exists;
+                            this.addResult(r);
+                        })
                     });    
                     loaded(res.length, 10);
-                    this.page++;
+                    this.query.page++;
                 });
             },
             reset(){
@@ -123,6 +137,14 @@
             },
             addResult(res){
                 this.resultsData.push(res);
+            },
+            openLink(link){
+                electron.ipcRenderer.invoke('openLink', link);
+            },
+            async download(mp3_url, localPath){
+                return new Promise((resolve) => {
+                    electron.ipcRenderer.invoke('downloadMP3', {url: mp3_url, dest: localPath}).then(()=>{ resolve() });
+                });
             }
         },
     }

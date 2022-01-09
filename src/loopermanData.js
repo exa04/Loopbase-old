@@ -5,12 +5,13 @@ const fs = require('fs');
 
 async function downloadMP3(url, dest){
     return new Promise((resolve, reject) => {
-        var file = fs.createWriteStream(dest);
         var dir = path.dirname(dest);
-
         if (!fs.existsSync(dir)){
             fs.mkdirSync(dir, { recursive: true });
         }
+
+        var file = fs.createWriteStream(dest);
+        
         request({
             uri: url,
             timeout: 60000
