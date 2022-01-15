@@ -11,7 +11,7 @@
             ref="SearchBar"
         />
         <div class="actions">
-            <vue-feather type="folder" size="18"></vue-feather>
+            <vue-feather type="folder" size="18" @click="revealFile('')"></vue-feather>
             <vue-feather type="settings" size="18"></vue-feather>
         </div>
     </div>
@@ -20,12 +20,18 @@
 <script>
     import VueFeather from 'vue-feather';
     import SearchBar from './inputs/SearchBar';
+    const electron = window.require("electron");
 
     export default {
         components: {
             VueFeather,
             SearchBar
-        }
+        },
+        methods: {
+            revealFile(f){
+                electron.ipcRenderer.invoke('revealFile', f);
+            }
+        },
     };
 </script>
 
@@ -62,7 +68,7 @@
         height: 18px;
         svg{
             stroke: $foreground-200;
-            stroke-width: 2.5;
+            cursor: pointer;
         }
     }
 </style>
