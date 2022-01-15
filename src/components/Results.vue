@@ -6,10 +6,8 @@
             @dragstart.prevent="if(res.downloaded) startDrag(res.localPath);"
             draggable="true">
             <img :src="res.profile_pic" class="profile-picture-large">
-            <div class="play-btn">
-                <vue-feather type="play"
-                    size="18"
-                />
+            <div class="play-btn icon-btn" @click="playResult(res)">
+                <vue-feather type="play" size="18"/>
             </div>
             <div class="info-audio">
                 <div class="audio-desc">
@@ -19,7 +17,7 @@
             </div>
             <img class="visualizer" :src="res.waveform" draggable="false">
             <div class="mono-value secondary">{{res.duration}}</div>
-            <div class="mono-value">{{res.key}}</div>
+            <div class="mono-value" style="width: 69px;">{{res.key}}</div>
             <div class="mono-value">{{res.tempo}}</div>
             <div class="actions-result">
                 <vue-feather type="trash-2"
@@ -92,7 +90,6 @@
         },
         methods: {
             load( {loaded} ) {
-                console.log(this.query)
                 electron.ipcRenderer.invoke("search", {
                     category:       this.query.category,
                     keys:           this.query.keys,
@@ -118,7 +115,7 @@
 
                         let oldKey = r.key;
                         if(oldKey == "Unknown"){
-                            r.key = " Unknown";
+                            r.key = "Unknown";
                         } else {
                             r.key = oldKey[0] + (oldKey[1] == "#" ? "#" : " ");
                             if(oldKey.substring(-1) == "m"){
@@ -162,11 +159,14 @@
                 });
             },
             revealFile(path){
-                console.log(path);
                 electron.ipcRenderer.invoke('revealFile', path);
             },
             startDrag(path){
                 electron.ipcRenderer.send('ondragstart', path);
+            },
+            playResult(res){
+                let playbar = this.$parent.$parent.$refs.PlayBar;
+                playbar.loadSample(res);
             }
         },
     }
@@ -187,13 +187,9 @@
         height: 52px + $item-gap;
         align-items: center;
         border-radius: $radius;
-        transition-duration: $animation-duration;
-        transition-timing-function: $animation-timing;
         .info-audio{
             @include side-gradient(to right, $window-background);
             flex-grow: 2;
-            transition-duration: $animation-duration;
-            transition-timing-function: $animation-timing;
         }
         &:hover{
             background-color: $window-hover;

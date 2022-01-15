@@ -53,8 +53,11 @@ h1{font-size: 48px;}
 }
 
 .mono-value{
-    font-family: monospace;
-    font-weight: 700;
+    text-transform: full-width;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    letter-spacing: 1px;
+    white-space: pre;
     &.secondary{
         font-weight: 500;
         color: $foreground-200;
