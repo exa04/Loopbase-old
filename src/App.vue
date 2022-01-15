@@ -63,13 +63,7 @@
                 }
                 this.$refs.MainContent.$refs.Results.$data.query = query;
                 this.$refs.MainContent.$refs.Results.reset();
-            },
-            searchStreamBegin(){
-                
-            },
-            searchStreamEnd(){
-                
-            },
+            }
         }
     }
 </script>
