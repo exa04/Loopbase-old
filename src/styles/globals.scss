@@ -124,3 +124,20 @@ $animation-timing: ease-in-out;
         border-color: $accent-2;
     }
 }
+
+$scrollbar-w: 16px;
+
+::-webkit-scrollbar {
+    width: $scrollbar-w;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba($foreground-100, .2);
+    border: 4px transparent solid;
+    border-radius: $scrollbar-w - (4px * 2);
+    background-clip: padding-box;
+    &:hover{
+        background: rgba($foreground-100, 0.5);
+        border: 4px transparent solid;
+    }
+}
