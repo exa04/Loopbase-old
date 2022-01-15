@@ -26,7 +26,7 @@ async function createWindow() {
         width: 1000,
         height: 700,
         titleBarStyle: 'hidden',
-        trafficLightPosition: {x: 20, y: 18},
+        trafficLightPosition: {x: 21, y: 18},
         webPreferences: {
             // Use pluginOptions.nodeIntegration, leave this alone
             // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info

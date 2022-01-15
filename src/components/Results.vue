@@ -182,16 +182,15 @@
 <style lang="scss">
     @import "../styles/globals.scss";
     .result{
-        box-sizing: border-box;
-        width: calc(100% - $item-gap);
-        max-width: $max-content-width + 2 * $item-gap;
+        width: calc(100% - $side-padding * 2);
+        max-width: $max-content-width;
         display: flex;
         margin: auto;
         margin-bottom: $item-gap / 2;
         margin-top: $item-gap / 2;
         padding: $item-gap / 2;
         gap: $item-gap;
-        height: 52px + $item-gap;
+        height: 52px;
         align-items: center;
         border-radius: $radius;
         .info-audio{
