@@ -150,12 +150,19 @@
             },
             async download(mp3_url, localPath){
                 return new Promise((resolve) => {
-                    electron.ipcRenderer.invoke('downloadMP3', {url: mp3_url, dest: localPath}).then(()=>{ resolve() });
+                    electron.ipcRenderer.invoke('downloadMP3', {
+                        url: mp3_url,
+                        dest: localPath
+                    }).then(()=>{
+                        resolve()
+                    });
                 });
             },
             async remove(localPath){
                 return new Promise((resolve) => {
-                    electron.ipcRenderer.invoke('fileDelete', localPath).then(()=>{ resolve() });
+                    electron.ipcRenderer.invoke('fileDelete', localPath).then(()=>{
+                        resolve()
+                    });
                 });
             },
             revealFile(path){
