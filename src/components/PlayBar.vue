@@ -18,7 +18,7 @@
             <vue-feather class="icon-btn" type="skip-back" size="18"></vue-feather>
             <vue-feather
                 class="icon-btn"
-                :type="this.$refs.audioPlayer.paused ? 'play' : 'pause'"
+                :type="this.$refs.audioPlayer == undefined || this.$refs.audioPlayer.paused ? 'play' : 'pause'"
                 size="18"
                 @click="togglePlay()"
             />
