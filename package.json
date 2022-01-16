@@ -15,13 +15,13 @@
   "dependencies": {
     "@fontsource/rubik": "^4.5.0",
     "@ts-pro/vue-eternal-loading": "^1.2.0",
-    "@vueform/slider": "^2.0.8",
     "cheerio": "^1.0.0-rc.10",
     "core-js": "^3.6.5",
     "feather-icons": "^4.28.0",
     "sharp": "^0.29.3",
     "vue": "^3.0.0",
-    "vue-feather": "^2.0.0-rc.1"
+    "vue-feather": "^2.0.0-rc.1",
+    "vue-slider-component": "^4.0.0-beta.4"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

@@ -24,7 +24,7 @@
             />
             <vue-feather class="icon-btn" type="skip-forward" size="18"></vue-feather>
         </div>
-        <Slider
+        <!-- <Slider
             :tooltips="false"
             id="playbackSlider"
             ref="playbackSlider"
@@ -32,6 +32,19 @@
             v-model="position"
             :step="0.001"
             :max="1"
+        /> -->
+        <vue-slider
+            v-model="position" 
+            id="playbackSlider"
+            ref="playbackSlider"
+            :lazy="true"
+            min="0"
+            max="1"
+            interval=".0001"
+            @drag-start="dragging = true"
+            @drag-end="dragging = false; positionToAudio()"
+            tooltip="none"
+            :dragOnClick="true"
         />
         <vue-feather
             class="icon-btn"
@@ -45,27 +58,25 @@
             <vue-feather class="icon-btn" type="volume-1" size="18" v-else-if="volume < 67"></vue-feather>
             <vue-feather class="icon-btn" type="volume-2" size="18" v-else-if="volume >= 67"></vue-feather>
         </div>
-        <Slider
-            v-model="volume"
-            showTooltip="drag"
+        <vue-slider
+            v-model="volume" 
             id="volumeSlider"
-            :lazy="false"
-            :min="0"
-            :step="1"
-            :max="100"
+            min="0"
+            max="100"
         />
     </div>
 </template>
 
 <script>
     import VueFeather from 'vue-feather';
-    import Slider from '@vueform/slider';
+    import VueSlider from 'vue-slider-component';
+    import 'vue-slider-component/theme/antd.css'
 
     export default {
         name:'PlayBar',
         components: {
             VueFeather,
-            Slider
+            VueSlider
         },
         props: {
         },
@@ -104,6 +115,7 @@
             getPlaybackPos(){
                 let audio = document.getElementById("audioPlayer");
                 if(audio == undefined) return 0;
+                if(!this.$data.dragging)
                 return audio.currentTime / audio.duration;
             },
             setPlaybackPos(){
@@ -116,11 +128,11 @@
                 if(audio == undefined) return 0;
                 return audio.duration;
             },
-            // positionToAudio(){
-            //     let audio = document.getElementById("audioPlayer");
-            //     if(audio == undefined) return 0;
-            //     setTimeout(audio.currentTime = audio.duration * this.$data.position, 10);
-            // }
+            positionToAudio(){
+                let audio = document.getElementById("audioPlayer");
+                if(audio == undefined) return 0;
+                setTimeout(audio.currentTime = audio.duration * this.$data.position, 10);
+            }
         },
         data() {
             return {
@@ -131,7 +143,8 @@
                 info: "",
                 profile_picture: "",
                 volume: 100,
-                prevVolume: 100
+                prevVolume: 100,
+                dragging: false
             }
         }
     }
@@ -180,7 +193,7 @@
         align-items: center;
     }
     #volumeSlider{
-        width: 120px;
+        width: 120px !important;
     }
     #playbackSlider{
         flex-grow: 2;
