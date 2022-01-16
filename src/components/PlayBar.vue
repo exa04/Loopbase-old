@@ -152,7 +152,6 @@
 
 <style lang="scss">
     @import "../styles/globals.scss";
-    @import "@vueform/slider/themes/default.scss";
 
     .play-bar{
         background-color: $playbar-background;
