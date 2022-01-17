@@ -28,7 +28,7 @@ git clone https://github.com/StarburstAudio/loopbase
 npm i
 ```
 
-3. Now, decide whather you want to **build** or **run**
+3. Now, decide whether you want to **build** or **run**
 
 ```sh
 npm run electron:serve  # Runs the app with hot-reload
