@@ -79,7 +79,6 @@
         },
         methods: {
             loadSample(res){
-                console.log("???");
                 this.$data.title = res.title;
                 this.$data.info = res.author + " | " + res.tempo + " | " + res.key;
                 this.$data.profile_picture = res.profile_pic;

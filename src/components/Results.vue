@@ -118,7 +118,7 @@
                             r.key = "Unknown";
                         } else {
                             r.key = oldKey[0] + (oldKey[1] == "#" ? "#" : " ");
-                            if(oldKey.substring(-1) == "m"){
+                            if(oldKey.slice(-1) == "m"){
                                 r.key += " Minor";
                             }else{
                                 r.key += " Major";

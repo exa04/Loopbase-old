@@ -47,6 +47,7 @@
                 query.keys = query.keys.replaceAll(keyregex, "");
 
                 if(keytext.length > 0){
+                    query.filterByKey = true;
                     let keymatch = keytext.pop()[0].toLowerCase();
                     let note = keymatch[0];
                     if(keymatch[1] == "#") note += "s";
@@ -61,6 +62,7 @@
                         keymatch.match(/(maj|min)/i)[0].toLowerCase() == "min" ? "m" : ""
                     ];
                 }
+                
                 this.$refs.MainContent.$refs.Results.$data.query = query;
                 this.$refs.MainContent.$refs.Results.reset();
             }
