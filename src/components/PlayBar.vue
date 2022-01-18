@@ -68,7 +68,6 @@
 <script>
     import VueFeather from 'vue-feather';
     import VueSlider from 'vue-slider-component';
-    import 'vue-slider-component/theme/antd.css'
 
     export default {
         name:'PlayBar',
@@ -150,6 +149,7 @@
 
 <style lang="scss">
     @import "../styles/globals.scss";
+    @import "../styles/slider.scss";
 
     .play-bar{
         background-color: $playbar-background;
