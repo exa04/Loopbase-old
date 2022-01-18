@@ -15,14 +15,12 @@
             </div>
         </div>
         <div class="playback-controls">
-            <vue-feather class="icon-btn" type="skip-back" size="18"></vue-feather>
             <vue-feather
                 class="icon-btn"
                 :type="this.$refs.audioPlayer == undefined || this.$refs.audioPlayer.paused ? 'play' : 'pause'"
                 size="18"
                 @click="togglePlay()"
             />
-            <vue-feather class="icon-btn" type="skip-forward" size="18"></vue-feather>
         </div>
         <!-- <Slider
             :tooltips="false"
