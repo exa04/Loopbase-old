@@ -10,6 +10,7 @@
     import PlayBar from './components/PlayBar.vue';
     import '@fontsource/rubik/400.css';
     import '@fontsource/rubik/700.css';
+    import '@ibm/plex/scss/ibm-plex.scss';
 
     export default {
         name: 'App',

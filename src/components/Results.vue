@@ -16,9 +16,9 @@
                 </div>
             </div>
             <img class="visualizer" :src="res.waveform" draggable="false">
-            <div class="mono-value secondary">{{res.duration}}</div>
-            <div class="mono-value" style="width: 69px;">{{res.key}}</div>
-            <div class="mono-value">{{res.tempo}}</div>
+            <div class="mono-value secondary" style="">{{res.duration}}</div>
+            <div class="mono-value" style="width: 10ch;">{{res.key}}</div>
+            <div class="mono-value" style="width: 7ch;">{{res.tempo}}</div>
             <div class="actions-result">
                 <vue-feather type="trash-2"
                     size="18"
