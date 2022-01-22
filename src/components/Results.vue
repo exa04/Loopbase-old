@@ -231,7 +231,7 @@
         opacity: .5;
     }
     .icon-spacer{
-        width: 18px;
+        width: $item-scale;
     }
     .like{
         &.liked svg{

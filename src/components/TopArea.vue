@@ -4,9 +4,34 @@
         <h1>{{section_name}}</h1>
         <div class="tags-container" v-if="search_header">
             <div class="tags-left">
-                <div class="tag active">
-                    <vue-feather type="activity" size="18"/>
-                    <div>Tempo</div>
+                <div>
+                    <div class="tag active">
+                        <vue-feather type="activity" size="18"/>
+                        <div>Tempo</div>
+                    </div>
+                    <div class="tag-popout">
+                        <h2>Tempo</h2>
+                        <Switch
+                            title="Range"
+                            v-model="queryInfo.tempoRange"
+                        />
+                        <vue-slider
+                            v-model="position"
+                            id="playbackSlider"
+                            ref="playbackSlider"
+                            :lazy="true"
+                            min="0"
+                            max="1"
+                            interval=".0001"
+                            @drag-start="dragging = true"
+                            @drag-end="dragging = false; positionToAudio()"
+                            tooltip="none"
+                        />
+                        <div class="button-duo">
+                            <Button>Apply</Button>
+                            <Button secondary>Cancel</Button>
+                        </div>
+                    </div>
                 </div>
                 <div class="tag">
                     <vue-feather type="music" size="18"/> 
@@ -35,15 +60,44 @@
 
 <script>
     import VueFeather from 'vue-feather';
+    import VueSlider from 'vue-slider-component';
+    import Switch from './inputs/Switch';
+    import Button from './inputs/Button';
     export default {
         name: "TopArea",
         components: {
-            VueFeather
+            VueFeather,
+            VueSlider,
+            Switch,
+            Button
         },
         props: {
             library_name: String,
             section_name: String,
             search_header: Boolean
+        },
+        data() {
+            return {
+                queryInfo: {
+                    category:       'loops',
+                    order:          ['date', 'd'],
+                    tempo:          [0,200],
+                    tempoRange:     false,
+                    key:            ['c', ''],
+                    date:           0,
+                    genre:          0,
+                    filterByKey:    false,
+                },
+                filterEnabled: {
+                    tempo: false,
+                    key: false
+                }
+            }
+        },
+        methods:{
+            sendQuery(){
+                this.$parent.search();
+            }
         }
     }
 </script>
@@ -76,9 +130,10 @@
         gap: $item-gap;
     }
     .tag, .tag-duo > *{
+        float: left;
         display: flex;
         gap: 8px;
-        height: 18px;
+        height: $item-scale;
         padding: 8px;
         padding-top: 4px;
         padding-bottom: 4px;
@@ -120,6 +175,18 @@
             padding-bottom: 4px;
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
+        }
+    }
+    .tag-popout{
+        @include glass-box(false);
+        width: 200px;
+        height: fit-content;
+        position: absolute;
+        transform: translateY($item-scale + $item-gap);
+        padding: $side-padding;
+        z-index: 2;
+        > *{
+            margin-bottom: $item-gap / 2;
         }
     }
     .results-header{

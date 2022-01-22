@@ -65,7 +65,7 @@
     .actions{
         display: flex;
         gap: $item-gap;
-        height: 18px;
+        height: $item-scale;
         svg{
             stroke: $foreground-200;
             cursor: pointer;

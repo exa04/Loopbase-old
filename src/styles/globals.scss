@@ -6,6 +6,7 @@ $background-300: #46174B;
 
 $foreground-100: #EDE6EE;
 $foreground-200: #BCA0C0;
+$inverse-foreground: #000;
 
 $accent-1: #EE00AC;
 $accent-2: #00E991;
@@ -29,6 +30,7 @@ $radius: 8.5px;
 $item-gap: 16px;
 $side-padding: 21px;
 $gradient-s: 32px;
+$item-scale: 18px;
 
 h1,h2,h3,h4,h5,h6{
     padding: 0px;
@@ -102,6 +104,22 @@ $animation-timing: ease-in-out;
             margin-right: - $size;
         }
         content: "";
+    }
+}
+
+@mixin glass-box($soft){
+    background-color: rgba($background-200, .65);
+    backdrop-filter: blur(12px);
+    border: 1px rgba(255,255,255,.2) solid;
+    border-radius: $radius;
+    box-shadow: 0px 0px 0px 1px #000,
+                0px 5px 7px -1px rgba(0,0,0,0.3),
+                0px 8px 29px 6px rgba(0,0,0,0.5),
+          inset 0px 4px 0px -3px rgba(255,255,255,.4);
+
+    @if $soft{
+        background-color: rgba($background-200, .85);
+        backdrop-filter: blur(24px);
     }
 }
 
