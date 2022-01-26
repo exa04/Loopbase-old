@@ -5,9 +5,11 @@
             :key="res.mp3_url"
             @dragstart.prevent="if(res.downloaded) startDrag(res.localPath);"
             draggable="true">
-            <img :src="res.profile_pic" class="profile-picture-large">
-            <div class="play-btn icon-btn" @click="playResult(res)">
-                <vue-feather type="play" size="18"/>
+            <div class="result-profile-pic">
+                <img :src="res.profile_pic" class="profile-picture-large">
+                <div class="play-btn icon-btn" @click="playResult(res)">
+                    <vue-feather type="play" size="18"/>
+                </div>
             </div>
             <div class="info-audio">
                 <div class="audio-desc">
@@ -16,9 +18,9 @@
                 </div>
             </div>
             <img class="visualizer" :src="res.waveform" draggable="false">
-            <div class="mono-value secondary" style="">{{res.duration}}</div>
-            <div class="mono-value" style="width: 10ch;">{{res.key}}</div>
-            <div class="mono-value" style="width: 7ch;">{{res.tempo}}</div>
+            <div class="mono-value secondary" style="">{{res.duration}}0:00</div>
+            <div class="mono-value">{{res.key}}</div>
+            <div class="mono-value">{{res.tempo}}</div>
             <div class="actions-result">
                 <vue-feather type="trash-2"
                     size="18"
@@ -106,7 +108,7 @@
                     // }
                     res.forEach((r)=>{
                         r.filename = r.mp3_url.split("/").splice(-1)[0].split("?")[0];
-            
+
                         r.localPath = "loops/"
                             + r.category.toLowerCase() + '/'
                             + r.tempo.replace(' ', '_') + '_'
@@ -133,7 +135,7 @@
                             r.downloaded = exists;
                             this.addResult(r);
                         })
-                    });    
+                    });
                     loaded(res.length, 10);
                     this.query.page++;
                 });
@@ -181,10 +183,15 @@
 
 <style lang="scss">
     @import "../styles/globals.scss";
+    .results{
+        width: 100vw;
+        overflow: hidden;
+    }
     .result{
         width: calc(100% - $side-padding * 2);
         max-width: $max-content-width;
-        display: flex;
+        display: grid;
+        grid-template-columns: 52px 1fr 1fr 5ch 10ch 7ch auto;
         margin: auto;
         margin-bottom: $item-gap / 2;
         margin-top: $item-gap / 2;
@@ -204,7 +211,7 @@
             }
             .play-btn{
                 opacity: 1;
-                background-color: rgba($background-300,.5);
+                background-color: rgba($background-300,.8);
             }
         }
         .audio-desc{
@@ -216,15 +223,16 @@
             justify-content: space-between;
         }
     }
+    .result-profile-pic{
+        display: flex;
+        flex-direction: row;
+    }
     .profile-picture-large{
-        width: 52px;
         border-radius: $radius;
     }
     .visualizer{
         height: 100%;
-        width: 100px;
-        flex-shrink: 1;
-        flex-grow: 1;
+        width: 100%;
         background: #000;
         filter: invert(1);
         mix-blend-mode: lighten;
@@ -253,15 +261,12 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-left: -52px - $item-gap;
+        margin-left: -52px;
         opacity: 0;
         background-color: $background-300;
         svg{
             stroke: $foreground-100;
         }
         border-radius: $radius;
-        transition-duration: $animation-duration;
-        transition-timing-function: $animation-timing;
-        backdrop-filter: blur(8px);
     }
 </style>
