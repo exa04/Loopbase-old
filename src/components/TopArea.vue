@@ -5,37 +5,112 @@
         <div class="tags-container" v-if="search_header">
             <div class="tags-left">
                 <div>
-                    <div class="tag active">
-                        <vue-feather type="activity" size="18"/>
-                        <div>Tempo</div>
-                    </div>
-                    <div class="tag-popout">
-                        <h2>Tempo</h2>
-                        <Switch
-                            title="Range"
-                            v-model="queryInfo.tempoRange"
+                    <div class="tag"
+                        @click.self="filterEnabled.tempo = !filterEnabled.tempo;
+                                filterValues.tempoRange = queryInfo.tempo"
+                        :class="{ active: filterAdded.tempo }"
+                    >
+                        <vue-feather
+                            type="activity"
+                            size="18"
+                            @click="filterEnabled.tempo = !filterEnabled.tempo;
+                                    filterValues.tempoRange = queryInfo.tempo"
                         />
+                        <div
+                            @click="filterEnabled.tempo = !filterEnabled.tempo;
+                                    filterValues.tempoRange = queryInfo.tempo"
+                        >
+                            Tempo{{filterAdded.tempo ? ": " + queryInfo.tempo[0] + " - " + queryInfo.tempo[1] + " BPM" : ""}}
+                        </div>
+                        <vue-feather
+                            type="x"
+                            size="18"
+                            @click="filterAdded.tempo = false"
+                            :class="{hidden: !filterAdded.tempo}"
+                        />
+                    </div>
+                    <div class="tag-popout" :class="{ hidden: !filterEnabled.tempo }">
+                        <h2>Tempo</h2>
                         <vue-slider
-                            v-model="position"
+                            v-model="filterValues.tempoRange"
                             id="playbackSlider"
                             ref="playbackSlider"
                             :lazy="true"
                             min="0"
-                            max="1"
-                            interval=".0001"
-                            @drag-start="dragging = true"
-                            @drag-end="dragging = false; positionToAudio()"
-                            tooltip="none"
+                            max="200"
+                            interval="1"
                         />
-                        <div class="button-duo">
-                            <Button>Apply</Button>
-                            <Button secondary>Cancel</Button>
+                        <div class="button-duo"
+                            @click="filterEnabled.tempo = false"
+                        >
+                            <Button
+                                @click="queryInfo.tempo = filterValues.tempoRange;
+                                filterAdded.tempo = true"
+                            >
+                                Apply
+                            </Button>
+                            <Button secondary @click="filterValues.tempoRange = queryInfo.tempo">Cancel</Button>
                         </div>
                     </div>
                 </div>
-                <div class="tag">
-                    <vue-feather type="music" size="18"/> 
-                    <div>Key</div>
+                <div>
+                    <div class="tag"
+                        @click.self="filterEnabled.key = !filterEnabled.key;
+                                filterValues.key = queryInfo.key"
+                        :class="{ active: filterAdded.key }"
+                    >
+                        <vue-feather
+                            type="music"
+                            size="18"
+                            @click="filterEnabled.key = !filterEnabled.key;
+                                    filterValues.key = queryInfo.key"
+                        />
+                        <div
+                            @click="filterEnabled.key = !filterEnabled.key;
+                                    filterValues.key = queryInfo.key"
+                        >
+                            Key
+                        </div>
+                        <vue-feather
+                            type="x"
+                            size="18"
+                            @click="filterAdded.key = false"
+                            :class="{hidden: !filterAdded.key}"
+                        />
+                    </div>
+                    <div class="tag-popout" :class="{ hidden: !filterEnabled.key }">
+                        <h2>Key</h2>
+                        <div>
+                            <div class="key-row sharps">
+                                <div>C#</div>
+                                <div class="selected">D#</div>
+                                <div class="key-seperator"></div>
+                                <div>F#</div>
+                                <div>G#</div>
+                                <div>A#</div>
+                            </div>
+                            <div class="key-row">
+                                <div>C</div>
+                                <div>D</div>
+                                <div>E</div>
+                                <div>F</div>
+                                <div>G</div>
+                                <div>A</div>
+                                <div>B</div>
+                            </div>
+                        </div>
+                        <div class="button-duo"
+                            @click="filterEnabled.key = false"
+                        >
+                            <Button
+                                @click="queryInfo.key = filterValues.key;
+                                filterAdded.key = true"
+                            >
+                                Apply
+                            </Button>
+                            <Button secondary @click="filterValues.key = queryInfo.key">Cancel</Button>
+                        </div>
+                    </div>
                 </div>
                 <div class="tag">
                     <div>Instrument</div>
@@ -46,7 +121,7 @@
             </div>
             <div class="tag-duo">
                 <div>Sort by date</div>
-                <vue-feather type="chevron-down" size="18"/> 
+                <vue-feather type="chevron-down" size="18"/>
             </div>
         </div>
         <div class="results-header" v-if="search_header">
@@ -61,14 +136,12 @@
 <script>
     import VueFeather from 'vue-feather';
     import VueSlider from 'vue-slider-component';
-    import Switch from './inputs/Switch';
     import Button from './inputs/Button';
     export default {
         name: "TopArea",
         components: {
             VueFeather,
             VueSlider,
-            Switch,
             Button
         },
         props: {
@@ -91,6 +164,13 @@
                 filterEnabled: {
                     tempo: false,
                     key: false
+                },
+                filterAdded: {
+                    tempo: false,
+                    key: false
+                },
+                filterValues: {
+                    tempoRange:          [0,200],
                 }
             }
         },
@@ -137,29 +217,21 @@
         padding: 8px;
         padding-top: 4px;
         padding-bottom: 4px;
-        background: rgba($foreground-100, .2);
         border-radius: $radius;
-        box-shadow: inset 0 0 0px 2px $foreground-100;
         font-weight: 900;
         cursor: pointer;
         transition-duration: $animation-duration;
         transition-timing-function: $animation-timing;
-        &:hover{
-            background: rgba($foreground-100, .4);
-        }
-        &:active{
-            background: rgba($foreground-100, .3);
-        }
+        background-color: $background-100;
+        &:hover{ background: $background-300; }
+        &:active{ background: $background-400; }
         &.active{
-            background: rgba($accent-1, .3);
-            box-shadow: inset 0 0 0px 2px $accent-1;
-            &:hover{
-                background: rgba($accent-1, .4);
-            }
-            &:active{
-                background: rgba($accent-1, .3);
-            }
+            background: $accent-1;
+            &:hover{ background: darken($accent-1, 10%); }
+            &:active{ background: darken($accent-1, 20%); }
+            color: $foreground-100;
         }
+        color: $foreground-200;
     }
     .tag-duo{
         display: flex;
@@ -179,7 +251,7 @@
     }
     .tag-popout{
         @include glass-box(false);
-        width: 200px;
+        min-width: 200px;
         height: fit-content;
         position: absolute;
         transform: translateY($item-scale + $item-gap);
@@ -196,5 +268,38 @@
         max-width: $max-content-width;
         margin: auto;
         margin-top: $item-gap;
+    }
+    .hidden{
+        transform: translateY($item-scale + $item-gap + 100px);
+        display: none;
+    }
+    .key-row{
+        display: flex;
+        justify-content: center;
+        > div{
+            height: $item-scale;
+            aspect-ratio: 1;
+            display: flex;
+            justify-content: center;
+            padding: $item-gap / 2;
+            background-color: $foreground-100;
+            border-radius: 50%;
+            margin: $item-gap / 8;
+            transition-duration: $animation-duration;
+            transition-timing-function: $animation-timing;
+            color: $inverse-foreground;
+            &:hover{
+                background: $foreground-200;
+            }
+            &:active{
+                background: $accent-2;
+            }
+            &.selected{
+                background: $accent-2;
+            }
+            &.key-seperator{
+                background-color: transparent !important;
+            }
+        }
     }
 </style>
