@@ -144,6 +144,10 @@ $animation-timing: ease-in-out;
     }
 }
 
+.vue-slider-dot-tooltip-text{
+    color: $inverse-foreground;
+}
+
 $scrollbar-w: 16px;
 
 ::-webkit-scrollbar {
