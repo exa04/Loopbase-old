@@ -18,9 +18,9 @@
                 </div>
             </div>
             <img class="visualizer" :src="res.waveform" draggable="false">
-            <div class="mono-value" style="">{{res.duration}}0:00</div>
-            <div class="mono-value">{{res.key}}</div>
-            <div class="mono-value">{{res.tempo}}</div>
+            <div class="mono-value info-duration" style="">{{res.duration}}0:00</div>
+            <div class="mono-value info-key">{{res.key}}</div>
+            <div class="mono-value info-tempo">{{res.tempo}}</div>
             <div class="actions-result">
                 <vue-feather type="trash-2"
 
@@ -189,13 +189,11 @@
     }
     .result{
         width: calc(100% - $side-padding * 2);
-        max-width: $max-content-width;
         display: grid;
-        grid-template-columns: $profile-pic-large-size 1fr 1fr 5ch 10ch 7ch auto;
+        grid-template-columns: $profile-pic-large-size 1fr 1fr 5ch 8ch 7ch auto;
         margin: auto;
         padding: $item-gap/1.5;
         gap: $item-gap;
-        height: $profile-pic-large-size;
         align-items: center;
         border-radius: $radius;
         .info-audio{
