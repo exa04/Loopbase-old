@@ -223,12 +223,12 @@
                 stroke: $foreground-100;
             }
             .desc-author{
-                text-decoration: underline solid;
-                text-decoration-thickness: 2px;
                 &:hover{
                     color: $foreground-100;
                     transition-duration: $animation-duration;
                     transition-timing-function: $animation-timing;
+                    text-decoration-thickness: 2px;
+                    text-decoration: underline solid;
                 }
             }
             .mono-value{
