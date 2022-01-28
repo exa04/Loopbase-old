@@ -1,7 +1,11 @@
 <template>
     <div class="top-area">
-        <p ref="LibraryName" class="LibraryName">{{library_name}}</p>
-        <h1>{{section_name}}</h1>
+        <p ref="LibraryName" class="LibraryName">
+            {{query.keys == undefined || query.keys == "" ? library_name : "Search results for:"}}</p>
+        <h1>
+            <span :if="query.keys == undefined || query.keys == ''">{{query.keys}}</span>
+            {{section_name}}
+        </h1>
         <div class="tags-container" v-if="search_header">
             <div class="tags-left">
                 <div>
@@ -160,6 +164,9 @@
                     date:           0,
                     genre:          0,
                     filterByKey:    false,
+                },
+                query : {
+
                 },
                 filterEnabled: {
                     tempo: false,

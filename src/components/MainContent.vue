@@ -4,6 +4,7 @@
             library_name="Public library"
             section_name="Loops"
             search_header
+            ref="TopArea"
         />
         <Results ref="Results"/>
     </div>
