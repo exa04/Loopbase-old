@@ -123,18 +123,8 @@ $animation-timing: ease-in-out;
 // Mixins
 
 @mixin side-gradient($direction, $color, $size: $gradient-s){
-    &::after{
-        width: $size;
-        height: 100%;
-        background: linear-gradient($direction, transparent, $color);
-        position: relative;
-        @if $direction == to right{
-            right: $size;
-            top: 0;
-            margin-right: - $size;
-        }
-        content: "";
-    }
+
+    -webkit-mask-image: linear-gradient($direction, #000 80%, transparent);
 }
 
 @mixin glass($color, $soft, $box){
