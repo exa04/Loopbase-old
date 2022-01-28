@@ -1,22 +1,7 @@
 // Basic colors: All others are derivatives of these
 
 $background: #5c2363;
-
-$background-100: #26002B;
-$background-200: #330039;
-$background-300: #46174B;
-$background-400: #5c2363;
-
-$background-100: darken($background, 16%);
-$background-200: darken($background, 12%);
-$background-300: darken($background, 6%);
-$background-400: $background;
-
 $foreground: #EDE6EE;
-
-$foreground-100: $foreground;
-$foreground-200: darken($foreground, 20%);
-$foreground-300: darken($foreground, 40%);
 $inverse-foreground: #000;
 
 $accent-1: #DF3DB1;
@@ -24,15 +9,17 @@ $accent-2: #00FF99;
 $accent-3: #F5FE00;
 $accent-4: #7713E9;
 
-// $background: #222;
+// Generated colors
 
-// $background-100: darken($background, 9%);
-// $background-200: darken($background, 5%);
-// $background-300: darken($background, 2%);
-// $background-400: $background;
+$background-100: darken($background, 16%);
+$background-200: darken($background, 12%);
+$background-300: darken($background, 6%);
+$background-400: $background;
 
-// $foreground-100: #ffffff;
-// $foreground-200: #838383;
+$foreground-100: $foreground;
+$foreground-200: darken($foreground, 20%);
+$foreground-300: darken($foreground, 40%);
+
 
 // Window colors
 
