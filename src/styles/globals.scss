@@ -12,9 +12,11 @@ $background-200: darken($background, 12%);
 $background-300: darken($background, 6%);
 $background-400: $background;
 
-$foreground-100: #EDE6EE;
-$foreground-200: #BCA0C0;
-$foreground-300: #907094;
+$foreground: #EDE6EE;
+
+$foreground-100: $foreground;
+$foreground-200: darken($foreground, 20%);
+$foreground-300: darken($foreground, 40%);
 $inverse-foreground: #000;
 
 $accent-1: #DF3DB1;
@@ -92,7 +94,6 @@ h1{
     font-size: $font-size * .85;
     &.secondary{
         font-weight: 500;
-        color: $foreground-200;
     }
     white-space: pre;
 }

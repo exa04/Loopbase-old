@@ -18,7 +18,7 @@
                 </div>
             </div>
             <img class="visualizer" :src="res.waveform" draggable="false">
-            <div class="mono-value secondary" style="">{{res.duration}}0:00</div>
+            <div class="mono-value" style="">{{res.duration}}0:00</div>
             <div class="mono-value">{{res.key}}</div>
             <div class="mono-value">{{res.tempo}}</div>
             <div class="actions-result">
@@ -193,9 +193,7 @@
         display: grid;
         grid-template-columns: $profile-pic-large-size 1fr 1fr 5ch 10ch 7ch auto;
         margin: auto;
-        margin-bottom: $item-gap / 2;
-        margin-top: $item-gap / 2;
-        padding: $item-gap / 2;
+        padding: $item-gap/1.5;
         gap: $item-gap;
         height: $profile-pic-large-size;
         align-items: center;
@@ -224,7 +222,6 @@
             .actions-result svg{
                 stroke: $foreground-100;
             }
-
             .desc-author{
                 text-decoration: underline solid;
                 text-decoration-thickness: 2px;
@@ -234,6 +231,15 @@
                     transition-timing-function: $animation-timing;
                 }
             }
+            .mono-value{
+                color: $foreground-100;
+                transition-duration: $animation-duration;
+                transition-timing-function: $animation-timing;
+            }
+        }
+
+        .mono-value{
+            color: $foreground-200;
         }
         .audio-desc{
             margin-left: 0;
