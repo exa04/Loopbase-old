@@ -8,13 +8,13 @@
             <div class="result-profile-pic">
                 <img :src="res.profile_pic" class="profile-picture-large">
                 <div class="play-btn icon-btn" @click="playResult(res)">
-                    <vue-feather type="play" size="18"/>
+                    <vue-feather type="play" />
                 </div>
             </div>
             <div class="info-audio">
                 <div class="audio-desc">
                     <div ref="LoopName" class="desc-title">{{res.title}}</div>
-                    <div ref="ArtistName" class="desc-artist">{{res.author}}</div>
+                    <div ref="AuthorName" class="desc-author subtext">{{res.author}}</div>
                 </div>
             </div>
             <img class="visualizer" :src="res.waveform" draggable="false">
@@ -23,34 +23,34 @@
             <div class="mono-value">{{res.tempo}}</div>
             <div class="actions-result">
                 <vue-feather type="trash-2"
-                    size="18"
+                    
                     v-if="res.downloaded"
                     class="icon-btn"
                     @click="remove(res.localPath).then(res.downloaded = false)"
                 />
                 <div class="icon-spacer" v-else/>
                 <vue-feather type="folder"
-                    size="18"
+                    
                     v-if="res.downloaded"
                     class="icon-btn"
                     @click="revealFile(res.localPath)"
                 />
                 <vue-feather
                     type="download"
-                    size="18"
+                    
                     v-else
                     class="icon-btn"
                     @click="download(res.mp3_url, res.localPath).then(res.downloaded = true)"
                 />
                 <vue-feather
                     type="heart"
-                    size="18"
+                    
                     id="like"
                     v-bind:class="[{liked: false}, 'like', 'icon-btn']"
                 />
                 <vue-feather
                     type="link"
-                    size="18"
+                    
                     class="icon-btn"
                     @click="openLink(res.web_link)"
                 />
@@ -191,18 +191,26 @@
         width: calc(100% - $side-padding * 2);
         max-width: $max-content-width;
         display: grid;
-        grid-template-columns: 52px 1fr 1fr 5ch 10ch 7ch auto;
+        grid-template-columns: $profile-pic-large-size 1fr 1fr 5ch 10ch 7ch auto;
         margin: auto;
         margin-bottom: $item-gap / 2;
         margin-top: $item-gap / 2;
         padding: $item-gap / 2;
         gap: $item-gap;
-        height: 52px;
+        height: $profile-pic-large-size;
         align-items: center;
         border-radius: $radius;
         .info-audio{
             @include side-gradient(to right, $window-background);
             flex-grow: 2;
+
+            .desc-title{
+                font-weight: 700;
+            }
+
+            .desc-author{
+                cursor: pointer;
+            }
         }
         &:hover{
             background-color: $window-hover;
@@ -212,6 +220,16 @@
             .play-btn{
                 opacity: 1;
                 background-color: rgba($background-300,.8);
+            }
+
+            .desc-author{
+                text-decoration: underline solid;
+                text-decoration-thickness: 2px;
+                &:hover{
+                    color: $foreground-100;
+                    transition-duration: $animation-duration;
+                    transition-timing-function: $animation-timing;
+                }
             }
         }
         .audio-desc{
@@ -229,9 +247,11 @@
     }
     .profile-picture-large{
         border-radius: $radius;
+        aspect-ratio: 1;
+        width: $profile-pic-large-size;
     }
     .visualizer{
-        height: 100%;
+        height: $profile-pic-large-size;
         width: 100%;
         background: #000;
         filter: invert(1);
@@ -256,12 +276,12 @@
         }
     }
     .play-btn{
-        width: 52px;
+        width: $profile-pic-large-size;
         aspect-ratio: 1;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-left: -52px;
+        margin-left: -$profile-pic-large-size;
         opacity: 0;
         background-color: $background-300;
         svg{

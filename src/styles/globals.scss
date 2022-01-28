@@ -1,8 +1,16 @@
 // Basic colors: All others are derivatives of these
 
+$background: #5c2363;
+
 $background-100: #26002B;
 $background-200: #330039;
 $background-300: #46174B;
+$background-400: #5c2363;
+
+$background-100: darken($background, 16%);
+$background-200: darken($background, 12%);
+$background-300: darken($background, 6%);
+$background-400: $background;
 
 $foreground-100: #EDE6EE;
 $foreground-200: #BCA0C0;
@@ -12,6 +20,16 @@ $accent-1: #DF3DB1;
 $accent-2: #00FF99;
 $accent-3: #F5FE00;
 $accent-4: #7713E9;
+
+// $background: #222;
+
+// $background-100: darken($background, 9%);
+// $background-200: darken($background, 5%);
+// $background-300: darken($background, 2%);
+// $background-400: $background;
+
+// $foreground-100: #ffffff;
+// $foreground-200: #838383;
 
 // Window colors
 
@@ -25,19 +43,31 @@ $playbar-background: $background-100;
 
 // Sizing
 
+$scale: 1;
+$font_scale: 1;
+
 $max-content-width: 1100px;
 $radius: 8.5px;
-$item-gap: 16px;
+$item-gap: 16px * $scale;
 $side-padding: 21px;
-$gradient-s: 32px;
-$item-scale: 18px;
+$gradient-s: 32px * $scale;
+$item-scale: 18px * $scale;
+$font-size: 15px * $font_scale;
+
+$profile-pic-large-size: $item-scale * 3 * $scale;
+
+.vue-feather > svg{
+    width: $item-scale;
+}
 
 h1,h2,h3,h4,h5,h6{
     padding: 0px;
     margin: 0px;
 }
 
-h1{font-size: 48px;}
+h1{
+    font-size: $font-size * 5 * $scale;
+}
 
 // Text
 
@@ -46,12 +76,9 @@ h1{font-size: 48px;}
     user-select: none;
 }
 
-.desc-title{
-    font-weight: 700;
-}
-
-.desc-artist{
+.subtext{
     color: $foreground-200;
+    font-size: $font-size * .85;
 }
 
 .mono-value{
@@ -61,6 +88,7 @@ h1{font-size: 48px;}
     text-align: right;
     letter-spacing: 1px;
     white-space: pre;
+    font-size: $font-size * .85;
     &.secondary{
         font-weight: 500;
         color: $foreground-200;
@@ -107,19 +135,21 @@ $animation-timing: ease-in-out;
     }
 }
 
-@mixin glass-box($soft){
-    background-color: rgba($background-200, .65);
-    backdrop-filter: blur(12px);
-    border: 1px rgba(255,255,255,.2) solid;
-    border-radius: $radius;
-    box-shadow: 0px 0px 0px 1px #000,
-                0px 5px 7px -1px rgba(0,0,0,0.3),
-                0px 8px 29px 6px rgba(0,0,0,0.5),
-          inset 0px 4px 0px -3px rgba(255,255,255,.4);
+@mixin glass($color, $soft, $box){
+    background-color: rgba($color, .5);
+    backdrop-filter: saturate(150%) contrast(120%) brightness(60%) blur(16px);
+    @if $box {
+        border: 1px rgba(255,255,255,.2) solid;
+        border-radius: $radius;
+        box-shadow: 0px 0px 0px 1px #000,
+                    0px 5px 7px -1px rgba(0,0,0,0.3),
+                    0px 8px 29px 6px rgba(0,0,0,0.5),
+              inset 0px 4px 0px -3px rgba(255,255,255,.4);
+    }
 
     @if $soft{
-        background-color: rgba($background-200, .85);
-        backdrop-filter: blur(24px);
+        background-color: rgba($color, .85);
+        backdrop-filter: saturate(150%) contrast(120%) brightness(70%) blur(24px);
     }
 }
 
@@ -146,21 +176,4 @@ $animation-timing: ease-in-out;
 
 .vue-slider-dot-tooltip-text{
     color: $inverse-foreground;
-}
-
-$scrollbar-w: 16px;
-
-::-webkit-scrollbar {
-    width: $scrollbar-w;
-}
-
-::-webkit-scrollbar-thumb {
-    background: rgba($foreground-100, .2);
-    border: 4px transparent solid;
-    border-radius: $scrollbar-w - (4px * 2);
-    background-clip: padding-box;
-    &:hover{
-        background: rgba($foreground-100, 0.5);
-        border: 4px transparent solid;
-    }
 }

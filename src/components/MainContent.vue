@@ -19,7 +19,7 @@ export default ({
         Results
     },
     setup() {
-        
+
     },
 })
 </script>
@@ -30,5 +30,6 @@ export default ({
         display: flex;
         flex-direction: column;
         overflow: overlay;
+        padding-top: 52px;
     }
 </style>

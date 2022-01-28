@@ -189,6 +189,8 @@
         padding: $side-padding;
         padding-bottom: $item-gap;
         border-bottom: 1px solid $background-300;
+        width: calc(100% + 1px);    // TODO: Find a better alternative to this questionable hack
+        box-sizing: border-box;
         h1{
             max-width: $max-content-width;
             margin: auto;
@@ -250,7 +252,7 @@
         }
     }
     .tag-popout{
-        @include glass-box(false);
+        @include glass($background-200, false, true);
         min-width: 200px;
         height: fit-content;
         position: absolute;
@@ -281,13 +283,14 @@
             aspect-ratio: 1;
             display: flex;
             justify-content: center;
-            padding: $item-gap / 2;
+            padding: $item-gap / 4;
             background-color: $foreground-100;
             border-radius: 50%;
             margin: $item-gap / 8;
             transition-duration: $animation-duration;
             transition-timing-function: $animation-timing;
             color: $inverse-foreground;
+            font-size: $font-size * .85;
             &:hover{
                 background: $foreground-200;
             }

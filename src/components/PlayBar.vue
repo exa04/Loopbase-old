@@ -11,14 +11,14 @@
             <img ref="ProfilePicture" :src="profile_picture" class="profile-picture">
             <div class="audio-desc">
                 <div ref="LoopName" class="desc-title">{{title}}</div>
-                <div ref="ArtistName" class="desc-artist">{{info}}</div>
+                <div ref="ArtistName" class="desc-artist subtext">{{info}}</div>
             </div>
         </div>
         <div class="playback-controls">
             <vue-feather
                 class="icon-btn"
                 :type="this.$refs.audioPlayer == undefined || this.$refs.audioPlayer.paused ? 'play' : 'pause'"
-                size="18"
+                
                 @click="togglePlay()"
             />
         </div>
@@ -32,7 +32,7 @@
             :max="1"
         /> -->
         <vue-slider
-            v-model="position" 
+            v-model="position"
             id="playbackSlider"
             ref="playbackSlider"
             :lazy="true"
@@ -47,17 +47,17 @@
         <vue-feather
             class="icon-btn"
             type="volume-x"
-            size="18"
+            
             v-if="volume==0"
             @click="volume = prevVolume"
         />
         <div v-else @click="prevVolume = volume; volume = 0" style="height: 18px">
-            <vue-feather class="icon-btn" type="volume" size="18" v-if="volume < 33"></vue-feather>
-            <vue-feather class="icon-btn" type="volume-1" size="18" v-else-if="volume < 67"></vue-feather>
-            <vue-feather class="icon-btn" type="volume-2" size="18" v-else-if="volume >= 67"></vue-feather>
+            <vue-feather class="icon-btn" type="volume"  v-if="volume < 33"></vue-feather>
+            <vue-feather class="icon-btn" type="volume-1"  v-else-if="volume < 67"></vue-feather>
+            <vue-feather class="icon-btn" type="volume-2"  v-else-if="volume >= 67"></vue-feather>
         </div>
         <vue-slider
-            v-model="volume" 
+            v-model="volume"
             id="volumeSlider"
             min="0"
             max="100"
@@ -151,7 +151,7 @@
     @import "../styles/slider.scss";
 
     .play-bar{
-        background-color: $playbar-background;
+        @include glass($playbar-background, false, false);
         padding: 0 $side-padding;
         gap: $side-padding;
         height: 90px;
@@ -167,7 +167,6 @@
         align-items: center;
         flex-grow: 2;
         height: 100%;
-        @include side-gradient(to right, $playbar-background);
     }
     .profile-picture{
         width: 36px;

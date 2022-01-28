@@ -11,8 +11,8 @@
             ref="SearchBar"
         />
         <div class="actions">
-            <vue-feather type="folder" size="18" @click="revealFile('')"></vue-feather>
-            <vue-feather type="settings" size="18"></vue-feather>
+            <vue-feather size="24" type="folder"  @click="revealFile('')"></vue-feather>
+            <vue-feather size="24" type="settings" ></vue-feather>
         </div>
     </div>
 </template>
@@ -38,9 +38,9 @@
 <style lang="scss">
     @import '../styles/globals.scss';
     .title-bar{
+        @include glass($background-100, false, false);
         -webkit-app-region: drag;
         justify-content: space-between;
-        background-color: $titlebar-background;
         color: $foreground-100;
         padding: 0 $side-padding;
         height: 52px;
@@ -65,10 +65,11 @@
     .actions{
         display: flex;
         gap: $item-gap;
-        height: $item-scale;
-        svg{
+        .vue-feather, .vue-feather > svg {
             stroke: $foreground-200;
             cursor: pointer;
+            width: 18px !important;
+            aspect-ratio: 1;
         }
     }
 </style>

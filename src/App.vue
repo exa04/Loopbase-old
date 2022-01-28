@@ -37,7 +37,7 @@
                 let bpmregex = /[0-9]+ *bpm(?: |$)/gi;
                 let bpmtext = Array.from(originalQuery.matchAll(bpmregex));
                 query.keys = originalQuery.replaceAll(bpmregex, "");
-                
+
                 if(bpmtext.length > 0){
                     query.tempo = bpmtext.pop()[0].match(/[1-9][0-9]*/)[0];
                     query.tempo = [Number(query.tempo), Number(query.tempo)];
@@ -63,7 +63,7 @@
                         keymatch.match(/(maj|min)/i)[0].toLowerCase() == "min" ? "m" : ""
                     ];
                 }
-                
+
                 this.$refs.MainContent.$refs.Results.$data.query = query;
                 this.$refs.MainContent.$refs.Results.reset();
             }
@@ -73,15 +73,31 @@
 
 <style lang="scss">
     @import 'styles/globals.scss';
-    body{ margin: 0; background-color: $window-background;}
+    body{
+        margin: 0;
+        background-color: $window-background;
+        overflow-x: hidden;
+    }
     #app {
         color: $foreground-100;
-        font-size: 14px;
+        font-size: $font-size;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         background-color: $window-background;
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
+        .title-bar{
+            top: 0;
+        }
+        .title-bar, .play-bar{
+            z-index: 5;
+            position: fixed;
+            box-sizing: border-box;
+            width: 100%;
+        }
+        .main-content{
+            z-index: -1;
+        }
+        .play-bar{
+            bottom: 0;
+        }
     }
 </style>

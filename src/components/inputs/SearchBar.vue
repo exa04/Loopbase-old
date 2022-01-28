@@ -62,6 +62,7 @@
     width: 437px;
     .inner svg{
         stroke: $foreground-200;
+        height: $font-size * .9;
         stroke-width: 3.5;
     }
     background-color: $background-200;
