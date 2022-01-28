@@ -199,17 +199,14 @@
         width: calc(100% + 1px);    // TODO: Find a better alternative to this questionable hack
         box-sizing: border-box;
         h1{
-            max-width: $max-content-width;
             margin: auto;
         }
     }
     .LibraryName{
-        max-width: $max-content-width;
         margin: auto;
         color: $foreground-200;
     }
     .tags-container{
-        max-width: $max-content-width;
         margin: auto;
         margin-top: $item-gap;
     }
@@ -274,7 +271,6 @@
         display: flex;
         gap: $item-gap;
         color: $foreground-200;
-        max-width: $max-content-width;
         margin: auto;
         margin-top: $item-gap;
     }
