@@ -76,7 +76,7 @@
     body{
         margin: 0;
         background-color: $window-background;
-        overflow-x: hidden;
+        overflow-y: overlay;
     }
     #app {
         color: $foreground-100;
@@ -99,5 +99,22 @@
         .play-bar{
             bottom: 0;
         }
+    }
+    *::-webkit-scrollbar {
+        width: 10px;
+        margin-right: 10px;
+    }
+
+    *::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    *::-webkit-scrollbar-thumb {
+        transition: $animation-duration;
+        background-color: rgba($foreground-100, 25%);
+        &:hover{
+            background-color: rgba($foreground-100, 50%);
+        }
+        border-radius: 10px;
     }
 </style>

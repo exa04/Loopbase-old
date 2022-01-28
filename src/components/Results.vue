@@ -185,7 +185,7 @@
     @import "../styles/globals.scss";
     .results{
         width: 100vw;
-        overflow: hidden;
+        height: fit-content;
     }
     .result{
         width: calc(100% - $side-padding * 2);

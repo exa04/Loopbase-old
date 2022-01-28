@@ -12,7 +12,8 @@
 
 <script>
 import TopArea from './TopArea';
-import Results from './Results'
+import Results from './Results';
+
 export default ({
     name: 'MainContent',
     components: {
@@ -31,6 +32,9 @@ export default ({
         display: flex;
         flex-direction: column;
         overflow: overlay;
+        overflow-x: hidden;
         padding-top: 52px;
+        height: 100vh;
+        box-sizing: border-box;
     }
 </style>
