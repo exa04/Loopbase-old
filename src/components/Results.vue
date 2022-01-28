@@ -23,34 +23,34 @@
             <div class="mono-value">{{res.tempo}}</div>
             <div class="actions-result">
                 <vue-feather type="trash-2"
-                    
+
                     v-if="res.downloaded"
                     class="icon-btn"
                     @click="remove(res.localPath).then(res.downloaded = false)"
                 />
                 <div class="icon-spacer" v-else/>
                 <vue-feather type="folder"
-                    
+
                     v-if="res.downloaded"
                     class="icon-btn"
                     @click="revealFile(res.localPath)"
                 />
                 <vue-feather
                     type="download"
-                    
+
                     v-else
                     class="icon-btn"
                     @click="download(res.mp3_url, res.localPath).then(res.downloaded = true)"
                 />
                 <vue-feather
                     type="heart"
-                    
+
                     id="like"
                     v-bind:class="[{liked: false}, 'like', 'icon-btn']"
                 />
                 <vue-feather
                     type="link"
-                    
+
                     class="icon-btn"
                     @click="openLink(res.web_link)"
                 />
@@ -221,6 +221,9 @@
                 opacity: 1;
                 background-color: rgba($background-300,.8);
             }
+            .actions-result svg{
+                stroke: $foreground-100;
+            }
 
             .desc-author{
                 text-decoration: underline solid;
@@ -239,6 +242,9 @@
             width: 125px - $item-gap;
             display: flex;
             justify-content: space-between;
+            svg{
+                stroke: $foreground-300;
+            }
         }
     }
     .result-profile-pic{
