@@ -100,7 +100,7 @@ h1{
 
 // Animations
 
-$animation-duration: 150ms;
+$animation-duration: 70ms;
 $animation-timing: ease-in-out;
 
 // Icons
@@ -123,7 +123,6 @@ $animation-timing: ease-in-out;
 // Mixins
 
 @mixin side-gradient($direction, $color, $size: $gradient-s){
-
     -webkit-mask-image: linear-gradient($direction, #000 80%, transparent);
 }
 

@@ -237,6 +237,8 @@
                 transition-timing-function: $animation-timing;
             }
         }
+        transition-duration: $animation-duration;
+        transition-timing-function: $animation-timing;
 
         .mono-value{
             color: $foreground-200;
@@ -300,5 +302,7 @@
             stroke: $foreground-100;
         }
         border-radius: $radius;
+        transition-duration: $animation-duration;
+        transition-timing-function: $animation-timing;
     }
 </style>
