@@ -177,5 +177,8 @@
                 "v v"
                 "a a";
         }
+        .hide-bp-300{
+            display: none;
+        }
     }
 </style>

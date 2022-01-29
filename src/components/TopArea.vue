@@ -24,7 +24,10 @@
                             @click="filterEnabled.tempo = !filterEnabled.tempo;
                                     filterValues.tempoRange = queryInfo.tempo"
                         >
-                            Tempo{{filterAdded.tempo ? ": " + queryInfo.tempo[0] + " - " + queryInfo.tempo[1] + " BPM" : ""}}
+                            Tempo<span
+                                :if="filterAdded.tempo"
+                                class="hide-bp-300"
+                            >: {{queryInfo.tempo[0]}} - {{queryInfo.tempo[1]}} BPM</span>
                         </div>
                         <vue-feather
                             type="x"
@@ -209,11 +212,18 @@
     .tags-container{
         margin: auto;
         margin-top: $item-gap;
+        .tag-duo{
+            flex-shrink: 0;
+        }
     }
     .tags-container, .tags-left{
         display: flex;
         flex-grow: 1;
         gap: $item-gap;
+        flex-wrap: wrap;
+    }
+    .tags-left{
+        overflow: auto;
     }
     .tag, .tag-duo > *{
         float: left;
