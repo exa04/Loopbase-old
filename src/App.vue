@@ -167,6 +167,10 @@
             }
         }
     }
+    @media only screen and (max-width: 400px) {
+        #topSearch{ display: none; }
+        #bottomSearch{ display: block; }
+    }
     @media only screen and (max-width: 300px) {
         .result{
             grid-template-columns: $profile-pic-large-size auto;

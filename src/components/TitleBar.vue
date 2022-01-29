@@ -9,6 +9,7 @@
             placeholder="Search for loops..."
             @submitSearch="this.$parent.search()"
             ref="SearchBar"
+            id="topSearch"
         />
         <div class="actions">
             <vue-feather size="24" type="folder"  @click="revealFile('')"></vue-feather>

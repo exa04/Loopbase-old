@@ -23,12 +23,11 @@
             <div class="mono-value info-tempo">{{res.tempo}}</div>
             <div class="actions-result">
                 <vue-feather type="trash-2"
-
                     v-if="res.downloaded"
                     class="icon-btn"
                     @click="remove(res.localPath).then(res.downloaded = false)"
                 />
-                <div class="icon-spacer" v-else/>
+                <div class="icon-spacer"/>
                 <vue-feather type="folder"
 
                     v-if="res.downloaded"

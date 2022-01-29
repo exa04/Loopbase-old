@@ -71,6 +71,9 @@
     transition-duration: $animation-duration;
     transition-timing-function: $animation-timing;
     cursor: text;
+    border: 1px rgba(255,255,255,.1) solid;
+    border-radius: $radius;
+    box-shadow: inset 0px -3px 1px -2px rgba(255,255,255,.2);
 }
 .SearchBar.active{
     .inner{

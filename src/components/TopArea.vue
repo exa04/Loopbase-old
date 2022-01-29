@@ -6,6 +6,12 @@
             <span :if="query.keys == undefined || query.keys == ''">{{query.keys}}</span>
             {{section_name}}
         </h1>
+        <SearchBar
+            placeholder="Search for loops..."
+            @submitSearch="this.$parent.search()"
+            ref="SearchBar"
+            id="bottomSearch"
+        />
         <div class="tags-container" v-if="search_header">
             <div class="tags-left">
                 <div>
@@ -144,12 +150,14 @@
     import VueFeather from 'vue-feather';
     import VueSlider from 'vue-slider-component';
     import Button from './inputs/Button';
+    import SearchBar from './inputs/SearchBar.vue';
     export default {
         name: "TopArea",
         components: {
             VueFeather,
             VueSlider,
-            Button
+            Button,
+            SearchBar
         },
         props: {
             library_name: String,
@@ -317,5 +325,11 @@
                 background-color: transparent !important;
             }
         }
+    }
+    #bottomSearch{
+        width: 100%;
+        background-color: $background-100;
+        display: none;
+        margin: $item-gap 0;
     }
 </style>
