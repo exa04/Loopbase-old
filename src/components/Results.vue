@@ -27,7 +27,7 @@
                     class="icon-btn"
                     @click="remove(res.localPath).then(res.downloaded = false)"
                 />
-                <div class="icon-spacer"/>
+                <div class="icon-spacer" v-else/>
                 <vue-feather type="folder"
 
                     v-if="res.downloaded"
