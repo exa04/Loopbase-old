@@ -152,6 +152,7 @@
         }
     }
     @media only screen and (max-width: 600px) {
+        h1{ font-size: $font-size * 5 * $scale; }
     }
     @media only screen and (max-width: 500px) {
         .result{
@@ -166,10 +167,12 @@
                 width: 100%;
             }
         }
+        h1{ font-size: $font-size * 4 * $scale; }
     }
     @media only screen and (max-width: 400px) {
         #topSearch{ display: none; }
         #bottomSearch{ display: block; }
+        h1{ font-size: $font-size * 3 * $scale; }
     }
     @media only screen and (max-width: 300px) {
         .result{
@@ -184,5 +187,6 @@
         .hide-bp-300{
             display: none;
         }
+        h1{ font-size: $font-size * 2 * $scale; }
     }
 </style>
