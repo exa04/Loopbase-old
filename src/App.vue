@@ -121,6 +121,9 @@
         .mono-value{
             letter-spacing: -.5px;
         }
+        .info-duration{
+            display: none;
+        }
         .result{
             grid-template-columns: $profile-pic-large-size auto 6ch 5ch;
             gap: $item-gap / 1.5;
@@ -149,11 +152,6 @@
         }
     }
     @media only screen and (max-width: 600px) {
-        .info-duration{
-            display: none;
-        }
-        .result{
-        }
     }
     @media only screen and (max-width: 500px) {
         .result{
