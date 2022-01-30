@@ -8,7 +8,7 @@
         </h1>
         <SearchBar
             placeholder="Search for loops..."
-            @submitSearch="this.$parent.search()"
+            @submitSearch="this.$parent.$parent.search()"
             ref="SearchBar"
             id="bottomSearch"
         />
