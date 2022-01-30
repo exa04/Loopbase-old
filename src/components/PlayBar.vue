@@ -22,15 +22,6 @@
                 @click="togglePlay()"
             />
         </div>
-        <!-- <Slider
-            :tooltips="false"
-            id="playbackSlider"
-            ref="playbackSlider"
-            :min="0"
-            v-model="position"
-            :step="0.001"
-            :max="1"
-        /> -->
         <vue-slider
             v-model="position"
             id="playbackSlider"
@@ -59,8 +50,8 @@
         <vue-slider
             v-model="volume"
             id="volumeSlider"
-            min="0"
-            max="100"
+            :min="0"
+            :max="100"
         />
     </div>
 </template>

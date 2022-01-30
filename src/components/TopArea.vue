@@ -49,9 +49,9 @@
                             id="playbackSlider"
                             ref="playbackSlider"
                             :lazy="true"
-                            min="0"
-                            max="200"
-                            interval="1"
+                            :min="0"
+                            :max="200"
+                            :interval="1"
                         />
                         <div class="button-duo"
                             @click="filterEnabled.tempo = false"
