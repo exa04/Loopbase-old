@@ -31,7 +31,7 @@
                                     filterValues.tempoRange = queryInfo.tempo"
                         >
                             Tempo<span
-                                :if="filterAdded.tempo"
+                                v-if="filterAdded.tempo"
                                 class="hide-bp-300"
                             >: {{queryInfo.tempo[0]}} - {{queryInfo.tempo[1]}} BPM</span>
                         </div>
