@@ -33,7 +33,11 @@
                             Tempo<span
                                 v-if="filterAdded.tempo"
                                 class="hide-bp-300"
-                            >: {{queryInfo.tempo[0]}} - {{queryInfo.tempo[1]}} BPM</span>
+                            >: {{
+                                    queryInfo.tempo[0] == queryInfo.tempo[1] ?
+                                        queryInfo.tempo[0] :
+                                        queryInfo.tempo[0] + " - " + queryInfo.tempo[1]
+                                }} BPM</span>
                         </div>
                         <vue-feather
                             type="x"
