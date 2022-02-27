@@ -22,15 +22,17 @@
         methods: {
             search(){
                 let originalQuery = this.$refs.TitleBar.$refs.SearchBar.value;
+                let topBarQuery = this.$refs.MainContent.$refs.TopArea.queryInfo;
                 let query = {
-                    category:       'loops',
+                    category:       topBarQuery.category,
                     keys:           '',
-                    order:          ['date', 'd'],
-                    tempo:          [0,200],
+                    order:          topBarQuery.order,
+                    tempo:          topBarQuery.tempo,
                     page:           1,
-                    key:            ['', ''],
-                    date:           0,
-                    genre:          0
+                    key:            [topBarQuery.key[0], topBarQuery.key[1]],
+                    date:           topBarQuery.date,
+                    genre:          topBarQuery.genre,
+                    filterByKey:    this.$refs.MainContent.$refs.TopArea.filterAdded.key
                 };
 
                 // This matches every ocurrence of (NUMBER) BPM in the query
@@ -68,6 +70,8 @@
                         keymatch.match(/(maj|min)/i)[0].toLowerCase() == "min" ? "m" : ""
                     ];
                 }
+
+                console.log(query);
                 this.$refs.MainContent.$refs.TopArea.$data.query = query;
                 this.$refs.MainContent.$refs.Results.$data.query = query;
                 this.$refs.MainContent.$refs.Results.reset();

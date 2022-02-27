@@ -86,7 +86,14 @@
                             @click="filterEnabled.key = !filterEnabled.key;
                                     filterValues.key = queryInfo.key"
                         >
-                            Key
+                            Key<span
+                                v-if="filterAdded.key"
+                                class="hide-bp-300"
+                            >: {{
+                                queryInfo.key[0].charAt(0).toUpperCase() +
+                                (queryInfo.key[0].charAt(1) == "s" ? "#" : "") + " " +
+                                (queryInfo.key[1] == "m" ? "Minor" : "Major")
+                            }}</span>
                         </div>
                         <vue-feather
                             type="x"
@@ -97,23 +104,28 @@
                     </div>
                     <div class="tag-popout" :class="{ hidden: !filterEnabled.key }">
                         <h2>Key</h2>
+                        <Switch
+                            class="keyModeSwitch"
+                            @update:modelValue="v => filterValues.key[1] = (v ? 'm' : '')"
+                            :title="'Mode: ' + (filterValues.key[1] == 'm' ? 'Minor' : 'Major')"
+                        />
                         <div>
                             <div class="key-row sharps">
-                                <div>C#</div>
-                                <div class="selected">D#</div>
+                                <div @click="filterValues.key[0] = 'cs'" :class="{selected : filterValues.key[0] == 'cs'}">C#</div>
+                                <div @click="filterValues.key[0] = 'ds'" :class="{selected : filterValues.key[0] == 'ds'}">D#</div>
                                 <div class="key-seperator"></div>
-                                <div>F#</div>
-                                <div>G#</div>
-                                <div>A#</div>
+                                <div @click="filterValues.key[0] = 'fs'" :class="{selected : filterValues.key[0] == 'fs'}">F#</div>
+                                <div @click="filterValues.key[0] = 'gs'" :class="{selected : filterValues.key[0] == 'gs'}">G#</div>
+                                <div @click="filterValues.key[0] = 'as'" :class="{selected : filterValues.key[0] == 'as'}">A#</div>
                             </div>
                             <div class="key-row">
-                                <div>C</div>
-                                <div>D</div>
-                                <div>E</div>
-                                <div>F</div>
-                                <div>G</div>
-                                <div>A</div>
-                                <div>B</div>
+                                <div @click="filterValues.key[0] = 'c'" :class="{selected : filterValues.key[0] == 'c'}">C</div>
+                                <div @click="filterValues.key[0] = 'd'" :class="{selected : filterValues.key[0] == 'd'}">D</div>
+                                <div @click="filterValues.key[0] = 'e'" :class="{selected : filterValues.key[0] == 'e'}">E</div>
+                                <div @click="filterValues.key[0] = 'f'" :class="{selected : filterValues.key[0] == 'f'}">F</div>
+                                <div @click="filterValues.key[0] = 'g'" :class="{selected : filterValues.key[0] == 'g'}">G</div>
+                                <div @click="filterValues.key[0] = 'a'" :class="{selected : filterValues.key[0] == 'a'}">A</div>
+                                <div @click="filterValues.key[0] = 'b'" :class="{selected : filterValues.key[0] == 'b'}">B</div>
                             </div>
                         </div>
                         <div class="button-duo"
@@ -155,13 +167,15 @@
     import VueSlider from 'vue-slider-component';
     import Button from './inputs/Button';
     import SearchBar from './inputs/SearchBar.vue';
+    import Switch from './inputs/Switch.vue';
     export default {
         name: "TopArea",
         components: {
             VueFeather,
             VueSlider,
             Button,
-            SearchBar
+            SearchBar,
+            Switch
         },
         props: {
             library_name: String,
@@ -175,7 +189,7 @@
                     order:          ['date', 'd'],
                     tempo:          [0,200],
                     tempoRange:     false,
-                    key:            ['c', ''],
+                    key:            ['',''],
                     date:           0,
                     genre:          0,
                     filterByKey:    false,
@@ -193,6 +207,7 @@
                 },
                 filterValues: {
                     tempoRange:          [0,200],
+                    key:                ['', false],
                 }
             }
         },
