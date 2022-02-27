@@ -193,6 +193,11 @@
             }
         },
         methods:{
+            setTempo(values){
+                this.filterAdded.tempo = true;
+                this.queryInfo.tempo = values;
+                console.log(values);
+            },
             sendQuery(){
                 this.$parent.search();
             }
