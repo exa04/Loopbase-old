@@ -162,8 +162,47 @@
                 </div>
             </div>
             <div class="tag-duo">
-                <div>Sort by date</div>
-                <vue-feather type="chevron-down" size="18"/>
+                <div
+                    @click="filterEnabled.sort = !filterEnabled.sort"
+                >
+                    Sort by date
+                </div>
+                <vue-feather
+                    type="chevron-down"
+                    size="18"
+                    @click="
+                        queryInfo.order[1] = (queryInfo.order[1] == 'd' ? 'a' : 'd')
+                        this.$parent.$parent.search();
+                    "
+                />
+            </div>
+            <div
+                class="tag-popout align-left"
+                :class="{ hidden: !filterEnabled.sort }"
+            >
+                <h2>Sort by</h2>
+                <div class="select-sort">
+                    <div
+                        class="option-sort"
+                        v-for="sort in [
+                            ['date', 'Date'],
+                            ['name', 'Title'],
+                            ['author', 'Author'],
+                            ['tempo', 'Tempo'],
+                            ['downloads', 'Downloads'],
+                            ['comments', 'Comments']
+                        ]"
+                        :key="sort[0]"
+                        :class="{selected : sort[0] == queryInfo.order[0]}"
+                        @click="
+                            queryInfo.order[0] = sort[0];
+                            this.$parent.$parent.search();
+                            filterEnabled.sort = false;
+                        "
+                    >
+                        {{sort[1]}}
+                    </div>
+                </div>
             </div>
         </div>
         <div class="results-header" v-if="search_header">
@@ -212,7 +251,8 @@
                 },
                 filterEnabled: {
                     tempo: false,
-                    key: false
+                    key: false,
+                    sort: false
                 },
                 filterAdded: {
                     tempo: false,
@@ -320,6 +360,13 @@
         z-index: 2;
         > *{
             margin-bottom: $item-gap / 2;
+            &:last-child{
+                margin-bottom: 0;
+            }
+        }
+        &.align-left{
+            transform: translate(-$side-padding, $item-scale + $item-gap);
+            right: 0;
         }
     }
     .results-header{
@@ -333,33 +380,73 @@
         transform: translateY($item-scale + $item-gap + 100px);
         display: none;
     }
+    .select-sort{
+        .option-sort{
+            cursor: pointer;
+            background-color: $background-300;
+            padding: $item-gap / 2;
+            border: 1px solid $background-300;
+            border-bottom: 1px solid $background-200;
+            transition-duration: $animation-duration;
+            transition-timing-function: $animation-timing;
+            color: $foreground-200;
+            &:hover:not(.selected){
+                background-color: $background-400;
+                border-radius: $radius;
+                transform: scale(1.1);
+                border: 1px solid $background-200;
+                color: $foreground-100;
+            }
+            &:active:not(.selected){
+                background-color: $background-300;
+                border-radius: $radius;
+                transform: scale(1.05);
+                border: 1px solid $background-200;
+                color: $foreground-100;
+            }
+            &:first-child{
+                border-top-left-radius: $radius;
+                border-top-right-radius: $radius;
+            }
+            &:last-child{
+                border-bottom-left-radius: $radius;
+                border-bottom-right-radius: $radius;
+            }
+            &.selected{
+                background-color: $accent-2;
+                color: $inverse-foreground;
+            }
+        }
+    }
     .key-row{
         display: flex;
         justify-content: center;
         > div{
+            cursor: pointer;
             height: $item-scale;
             aspect-ratio: 1;
             display: flex;
             justify-content: center;
             padding: $item-gap / 4;
-            background-color: $foreground-100;
+            background-color: $background-300;
             border-radius: 50%;
             margin: $item-gap / 8;
             transition-duration: $animation-duration;
             transition-timing-function: $animation-timing;
-            color: $inverse-foreground;
             font-size: $font-size * .85;
             &:hover{
-                background: $foreground-200;
+                background: $background-400;
             }
             &:active{
-                background: $accent-2;
+                background: $background-300;
             }
             &.selected{
+                color: $inverse-foreground;
                 background: $accent-2;
             }
             &.key-seperator{
                 background-color: transparent !important;
+                cursor: default;
             }
         }
     }
