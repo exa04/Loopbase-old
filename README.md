@@ -1,46 +1,36 @@
-<img align="left" width="140" height="140" src="img/logo_readme.svg">
-<h1>Loopbase</h1>
-<p>A desktop client for Looperman</p>
-<br>
-<p align="center">
-  <img width="800" src="https://i.imgur.com/Z7Q9scj.png">
-</p>
-  
-> :warning: **THIS APP IS STILL IN ITS ALPHA STAGE**
-> You may encounter bugs, some features are still missing.
+# Loopbase
 
-With loopbase, you can browse samples on looperman and drag-and-drop them into your DAW. Use the righthand section to filter your search queries and save samples to your disk! Loopbase is not affiliated with Looperman.
+> ⚠️ THIS APP IS STILL IN ALPHA: You may encounter bugs, some features are missing or subject to change.
+
+With loopbase, you can browse samples on Looperman and download them. Just search for whatever you need, save samples, and drag them into your DAW from the app! Loopbase is not affiliated with Looperman.
+
+<img width="1072" alt="grafik" src="https://user-images.githubusercontent.com/68156346/149636073-55805004-a4a5-4268-96fa-d60bf1553498.png">
 
 ## Installing
 
-You can try the current alpha version by cloning this repository.
+If you're looking for something more stable, head over to the [releases section](https://github.com/StarburstAudio/loopbase/releases) and grab the latest one for your platform.
+
+If you want to have something more new, you can build from source
+
+## Building
+
+If you want to build Loopbase yourself, it's as easy as 1-2-3!
+
+1. Clone the repository
 
 ```sh
 git clone https://github.com/StarburstAudio/loopbase
+```
+
+2. Then, install all the dependencies
+
+```sh
 npm i
 ```
 
-You can then run a launch script
+3. Now, decide whether you want to **build** or **run**
 
 ```sh
-# You have two options: You can start the app...
-npm run start
-# ...Or continuously watch its scss files for changes and recompile to css.
-npm run watch-start
+npm run electron:serve  # Runs the app with hot-reload
+npm run electron:build  # Compiles the app to an executable
 ```
-
-And lastly, you can also build the app
-
-```sh
-npm run build
-```
-
-## Contributing
-
-You can find the issues that are to be tackled on [the project board](https://github.com/StarburstAudio/loopbase/projects/2). If you want to work on an issue that is yet to be assigned, just comment on it and start a pull request. If you're unsure on which one to pick, there are probably some tagged "help wanted" or "good first issue". If you find any bugs or otherwise, don't hesitate to file an issue for them, too.
-
-There are some things that do need to be adressed before most other issues:
-  - JS refactoring
-  - SCSS refactoring
-  - Redesign
-    - Only goes for things that affect the front-end; Switch to the `visual-redesign` branch to contribute to the redesign (There's already a [prototype](https://www.figma.com/proto/uJP8u3soovR04vpmJreHnM/Loopbase-Redesign?node-id=45%3A6&scaling=min-zoom&page-id=0%3A1) to be implemented!)

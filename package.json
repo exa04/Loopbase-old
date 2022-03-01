@@ -1,37 +1,61 @@
 {
   "name": "loopbase",
-  "version": "1.0.0-alpha-1",
-  "description": "Desktop looperman client for downloading samples.",
-  "main": "main.js",
-  "author": "Starburst Audio",
+  "version": "1.0.0-alpha-2",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "electron:build": "vue-cli-service electron:build",
+    "electron:serve": "vue-cli-service electron:serve",
+    "postinstall": "electron-builder install-app-deps",
+    "postuninstall": "electron-builder install-app-deps"
+  },
+  "main": "background.js",
   "dependencies": {
+    "@fontsource/rubik": "^4.5.0",
+    "@ibm/plex": "^6.0.0",
+    "@ts-pro/vue-eternal-loading": "^1.2.0",
     "cheerio": "^1.0.0-rc.10",
-    "request": "^2.88.2"
+    "core-js": "^3.6.5",
+    "feather-icons": "^4.28.0",
+    "sharp": "^0.29.3",
+    "vue": "^3.0.0",
+    "vue-feather": "^2.0.0-rc.1",
+    "vue-slider-component": "^4.0.0-beta.4"
   },
   "devDependencies": {
-    "clean-css-cli": "^5.4.2",
-    "electron": "^15.3.0",
-    "electron-builder": "^22.14.5",
-    "node-sass": "^6.0.1"
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.0.0",
+    "babel-eslint": "^10.1.0",
+    "electron": "^13.0.0",
+    "electron-devtools-installer": "^3.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^7.0.0",
+    "node-sass": "^6.0.1",
+    "sass": "^1.46.0",
+    "sass-loader": "^10.2.0",
+    "vue-cli-plugin-electron-builder": "~2.1.1"
   },
-  "scripts": {
-    "compile-scss": "node-sass -r scss -o css",
-    "watch-scss": "node-sass -rw scss -o css",
-    "start": "npm run compile-scss & electron .",
-    "watch-start": "npm run watch-scss & electron .",
-    "build": "npm run compile-scss & npx electron-builder --windows --linux"
-  },
-  "license": "GPL-3.0",
-  "build": {
-    "appId": "org.starburst.loopbase",
-    "productName": "Loopbase",
-    "copyright": "Licensed under GNU GPLv3",
-    "mac": {
-      "category": "public.app-category.music"
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
     },
-    "linux": {
-      "maintainer": "StarburstAudio",
-      "category": "Audio"
-    }
-  }
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
 }
