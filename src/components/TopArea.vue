@@ -165,10 +165,10 @@
                 <div
                     @click="filterEnabled.sort = !filterEnabled.sort"
                 >
-                    Sort by date
+                    Sort by {{queryInfo.order[0]}}
                 </div>
                 <vue-feather
-                    type="chevron-down"
+                    :type="queryInfo.order[1] == 'd'? 'chevron-down' : 'chevron-up'"
                     size="18"
                     @click="
                         queryInfo.order[1] = (queryInfo.order[1] == 'd' ? 'a' : 'd')
