@@ -154,11 +154,50 @@
                         </div>
                     </div>
                 </div>
-                <div class="tag">
-                    <div>Instrument</div>
+                <div class="tag"
+                    @click.self="filterEnabled.genre = !filterEnabled.genre"
+                    :class="{ active: queryInfo.genre != 0 }
+                ">
+                        <div
+                            @click="filterEnabled.genre = !filterEnabled.genre;
+                                    filterValues.genre = queryInfo.genre"
+                        >
+                            Genre<span
+                                v-if="queryInfo.genre != 0"
+                                class="hide-bp-300"
+                            >: {{
+                                genrelist.find(e => e[0] == queryInfo.genre)[1]
+                            }}</span>
+                        </div>
+                        <vue-feather
+                            type="x"
+                            size="18"
+                            @click="
+                                queryInfo.genre = 0;
+                                this.$parent.$parent.search();
+                            "
+                            :class="{hidden: queryInfo.genre == 0}"
+                        />
                 </div>
-                <div class="tag">
-                    <div>Genre</div>
+                <div class="tag-popout" :class="{ hidden: !filterEnabled.genre }">
+                    <h2>Genre</h2>
+                    <div class="select">
+                        <div
+                            class="option"
+                            v-for="genre in genrelist"
+                            :key="genre[0]"
+                            :class="{selected : parseInt(genre[0]) == queryInfo.genre}"
+                            @click="
+                                queryInfo.genre = parseInt(genre[0]);
+                                this.$parent.$parent.search();
+                                filterEnabled.genre = false;
+                                filterAdded.genre = true;
+
+                            "
+                        >
+                            {{genre[1]}}
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="tag-duo">
@@ -181,12 +220,11 @@
                 :class="{ hidden: !filterEnabled.sort }"
             >
                 <h2>Sort by</h2>
-                <div class="select-sort">
+                <div class="select">
                     <div
-                        class="option-sort"
+                        class="option"
                         v-for="sort in [
-                            ['date', 'Date'],
-                            ['name', 'Title'],
+                            ['date', 'Date'], ['name', 'Title'],
                             ['author', 'Author'],
                             ['tempo', 'Tempo'],
                             ['downloads', 'Downloads'],
@@ -252,16 +290,19 @@
                 filterEnabled: {
                     tempo: false,
                     key: false,
-                    sort: false
+                    sort: false,
+                    genre: false
                 },
                 filterAdded: {
                     tempo: false,
-                    key: false
+                    key: false,
+                    genre: false
                 },
                 filterValues: {
                     tempoRange:          [0,200],
                     key:                ['', false],
-                }
+                },
+                genrelist: [['0', 'All Genres'], ['56', '8Bit Chiptune'], ['52', 'Acid'], ['3', 'Acoustic'], ['67', 'Afrobeat'], ['2', 'Ambient'], ['66', 'Big Room'], ['33', 'Blues'], ['65', 'Boom Bap'], ['37', 'Breakbeat'], ['21', 'Chill Out'], ['36', 'Cinematic'], ['13', 'Classical'], ['51', 'Comedy'], ['44', 'Country'], ['39', 'Crunk'], ['17', 'Dance'], ['55', 'Dancehall'], ['30', 'Deep House'], ['23', 'Dirty'], ['18', 'Disco'], ['11', 'Drum And Bass'], ['5', 'Dub'], ['49', 'Dubstep'], ['64', 'EDM'], ['42', 'Electro'], ['16', 'Electronic'], ['15', 'Ethnic'], ['25', 'Folk'], ['19', 'Funk'], ['46', 'Fusion'], ['24', 'Garage'], ['31', 'Glitch'], ['43', 'Grime'], ['53', 'Grunge'], ['48', 'Hardcore'], ['61', 'Hardstyle'], ['27', 'Heavy Metal'], ['7', 'Hip Hop'], ['22', 'House'], ['63', 'Indie'], ['38', 'Industrial'], ['6', 'Jazz'], ['10', 'Jungle'], ['69', 'Latin'], ['62', 'Lo-Fi'], ['57', 'Moombahton'], ['34', 'Orchestral'], ['70', 'Phonk'], ['50', 'Pop'], ['60', 'Psychedelic'], ['14', 'Punk'], ['8', 'Rap'], ['20', 'Rave'], ['4', 'Reggae'], ['32', 'Reggaeton'], ['45', 'Religious'], ['12', 'RnB'], ['1', 'Rock'], ['29', 'Samba'], ['41', 'Ska'], ['59', 'Soul'], ['47', 'Spoken Word'], ['9', 'Techno'], ['28', 'Trance'], ['54', 'Trap'], ['58', 'Trip Hop'], ['68', 'UK Drill'], ['35', 'Weird']]
             }
         },
         methods:{
@@ -353,6 +394,8 @@
     .tag-popout{
         @include glass($background-200, false, true);
         min-width: 200px;
+        max-height: 50vh;
+        overflow: auto;
         height: fit-content;
         position: absolute;
         transform: translateY($item-scale + $item-gap);
@@ -380,8 +423,8 @@
         transform: translateY($item-scale + $item-gap + 100px);
         display: none;
     }
-    .select-sort{
-        .option-sort{
+    .select{
+        .option{
             cursor: pointer;
             background-color: $background-300;
             padding: $item-gap / 2;
