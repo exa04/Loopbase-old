@@ -56,7 +56,7 @@
             </div>
         </div>
     </div>
-    <VueEternalLoading :load="load" v-model:is-initial="isInitial">
+    <VueEternalLoading :load="load" v-model:is-initial="isInitial" id="loading-section">
         <!-- TODO: Add a fancy loading indicator -->
     </VueEternalLoading>
 </template>
@@ -185,6 +185,11 @@
     .results{
         width: 100vw;
         height: fit-content;
+    }
+    #loading-section{
+        padding-top: $item-gap;
+        padding-bottom: 90px + $item-gap;
+        margin: auto;
     }
     .result{
         width: calc(100% - $side-padding * 2);
