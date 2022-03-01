@@ -1,13 +1,10 @@
 <template>
-    <div class="SearchBar" ref="SearchBar" onclick="document.querySelector('.input').focus()">
+    <div class="SearchBar" ref="SearchBar">
         <div class="inner">
             <vue-feather type="search" size="12" class="search" @onclick="submit"></vue-feather>
             <input class="input"
                 ref="input"
                 contenteditable="true"
-                @focusout="onUnfocus"
-                @focus="onFocus"
-                @keypress="resizeInput"
                 v-bind:placeholder="placeholder"
                 v-model="value"
                 v-on:keyup.enter="submit"
@@ -30,18 +27,6 @@
             placeholder: String
         },
         methods: {
-            onUnfocus(){
-                this.$refs.SearchBar.className = "SearchBar";
-                if((this.$refs.input.value).length == 0) this.$refs.input.style.width = '';
-                else this.$refs.input.style.width = (((this.$refs.input.value).length) + 1) + 'ch';
-            },
-            onFocus(){
-                this.$refs.SearchBar.className = "SearchBar active";
-            },
-            resizeInput(){
-                if((this.$refs.input.value).length == 0) this.$refs.input.style.width = '';
-                else this.$refs.input.style.width = (((this.$refs.input.value).length) + 1) + 'ch';
-            },
             submit(){
                 this.$emit('submitSearch');
             }
@@ -75,27 +60,13 @@
     border-radius: $radius;
     box-shadow: inset 0px -3px 1px -2px rgba(255,255,255,.2);
 }
-.SearchBar.active{
-    .inner{
-        margin-left: $item-gap;
-        transform: translateX(0);
-        svg{
-            stroke: $foreground-100;
-        }
-    }
-    .input{
-        color: $foreground-100;
-    }
-}
 .inner{
     display: flex;
     align-items: center;
     gap: 6px;
-    margin-left: 50%;
+    margin-left: $item-gap;
     height: 100%;
-    transform: translateX(-50%);
-    width: min-content;
-    min-width: 20px;
+    width: 100%;
     max-width: 100%;
     transition-duration: $animation-duration;
     transition-timing-function: $animation-timing;
@@ -109,8 +80,7 @@
     white-space: nowrap;
     color: $foreground-200;
     overflow: visible;
-    width: 110px;
-    padding: 0;
-    margin: 0;
+    width: 100%;
+    height: 100%;
 }
 </style>
