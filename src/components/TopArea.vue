@@ -42,7 +42,10 @@
                         <vue-feather
                             type="x"
                             size="18"
-                            @click="filterAdded.tempo = false"
+                            @click="
+                                filterAdded.tempo = false;
+                                this.$parent.$parent.search();
+                            "
                             :class="{hidden: !filterAdded.tempo}"
                         />
                     </div>
@@ -61,8 +64,11 @@
                             @click="filterEnabled.tempo = false"
                         >
                             <Button
-                                @click="queryInfo.tempo = filterValues.tempoRange;
-                                filterAdded.tempo = true"
+                                @click="
+                                    queryInfo.tempo = filterValues.tempoRange;
+                                    filterAdded.tempo = true;
+                                    this.$parent.$parent.search();
+                                "
                             >
                                 Apply
                             </Button>
@@ -98,7 +104,10 @@
                         <vue-feather
                             type="x"
                             size="18"
-                            @click="filterAdded.key = false"
+                            @click="
+                                filterAdded.key = false;
+                                this.$parent.$parent.search();
+                            "
                             :class="{hidden: !filterAdded.key}"
                         />
                     </div>
@@ -132,8 +141,12 @@
                             @click="filterEnabled.key = false"
                         >
                             <Button
-                                @click="queryInfo.key = filterValues.key;
-                                filterAdded.key = true"
+                                @click="
+                                    queryInfo.key = filterValues.key;
+                                    filterAdded.key = true;
+                                    this.$parent.$parent.search();
+                                "
+                                v-if="filterValues.key[0] != ' '"
                             >
                                 Apply
                             </Button>
