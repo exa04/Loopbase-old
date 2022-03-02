@@ -162,6 +162,29 @@
                 grid-area: d;
             }
         }
+        .settings-window{
+            flex-direction: column;
+            .content{
+                @include glass($background-200, true, true);
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+            }
+            .sidebar{
+                @include glass($background-200, false, true);
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+                border-bottom: none;
+                .last{
+                    position: relative;
+                }
+            }
+            #sidebar-x{
+                display: block;
+            }
+            #content-x{
+                display: none;
+            }
+        }
     }
     @media only screen and (max-width: 600px) {
         h1{ font-size: $font-size * 5 * $scale; }

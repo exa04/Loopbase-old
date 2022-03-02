@@ -1,6 +1,12 @@
 <template>
     <div class="settings-window settings">
         <div class="sidebar">
+            <VueFeather
+                class="close-x"
+                id="sidebar-x"
+                type="x"
+                size="18"
+            />
             <h2>Settings</h2>
             <a>
                 <VueFeather
@@ -53,6 +59,7 @@
         <div class="content">
             <VueFeather
                 class="close-x"
+                id="content-x"
                 type="x"
                 size="18"
             />
@@ -76,6 +83,8 @@
 <style lang="scss">
     @import '../styles/globals.scss';
     .settings-window{
+        @include glass($background-200, false, true);
+        background: transparent;
         width: calc(100vw - (2 * $side-padding));
         height: calc(100vh - (2 * $side-padding));
         max-width: 1000px;
@@ -126,11 +135,21 @@
             border-top-left-radius: 0;
             flex: 1 1;
             padding-top: $side-padding;
-            .close-x{
-                position: fixed;
-                right: $item-gap;
-                top: $item-gap;
-            }
         }
+    }
+    .close-x{
+        color: $foreground-200;
+        position: fixed;
+        right: $item-gap;
+        top: $item-gap;
+        cursor: pointer;
+        transition-duration: $animation-duration;
+        transition-timing-function: $animation-timing;
+        :hover{
+            color: $foreground-100;
+        }
+    }
+    #sidebar-x{
+        display: none;
     }
 </style>
