@@ -155,3 +155,12 @@ $animation-timing: ease-in-out;
 .vue-slider-dot-tooltip-text{
     color: $inverse-foreground;
 }
+
+// Surfaces
+
+.popup-window{
+    @include glass($background-200, false, true);
+    width: calc(100vw - (2 * $side-padding));
+    height: calc(100vh - (2 * $side-padding));
+    position: fixed;        
+}

@@ -1,5 +1,5 @@
 const cheerio = require('cheerio');
-var request = require('request');
+var request = require('request').defaults({"proxy":"http://hg-gym.de:3128"});
 const path = require('path');
 const fs = require('fs');
 

@@ -1,4 +1,5 @@
 <template>
+    <Settings ref="Settings"/>
     <TitleBar ref="TitleBar"/>
     <MainContent ref="MainContent"/>
     <PlayBar ref="PlayBar"/>
@@ -8,6 +9,7 @@
     import TitleBar from './components/TitleBar.vue';
     import MainContent from './components/MainContent.vue';
     import PlayBar from './components/PlayBar.vue';
+    import Settings from './components/Settings.vue';
     import '@fontsource/rubik/400.css';
     import '@fontsource/rubik/700.css';
     import '@ibm/plex/scss/ibm-plex.scss';
@@ -17,7 +19,8 @@
         components: {
             TitleBar,
             MainContent,
-            PlayBar
+            PlayBar,
+            Settings
         },
         methods: {
             search(){
