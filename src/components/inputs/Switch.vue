@@ -35,6 +35,19 @@ export default {
     .switch{
         display: flex;
         justify-content: space-between;
+        &.big{
+            .switch-inner{
+                width: $radius * 3;
+                border-radius: $radius * 1.5;
+                &.active{
+                    margin-left: $radius * 3;
+                }
+            }
+            .switch-outer{
+                width: $radius * 6;
+                border-radius: $radius * 1.5;
+            }
+        }
     }
     .switch-inner{
         width: $radius * 2;
