@@ -6,6 +6,7 @@
                 id="sidebar-x"
                 type="x"
                 size="18"
+                @click="this.$emit('close')"
             />
             <h2>Settings</h2>
             <a>
@@ -23,7 +24,7 @@
                     size="18"
                 />
                 <span>
-                    Search & Content
+                    Search &amp; Content
                 </span>
             </a>
             <a>
@@ -45,15 +46,22 @@
                 </span>
             </a>
             <div class="last">
-                <a>
+                <a
+                    @click="openLink('https://github.com/StarburstAudio/loopbase/issues/new')"
+                >
                     <VueFeather
                         type="alert-triangle"
                         size="18"
                     />
                     <span>
-                    Bugs & Suggestions
+                    Bugs &amp; Suggestions
                     </span>
                 </a>
+                <p id="version-string">
+                    Loopbase version
+                    <br>
+                    {{version}}
+                </p>
             </div>
         </div>
         <div class="content">
@@ -62,6 +70,7 @@
                 id="content-x"
                 type="x"
                 size="18"
+                @click="this.$emit('close')"
             />
 
             <h1>General</h1>
@@ -72,16 +81,42 @@
 
 <script>
     import VueFeather from 'vue-feather';
+    const electron = window.require("electron");
+
     export default {
         name: "Settings",
         components: {
             VueFeather
+        },
+        data() {
+            return {
+                version: ""
+            }
+        },
+        methods:{
+            openLink(url) {
+                electron.ipcRenderer.invoke('openLink', url);
+            }
+        },
+        async mounted () {
+            this.version = await electron.ipcRenderer.invoke("getVersion");
         }
     }
 </script>
 
 <style lang="scss">
     @import '../styles/globals.scss';
+
+    @keyframes slidein {
+        from {
+            transform: translateY(calc(-50% + 16px));
+        }
+        
+        to {
+            transform: translateY(-50%);
+        }
+    }  
+
     .settings-window{
         @include glass($background-200, false, true);
         background: transparent;
@@ -91,6 +126,9 @@
         max-height: 800px;
         left: 50vw;
         top: 50vh;
+        animation-duration: 3s;
+        animation-name: slidein $animation-duration;
+        animation-timing-function: $animation-timing;
         transform: translate(-50%, -50%);
         position: fixed;
         z-index: 6;
@@ -151,5 +189,12 @@
     }
     #sidebar-x{
         display: none;
+    }
+    #version-string{
+        padding-left: $side-padding;
+        padding-right: $side-padding;
+        color: $foreground-300;
+        margin-top: 0;
+        font-size: $font-size * .85;
     }
 </style>

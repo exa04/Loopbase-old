@@ -1,6 +1,6 @@
 <template>
-    <Settings ref="Settings"/>
-    <TitleBar ref="TitleBar"/>
+    <Settings ref="Settings" v-if="settingsOpen" @close="settingsOpen = false"/>
+    <TitleBar ref="TitleBar" @settingsOpen="settingsOpen = true"/>
     <MainContent ref="MainContent"/>
     <PlayBar ref="PlayBar"/>
 </template>
@@ -79,6 +79,11 @@
                 this.$refs.MainContent.$refs.Results.$data.query = query;
                 this.$refs.MainContent.$refs.Results.reset();
             }
+        },
+        data() {
+            return {
+                settingsOpen: false
+            };
         }
     }
 </script>
