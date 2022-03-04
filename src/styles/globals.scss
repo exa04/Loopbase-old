@@ -164,3 +164,8 @@ $animation-timing: ease-in-out;
     height: calc(100vh - (2 * $side-padding));
     position: fixed;        
 }
+
+.il-block{
+    display: inline-block;
+    margin-right: $item-gap;
+}
