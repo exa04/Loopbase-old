@@ -47,7 +47,19 @@ export default {
                 width: $radius * 6;
                 border-radius: $radius * 1.5;
             }
+            :active{
+                .switch-inner{
+                    margin-left: $radius;
+                    &.active{
+                        margin-left: $radius * 2;
+                    }
+                }
+                .switch-outer{
+                    background: $background-200;
+                }
+            }
         }
+        
     }
     .switch-inner{
         width: $radius * 2;
