@@ -8,7 +8,8 @@
 export default {
     name: "Button",
     props: {
-        secondary: Boolean
+        secondary: Boolean,
+        inline: Boolean
     }
 }
 </script>
