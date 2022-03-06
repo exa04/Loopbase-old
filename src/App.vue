@@ -259,5 +259,8 @@
             display: none;
         }
         h1{ font-size: $font-size * 2 * $scale; }
+        .settings-window .vue-feather{
+            display: none;
+        }
     }
 </style>
