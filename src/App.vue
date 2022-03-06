@@ -1,6 +1,9 @@
 <template>
-    <Settings ref="Settings" v-if="settingsOpen" @close="settingsOpen = false"/>
-    <TitleBar ref="TitleBar" @settingsOpen="settingsOpen = true"/>
+
+    <Transition name="popup">
+        <Settings ref="Settings" v-if="settingsOpen" @close="settingsOpen = false"/>
+    </Transition>
+    <TitleBar ref="TitleBar" @settingsOpen="settingsOpen = !settingsOpen"/>
     <MainContent ref="MainContent"/>
     <PlayBar ref="PlayBar"/>
 </template>
@@ -90,6 +93,22 @@
 
 <style lang="scss">
     @import 'styles/globals.scss';
+
+    .popup-enter-active,
+    .popup-leave-active {
+        transition: all calc($animation-duration * 2) $animation-timing;
+    }
+
+    .popup-enter-from, .popup-leave-to{
+        transform: translate(-50%, calc(-50% + 64px)) scale(.95);
+        opacity: 0;
+    }
+
+    .popup-enter-to, .popup-leave-from{
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+
     body{
         margin: 0;
         background-color: $window-background;

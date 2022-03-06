@@ -1,82 +1,82 @@
 <template>
-    <div class="settings-window settings">
-        <div class="sidebar">
-            <VueFeather
-                class="close-x"
-                id="sidebar-x"
-                type="x"
-                size="18"
-                @click="this.$emit('close')"
-            />
-            <h2>Settings</h2>
-            <a>
+        <div class="settings-window settings">
+            <div class="sidebar">
                 <VueFeather
-                    type="settings"
+                    class="close-x"
+                    id="sidebar-x"
+                    type="x"
                     size="18"
+                    @click="this.$emit('close')"
                 />
-                <span>
-                    General
-                </span>
-            </a>
-            <a>
-                <VueFeather
-                    type="search"
-                    size="18"
-                />
-                <span>
-                    Search &amp; Content
-                </span>
-            </a>
-            <a>
-                <VueFeather
-                    type="edit-2"
-                    size="18"
-                />
-                <span>
-                    Appearance
-                </span>
-            </a>
-            <a>
-                <VueFeather
-                    type="code"
-                    size="18"
-                />
-                <span>
-                    Advanced
-                </span>
-            </a>
-            <div class="last">
-                <a
-                    @click="openLink('https://github.com/StarburstAudio/loopbase/issues/new')"
-                >
+                <h2>Settings</h2>
+                <a>
                     <VueFeather
-                        type="alert-triangle"
+                        type="settings"
                         size="18"
                     />
                     <span>
-                    Bugs &amp; Suggestions
+                        General
                     </span>
                 </a>
-                <p id="version-string">
-                    Loopbase version
-                    <br>
-                    {{version}}
-                </p>
+                <a>
+                    <VueFeather
+                        type="search"
+                        size="18"
+                    />
+                    <span>
+                        Search &amp; Content
+                    </span>
+                </a>
+                <a>
+                    <VueFeather
+                        type="edit-2"
+                        size="18"
+                    />
+                    <span>
+                        Appearance
+                    </span>
+                </a>
+                <a>
+                    <VueFeather
+                        type="code"
+                        size="18"
+                    />
+                    <span>
+                        Advanced
+                    </span>
+                </a>
+                <div class="last">
+                    <a
+                        @click="openLink('https://github.com/StarburstAudio/loopbase/issues/new')"
+                    >
+                        <VueFeather
+                            type="alert-triangle"
+                            size="18"
+                        />
+                        <span>
+                        Bugs &amp; Suggestions
+                        </span>
+                    </a>
+                    <p id="version-string">
+                        Loopbase version
+                        <br>
+                        {{version}}
+                    </p>
+                </div>
+            </div>
+            <div class="content">
+                <VueFeather
+                    class="close-x"
+                    id="content-x"
+                    type="x"
+                    size="18"
+                    @click="this.$emit('close')"
+                />
+
+                <h1>General</h1>
+                <p></p>
             </div>
         </div>
-        <div class="content">
-            <VueFeather
-                class="close-x"
-                id="content-x"
-                type="x"
-                size="18"
-                @click="this.$emit('close')"
-            />
-
-            <h1>General</h1>
-            <p></p>
-        </div>
-    </div>
 </template>
 
 <script>
@@ -107,16 +107,6 @@
 <style lang="scss">
     @import '../styles/globals.scss';
 
-    @keyframes slidein {
-        from {
-            transform: translateY(calc(-50% + 16px));
-        }
-        
-        to {
-            transform: translateY(-50%);
-        }
-    }  
-
     .settings-window{
         @include glass($background-200, false, true);
         background: transparent;
@@ -126,9 +116,6 @@
         max-height: 800px;
         left: 50vw;
         top: 50vh;
-        animation-duration: 3s;
-        animation-name: slidein $animation-duration;
-        animation-timing-function: $animation-timing;
         transform: translate(-50%, -50%);
         position: fixed;
         z-index: 6;
