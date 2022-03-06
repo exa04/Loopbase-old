@@ -87,8 +87,8 @@ h1{
 
 // Animations
 
-$animation-duration: 70ms;
-$animation-timing: ease-in-out;
+$animation-duration: 270ms;
+$animation-timing: cubic-bezier(.34,-0.16,0,1.18);
 
 // Icons
 
