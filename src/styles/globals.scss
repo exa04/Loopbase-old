@@ -88,7 +88,9 @@ h1{
 // Animations
 
 $animation-duration: 270ms;
+$animation-duration-alt: 380ms;
 $animation-timing: cubic-bezier(.34,-0.16,0,1.18);
+$animation-timing-alt: cubic-bezier(.45,.73,.26,1.54); // For "jiggly" animations (on geometric transforms, not on colors)
 
 // Icons
 
@@ -154,4 +156,18 @@ $animation-timing: cubic-bezier(.34,-0.16,0,1.18);
 
 .vue-slider-dot-tooltip-text{
     color: $inverse-foreground;
+}
+
+// Surfaces
+
+.popup-window{
+    @include glass($background-200, false, true);
+    width: calc(100vw - (2 * $side-padding));
+    height: calc(100vh - (2 * $side-padding));
+    position: fixed;        
+}
+
+.il-block{
+    display: inline-block;
+    margin-right: $item-gap;
 }

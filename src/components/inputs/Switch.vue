@@ -35,6 +35,31 @@ export default {
     .switch{
         display: flex;
         justify-content: space-between;
+        &.big{
+            .switch-inner{
+                width: $radius * 3;
+                border-radius: $radius * 1.5;
+                &.active{
+                    margin-left: $radius * 3;
+                }
+            }
+            .switch-outer{
+                width: $radius * 6;
+                border-radius: $radius * 1.5;
+            }
+            :active{
+                .switch-inner{
+                    margin-left: $radius;
+                    &.active{
+                        margin-left: $radius * 2;
+                    }
+                }
+                .switch-outer{
+                    background: $background-200;
+                }
+            }
+        }
+        
     }
     .switch-inner{
         width: $radius * 2;
@@ -42,7 +67,7 @@ export default {
         border-radius: $radius;
         background: $foreground-100;
         transition-duration: $animation-duration;
-        transition-timing-function: $animation-timing;
+        transition-timing-function: $animation-timing-alt;
         &.active{
             margin-left: $radius * 2;
         }

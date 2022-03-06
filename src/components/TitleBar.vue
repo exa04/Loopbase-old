@@ -13,7 +13,7 @@
         />
         <div class="actions">
             <vue-feather size="24" type="folder"  @click="revealFile('')"></vue-feather>
-            <vue-feather size="24" type="settings" ></vue-feather>
+            <vue-feather size="24" type="settings" @click="this.$emit('settingsOpen')"></vue-feather>
         </div>
     </div>
 </template>

@@ -1,13 +1,28 @@
 <template>
-    <TitleBar ref="TitleBar"/>
-    <MainContent ref="MainContent"/>
-    <PlayBar ref="PlayBar"/>
+    <Transition name="popup">
+        <Settings
+            ref="Settings"
+            v-if="settingsOpen"
+            @close="settingsOpen = false"
+        />
+    </Transition>
+    <TitleBar
+        ref="TitleBar"
+        @settingsOpen="settingsOpen = !settingsOpen"
+    />
+    <MainContent
+        ref="MainContent"
+    />
+    <PlayBar
+        ref="PlayBar"
+    />
 </template>
 
 <script>
     import TitleBar from './components/TitleBar.vue';
     import MainContent from './components/MainContent.vue';
     import PlayBar from './components/PlayBar.vue';
+    import Settings from './components/Settings.vue';
     import '@fontsource/rubik/400.css';
     import '@fontsource/rubik/700.css';
     import '@ibm/plex/scss/ibm-plex.scss';
@@ -17,7 +32,8 @@
         components: {
             TitleBar,
             MainContent,
-            PlayBar
+            PlayBar,
+            Settings
         },
         methods: {
             search(){
@@ -76,12 +92,34 @@
                 this.$refs.MainContent.$refs.Results.$data.query = query;
                 this.$refs.MainContent.$refs.Results.reset();
             }
+        },
+        data() {
+            return {
+                settingsOpen: false
+            };
         }
     }
 </script>
 
 <style lang="scss">
     @import 'styles/globals.scss';
+
+    .popup-enter-active,
+    .popup-leave-active {
+        transition: all $animation-duration-alt $animation-timing-alt;
+    }
+
+    .popup-enter-from, .popup-leave-to{
+        transform: translate(-50%, calc(-50% + 64px)) scale(.97);
+        opacity: 0;
+        box-shadow: 0px 0px 0px 0px #000;
+    }
+
+    .popup-enter-to, .popup-leave-from{
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+
     body{
         margin: 0;
         background-color: $window-background;
@@ -159,6 +197,30 @@
                 grid-area: d;
             }
         }
+        .settings-window{
+            flex-direction: column;
+            .content{
+                @include glass($background-200, true, true);
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+                border-top: 1px solid $seperator;
+            }
+            .sidebar{
+                @include glass($background-200, false, true);
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+                border-bottom: none;
+                .last{
+                    position: relative;
+                }
+            }
+            #sidebar-x{
+                display: block;
+            }
+            #content-x{
+                display: none;
+            }
+        }
     }
     @media only screen and (max-width: 600px) {
         h1{ font-size: $font-size * 5 * $scale; }
@@ -197,5 +259,8 @@
             display: none;
         }
         h1{ font-size: $font-size * 2 * $scale; }
+        .settings-window .vue-feather{
+            display: none;
+        }
     }
 </style>
