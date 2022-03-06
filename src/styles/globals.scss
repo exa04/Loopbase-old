@@ -88,8 +88,9 @@ h1{
 // Animations
 
 $animation-duration: 270ms;
+$animation-duration-alt: 380ms;
 $animation-timing: cubic-bezier(.34,-0.16,0,1.18);
-$animation-timing-alt: cubic-bezier(.62,-0.02,.27,1.64); // For "jiggly" animations (on geometric transforms, not on colors)
+$animation-timing-alt: cubic-bezier(.45,.73,.26,1.54); // For "jiggly" animations (on geometric transforms, not on colors)
 
 // Icons
 

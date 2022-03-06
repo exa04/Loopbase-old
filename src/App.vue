@@ -96,7 +96,7 @@
 
     .popup-enter-active,
     .popup-leave-active {
-        transition: all calc($animation-duration) $animation-timing-alt;
+        transition: all $animation-duration-alt $animation-timing-alt;
     }
 
     .popup-enter-from, .popup-leave-to{
