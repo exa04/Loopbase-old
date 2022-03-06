@@ -1,11 +1,21 @@
 <template>
-
     <Transition name="popup">
-        <Settings ref="Settings" v-if="settingsOpen" @close="settingsOpen = false"/>
+        <Settings
+            ref="Settings"
+            v-if="settingsOpen"
+            @close="settingsOpen = false"
+        />
     </Transition>
-    <TitleBar ref="TitleBar" @settingsOpen="settingsOpen = !settingsOpen"/>
-    <MainContent ref="MainContent"/>
-    <PlayBar ref="PlayBar"/>
+    <TitleBar
+        ref="TitleBar"
+        @settingsOpen="settingsOpen = !settingsOpen"
+    />
+    <MainContent
+        ref="MainContent"
+    />
+    <PlayBar
+        ref="PlayBar"
+    />
 </template>
 
 <script>
@@ -100,8 +110,9 @@
     }
 
     .popup-enter-from, .popup-leave-to{
-        transform: translate(-50%, calc(-50% + 64px)) scale(.95);
+        transform: translate(-50%, calc(-50% + 64px)) scale(.97);
         opacity: 0;
+        box-shadow: 0px 0px 0px 0px #000;
     }
 
     .popup-enter-to, .popup-leave-from{
