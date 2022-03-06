@@ -203,6 +203,7 @@
                 @include glass($background-200, true, true);
                 border-top-left-radius: 0;
                 border-top-right-radius: 0;
+                border-top: 1px solid $seperator;
             }
             .sidebar{
                 @include glass($background-200, false, true);
