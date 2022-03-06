@@ -158,6 +158,7 @@
             padding-right: $side-padding;
             border-bottom-left-radius: 0;
             border-top-left-radius: 0;
+            border-left: 1px solid $seperator;
             flex: 1 1;
             padding-top: $side-padding;
         }
