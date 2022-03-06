@@ -431,7 +431,7 @@
             border: 1px solid $background-300;
             border-bottom: 1px solid $background-200;
             transition-duration: $animation-duration;
-            transition-timing-function: $animation-timing;
+            transition-timing-function: $animation-timing-alt;
             color: $foreground-200;
             &:hover:not(.selected){
                 background-color: $background-400;

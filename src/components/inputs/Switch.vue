@@ -67,7 +67,7 @@ export default {
         border-radius: $radius;
         background: $foreground-100;
         transition-duration: $animation-duration;
-        transition-timing-function: $animation-timing;
+        transition-timing-function: $animation-timing-alt;
         &.active{
             margin-left: $radius * 2;
         }
