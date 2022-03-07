@@ -49,32 +49,34 @@
                             :class="{hidden: !filterAdded.tempo}"
                         />
                     </div>
-                    <div class="tag-popout" :class="{ hidden: !filterEnabled.tempo }">
-                        <h2>Tempo</h2>
-                        <vue-slider
-                            v-model="filterValues.tempoRange"
-                            id="playbackSlider"
-                            ref="playbackSlider"
-                            :lazy="true"
-                            :min="0"
-                            :max="200"
-                            :interval="1"
-                        />
-                        <div class="button-duo"
-                            @click="filterEnabled.tempo = false"
-                        >
-                            <Button
-                                @click="
-                                    queryInfo.tempo = filterValues.tempoRange;
-                                    filterAdded.tempo = true;
-                                    this.$parent.$parent.search();
-                                "
+                    <Transition name="tag-popup">
+                        <div class="tag-popout" v-if="filterEnabled.tempo">
+                            <h2>Tempo</h2>
+                            <vue-slider
+                                v-model="filterValues.tempoRange"
+                                id="playbackSlider"
+                                ref="playbackSlider"
+                                :lazy="true"
+                                :min="0"
+                                :max="200"
+                                :interval="1"
+                            />
+                            <div class="button-duo"
+                                @click="filterEnabled.tempo = false"
                             >
-                                Apply
-                            </Button>
-                            <Button secondary @click="filterValues.tempoRange = queryInfo.tempo">Cancel</Button>
+                                <Button
+                                    @click="
+                                        queryInfo.tempo = filterValues.tempoRange;
+                                        filterAdded.tempo = true;
+                                        this.$parent.$parent.search();
+                                    "
+                                >
+                                    Apply
+                                </Button>
+                                <Button secondary @click="filterValues.tempoRange = queryInfo.tempo">Cancel</Button>
+                            </div>
                         </div>
-                    </div>
+                    </Transition>
                 </div>
                 <div>
                     <div class="tag"
@@ -111,48 +113,50 @@
                             :class="{hidden: !filterAdded.key}"
                         />
                     </div>
-                    <div class="tag-popout" :class="{ hidden: !filterEnabled.key }">
-                        <h2>Key</h2>
-                        <Switch
-                            class="keyModeSwitch"
-                            @update:modelValue="v => filterValues.key[1] = (v ? 'm' : '')"
-                            :title="'Mode: ' + (filterValues.key[1] == 'm' ? 'Minor' : 'Major')"
-                        />
-                        <div>
-                            <div class="key-row sharps">
-                                <div @click="filterValues.key[0] = 'cs'" :class="{selected : filterValues.key[0] == 'cs'}">C#</div>
-                                <div @click="filterValues.key[0] = 'ds'" :class="{selected : filterValues.key[0] == 'ds'}">D#</div>
-                                <div class="key-seperator"></div>
-                                <div @click="filterValues.key[0] = 'fs'" :class="{selected : filterValues.key[0] == 'fs'}">F#</div>
-                                <div @click="filterValues.key[0] = 'gs'" :class="{selected : filterValues.key[0] == 'gs'}">G#</div>
-                                <div @click="filterValues.key[0] = 'as'" :class="{selected : filterValues.key[0] == 'as'}">A#</div>
+                    <Transition name="tag-popup">
+                        <div class="tag-popout" v-if="filterEnabled.key">
+                            <h2>Key</h2>
+                            <Switch
+                                class="keyModeSwitch"
+                                @update:modelValue="v => filterValues.key[1] = (v ? 'm' : '')"
+                                :title="'Mode: ' + (filterValues.key[1] == 'm' ? 'Minor' : 'Major')"
+                            />
+                            <div>
+                                <div class="key-row sharps">
+                                    <div @click="filterValues.key[0] = 'cs'" :class="{selected : filterValues.key[0] == 'cs'}">C#</div>
+                                    <div @click="filterValues.key[0] = 'ds'" :class="{selected : filterValues.key[0] == 'ds'}">D#</div>
+                                    <div class="key-seperator"></div>
+                                    <div @click="filterValues.key[0] = 'fs'" :class="{selected : filterValues.key[0] == 'fs'}">F#</div>
+                                    <div @click="filterValues.key[0] = 'gs'" :class="{selected : filterValues.key[0] == 'gs'}">G#</div>
+                                    <div @click="filterValues.key[0] = 'as'" :class="{selected : filterValues.key[0] == 'as'}">A#</div>
+                                </div>
+                                <div class="key-row">
+                                    <div @click="filterValues.key[0] = 'c'" :class="{selected : filterValues.key[0] == 'c'}">C</div>
+                                    <div @click="filterValues.key[0] = 'd'" :class="{selected : filterValues.key[0] == 'd'}">D</div>
+                                    <div @click="filterValues.key[0] = 'e'" :class="{selected : filterValues.key[0] == 'e'}">E</div>
+                                    <div @click="filterValues.key[0] = 'f'" :class="{selected : filterValues.key[0] == 'f'}">F</div>
+                                    <div @click="filterValues.key[0] = 'g'" :class="{selected : filterValues.key[0] == 'g'}">G</div>
+                                    <div @click="filterValues.key[0] = 'a'" :class="{selected : filterValues.key[0] == 'a'}">A</div>
+                                    <div @click="filterValues.key[0] = 'b'" :class="{selected : filterValues.key[0] == 'b'}">B</div>
+                                </div>
                             </div>
-                            <div class="key-row">
-                                <div @click="filterValues.key[0] = 'c'" :class="{selected : filterValues.key[0] == 'c'}">C</div>
-                                <div @click="filterValues.key[0] = 'd'" :class="{selected : filterValues.key[0] == 'd'}">D</div>
-                                <div @click="filterValues.key[0] = 'e'" :class="{selected : filterValues.key[0] == 'e'}">E</div>
-                                <div @click="filterValues.key[0] = 'f'" :class="{selected : filterValues.key[0] == 'f'}">F</div>
-                                <div @click="filterValues.key[0] = 'g'" :class="{selected : filterValues.key[0] == 'g'}">G</div>
-                                <div @click="filterValues.key[0] = 'a'" :class="{selected : filterValues.key[0] == 'a'}">A</div>
-                                <div @click="filterValues.key[0] = 'b'" :class="{selected : filterValues.key[0] == 'b'}">B</div>
-                            </div>
-                        </div>
-                        <div class="button-duo"
-                            @click="filterEnabled.key = false"
-                        >
-                            <Button
-                                @click="
-                                    queryInfo.key = filterValues.key;
-                                    filterAdded.key = true;
-                                    this.$parent.$parent.search();
-                                "
-                                v-if="filterValues.key[0] != ' '"
+                            <div class="button-duo"
+                                @click="filterEnabled.key = false"
                             >
-                                Apply
-                            </Button>
-                            <Button secondary @click="filterValues.key = queryInfo.key">Cancel</Button>
+                                <Button
+                                    @click="
+                                        queryInfo.key = filterValues.key;
+                                        filterAdded.key = true;
+                                        this.$parent.$parent.search();
+                                    "
+                                    v-if="filterValues.key[0] != ' '"
+                                >
+                                    Apply
+                                </Button>
+                                <Button secondary @click="filterValues.key = queryInfo.key">Cancel</Button>
+                            </div>
                         </div>
-                    </div>
+                    </Transition>
                 </div>
                 <div class="tag"
                     @click.self="filterEnabled.genre = !filterEnabled.genre"
@@ -179,26 +183,28 @@
                             :class="{hidden: queryInfo.genre == 0}"
                         />
                 </div>
-                <div class="tag-popout" :class="{ hidden: !filterEnabled.genre }">
-                    <h2>Genre</h2>
-                    <div class="select">
-                        <div
-                            class="option"
-                            v-for="genre in genrelist"
-                            :key="genre[0]"
-                            :class="{selected : parseInt(genre[0]) == queryInfo.genre}"
-                            @click="
-                                queryInfo.genre = parseInt(genre[0]);
-                                this.$parent.$parent.search();
-                                filterEnabled.genre = false;
-                                filterAdded.genre = true;
+                <Transition name="tag-popup">
+                    <div class="tag-popout" v-if="filterEnabled.genre">
+                        <h2>Genre</h2>
+                        <div class="select">
+                            <div
+                                class="option"
+                                v-for="genre in genrelist"
+                                :key="genre[0]"
+                                :class="{selected : parseInt(genre[0]) == queryInfo.genre}"
+                                @click="
+                                    queryInfo.genre = parseInt(genre[0]);
+                                    this.$parent.$parent.search();
+                                    filterEnabled.genre = false;
+                                    filterAdded.genre = true;
 
-                            "
-                        >
-                            {{genre[1]}}
+                                "
+                            >
+                                {{genre[1]}}
+                            </div>
                         </div>
                     </div>
-                </div>
+                </Transition>
             </div>
             <div class="tag-duo">
                 <div
@@ -215,33 +221,35 @@
                     "
                 />
             </div>
-            <div
-                class="tag-popout align-left"
-                :class="{ hidden: !filterEnabled.sort }"
-            >
-                <h2>Sort by</h2>
-                <div class="select">
-                    <div
-                        class="option"
-                        v-for="sort in [
-                            ['date', 'Date'], ['name', 'Title'],
-                            ['author', 'Author'],
-                            ['tempo', 'Tempo'],
-                            ['downloads', 'Downloads'],
-                            ['comments', 'Comments']
-                        ]"
-                        :key="sort[0]"
-                        :class="{selected : sort[0] == queryInfo.order[0]}"
-                        @click="
-                            queryInfo.order[0] = sort[0];
-                            this.$parent.$parent.search();
-                            filterEnabled.sort = false;
-                        "
-                    >
-                        {{sort[1]}}
+            <Transition name="tag-popup">
+                <div
+                    class="tag-popout align-left"
+                    :class="{ hidden: !filterEnabled.sort }"
+                >
+                    <h2>Sort by</h2>
+                    <div class="select">
+                        <div
+                            class="option"
+                            v-for="sort in [
+                                ['date', 'Date'], ['name', 'Title'],
+                                ['author', 'Author'],
+                                ['tempo', 'Tempo'],
+                                ['downloads', 'Downloads'],
+                                ['comments', 'Comments']
+                            ]"
+                            :key="sort[0]"
+                            :class="{selected : sort[0] == queryInfo.order[0]}"
+                            @click="
+                                queryInfo.order[0] = sort[0];
+                                this.$parent.$parent.search();
+                                filterEnabled.sort = false;
+                            "
+                        >
+                            {{sort[1]}}
+                        </div>
                     </div>
                 </div>
-            </div>
+            </Transition>
         </div>
         <div class="results-header" v-if="search_header">
             <div style="width: 52px">User</div>
@@ -320,6 +328,21 @@
 
 <style lang="scss">
     @import '../styles/globals.scss';
+    
+    .tag-popup-enter-active,
+    .tag-popup-leave-active {
+        transition: all $animation-duration-alt $animation-timing-alt;
+    }
+
+    .tag-popup-enter-from, .tag-popup-leave-to{
+        transform: translateY($item-scale + $item-gap + 64px);
+        opacity: 0;
+    }
+
+    .tag-popup-enter-to, .tag-popup-leave-from{
+        transform: translateY($item-scale + $item-gap);
+        opacity: 1;
+    }
 
     .top-area{
         padding: $side-padding;

@@ -48,7 +48,7 @@
                     key:            [topBarQuery.key[0], topBarQuery.key[1]],
                     date:           topBarQuery.date,
                     genre:          topBarQuery.genre,
-                    filterByKey:    this.$refs.MainContent.$refs.TopArea.filterAdded.key
+                    filterByKey:    this.$refs.MainContent.$refs.TopArea.filterAdded.keytest
                 };
 
                 // This matches every ocurrence of (NUMBER) BPM in the query
