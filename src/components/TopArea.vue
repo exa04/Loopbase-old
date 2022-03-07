@@ -329,18 +329,20 @@
 <style lang="scss">
     @import '../styles/globals.scss';
     
+
     .tag-popup-enter-active,
     .tag-popup-leave-active {
         transition: all $animation-duration-alt $animation-timing-alt;
     }
 
     .tag-popup-enter-from, .tag-popup-leave-to{
-        transform: translateY($item-scale + $item-gap + 64px);
+        transform: translateY($item-scale * 2 + $item-gap) !important;
         opacity: 0;
+        box-shadow: 0px 0px 0px 0px #000 !important;
     }
 
     .tag-popup-enter-to, .tag-popup-leave-from{
-        transform: translateY($item-scale + $item-gap);
+        transform: translateY($item-scale + $item-gap) !important;
         opacity: 1;
     }
 
