@@ -221,10 +221,10 @@
                     "
                 />
             </div>
-            <Transition name="tag-popup">
+            <Transition name="tag-popup-l">
                 <div
                     class="tag-popout align-left"
-                    :class="{ hidden: !filterEnabled.sort }"
+                    v-if="filterEnabled.sort"
                 >
                     <h2>Sort by</h2>
                     <div class="select">
@@ -331,7 +331,9 @@
     
 
     .tag-popup-enter-active,
-    .tag-popup-leave-active {
+    .tag-popup-leave-active,
+    .tag-popup-l-enter-active,
+    .tag-popup-l-leave-active {
         transition: all $animation-duration-alt $animation-timing-alt;
     }
 
@@ -343,6 +345,17 @@
 
     .tag-popup-enter-to, .tag-popup-leave-from{
         transform: translateY($item-scale + $item-gap) !important;
+        opacity: 1;
+    }
+    
+    .tag-popup-l-enter-from, .tag-popup-l-leave-to{
+        transform: translate(-$side-padding, $item-scale * 2 + $item-gap) !important;
+        opacity: 0;
+        box-shadow: 0px 0px 0px 0px #000 !important;
+    }
+
+    .tag-popup-l-enter-to, .tag-popup-l-leave-from{
+        transform: translate(-$side-padding, $item-scale + $item-gap) !important;
         opacity: 1;
     }
 
