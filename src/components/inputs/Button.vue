@@ -1,5 +1,5 @@
 <template>
-    <div class="button" :class="{ secondary: secondary }">
+    <div class="button" :class="{ secondary: secondary, tertiary: tertiary }">
         <slot></slot>
     </div>
 </template>
@@ -8,7 +8,8 @@
 export default {
     name: "Button",
     props: {
-        secondary: Boolean
+        secondary: Boolean,
+        tertiary: Boolean
     }
 }
 </script>
@@ -16,7 +17,7 @@ export default {
 <style lang="scss">
     @import '../../styles/globals.scss';
     .button{
-        background-color: $accent-1;
+        background: $accent-1;
         transition-duration: $animation-duration;
         transition-timing-function: $animation-timing;
         border-radius: $radius;
@@ -25,7 +26,6 @@ export default {
         padding-top: $item-gap / 2;
         padding-bottom: $item-gap / 2;
         width: fit-content;
-        background: $accent-1;
         cursor: pointer;
         font-weight: 900;
         &:hover{
@@ -35,10 +35,15 @@ export default {
             background: darken($accent-1, 20%);
         }
         &.secondary{
-            background-color: $foreground-100;
+            background: $foreground-100;
             &:hover{ background: darken($foreground-100, 10%); }
             &:active{ background: darken($foreground-100, 20%); }
             color: $inverse-foreground;
+        }
+        &.tertiary{
+            background: $background-300;
+            &:hover{ background: $background-400; }
+            &:active{ background: $background-300; }
         }
     }
     .button-duo{
