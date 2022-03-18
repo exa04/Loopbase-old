@@ -224,6 +224,15 @@
     }
     @media only screen and (max-width: 600px) {
         h1{ font-size: $font-size * 5 * $scale; }
+        .settings-window .content .inner-content .input-component {
+            margin-left: 0px;
+            width: 100%;
+        }
+        .settings-window {
+            width: 100vw;
+            height: 100vh;
+            max-height: 100vh;
+        }
     }
     @media only screen and (max-width: 500px) {
         .result{
