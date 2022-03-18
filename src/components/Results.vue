@@ -183,6 +183,7 @@
 <style lang="scss">
     @import "../styles/globals.scss";
     .results{
+        padding-top: $side-padding / 2;
         width: 100vw;
         height: fit-content;
     }
