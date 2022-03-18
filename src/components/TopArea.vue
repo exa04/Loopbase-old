@@ -402,9 +402,9 @@
         cursor: pointer;
         transition-duration: $animation-duration;
         transition-timing-function: $animation-timing;
-        background-color: $background-100;
-        &:hover{ background: $background-300; }
-        &:active{ background: $background-400; }
+        background: $background-300;
+        &:hover{ background: $background-400; }
+        &:active{ background: $background-300; }
         &.active{
             background: $accent-1;
             &:hover{ background: darken($accent-1, 10%); }
