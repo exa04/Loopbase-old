@@ -77,7 +77,7 @@ export default {
     .switch-outer{
         flex-shrink: 0;
         width: $radius * 4;
-        height: $radius;
+        height: $radius * 2;
         border-radius: $radius;
         background-color: $background-100;
         cursor: pointer;
