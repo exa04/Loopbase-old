@@ -35,6 +35,7 @@ export default {
     .switch{
         display: flex;
         justify-content: space-between;
+        align-items: center;
         &.big{
             .switch-inner{
                 width: $radius * 3;
@@ -45,6 +46,7 @@ export default {
             }
             .switch-outer{
                 width: $radius * 6;
+                height: $radius * 3;
                 border-radius: $radius * 1.5;
             }
             :active{
@@ -73,7 +75,9 @@ export default {
         }
     }
     .switch-outer{
+        flex-shrink: 0;
         width: $radius * 4;
+        height: $radius;
         border-radius: $radius;
         background-color: $background-100;
         cursor: pointer;
@@ -85,5 +89,7 @@ export default {
     }
     .switch-label{
         color: $foreground-200;
+        width: calc(100% - ($radius * 4));
+        flex-shrink: 1;
     }
 </style>
