@@ -72,25 +72,65 @@
                     size="18"
                     @click="this.$emit('close')"
                 />
-
-                <h1>General</h1>
-                <p></p>
+                <div class="inner-content">
+                    <h1>Settings</h1>
+                    <h2>Search &amp; Content</h2>
+                    <p>If you change the Samples directory, your samples will be migrated. However, they might go missing in your project files, so they will have to be re-linked.</p>
+                    <FileSelector title="Samples" openBtn class="input-component">/home/ari/loopbaseContent/</FileSelector>
+                    <FileSelector title="App data" openBtn class="input-component">/home/ari/.loopbase/</FileSelector>
+                    <Switch
+                        class="big input-component"
+                        title="Use germanic keys (H instead of B)"
+                    ></Switch>
+                    <h2>Appearance</h2>
+                    <h2>Advanced</h2>
+                </div>
+                <div class="action-pair">
+                    <div class="subtext unsaved-warn" v-if="changesMade">
+                        <VueFeather
+                            type="alert-triangle"
+                            class="centered il-block"
+                        />
+                        You have unsaved changes!
+                    </div>
+                    <div>
+                        <Button class="il-block" secondary>
+                            Cancel
+                        </Button>
+                        <Button class="il-block">
+                            Apply
+                        </Button>
+                    </div>
+                </div>
             </div>
         </div>
 </template>
 
 <script>
     import VueFeather from 'vue-feather';
+    import Button from './inputs/Button.vue';
+    import FileSelector from './inputs/FileSelector.vue';
+    import Switch from './inputs/Switch.vue'
     const electron = window.require("electron");
 
     export default {
         name: "Settings",
         components: {
-            VueFeather
+            VueFeather,
+            Button,
+            FileSelector,
+            Switch
         },
         data() {
             return {
-                version: ""
+                version: "",
+                changesMade: true,
+                prefs: {
+                    dir : {
+                        content: "",
+                        appdata: "",
+                    }
+                }
             }
         },
         methods:{
@@ -108,6 +148,8 @@
     @import '../styles/globals.scss';
 
     .settings-window{
+        transition-duration: $animation-duration-alt;
+        transition-timing-function: $animation-timing;
         @include glass($background-200, false, true);
         background: transparent;
         width: calc(100vw - (2 * $side-padding));
@@ -161,6 +203,27 @@
             border-left: 1px solid $seperator;
             flex: 1 1;
             padding-top: $side-padding;
+            overflow: auto;
+            .inner-content{
+                min-height: calc(100% - ($item-scale + $item-gap + $side-padding * 2));
+                > * {
+                    margin-bottom: $item-gap;
+                    margin-top: $item-gap;
+                }
+                .input-component{
+                    margin-left: $side-padding;
+                    width: calc(100% - $side-padding);
+                }
+            }
+        }
+        .action-pair{
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: $side-padding;
+            .unsaved-warn{
+                flex-grow: 1;
+            }
         }
     }
     .close-x{
