@@ -154,6 +154,7 @@
         }
     }
     .info-audio{
+        @include side-gradient(to right, $window-background);
         display: flex;
         align-items: center;
         flex-grow: 2;
