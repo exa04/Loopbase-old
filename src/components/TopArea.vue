@@ -14,150 +14,65 @@
         />
         <div class="tags-container" v-if="search_header">
             <div class="tags-left">
-                <div>
-                    <div class="tag"
-                        @click.self="filterEnabled.tempo = !filterEnabled.tempo;
-                                filterValues.tempoRange = queryInfo.tempo"
-                        :class="{ active: filterAdded.tempo }"
-                    >
-                        <vue-feather
-                            type="activity"
-                            size="18"
-                            @click="filterEnabled.tempo = !filterEnabled.tempo;
-                                    filterValues.tempoRange = queryInfo.tempo"
-                        />
-                        <div
-                            @click="filterEnabled.tempo = !filterEnabled.tempo;
-                                    filterValues.tempoRange = queryInfo.tempo"
-                        >
-                            Tempo<span
-                                v-if="filterAdded.tempo"
-                                class="hide-bp-300"
-                            >: {{
-                                    queryInfo.tempo[0] == queryInfo.tempo[1] ?
-                                        queryInfo.tempo[0] :
-                                        queryInfo.tempo[0] + " - " + queryInfo.tempo[1]
-                                }} BPM</span>
+                <Tag
+                    title="Tempo"
+                    :additionalInfo="(
+                        queryInfo.tempo[0] == queryInfo.tempo[1] ?
+                            queryInfo.tempo[0] :
+                            queryInfo.tempo[0] + ' - ' + queryInfo.tempo[1]
+                    ) + 'BPM'"
+                    icon="activity"
+                    @cancel="filterValues.tempoRange = queryInfo.tempo"
+                    @save="queryInfo.tempo = filterValues.tempoRange"
+                    @remove="queryInfo.tempo = [0,200]"
+                >
+                    <vue-slider
+                        v-model="filterValues.tempoRange"
+                        id="playbackSlider"
+                        ref="playbackSlider"
+                        :lazy="true"
+                        :min="0"
+                        :max="200"
+                        :interval="1"
+                    />
+                </Tag>
+                <Tag
+                    title="Key"
+                    :additionalInfo="
+                        queryInfo.key[0].charAt(0).toUpperCase() +
+                        (queryInfo.key[0].charAt(1) == 's' ? '#' : '') + ' ' +
+                        (queryInfo.key[1] == 'm' ? 'Minor' : 'Major')
+                    "
+                    icon="music"
+                    @cancel="filterValues.key = queryInfo.key"
+                    @save="queryInfo.key = filterValues.key"
+                    @remove="queryInfo.key = ['','']; queryInfo.filterByKey = false"
+                >
+                    <Switch
+                        class="keyModeSwitch"
+                        @update:modelValue="v => filterValues.key[1] = (v ? 'm' : '')"
+                        :title="'Mode: ' + (filterValues.key[1] == 'm' ? 'Minor' : 'Major')"
+                    />
+                    <div>
+                        <div class="key-row sharps">
+                            <div @click="filterValues.key[0] = 'cs'" :class="{selected : filterValues.key[0] == 'cs'}">C#</div>
+                            <div @click="filterValues.key[0] = 'ds'" :class="{selected : filterValues.key[0] == 'ds'}">D#</div>
+                            <div class="key-seperator"></div>
+                            <div @click="filterValues.key[0] = 'fs'" :class="{selected : filterValues.key[0] == 'fs'}">F#</div>
+                            <div @click="filterValues.key[0] = 'gs'" :class="{selected : filterValues.key[0] == 'gs'}">G#</div>
+                            <div @click="filterValues.key[0] = 'as'" :class="{selected : filterValues.key[0] == 'as'}">A#</div>
                         </div>
-                        <vue-feather
-                            type="x"
-                            size="18"
-                            @click="
-                                filterAdded.tempo = false;
-                                this.$parent.$parent.search();
-                            "
-                            :class="{hidden: !filterAdded.tempo}"
-                        />
+                        <div class="key-row">
+                            <div @click="filterValues.key[0] = 'c'" :class="{selected : filterValues.key[0] == 'c'}">C</div>
+                            <div @click="filterValues.key[0] = 'd'" :class="{selected : filterValues.key[0] == 'd'}">D</div>
+                            <div @click="filterValues.key[0] = 'e'" :class="{selected : filterValues.key[0] == 'e'}">E</div>
+                            <div @click="filterValues.key[0] = 'f'" :class="{selected : filterValues.key[0] == 'f'}">F</div>
+                            <div @click="filterValues.key[0] = 'g'" :class="{selected : filterValues.key[0] == 'g'}">G</div>
+                            <div @click="filterValues.key[0] = 'a'" :class="{selected : filterValues.key[0] == 'a'}">A</div>
+                            <div @click="filterValues.key[0] = 'b'" :class="{selected : filterValues.key[0] == 'b'}">B</div>
+                        </div>
                     </div>
-                    <Transition name="tag-popup">
-                        <div class="tag-popout" v-if="filterEnabled.tempo">
-                            <h2>Tempo</h2>
-                            <vue-slider
-                                v-model="filterValues.tempoRange"
-                                id="playbackSlider"
-                                ref="playbackSlider"
-                                :lazy="true"
-                                :min="0"
-                                :max="200"
-                                :interval="1"
-                            />
-                            <div class="button-duo"
-                                @click="filterEnabled.tempo = false"
-                            >
-                                <Button
-                                    @click="
-                                        queryInfo.tempo = filterValues.tempoRange;
-                                        filterAdded.tempo = true;
-                                        this.$parent.$parent.search();
-                                    "
-                                >
-                                    Apply
-                                </Button>
-                                <Button secondary @click="filterValues.tempoRange = queryInfo.tempo">Cancel</Button>
-                            </div>
-                        </div>
-                    </Transition>
-                </div>
-                <div>
-                    <div class="tag"
-                        @click.self="filterEnabled.key = !filterEnabled.key;
-                                filterValues.key = queryInfo.key"
-                        :class="{ active: filterAdded.key }"
-                    >
-                        <vue-feather
-                            type="music"
-                            size="18"
-                            @click="filterEnabled.key = !filterEnabled.key;
-                                    filterValues.key = queryInfo.key"
-                        />
-                        <div
-                            @click="filterEnabled.key = !filterEnabled.key;
-                                    filterValues.key = queryInfo.key"
-                        >
-                            Key<span
-                                v-if="filterAdded.key"
-                                class="hide-bp-300"
-                            >: {{
-                                queryInfo.key[0].charAt(0).toUpperCase() +
-                                (queryInfo.key[0].charAt(1) == "s" ? "#" : "") + " " +
-                                (queryInfo.key[1] == "m" ? "Minor" : "Major")
-                            }}</span>
-                        </div>
-                        <vue-feather
-                            type="x"
-                            size="18"
-                            @click="
-                                filterAdded.key = false;
-                                this.$parent.$parent.search();
-                            "
-                            :class="{hidden: !filterAdded.key}"
-                        />
-                    </div>
-                    <Transition name="tag-popup">
-                        <div class="tag-popout" v-if="filterEnabled.key">
-                            <h2>Key</h2>
-                            <Switch
-                                class="keyModeSwitch"
-                                @update:modelValue="v => filterValues.key[1] = (v ? 'm' : '')"
-                                :title="'Mode: ' + (filterValues.key[1] == 'm' ? 'Minor' : 'Major')"
-                            />
-                            <div>
-                                <div class="key-row sharps">
-                                    <div @click="filterValues.key[0] = 'cs'" :class="{selected : filterValues.key[0] == 'cs'}">C#</div>
-                                    <div @click="filterValues.key[0] = 'ds'" :class="{selected : filterValues.key[0] == 'ds'}">D#</div>
-                                    <div class="key-seperator"></div>
-                                    <div @click="filterValues.key[0] = 'fs'" :class="{selected : filterValues.key[0] == 'fs'}">F#</div>
-                                    <div @click="filterValues.key[0] = 'gs'" :class="{selected : filterValues.key[0] == 'gs'}">G#</div>
-                                    <div @click="filterValues.key[0] = 'as'" :class="{selected : filterValues.key[0] == 'as'}">A#</div>
-                                </div>
-                                <div class="key-row">
-                                    <div @click="filterValues.key[0] = 'c'" :class="{selected : filterValues.key[0] == 'c'}">C</div>
-                                    <div @click="filterValues.key[0] = 'd'" :class="{selected : filterValues.key[0] == 'd'}">D</div>
-                                    <div @click="filterValues.key[0] = 'e'" :class="{selected : filterValues.key[0] == 'e'}">E</div>
-                                    <div @click="filterValues.key[0] = 'f'" :class="{selected : filterValues.key[0] == 'f'}">F</div>
-                                    <div @click="filterValues.key[0] = 'g'" :class="{selected : filterValues.key[0] == 'g'}">G</div>
-                                    <div @click="filterValues.key[0] = 'a'" :class="{selected : filterValues.key[0] == 'a'}">A</div>
-                                    <div @click="filterValues.key[0] = 'b'" :class="{selected : filterValues.key[0] == 'b'}">B</div>
-                                </div>
-                            </div>
-                            <div class="button-duo"
-                                @click="filterEnabled.key = false"
-                            >
-                                <Button
-                                    @click="
-                                        queryInfo.key = filterValues.key;
-                                        filterAdded.key = true;
-                                        this.$parent.$parent.search();
-                                    "
-                                    v-if="filterValues.key[0] != ' '"
-                                >
-                                    Apply
-                                </Button>
-                                <Button secondary @click="filterValues.key = queryInfo.key">Cancel</Button>
-                            </div>
-                        </div>
-                    </Transition>
-                </div>
+                </Tag>
                 <div class="tag"
                     @click.self="filterEnabled.genre = !filterEnabled.genre"
                     :class="{ active: queryInfo.genre != 0 }
@@ -263,17 +178,18 @@
 <script>
     import VueFeather from 'vue-feather';
     import VueSlider from 'vue-slider-component';
-    import Button from './inputs/Button';
     import SearchBar from './inputs/SearchBar.vue';
     import Switch from './inputs/Switch.vue';
+    import Tag from './inputs/Tag.vue';
+
     export default {
         name: "TopArea",
         components: {
             VueFeather,
             VueSlider,
-            Button,
             SearchBar,
-            Switch
+            Switch,
+            Tag
         },
         props: {
             library_name: String,
@@ -329,36 +245,6 @@
 <style lang="scss">
     @import '../styles/globals.scss';
     
-
-    .tag-popup-enter-active,
-    .tag-popup-leave-active,
-    .tag-popup-l-enter-active,
-    .tag-popup-l-leave-active {
-        transition: all $animation-duration-alt $animation-timing-alt;
-    }
-
-    .tag-popup-enter-from, .tag-popup-leave-to{
-        transform: translateY($item-scale * 2 + $item-gap) !important;
-        opacity: 0;
-        box-shadow: 0px 0px 0px 0px #000 !important;
-    }
-
-    .tag-popup-enter-to, .tag-popup-leave-from{
-        transform: translateY($item-scale + $item-gap) !important;
-        opacity: 1;
-    }
-    
-    .tag-popup-l-enter-from, .tag-popup-l-leave-to{
-        transform: translate(-$side-padding, $item-scale * 2 + $item-gap) !important;
-        opacity: 0;
-        box-shadow: 0px 0px 0px 0px #000 !important;
-    }
-
-    .tag-popup-l-enter-to, .tag-popup-l-leave-from{
-        transform: translate(-$side-padding, $item-scale + $item-gap) !important;
-        opacity: 1;
-    }
-
     .top-area{
         padding: $side-padding;
         padding-bottom: $item-gap;
@@ -372,83 +258,6 @@
     .LibraryName{
         margin: auto;
         color: $foreground-200;
-    }
-    .tags-container{
-        margin: auto;
-        margin-top: $item-gap;
-        .tag-duo{
-            flex-shrink: 0;
-        }
-    }
-    .tags-container, .tags-left{
-        display: flex;
-        flex-grow: 1;
-        gap: $item-gap;
-        flex-wrap: wrap;
-    }
-    .tags-left{
-        overflow: auto;
-    }
-    .tag, .tag-duo > *{
-        float: left;
-        display: flex;
-        gap: 8px;
-        height: $item-scale;
-        padding: 8px;
-        padding-top: 4px;
-        padding-bottom: 4px;
-        border-radius: $radius;
-        font-weight: 900;
-        cursor: pointer;
-        transition-duration: $animation-duration;
-        transition-timing-function: $animation-timing;
-        background: $background-300;
-        &:hover{ background: $background-400; }
-        &:active{ background: $background-300; }
-        &.active{
-            background: $accent-1;
-            &:hover{ background: darken($accent-1, 10%); }
-            &:active{ background: darken($accent-1, 20%); }
-            color: $foreground-100;
-        }
-        color: $foreground-200;
-    }
-    .tag-duo{
-        display: flex;
-        div{
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-        i {
-            margin-left: -2px;
-            padding-left: 8px;
-            padding-right: 8px;
-            padding-top: 4px;
-            padding-bottom: 4px;
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-        }
-    }
-    .tag-popout{
-        @include glass($background-200, false, true);
-        min-width: 200px;
-        max-height: 50vh;
-        overflow: auto;
-        height: fit-content;
-        position: absolute;
-        transform: translateY($item-scale + $item-gap);
-        padding: $side-padding;
-        z-index: 2;
-        > *{
-            margin-bottom: $item-gap / 2;
-            &:last-child{
-                margin-bottom: 0;
-            }
-        }
-        &.align-left{
-            transform: translate(-$side-padding, $item-scale + $item-gap);
-            right: 0;
-        }
     }
     .results-header{
         display: flex;
