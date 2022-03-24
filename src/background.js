@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, protocol, BrowserWindow, ipcMain, shell } from 'electron'
+import { app, protocol, BrowserWindow, ipcMain, shell, dialog } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 import { search, downloadMP3 } from './loopermanData';
@@ -9,7 +9,9 @@ import { homedir } from 'os';
 import { join } from 'path';
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
-const pref = {
+let win;
+
+let pref = {
     dir : {
         content: homedir() + "/loopbaseContent"
     }
@@ -22,7 +24,7 @@ protocol.registerSchemesAsPrivileged([
 
 async function createWindow() {
     // Create the browser window.
-    const win = new BrowserWindow({
+    win = new BrowserWindow({
         width: 1000,
         height: 700,
         titleBarStyle: 'hidden',
@@ -139,7 +141,22 @@ ipcMain.handle('fileDelete', async (event, path) =>{
 
 ipcMain.handle('revealFile', (event, path)=>{
     shell.showItemInFolder(pref.dir.content + "/" + path);
-})
+});
+
+ipcMain.handle('chooseFile', ()=>{
+    return dialog.showOpenDialog(win, {
+        properties: ['openDirectory']
+    });
+});
+
+ipcMain.handle('getPrefs', ()=>{
+    return JSON.parse(JSON.stringify(pref));
+});
+
+ipcMain.handle('setPrefs', (event, p)=>{
+    pref = p;
+    //pref = JSON.parse(JSON.stringify(newPrefs));
+});
 
 ipcMain.handle('openLink', async (event, url) =>{
     shell.openExternal(url);
