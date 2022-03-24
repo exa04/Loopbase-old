@@ -72,21 +72,20 @@
                     size="18"
                     @click="this.$emit('close')"
                 />
-                <div class="inner-content">
+                <div class="inner-content" v-if="prefsLoaded">
                     <h1>Settings</h1>
                     <h2>Search &amp; Content</h2>
-                    <p>If you change the Samples directory, your samples will be migrated. However, they might go missing in your project files, so they will have to be re-linked.</p>
-                    <FileSelector title="Samples" openBtn class="input-component">/home/ari/loopbaseContent/</FileSelector>
-                    <FileSelector title="App data" openBtn class="input-component">/home/ari/.loopbase/</FileSelector>
-                    <Switch
-                        class="big input-component"
-                        title="Use germanic keys (H instead of B)"
-                    ></Switch>
-                    <h2>Appearance</h2>
-                    <h2>Advanced</h2>
+                    <p>If you change the samples directory, your previously downloaded samples will stay in the old one. You can migrate them yourself, but you will also have to re-link them in your project files!</p>
+                    <FileSelector
+                        title="Samples"
+                        openBtn
+                        class="input-component"
+                        @update:modelValue="v => prefs.dir.content = v"
+                        :modelValue="prefs.dir.content"
+                    ></FileSelector>
                 </div>
                 <div class="action-pair">
-                    <div class="subtext unsaved-warn" v-if="changesMade">
+                    <div class="subtext unsaved-warn" v-if="JSON.stringify(prefs) !== JSON.stringify(originalPrefs)">
                         <VueFeather
                             type="alert-triangle"
                             class="centered il-block"
@@ -94,10 +93,10 @@
                         You have unsaved changes!
                     </div>
                     <div>
-                        <Button class="il-block" secondary>
+                        <Button class="il-block" secondary @click="this.$emit('close')">
                             Cancel
                         </Button>
-                        <Button class="il-block">
+                        <Button class="il-block" @click="savePrefs(); this.$emit('close')">
                             Apply
                         </Button>
                     </div>
@@ -110,7 +109,6 @@
     import VueFeather from 'vue-feather';
     import Button from './inputs/Button.vue';
     import FileSelector from './inputs/FileSelector.vue';
-    import Switch from './inputs/Switch.vue'
     const electron = window.require("electron");
 
     export default {
@@ -118,28 +116,34 @@
         components: {
             VueFeather,
             Button,
-            FileSelector,
-            Switch
+            FileSelector
         },
         data() {
             return {
-                version: "",
-                changesMade: true,
-                prefs: {
-                    dir : {
-                        content: "",
-                        appdata: "",
-                    }
-                }
+                version: String,
+                prefs: Object,
+                originalPrefs: Object,
+                prefsLoaded: false
             }
         },
         methods:{
             openLink(url) {
                 electron.ipcRenderer.invoke('openLink', url);
+            },
+            savePrefs(){
+                let p = JSON.parse(JSON.stringify(this.prefs));
+                electron.ipcRenderer.invoke('setPrefs', p);
+                this.originalPrefs = p;
             }
         },
-        async mounted () {
+        async beforeCreate () {
             this.version = await electron.ipcRenderer.invoke("getVersion");
+            
+            let prefs = await electron.ipcRenderer.invoke("getPrefs");
+            this.prefs = JSON.parse(JSON.stringify(prefs));
+            this.originalPrefs = JSON.parse(JSON.stringify(prefs));   
+
+            this.prefsLoaded = true;
         }
     }
 </script>
@@ -218,6 +222,7 @@
         }
         .action-pair{
             display: flex;
+            flex-direction: column wrap;
             justify-content: flex-end;
             align-items: center;
             margin-bottom: $side-padding;
