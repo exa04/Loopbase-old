@@ -47,30 +47,3 @@ export default {
     }
 }
 </script>
-
-<style lang="scss">
-    @import '../../styles/globals.scss';
-    .fileselector{
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        gap: $item-gap;
-        flex-flow: row wrap;
-        .fs-title{
-            color: $foreground-200;
-        }
-        .fs-pathname{
-            color: $foreground-300;
-        }
-        .path{
-            flex-grow: 1;
-            display: flex;
-            flex-flow: row wrap;
-            justify-content: space-between;
-            color: $foreground-300;
-        }
-        input[type="file"]{
-            display: none;
-        }
-    }
-</style>

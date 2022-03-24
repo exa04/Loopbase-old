@@ -102,7 +102,21 @@
 </script>
 
 <style lang="scss">
-    @import 'styles/globals.scss';
+    @import './styles/globals.scss';
+
+    @import './styles/components/MainContent.scss';
+    @import './styles/components/PlayBar.scss';
+    @import './styles/components/Results.scss';
+    @import './styles/components/Settings.scss';
+    @import './styles/components/TitleBar.scss';
+    @import './styles/components/TopArea.scss';
+
+    @import './styles/inputs/Button.scss';
+    @import './styles/inputs/FileSelector.scss';
+    @import './styles/inputs/SearchBar.scss';
+    @import './styles/inputs/Slider.scss';
+    @import './styles/inputs/Switch.scss';
+    @import './styles/inputs/Tag.scss';
 
     .popup-enter-active,
     .popup-leave-active {

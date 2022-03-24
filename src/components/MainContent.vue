@@ -25,16 +25,3 @@ export default ({
     },
 })
 </script>
-
-<style lang="scss">
-    .main-content{
-        flex: 1 1;
-        display: flex;
-        flex-direction: column;
-        overflow: overlay;
-        overflow-x: hidden;
-        padding-top: 52px;
-        height: 100vh;
-        box-sizing: border-box;
-    }
-</style>

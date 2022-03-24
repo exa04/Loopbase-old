@@ -1,0 +1,44 @@
+.play-bar{
+    @include glass($playbar-background, false, false);
+    padding: 0 $side-padding;
+    gap: $side-padding;
+    height: 90px;
+    align-items: center;
+    display: flex;
+    border-top: 1px solid $seperator;
+    &.hidden{
+        display: none;
+    }
+}
+.info-audio{
+    @include side-gradient(to right, $window-background);
+    display: flex;
+    align-items: center;
+    flex-grow: 2;
+    height: 100%;
+}
+.profile-picture{
+    width: 36px;
+    image-rendering: crisp-edges;
+    border-radius: $radius;
+}
+.audio-desc{
+    margin-left: $item-gap / 2;
+    div{
+        width: max-content;
+    }
+    overflow: hidden;
+    width: 10px;
+    flex-grow: 1;
+}
+.playback-controls{
+    display: flex;
+    gap: $item-gap;
+    align-items: center;
+}
+#volumeSlider{
+    width: 120px !important;
+}
+#playbackSlider{
+    flex-grow: 2;
+}
