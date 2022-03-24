@@ -17,6 +17,18 @@ let pref = {
     }
 }
 
+let appdataPath = join(app.getPath("appData"), "loopbase");
+let prefsPath = join(appdataPath, "prefs.json");
+
+try {
+    if(!fs.existsSync(appdataPath)) fs.mkdirSync(appdataPath); 
+    if(!fs.existsSync(prefsPath)) fs.writeFileSync(prefsPath, JSON.stringify(pref)); 
+    
+    pref = JSON.parse(fs.readFileSync(prefsPath, {encoding:'utf8', flag:'r'}));
+} catch {
+    alert("Couldn't load preferences!");
+}
+
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
     { scheme: 'app', privileges: { secure: true, standard: true } }
@@ -153,9 +165,9 @@ ipcMain.handle('getPrefs', ()=>{
     return JSON.parse(JSON.stringify(pref));
 });
 
-ipcMain.handle('setPrefs', (event, p)=>{
+ipcMain.handle('setPrefs', async (event, p)=>{
     pref = p;
-    //pref = JSON.parse(JSON.stringify(newPrefs));
+    return await fs.writeFileSync(prefsPath, JSON.stringify(p));
 });
 
 ipcMain.handle('openLink', async (event, url) =>{
