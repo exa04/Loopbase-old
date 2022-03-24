@@ -171,4 +171,9 @@ $animation-timing-alt: cubic-bezier(.45,.73,.26,1.54); // For "jiggly" animation
 .il-block{
     display: inline-block;
     margin-right: $item-gap;
+    &.centered{
+        display: inline-block;
+        vertical-align: middle;
+    }
+
 }
