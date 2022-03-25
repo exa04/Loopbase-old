@@ -1,0 +1,53 @@
+.theme-chroma{
+    // Basic colors: All others are derivatives of these
+
+    $background: #323349;
+    $foreground: #ffffff;
+
+    --inverse-foreground: #000;
+
+    --seperator: #000;
+
+    $accent-1: linear-gradient(90deg, #ff3dff 0%, #9c00ff 100%);
+    $accent-2: linear-gradient(90deg, #fff173 0%, #1dffb6 100%);
+    $accent-3: #F5FE00;
+    $accent-4: #7713E9;
+
+    // Generated colors
+
+    --accent-1-100: linear-gradient(90deg, #ff3dff 0%, #9c00ff 100%);
+    --accent-1-200: linear-gradient(90deg, #{darken(#ff3dff, 20%)} 0%, #{darken(#9c00ff, 20%)} 100%);
+    --accent-1-300: linear-gradient(90deg, #{darken(#ff3dff, 40%)} 0%, #{darken(#9c00ff, 40%)} 100%);
+
+    --accent-2-100: linear-gradient(90deg, #fff173 0%, #1dffb6 100%);
+    --accent-2-200: linear-gradient(90deg, #{darken(#fff173, 20%)} 0%, #{darken(#1dffb6, 20%)} 100%);
+    --accent-2-300: linear-gradient(90deg, #{darken(#fff173, 40%)} 0%, #{darken(#1dffb6, 40%)} 100%);
+
+    --accent-3-100: #{$accent-3};
+    --accent-3-200: #{darken($accent-3, 20%)};
+    --accent-3-300: #{darken($accent-3, 40%)};
+
+    --accent-4-100: #{$accent-4};
+    --accent-4-200: #{darken($accent-4, 20%)};
+    --accent-4-300: #{darken($accent-4, 40%)};    
+
+    --background-100: #{darken($background, 16%)};
+    --background-200: #{darken($background, 12%)};
+    --background-300: #{darken($background, 6%)};
+    --background-400: #{$background};
+
+    --foreground-100: #{$foreground};
+    --foreground-200: #{darken($foreground, 20%)};
+    --foreground-300: #{darken($foreground, 40%)};
+
+    --glass-100: #{rgba(darken($background, 16%), .5)};
+    --glass-200: #{rgba(darken($background, 12%), .5)};
+
+    --soft-glass-100: #{rgba(darken($background, 16%), .85)};
+    --soft-glass-200: #{rgba(darken($background, 12%), .85)};
+
+    // Scroll bars
+
+    --scroll-thumb-color: #{rgba($foreground, 25%)};
+    --scroll-thumb-color-hover: #{rgba($foreground, 50%)};
+}

@@ -5,17 +5,17 @@
     gap: $item-gap;
     flex-flow: row wrap;
     .fs-title{
-        color: $foreground-200;
+        color: var(--foreground-200);
     }
     .fs-pathname{
-        color: $foreground-300;
+        color: var(--foreground-300);
     }
     .path{
         flex-grow: 1;
         display: flex;
         flex-flow: row wrap;
         justify-content: space-between;
-        color: $foreground-300;
+        color: var(--foreground-300);
     }
     input[type="file"]{
         display: none;

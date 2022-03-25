@@ -1,11 +1,12 @@
 .play-bar{
-    @include glass($playbar-background, false, false);
+    @include glass(false, false);
+    background: var(--glass-100);
     padding: 0 $side-padding;
     gap: $side-padding;
     height: 90px;
     align-items: center;
     display: flex;
-    border-top: 1px solid $seperator;
+    border-top: 1px solid var(--seperator);
     &.hidden{
         display: none;
     }

@@ -1,7 +1,8 @@
 .settings-window{
     transition-duration: $animation-duration-alt;
     transition-timing-function: $animation-timing;
-    @include glass($background-200, false, true);
+    @include glass(false, true);
+    background: var(--glass-200);
     background: transparent;
     width: calc(100vw - (2 * $side-padding));
     height: calc(100vh - (2 * $side-padding));
@@ -17,7 +18,9 @@
         box-shadow: 0px 0px 0px 0px transparent !important;
     }
     .sidebar{
-        @include glass($background-200, false, true);
+        @include glass(false, true);
+        background: var(--glass-200);
+        background: var(--glass-200);
         border-bottom-right-radius: 0;
         border-top-right-radius: 0;
         border-right: none;
@@ -35,9 +38,9 @@
             cursor: pointer;
             transition-duration: $animation-duration;
             transition-timing-function: $animation-timing;
-            color: $foreground-200;
+            color: var(--foreground-200);
             &:hover{
-                color: $foreground-100;
+                color: var(--foreground-100);
             }
         }
         .last{
@@ -46,12 +49,13 @@
         }
     }
     .content{
-        @include glass($background-200, true, true);
+        @include glass(true, true);
+        background: var(--soft-glass-200);
         padding-left: $side-padding;
         padding-right: $side-padding;
         border-bottom-left-radius: 0;
         border-top-left-radius: 0;
-        border-left: 1px solid $seperator;
+        border-left: 1px solid var(--seperator);
         flex: 1 1;
         padding-top: $side-padding;
         overflow: auto;
@@ -79,7 +83,7 @@
     }
 }
 .close-x{
-    color: $foreground-200;
+    color: var(--foreground-200);
     position: fixed;
     right: $item-gap;
     top: $item-gap;
@@ -87,7 +91,7 @@
     transition-duration: $animation-duration;
     transition-timing-function: $animation-timing;
     :hover{
-        color: $foreground-100;
+        color: var(--foreground-100);
     }
 }
 #sidebar-x{
@@ -96,7 +100,7 @@
 #version-string{
     padding-left: $side-padding;
     padding-right: $side-padding;
-    color: $foreground-300;
+    color: var(--foreground-300);
     margin-top: 0;
     font-size: $font-size * .85;
 }

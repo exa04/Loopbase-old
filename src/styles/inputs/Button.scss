@@ -1,5 +1,5 @@
 .button{
-    background: $accent-1;
+    background: var(--accent-1-100);
     transition-duration: $animation-duration;
     transition-timing-function: $animation-timing;
     border-radius: $radius;
@@ -11,21 +11,21 @@
     cursor: pointer;
     font-weight: 900;
     &:hover{
-        background: darken($accent-1, 10%);
+        background: var(--accent-1-200);
     }
     &:active{
-        background: darken($accent-1, 20%);
+        background: var(--accent-1-300);
     }
     &.secondary{
-        background: $foreground-100;
-        &:hover{ background: darken($foreground-100, 10%); }
-        &:active{ background: darken($foreground-100, 20%); }
-        color: $inverse-foreground;
+        background: var(--foreground-100);
+        &:hover{ background: var(--foreground-200); }
+        &:active{ background: var(--foreground-300); }
+        color: var(--inverse-foreground);
     }
     &.tertiary{
-        background: $background-300;
-        &:hover{ background: $background-400; }
-        &:active{ background: $background-300; }
+        background: var(--background-300);
+        &:hover{ background: var(--background-400); }
+        &:active{ background: var(--background-300); }
     }
 }
 .button-duo{

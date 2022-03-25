@@ -1,35 +1,10 @@
-// Basic colors: All others are derivatives of these
-
-$background: #5c2363;
-$foreground: #EDE6EE;
-$inverse-foreground: #000;
-
-$accent-1: #DF3DB1;
-$accent-2: #00FF99;
-$accent-3: #F5FE00;
-$accent-4: #7713E9;
-
-// Generated colors
-
-$background-100: darken($background, 16%);
-$background-200: darken($background, 12%);
-$background-300: darken($background, 6%);
-$background-400: $background;
-
-$foreground-100: $foreground;
-$foreground-200: darken($foreground, 20%);
-$foreground-300: darken($foreground, 40%);
-
-
 // Window colors
 
-$window-background: $background-200;
-$window-hover: $background-300;
+$window-background: var(--background-200);
+$window-hover: var(--background-300);
 
-$seperator: #000;
-
-$titlebar-background: $background-100;
-$playbar-background: $background-100;
+$titlebar-background: var(--background-100);
+$playbar-background: var(--background-100);
 
 // Sizing
 
@@ -67,7 +42,7 @@ h1{
 }
 
 .subtext{
-    color: $foreground-200;
+    color: var(--foreground-200);
     font-size: $font-size * .85;
 }
 
@@ -90,23 +65,23 @@ h1{
 
 $animation-duration: 270ms;
 $animation-duration-alt: 380ms;
-$animation-timing: cubic-bezier(.34,-0.16,0,1.18);
+$animation-timing: cubic-bezier(.4,0,.4,1);
 $animation-timing-alt: cubic-bezier(.45,.73,.26,1.54); // For "jiggly" animations (on geometric transforms, not on colors)
 
 // Icons
 
 .icon-btn{
-    stroke: $foreground-100;
+    stroke: var(--foreground-100);
     cursor: pointer;
     svg{
         transition-duration: $animation-duration;
         transition-timing-function: $animation-timing;
     }
     &:hover svg{
-        stroke: $foreground-200;
+        stroke: var(--foreground-200);
     }
     &:active svg{
-        stroke: $foreground-100;
+        stroke: var(--foreground-100);
     }
 }
 
@@ -116,8 +91,7 @@ $animation-timing-alt: cubic-bezier(.45,.73,.26,1.54); // For "jiggly" animation
     -webkit-mask-image: linear-gradient($direction, #000 80%, transparent);
 }
 
-@mixin glass($color, $soft, $box){
-    background-color: rgba($color, .5);
+@mixin glass($soft, $box){
     backdrop-filter: saturate(150%) contrast(120%) brightness(60%) blur(16px);
     @if $box {
         border: 1px rgba(255,255,255,.2) solid;
@@ -129,7 +103,6 @@ $animation-timing-alt: cubic-bezier(.45,.73,.26,1.54); // For "jiggly" animation
     }
 
     @if $soft{
-        background-color: rgba($color, .85);
         backdrop-filter: saturate(150%) contrast(120%) brightness(70%) blur(24px);
     }
 }
@@ -141,28 +114,29 @@ $animation-timing-alt: cubic-bezier(.45,.73,.26,1.54); // For "jiggly" animation
 }
 
 .slider-connect{
-    background: $accent-2;
+    background: var(--accent-2-100);
 }
 
 .slider-base{
-    background: $background-200;
+    background: var(--background-200);
 }
 
 .slider-tooltip{
-    background: $accent-2;
+    background: var(--accent-2-100);
     &:before{
-        border-color: $accent-2;
+        border-color: var(--accent-2-100);
     }
 }
 
 .vue-slider-dot-tooltip-text{
-    color: $inverse-foreground;
+    color: var(--inverse-foreground);
 }
 
 // Surfaces
 
 .popup-window{
-    @include glass($background-200, false, true);
+    @include glass(false, true);
+    background: var(--glass-200);
     width: calc(100vw - (2 * $side-padding));
     height: calc(100vh - (2 * $side-padding));
     position: fixed;        
@@ -175,5 +149,14 @@ $animation-timing-alt: cubic-bezier(.45,.73,.26,1.54); // For "jiggly" animation
         display: inline-block;
         vertical-align: middle;
     }
-
+}
+.il-container{
+    display: flex;
+    gap: $item-gap;
+    &.centered{
+        align-items: center;
+    }
+}
+.rotated180{
+    transform: rotate(180deg);
 }

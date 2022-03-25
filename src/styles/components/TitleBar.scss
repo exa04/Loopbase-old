@@ -1,14 +1,15 @@
 .title-bar{
-    @include glass($background-100, false, false);
+    @include glass(false, false);
+    background: var(--glass-100);
     -webkit-app-region: drag;
     justify-content: space-between;
-    color: $foreground-100;
+    color: var(--foreground-100);
     padding: 0 $side-padding;
     height: 52px;
     display: flex;
     align-items: center;
     gap: $item-gap;
-    border-bottom: 1px solid $seperator;
+    border-bottom: 1px solid var(--seperator);
     >*{
         -webkit-app-region: no-drag;
     }
@@ -19,7 +20,7 @@
     div{
         width: 12px;
         height: 12px;
-        background-color: transparent;
+        background: transparent;
         border-radius: 6px;
     }
 }
@@ -27,7 +28,7 @@
     display: flex;
     gap: $item-gap;
     .vue-feather, .vue-feather > svg {
-        stroke: $foreground-200;
+        stroke: var(--foreground-200);
         cursor: pointer;
         width: 18px !important;
         aspect-ratio: 1;

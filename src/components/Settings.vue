@@ -83,6 +83,19 @@
                         @update:modelValue="v => prefs.dir.content = v"
                         :modelValue="prefs.dir.content"
                     ></FileSelector>
+                    <h2>Appearance</h2>
+                    <Select
+                        :options="[
+                            ['theme-dark', 'Dark'],
+                            ['theme-light', 'Light'],
+                            ['theme-purple', 'Purple'],
+                            ['theme-chroma', 'Chroma'],
+                            ['theme-dracula', 'Dracula']
+                        ]"
+                        class="input-component"
+                        :selected="prefs.theme"
+                        @selectOption="o => prefs.theme = o"
+                    >Theme</Select>
                 </div>
                 <div class="action-pair">
                     <div class="subtext unsaved-warn" v-if="JSON.stringify(prefs) !== JSON.stringify(originalPrefs)">
@@ -108,6 +121,7 @@
 <script>
     import VueFeather from 'vue-feather';
     import Button from './inputs/Button.vue';
+    import Select from './inputs/Select.vue';
     import FileSelector from './inputs/FileSelector.vue';
     const electron = window.require("electron");
 
@@ -116,7 +130,8 @@
         components: {
             VueFeather,
             Button,
-            FileSelector
+            FileSelector,
+            Select
         },
         data() {
             return {

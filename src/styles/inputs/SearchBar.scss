@@ -1,5 +1,5 @@
 ::-webkit-input-placeholder{
-    color: $foreground-200;
+    color: var(--foreground-200);
 }
 
 .SearchBar{
@@ -7,11 +7,11 @@
     flex-grow: 0;
     width: 437px;
     .inner svg{
-        stroke: $foreground-200;
+        stroke: var(--foreground-200);
         height: $font-size * .9;
         stroke-width: 3.5;
     }
-    background-color: $background-200;
+    background: var(--background-200);
     border-radius: $radius;
     height: 26px;
     transition-duration: $animation-duration;
@@ -39,7 +39,7 @@
     outline: none;
     display: inline-block;
     white-space: nowrap;
-    color: $foreground-200;
+    color: var(--foreground-200);
     overflow: visible;
     width: 100%;
     height: 100%;

@@ -1,0 +1,53 @@
+.theme-dracula{
+    // Basic colors: All others are derivatives of these
+
+    $background: #44475a;
+    $foreground: #fafafc;
+
+    --inverse-foreground: #000;
+
+    --seperator: #000;
+
+    $accent-1: #bd93f9;
+    $accent-2: #ff79c6;
+    $accent-3: #50fa7b;
+    $accent-4: #8be9fd;
+
+    // Generated colors
+
+    --accent-1-100: #{$accent-1};
+    --accent-1-200: #{darken($accent-1, 20%)};
+    --accent-1-300: #{darken($accent-1, 40%)};
+
+    --accent-2-100: #{$accent-2};
+    --accent-2-200: #{darken($accent-2, 20%)};
+    --accent-2-300: #{darken($accent-2, 40%)};
+
+    --accent-3-100: #{$accent-3};
+    --accent-3-200: #{darken($accent-3, 20%)};
+    --accent-3-300: #{darken($accent-3, 40%)};
+
+    --accent-4-100: #{$accent-4};
+    --accent-4-200: #{darken($accent-4, 20%)};
+    --accent-4-300: #{darken($accent-4, 40%)};    
+
+    --background-100: #{darken($background, 16%)};
+    --background-200: #{darken($background, 12%)};
+    --background-300: #{darken($background, 6%)};
+    --background-400: #{$background};
+
+    --foreground-100: #{$foreground};
+    --foreground-200: #{darken($foreground, 20%)};
+    --foreground-300: #{darken($foreground, 40%)};
+
+    --glass-100: #{rgba(darken($background, 16%), .5)};
+    --glass-200: #{rgba(darken($background, 12%), .5)};
+
+    --soft-glass-100: #{rgba(darken($background, 16%), .85)};
+    --soft-glass-200: #{rgba(darken($background, 12%), .85)};
+
+    // Scroll bars
+
+    --scroll-thumb-color: #{rgba($foreground, 25%)};
+    --scroll-thumb-color-hover: #{rgba($foreground, 50%)};
+}

@@ -1,21 +1,26 @@
 <template>
-    <Transition name="popup">
-        <Settings
-            ref="Settings"
-            v-if="settingsOpen"
-            @close="settingsOpen = false"
+    <div
+        :class="theme"
+        class="appRoot"
+    >
+        <Transition name="popup">
+            <Settings
+                ref="Settings"
+                v-if="settingsOpen"
+                @close="settingsOpen = false; loadTheme()"
+            />
+        </Transition>
+        <TitleBar
+            ref="TitleBar"
+            @settingsOpen="settingsOpen = !settingsOpen"
         />
-    </Transition>
-    <TitleBar
-        ref="TitleBar"
-        @settingsOpen="settingsOpen = !settingsOpen"
-    />
-    <MainContent
-        ref="MainContent"
-    />
-    <PlayBar
-        ref="PlayBar"
-    />
+        <MainContent
+            ref="MainContent"
+        />
+        <PlayBar
+            ref="PlayBar"
+        />
+    </div>
 </template>
 
 <script>
@@ -26,6 +31,8 @@
     import '@fontsource/rubik/400.css';
     import '@fontsource/rubik/700.css';
     import '@ibm/plex/scss/ibm-plex.scss';
+
+    const electron = window.require("electron");
 
     export default {
         name: 'App',
@@ -91,18 +98,33 @@
                 this.$refs.MainContent.$refs.TopArea.$data.query = query;
                 this.$refs.MainContent.$refs.Results.$data.query = query;
                 this.$refs.MainContent.$refs.Results.reset();
+            },
+            async loadTheme(){
+                let prefs = await electron.ipcRenderer.invoke("getPrefs");
+                this.theme = prefs.theme;
             }
         },
         data() {
             return {
-                settingsOpen: false
+                settingsOpen: false,
+                theme: 'theme-dark'
             };
+        },
+        async beforeCreate () {
+            let prefs = await electron.ipcRenderer.invoke("getPrefs");
+            this.theme = prefs.theme;
         }
     }
 </script>
 
 <style lang="scss">
     @import './styles/globals.scss';
+
+    @import './styles/themes/chroma.scss';
+    @import './styles/themes/dark.scss';
+    @import './styles/themes/dracula.scss';
+    @import './styles/themes/light.scss';
+    @import './styles/themes/purple.scss';
 
     @import './styles/components/MainContent.scss';
     @import './styles/components/PlayBar.scss';
@@ -114,6 +136,7 @@
     @import './styles/inputs/Button.scss';
     @import './styles/inputs/FileSelector.scss';
     @import './styles/inputs/SearchBar.scss';
+    @import './styles/inputs/Select.scss';
     @import './styles/inputs/Slider.scss';
     @import './styles/inputs/Switch.scss';
     @import './styles/inputs/Tag.scss';
@@ -136,15 +159,15 @@
 
     body{
         margin: 0;
-        background-color: $window-background;
+        background: $window-background;
         overflow-y: overlay;
     }
-    #app {
-        color: $foreground-100;
+    .appRoot {
+        color: var(--foreground-100);
         font-size: $font-size;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        background-color: $window-background;
+        background: $window-background;
         .title-bar{
             top: 0;
         }
@@ -172,9 +195,9 @@
 
     *::-webkit-scrollbar-thumb {
         transition: $animation-duration;
-        background-color: rgba($foreground-100, 25%);
+        background: --scroll-thumb-color;
         &:hover{
-            background-color: rgba($foreground-100, 50%);
+            background: --scroll-thumb-color-hover;
         }
         border-radius: 10px;
     }
@@ -214,13 +237,15 @@
         .settings-window{
             flex-direction: column;
             .content{
-                @include glass($background-200, true, true);
+                @include glass(true, true);
+                background: var(--soft-glass-200);
                 border-top-left-radius: 0;
                 border-top-right-radius: 0;
-                border-top: 1px solid $seperator;
+                border-top: 1px solid var(--seperator);
             }
             .sidebar{
-                @include glass($background-200, false, true);
+                @include glass(false, true);
+                background: var(--glass-200);
                 border-bottom-left-radius: 0;
                 border-bottom-right-radius: 0;
                 border-bottom: none;

@@ -23,7 +23,7 @@
                 }
             }
             .switch-outer{
-                background: $background-200;
+                background: var(--background-200);
             }
         }
     }
@@ -33,7 +33,7 @@
     width: $radius * 2;
     aspect-ratio: 1;
     border-radius: $radius;
-    background: $foreground-100;
+    background: var(--foreground-100);
     transition-duration: $animation-duration;
     transition-timing-function: $animation-timing-alt;
     &.active{
@@ -45,16 +45,16 @@
     width: $radius * 4;
     height: $radius * 2;
     border-radius: $radius;
-    background-color: $background-100;
+    background: var(--background-100);
     cursor: pointer;
     transition-duration: $animation-duration;
     transition-timing-function: $animation-timing;
     &.active{
-        background-color: $accent-2;
+        background: var(--accent-2-100);
     }
 }
 .switch-label{
-    color: $foreground-200;
+    color: var(--foreground-200);
     width: calc(100% - ($radius * 4));
     flex-shrink: 1;
 }
