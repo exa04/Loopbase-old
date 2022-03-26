@@ -16,6 +16,7 @@
     "@fontsource/rubik": "^4.5.0",
     "@ibm/plex": "^6.0.0",
     "@ts-pro/vue-eternal-loading": "^1.2.0",
+    "axios": "^0.26.1",
     "cheerio": "^1.0.0-rc.10",
     "core-js": "^3.6.5",
     "feather-icons": "^4.28.0",

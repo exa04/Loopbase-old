@@ -1,28 +1,23 @@
 const cheerio = require('cheerio');
-var request = require('request');
+const fileDownload = require('js-file-download');
+const axios = require('axios').default;
 const path = require('path');
 const fs = require('fs');
 
 async function downloadMP3(url, dest){
     return new Promise((resolve, reject) => {
+        
         var dir = path.dirname(dest);
         if (!fs.existsSync(dir)){
             fs.mkdirSync(dir, { recursive: true });
         }
 
-        var file = fs.createWriteStream(dest);
-
-        request({
-            uri: url,
-            timeout: 60000
-        })
-        .pipe(file)
-        .on('finish', () => {
-            resolve();
-        })
-        .on('error', (error) => {
-            reject(error);
-        })
+        axios.get({
+          url: 'http://localhost/downloadFile',
+          method: 'GET',
+          responseType: 'blob', // Important
+        }).then((res) => { fileDownload(res.data, dest); resolve() })
+            .catch(reject());
     })
 }
 
@@ -32,8 +27,8 @@ function search(args){
         let key = args.filterByKey ? ("&mkey="+args.key[0]+args.key[1]) : "";
         var date = args.date == 0 ? '' : '&when=' + args.date;
         var genre = args.genre == 0 ? '' : '&gid=' + args.genre;
-        request({
-            url: 'https://looperman.com/' + args.category
+        axios.get(
+            ('https://looperman.com/' + args.category
                 + '?page='+ args.page
                 + '&keys=' + args.keys
                 + '&order=' + args.order[0]
@@ -42,10 +37,9 @@ function search(args){
                 + "&dir="+args.order[1]
                 + key
                 + "&ftempo="+args.tempo[0]
-                + "&ttempo="+args.tempo[1],
-            timeout: 60000
-        }, function (err, res) {
-            const $ = cheerio.load(res.body);
+                + "&ttempo="+args.tempo[1])
+        ).then (res=> {
+            const $ = cheerio.load(res.data);
             $('#body-left .player-wrapper').each((i, el) => {
                 results.push({
                     title: $(el).find(".player-title").text(),
