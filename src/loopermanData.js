@@ -1,10 +1,11 @@
 const cheerio = require('cheerio');
-const fileDownload = require('js-file-download');
+const request = require('request');
 const axios = require('axios').default;
 const path = require('path');
 const fs = require('fs');
 
 async function downloadMP3(url, dest){
+    console.log(url);
     return new Promise((resolve, reject) => {
         
         var dir = path.dirname(dest);
@@ -12,12 +13,19 @@ async function downloadMP3(url, dest){
             fs.mkdirSync(dir, { recursive: true });
         }
 
-        axios.get({
-          url: 'http://localhost/downloadFile',
-          method: 'GET',
-          responseType: 'blob', // Important
-        }).then((res) => { fileDownload(res.data, dest); resolve() })
-            .catch(reject());
+        var file = fs.createWriteStream(dest);
+
+        request({
+            uri: url,
+            timeout: 60000
+        })
+        .pipe(file)
+        .on('finish', () => {
+            resolve();
+        })
+        .on('error', (error) => {
+            reject(error);
+        })
     })
 }
 
@@ -25,6 +33,7 @@ function search(args){
     return new Promise(reply => {
         let results = [];
         let key = args.filterByKey ? ("&mkey="+args.key[0]+args.key[1]) : "";
+        console.log(key);
         var date = args.date == 0 ? '' : '&when=' + args.date;
         var genre = args.genre == 0 ? '' : '&gid=' + args.genre;
         axios.get(
