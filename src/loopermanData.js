@@ -5,7 +5,6 @@ const path = require('path');
 const fs = require('fs');
 
 async function downloadMP3(url, dest){
-    console.log(url);
     return new Promise((resolve, reject) => {
         
         var dir = path.dirname(dest);
