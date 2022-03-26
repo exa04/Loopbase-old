@@ -26,7 +26,7 @@
                         v-for="o in options"
                         :key="o[0]"
                         :class="{selected : o[0] == selected}"
-                        @click="this.$emit('selectOption', o[0]);"
+                        @click="this.$emit('selectOption', o[0]); open = false"
                     >
                         {{o[1]}}
                     </div>
@@ -48,7 +48,7 @@ export default {
     },
     data() {
         return{
-            open: true
+            open: false
         }
     },
     props: {
