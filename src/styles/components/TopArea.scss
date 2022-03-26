@@ -1,7 +1,7 @@
 .top-area{
     padding: $side-padding;
     padding-bottom: $item-gap;
-    border-bottom: 1px solid var(--background-300);
+    border-bottom: 1px solid var(--seperator);
     width: calc(100% + 1px);    // TODO: Find a better alternative to this questionable hack
     box-sizing: border-box;
     h1{

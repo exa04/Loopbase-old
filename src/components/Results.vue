@@ -4,20 +4,32 @@
             v-for="res in resultsData"
             :key="res.mp3_url"
             @dragstart.prevent="if(res.downloaded) startDrag(res.localPath);"
-            draggable="true">
+            draggable="true"
+            :id="res.mp3_url"
+            :class="{playing: res.mp3_url == playing}"
+            @click.self="playResult(res)"
+            >
             <div class="result-profile-pic">
                 <img :src="res.profile_pic" class="profile-picture-large">
                 <div class="play-btn icon-btn" @click="playResult(res)">
-                    <vue-feather type="play" />
+                    <vue-feather :type="res.mp3_url == playing && !paused ? 'pause' : 'play'" />
                 </div>
             </div>
-            <div class="info-audio">
+            <div
+                class="info-audio"
+                @click="playResult(res)"
+            >
                 <div class="audio-desc">
                     <div ref="LoopName" class="desc-title">{{res.title}}</div>
                     <div ref="AuthorName" class="desc-author subtext">{{res.author}}</div>
                 </div>
             </div>
-            <img class="visualizer" :src="res.waveform" draggable="false">
+            <img
+                class="visualizer"
+                :src="res.waveform"
+                draggable="false"
+                @click="playResult(res)"
+            >
             <div class="mono-value info-duration" style="">{{res.duration}}0:00</div>
             <div class="mono-value info-key">{{res.key}}</div>
             <div class="mono-value info-tempo">{{res.tempo}}</div>
@@ -86,7 +98,9 @@
                     genre:          0,
                     filterByKey:    false
                 },
-                isInitial: false
+                isInitial: false,
+                playing: "",
+                paused: true
             };
         },
         methods: {
@@ -174,7 +188,14 @@
             },
             playResult(res){
                 let playbar = this.$parent.$parent.$refs.PlayBar;
+                if(!this.paused && res.mp3_url == this.playing){
+                    playbar.togglePlay();
+                    this.paused = true;
+                    return;
+                }
                 playbar.loadSample(res);
+                this.playing = res.mp3_url;
+                this.paused = false;
             }
         },
     }

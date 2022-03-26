@@ -29,7 +29,7 @@
             cursor: pointer;
         }
     }
-    &:hover{
+    &:hover, &.playing{
         background: $window-hover;
         .info-audio{
             @include side-gradient(to right, $window-hover);
@@ -54,6 +54,12 @@
             color: var(--foreground-100);
             transition-duration: $animation-duration;
             transition-timing-function: $animation-timing;
+        }
+    }
+    &.playing{
+        background: var(--accent-1-300);
+        &:hover{
+            background: var(--accent-1-200);
         }
     }
     transition-duration: $animation-duration;

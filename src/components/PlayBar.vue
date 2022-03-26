@@ -95,8 +95,10 @@
                 if(audio == undefined) return;
                 if (audio.paused) {
                     audio.play();
+                    this.$parent.$refs.MainContent.$refs.Results.paused = false;
                 } else {
                     audio.pause();
+                    this.$parent.$refs.MainContent.$refs.Results.paused = true;
                 }
             },
             getPlaybackPos(){
