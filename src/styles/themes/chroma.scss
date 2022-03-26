@@ -6,7 +6,7 @@
 
     --inverse-foreground: #000;
 
-    --seperator: #000;
+    --seperator: #{$background};
 
     $accent-1: linear-gradient(90deg, #ff3dff 0%, #9c00ff 100%);
     $accent-2: linear-gradient(90deg, #fff173 0%, #1dffb6 100%);
@@ -50,4 +50,10 @@
 
     --scroll-thumb-color: #{rgba($foreground, 25%)};
     --scroll-thumb-color-hover: #{rgba($foreground, 50%)};
+    .result:hover{
+        background: var(--accent-1-200);
+    }
+    .result.playing{
+        background: var(--accent-1-300);
+    }
 }

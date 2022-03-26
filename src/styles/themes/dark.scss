@@ -16,8 +16,8 @@
     // Generated colors
 
     --accent-1-100: #{$accent-1};
-    --accent-1-200: #{darken($accent-1, 20%)};
-    --accent-1-300: #{darken($accent-1, 40%)};
+    --accent-1-200: #{mix($accent-1, $background, 20%)};
+    --accent-1-300: #{mix($accent-1, $background, 40%)};
 
     --accent-2-100: #{$accent-2};
     --accent-2-200: #{darken($accent-2, 20%)};
