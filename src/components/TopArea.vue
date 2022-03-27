@@ -97,7 +97,7 @@
                                 queryInfo.genre = 0;
                                 this.$parent.$parent.search();
                             "
-                            :class="{hidden: queryInfo.genre == 0}"
+                            v-if="queryInfo.genre != 0"
                         />
                 </div>
                 <Transition name="tag-popup">
