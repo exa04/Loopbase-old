@@ -27,7 +27,7 @@
                 @click="$emit('remove');
                         added = false;
                 "
-                :class="{hidden: !added}"
+                v-if="added"
             />
         </div>
         <Transition name="tag-popup">
