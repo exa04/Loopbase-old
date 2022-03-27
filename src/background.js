@@ -40,6 +40,8 @@ async function createWindow() {
     win = new BrowserWindow({
         width: 1000,
         height: 700,
+        title: "Loopbase",
+        icon: join(__static, 'icon.png'),
         titleBarStyle: 'hidden',
         trafficLightPosition: {x: 21, y: 18},
         webPreferences: {
