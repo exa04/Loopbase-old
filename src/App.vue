@@ -234,6 +234,10 @@
                 grid-area: d;
             }
         }
+        .results-header{
+            grid-template-columns: $profile-pic-large-size auto 6ch 5ch;
+            gap: $item-gap / 1.5;
+        }
         .settings-window{
             flex-direction: column;
             .content{
@@ -284,6 +288,19 @@
                 "a a a";
             .actions-result{
                 width: 100%;
+            }
+        }
+        .results-header{
+            grid-template-columns: $profile-pic-large-size auto auto;
+            gap: $item-gap / 1.5;
+            div:nth-of-type(3){
+                text-align: right;
+                &::after{
+                    content: " & Tempo";
+                }
+            }
+            div:nth-of-type(4){
+                display: none;
             }
         }
         h1{ font-size: $font-size * 4 * $scale; }

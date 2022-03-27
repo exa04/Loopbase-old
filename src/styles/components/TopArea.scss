@@ -13,7 +13,8 @@
     color: var(--foreground-200);
 }
 .results-header{
-    display: flex;
+    display: grid;
+    grid-template-columns: $profile-pic-large-size 2fr 8ch 7ch 109px;
     gap: $item-gap;
     color: var(--foreground-200);
     margin: auto;

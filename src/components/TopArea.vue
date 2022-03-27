@@ -169,10 +169,10 @@
             </Transition>
         </div>
         <div class="results-header" v-if="search_header">
-            <div style="width: 52px">User</div>
-            <div style="flex-grow: 1">Title</div>
-            <div style="width: 68px">Key</div>
-            <div style="width: 183px">Tempo</div>
+            <div>User</div>
+            <div>Title</div>
+            <div>Key</div>
+            <div>Tempo</div>
         </div>
     </div>
 </template>
