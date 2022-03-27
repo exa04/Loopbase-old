@@ -46,8 +46,10 @@
                 >
                     <Button
                         @click="
-                            $emit('save');
-                            added = true;
+                            if(saveCondition){
+                                $emit('save');
+                                added = true;
+                            }
                         "
                     >
                         Apply
@@ -71,7 +73,8 @@
         props: {
             icon: String,
             title: String,
-            additionalInfo: String
+            additionalInfo: String,
+            saveCondition: Boolean
         },
         data() {
             return {

@@ -25,6 +25,7 @@
                     @cancel="filterValues.tempoRange = queryInfo.tempo"
                     @save="queryInfo.tempo = filterValues.tempoRange"
                     @remove="queryInfo.tempo = [0,200]"
+                    :saveCondition="filterValues.tempoRange.toString() != [0,200].toString()"
                 >
                     <vue-slider
                         v-model="filterValues.tempoRange"
@@ -44,9 +45,10 @@
                         (queryInfo.key[1] == 'm' ? 'Minor' : 'Major')
                     "
                     icon="music"
-                    @cancel="filterValues.key = queryInfo.key"
-                    @save="queryInfo.key = filterValues.key"
-                    @remove="queryInfo.key = ['','']; queryInfo.filterByKey = false"
+                    @cancel="filterValues.key = [...queryInfo.key]"
+                    @save="queryInfo.key = [...filterValues.key]"
+                    @remove="queryInfo.key = ['','']; filterValues.key = ['','']"
+                    :saveCondition="filterValues.key[0] != ''"
                 >
                     <Switch
                         class="keyModeSwitch"
@@ -233,7 +235,6 @@
             setTempo(values){
                 this.filterAdded.tempo = true;
                 this.queryInfo.tempo = values;
-                console.log(values);
             },
             sendQuery(){
                 this.$parent.search();

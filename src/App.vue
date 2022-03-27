@@ -45,17 +45,17 @@
         methods: {
             search(){
                 let originalQuery = this.$refs.TitleBar.$refs.SearchBar.value;
-                let topBarQuery = this.$refs.MainContent.$refs.TopArea.queryInfo;
+                let topBarQuery = JSON.parse(JSON.stringify(this.$refs.MainContent.$refs.TopArea.queryInfo));
                 let query = {
                     category:       topBarQuery.category,
                     keys:           '',
                     order:          topBarQuery.order,
                     tempo:          topBarQuery.tempo,
                     page:           1,
-                    key:            [topBarQuery.key[0], topBarQuery.key[1]],
+                    key:            topBarQuery.key,
                     date:           topBarQuery.date,
                     genre:          topBarQuery.genre,
-                    filterByKey:    this.$refs.MainContent.$refs.TopArea.filterAdded.keytest
+                    filterByKey:    (topBarQuery.key[0] != '')
                 };
 
                 // This matches every ocurrence of (NUMBER) BPM in the query
@@ -95,8 +95,8 @@
                 }
 
                 console.log(query);
-                this.$refs.MainContent.$refs.TopArea.$data.query = query;
-                this.$refs.MainContent.$refs.Results.$data.query = query;
+                this.$refs.MainContent.$refs.TopArea.$data.query = JSON.parse(JSON.stringify(query));
+                this.$refs.MainContent.$refs.Results.$data.query = JSON.parse(JSON.stringify(query));
                 this.$refs.MainContent.$refs.Results.reset();
             },
             async loadTheme(){

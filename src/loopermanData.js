@@ -32,7 +32,6 @@ function search(args){
     return new Promise(reply => {
         let results = [];
         let key = args.filterByKey ? ("&mkey="+args.key[0]+args.key[1]) : "";
-        console.log(key);
         var date = args.date == 0 ? '' : '&when=' + args.date;
         var genre = args.genre == 0 ? '' : '&gid=' + args.genre;
         axios.get(
