@@ -14,7 +14,7 @@ $font_scale: 1;
 $max-content-width: 1100px;
 $radius: 8.5px;
 $item-gap: 16px * $scale;
-$side-padding: 21px;
+$side-padding: $item-gap * 1.5;
 $gradient-s: 32px * $scale;
 $item-scale: 18px * $scale;
 $font-size: 15px * $font_scale;
