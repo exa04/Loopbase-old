@@ -23,8 +23,8 @@
                     ) + 'BPM'"
                     icon="activity"
                     @cancel="filterValues.tempoRange = queryInfo.tempo"
-                    @save="queryInfo.tempo = filterValues.tempoRange"
-                    @remove="queryInfo.tempo = [0,200]"
+                    @save="queryInfo.tempo = filterValues.tempoRange; this.$parent.$parent.search();"
+                    @remove="queryInfo.tempo = [0,200]; this.$parent.$parent.search();"
                     :saveCondition="filterValues.tempoRange.toString() != [0,200].toString()"
                 >
                     <vue-slider
@@ -46,8 +46,8 @@
                     "
                     icon="music"
                     @cancel="filterValues.key = [...queryInfo.key]"
-                    @save="queryInfo.key = [...filterValues.key]"
-                    @remove="queryInfo.key = ['','']; filterValues.key = ['','']"
+                    @save="queryInfo.key = [...filterValues.key]; this.$parent.$parent.search();"
+                    @remove="queryInfo.key = ['','']; filterValues.key = ['','']; this.$parent.$parent.search();"
                     :saveCondition="filterValues.key[0] != ''"
                 >
                     <Switch
