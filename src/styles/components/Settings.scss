@@ -5,11 +5,11 @@
     background: var(--glass-200);
     background: transparent;
     width: calc(100vw - (2 * $side-padding));
-    height: calc(100vh - (2 * $side-padding));
-    max-width: 1000px;
-    max-height: 800px;
+    height: calc(100vh - (2 * $side-padding) - 52px);
+    max-width: 1200px;
+    max-height: 900px;
     left: 50vw;
-    top: 50vh;
+    top: calc(50vh + 52px / 2);
     transform: translate(-50%, -50%);
     position: fixed;
     z-index: 6;
@@ -61,13 +61,30 @@
         overflow: auto;
         .inner-content{
             min-height: calc(100% - ($item-scale + $item-gap + $side-padding * 2));
-            > * {
-                margin-bottom: $item-gap;
-                margin-top: $item-gap;
-            }
             .input-component{
-                margin-left: $side-padding;
-                width: calc(100% - $side-padding);
+                width: 100%;
+                min-height: $item-scale + $item-gap;
+            }
+            h2{
+                color: var(--foreground-100);
+            }
+            h3{
+                text-transform: uppercase;
+                color: var(--foreground-200);
+                font-size: $font-size;
+            }
+            .section{
+                border-top: 1px solid var(--seperator);
+                > * {
+                    margin-bottom: $item-gap;
+                    margin-top: $item-gap;
+                }
+                > p{
+                    margin-top: $item-gap;
+                    margin-bottom: $item-gap;
+                    color: var(--foreground-300);
+                    max-width: 700px;
+                }
             }
         }
     }

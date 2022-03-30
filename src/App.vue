@@ -274,7 +274,8 @@
         .settings-window {
             width: 100vw;
             height: 100vh;
-            max-height: 100vh;
+            max-height: 100vh;        
+            top: 50vh;    
         }
     }
     @media only screen and (max-width: 500px) {
@@ -309,6 +310,15 @@
         #topSearch{ display: none; }
         #bottomSearch{ display: block; }
         h1{ font-size: $font-size * 3 * $scale; }
+        .settings-window{
+            .content, .sidebar a, .sidebar h2, #version-string{
+                padding-left: $item-gap;
+                padding-right: $item-gap;
+            }
+            .sidebar, .content{
+                padding-top: $item-gap;
+            }
+        }
     }
     @media only screen and (max-width: 300px) {
         .result{
