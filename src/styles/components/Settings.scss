@@ -97,6 +97,18 @@
                     font-size: $font-size;
                     margin-top: $item-gap * 2;
                 }
+                .ico-heading{
+                    background: var(--accent-1-100);
+                    aspect-ratio: 1;
+                    height: $item-gap * 2;
+                    display: flex;
+                    align-items: center;
+                    border-radius: 50%;
+                    justify-content: center;
+                    svg{
+                        stroke-width: 4px;
+                    }
+                }
             }
         }
     }
