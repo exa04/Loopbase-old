@@ -65,13 +65,8 @@
                 width: 100%;
                 min-height: $item-scale + $item-gap;
             }
-            h2{
-                color: var(--foreground-100);
-            }
-            h3{
-                text-transform: uppercase;
-                color: var(--foreground-200);
-                font-size: $font-size;
+            h1{
+                margin-bottom: $item-gap;
             }
             .section{
                 border-top: 1px solid var(--seperator);
@@ -79,11 +74,28 @@
                     margin-bottom: $item-gap;
                     margin-top: $item-gap;
                 }
+                > *:not(h2,h3){
+                    padding-left: $side-padding;
+                    box-sizing: border-box;
+                }
                 > p{
                     margin-top: $item-gap;
                     margin-bottom: $item-gap;
                     color: var(--foreground-300);
                     max-width: 700px;
+                }
+                h2{
+                    color: var(--foreground-100);
+                    margin-top: $item-gap * 2;
+                    display: flex;
+                    gap: $item-gap;
+                    align-items: center;
+                }
+                h3{
+                    text-transform: uppercase;
+                    color: var(--foreground-200);
+                    font-size: $font-size;
+                    margin-top: $item-gap * 2;
                 }
             }
         }
