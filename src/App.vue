@@ -118,6 +118,7 @@
 </script>
 
 <style lang="scss">
+    @import './styles/sizing-regular.scss';
     @import './styles/globals.scss';
 
     @import './styles/themes/chroma.scss';
