@@ -6,30 +6,35 @@
 }
 
 .select-popup-enter-from, .select-popup-leave-to{
-    transform: translateY(-$item-scale * 2 + $item-gap) !important;
+    transform: translateY(50%) !important;
     opacity: 0;
     box-shadow: 0px 0px 0px 0px #000 !important;
 }
 
 .select-popup-enter-to, .select-popup-leave-from{
-    transform: translateY($item-gap) !important;
+    transform: translateY(calc(2 * $item-gap + 50%));
     opacity: 1;
 }
 
 .select-popup-l-enter-from, .select-popup-l-leave-to{
-    transform: translate(-$side-padding, -$item-scale * 2 + $item-gap) !important;
+    transform: translateY(50%) !important;
     opacity: 0;
     box-shadow: 0px 0px 0px 0px #000 !important;
 }
 
 .select-popup-l-enter-to, .select-popup-l-leave-from{
-    transform: translateY($item-gap) !important;
+    transform: translateY(calc(2 * $item-gap + 50%));
     opacity: 1;
 }
 
 .select-chevron{
     transition-duration: $animation-duration;
     transition-timing-function: $animation-timing-alt;
+}
+.select-full{
+    display: flex;
+    align-items: center;
+    justify-content: stretch;
 }
 .select-container{
     @include glass(false, true);
@@ -40,12 +45,13 @@
     overflow: visible;
     height: fit-content;
     position: absolute;
-    transform: translateY($item-gap);
+    transform: translateY(calc(2 * $item-gap + 50%));
 }
 .select-layout{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
     .title{
         color: var(--foreground-200);
     }

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="select-full">
         <div class="select-layout">
             <div class="title"><slot/></div>
             <Button
