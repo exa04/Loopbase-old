@@ -125,6 +125,7 @@
     @import './styles/themes/dracula.scss';
     @import './styles/themes/light.scss';
     @import './styles/themes/purple.scss';
+    @import './styles/themes/dino.scss';
 
     @import './styles/components/MainContent.scss';
     @import './styles/components/PlayBar.scss';
