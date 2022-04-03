@@ -11,15 +11,6 @@
                 <h2>Settings</h2>
                 <a>
                     <VueFeather
-                        type="settings"
-                        size="18"
-                    />
-                    <span>
-                        General
-                    </span>
-                </a>
-                <a>
-                    <VueFeather
                         type="search"
                         size="18"
                     />
@@ -74,28 +65,105 @@
                 />
                 <div class="inner-content" v-if="prefsLoaded">
                     <h1>Settings</h1>
-                    <h2>Search &amp; Content</h2>
-                    <p>If you change the samples directory, your previously downloaded samples will stay in the old one. You can migrate them yourself, but you will also have to re-link them in your project files!</p>
-                    <FileSelector
-                        title="Samples"
-                        openBtn
-                        class="input-component"
-                        @update:modelValue="v => prefs.dir.content = v"
-                        :modelValue="prefs.dir.content"
-                    ></FileSelector>
-                    <h2>Appearance</h2>
-                    <Select
-                        :options="[
-                            ['theme-dark', 'Dark'],
-                            ['theme-light', 'Light'],
-                            ['theme-purple', 'Purple'],
-                            ['theme-chroma', 'Chroma'],
-                            ['theme-dracula', 'Dracula']
-                        ]"
-                        class="input-component"
-                        :selected="prefs.theme"
-                        @selectOption="o => prefs.theme = o"
-                    >Theme</Select>
+                    <div class="section">
+                        <h2>
+                            <span class="ico-heading">
+                                <VueFeather
+                                    type="search"
+                                    size="18"
+                                />
+                            </span>
+                            <span>Search &amp; Content</span>
+                        </h2>
+                        <h3>Directories</h3>
+                        <p>If you change the samples directory, your previously downloaded samples will stay in the old one. You can migrate them yourself, but you will also have to re-link them in your project files!</p>
+                        <FileSelector
+                            title="Samples"
+                            openBtn
+                            class="input-component"
+                            @update:modelValue="v => prefs.dir.content = v"
+                            :modelValue="prefs.dir.content"
+                        ></FileSelector>
+                        <h3>Keys</h3>
+                        <p>These settings don't affect your actual keys, just the way that they are displayed.</p>
+                        <div>
+                            <div class="key-row sharps">
+                                <div>C#</div>
+                                <div>D#</div>
+                                <div class="key-seperator"></div>
+                                <div>F#</div>
+                                <div>G#</div>
+                                <div>A#</div>
+                            </div>
+                            <div class="key-row">
+                                <div>C</div>
+                                <div>D</div>
+                                <div>E</div>
+                                <div>F</div>
+                                <div>G</div>
+                                <div>A</div>
+                                <div>B</div>
+                            </div>
+                        </div>
+                        <Switch title="Germanic key labels" class="input-component big"/>
+                        <Switch title="Mode accurate key labels" class="input-component big"/>
+                        <h3>Searching</h3>
+                        <Switch title="Smart filters" class="input-component big"/>
+                    </div>
+                    <div class="section">
+                        <h2>
+                            <span class="ico-heading">
+                                <VueFeather
+                                    type="edit-2"
+                                    size="18"
+                                />
+                            </span>
+                            <span>Appearance</span>
+                        </h2>
+                        <h3>Theme</h3>
+                        <p>Some features, like native title bar and compact mode, require restarting the app.</p>
+                        <Select
+                            :options="[
+                                ['theme-chroma', 'Chroma'],
+                                ['theme-dark', 'Dark'],
+                                ['theme-dino', 'Dino'],
+                                ['theme-dracula', 'Dracula'],
+                                ['theme-light', 'Light'],
+                                ['theme-purple', 'Purple'],
+                            ]"
+                            class="input-component"
+                            :selected="prefs.theme"
+                            @selectOption="o => prefs.theme = o"
+                        >Theme</Select>
+                        <Switch title="Compact mode" class="input-component big"/>
+                        <Switch title="Reduced motion" class="input-component big"/>
+                        <h3>Navigation</h3>
+                        <Switch title="Native title bar" class="input-component big"/>
+                        <Switch title="Sidebar" class="input-component big"/>
+                    </div>
+                    <div class="section">
+                        <h2>
+                            <span class="ico-heading">
+                                <VueFeather
+                                    type="code"
+                                    size="18"
+                                />
+                            </span>
+                            <span>Advanced</span>
+                        </h2>
+                        <h3>Settings</h3>
+                        <div class="input-component">
+                            <Button secondary class="il-block">Reset all settings</Button>
+                            <Button tertiary class="il-block">Export</Button>
+                            <Button tertiary class="il-block">Import</Button>
+                        </div>
+                        <h3>Code</h3>
+                        <Switch title="Send anonymous usage statistics" class="input-component big"/>
+                        <div class="input-component">
+                            <Button secondary class="il-block">Patch Notes</Button>
+                            <Button tertiary class="il-block">Source Code</Button>
+                        </div>
+                    </div>
                 </div>
                 <div class="action-pair">
                     <div class="subtext unsaved-warn" v-if="JSON.stringify(prefs) !== JSON.stringify(originalPrefs)">
@@ -122,6 +190,7 @@
     import VueFeather from 'vue-feather';
     import Button from './inputs/Button.vue';
     import Select from './inputs/Select.vue';
+    import Switch from './inputs/Switch.vue';
     import FileSelector from './inputs/FileSelector.vue';
     const electron = window.require("electron");
 
@@ -131,7 +200,8 @@
             VueFeather,
             Button,
             FileSelector,
-            Select
+            Select,
+            Switch
         },
         data() {
             return {
