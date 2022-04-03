@@ -4,7 +4,7 @@
 
 With loopbase, you can browse samples on Looperman and download them. Just search for whatever you need, save samples, and drag them into your DAW from the app! Loopbase is not affiliated with Looperman.
 
-<img width="1072" alt="grafik" src="https://user-images.githubusercontent.com/68156346/149636073-55805004-a4a5-4268-96fa-d60bf1553498.png">
+![Screenshot](https://user-images.githubusercontent.com/68156346/161435777-439a4893-a842-425e-b7cc-249d031e4503.png)
 
 ## Installing
 
@@ -14,7 +14,7 @@ If you want to have something more new, you can build from source
 
 ## Building
 
-If you want to build Loopbase yourself, it's as easy as 1-2-3!
+If you want to build Loopbase yourself, you'll need to have git, npm, and node.js installed.
 
 1. Clone the repository
 
@@ -22,7 +22,7 @@ If you want to build Loopbase yourself, it's as easy as 1-2-3!
 git clone https://github.com/StarburstAudio/loopbase
 ```
 
-2. Then, install all the dependencies
+2. Then, install the dependencies
 
 ```sh
 npm i
@@ -34,3 +34,5 @@ npm i
 npm run electron:serve  # Runs the app with hot-reload
 npm run electron:build  # Compiles the app to an executable
 ```
+
+If you run into an error, try running `nvm use 16` and then re-doing step 3.
