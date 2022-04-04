@@ -1,6 +1,14 @@
+<p>
+  <img src="https://raw.githubusercontent.com/StarburstAudio/loopbase/main/public/icons/png/128x128.png" align="left">
+</p>
+
 # Loopbase
 
-> ⚠️ THIS APP IS STILL IN ALPHA: You may encounter bugs, some features are missing or subject to change.
+![](https://github.com/StarburstAudio/loopbase/actions/workflows/main.yml/badge.svg)
+![](https://img.shields.io/github/package-json/v/StarburstAudio/loopbase?color=purple)
+![](https://img.shields.io/github/license/StarburstAudio/loopbase)
+![](https://img.shields.io/tokei/lines/github/StarburstAudio/loopbase)
+![](https://img.shields.io/github/downloads/StarburstAudio/loopbase/total)
 
 With loopbase, you can browse samples on Looperman and download them. Just search for whatever you need, save samples, and drag them into your DAW from the app! Loopbase is not affiliated with Looperman.
 
@@ -8,7 +16,7 @@ With loopbase, you can browse samples on Looperman and download them. Just searc
 
 ## Installing
 
-If you're looking for something more stable, head over to the [releases section](https://github.com/StarburstAudio/loopbase/releases) and grab the latest one for your platform.
+THIS APP IS STILL IN ALPHA: You may encounter bugs, some features are missing or subject to change. If you want a pre-release, head over to the [releases section](https://github.com/StarburstAudio/loopbase/releases) and grab the latest one for your platform.
 
 If you want to have something more new, you can build from source
 
