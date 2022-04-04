@@ -1,7 +1,7 @@
 name: GitHub Actions Demo
 on: [push]
 jobs:
-  Build:
+  Serve:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Triggered by ${{ github.event_name }} on ${{ github.ref }}"
@@ -16,7 +16,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm i
-      - name: Run build
+      - name: Run code
         run: |
-          npm run electron:build
+          npm run electron:serve
       - run: echo "Status is ${{ job.status }}."
