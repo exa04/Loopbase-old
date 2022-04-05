@@ -4,7 +4,7 @@
 
 # Loopbase
 
-![](https://github.com/StarburstAudio/loopbase/actions/workflows/main.yml/badge.svg)
+[![Continuous Integration](https://github.com/StarburstAudio/loopbase/actions/workflows/main.yml/badge.svg)](https://github.com/StarburstAudio/loopbase/actions/workflows/main.yml)
 ![](https://img.shields.io/github/package-json/v/StarburstAudio/loopbase?color=purple)
 ![](https://img.shields.io/github/license/StarburstAudio/loopbase)
 ![](https://img.shields.io/tokei/lines/github/StarburstAudio/loopbase)
