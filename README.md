@@ -14,11 +14,11 @@ With loopbase, you can browse samples on Looperman and download them. Just searc
 
 ![Screenshot](https://user-images.githubusercontent.com/68156346/161435777-439a4893-a842-425e-b7cc-249d031e4503.png)
 
-## Installing
+## 💻 Installing
 
 THIS APP IS STILL IN ALPHA: You may encounter bugs, some features are missing or subject to change. If you want a pre-release, head over to the [releases section](https://github.com/StarburstAudio/loopbase/releases) and grab the latest one for your platform.
 
-## Building
+## 🛠️ Building
 
 If you want to build Loopbase yourself, you'll need to have git, npm, and node.js installed.
 
