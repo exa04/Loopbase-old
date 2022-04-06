@@ -9,10 +9,12 @@ module.exports = {
                 icon: './public/icons/win/icon.ico'
               },
               mac: {
+                category: 'public.app-category.music',
                 icon: './public/icons/mac/icon.icns'
               },
               linux: {
-                icon: './public/icons/png'
+                icon: './public/icons/png',
+                category: 'Audio'
               },
             }
         }
