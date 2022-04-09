@@ -1,6 +1,6 @@
 .top-area{
-    padding: $side-padding;
-    padding-bottom: $item-gap;
+    padding: var(--side-padding);
+    padding-bottom: var(--item-gap);
     border-bottom: 1px solid var(--seperator);
     width: calc(100% + 1px);    // TODO: Find a better alternative to this questionable hack
     box-sizing: border-box;
@@ -14,14 +14,14 @@
 }
 .results-header{
     display: grid;
-    grid-template-columns: $profile-pic-large-size 2fr 8ch 7ch 109px;
-    gap: $item-gap;
+    grid-template-columns: var(--profile-pic-large-size) 2fr 8ch 7ch 109px;
+    gap: var(--item-gap);
     color: var(--foreground-200);
     margin: auto;
-    margin-top: $item-gap;
+    margin-top: var(--item-gap);
 }
 .hidden{
-    transform: translateY($item-scale + $item-gap + 100px);
+    transform: translateY(calc(var(--item-scale) + var(--item-gap) + 100px));
     display: none;
 }
 .key-row{
@@ -29,17 +29,17 @@
     justify-content: center;
     > div{
         cursor: pointer;
-        height: $item-scale;
+        height: var(--item-scale);
         aspect-ratio: 1;
         display: flex;
         justify-content: center;
-        padding: $item-gap / 4;
+        padding: calc(var(--item-gap) / 4);
         background: var(--background-300);
         border-radius: 50%;
-        margin: $item-gap / 8;
-        transition-duration: $animation-duration;
-        transition-timing-function: $animation-timing;
-        font-size: $font-size * .85;
+        margin: calc(var(--item-gap) / 8);
+        transition-duration: var(--animation-duration);
+        transition-timing-function: var(--animation-timing);
+        font-size: calc(var(--font-size) * .85);
         &:hover{
             background: var(--background-400);
         }
@@ -60,5 +60,5 @@
     width: 100%;
     background: var(--background-100);
     display: none;
-    margin: $item-gap 0;
+    margin: var(--item-gap) 0;
 }

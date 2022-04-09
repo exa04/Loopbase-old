@@ -15,7 +15,8 @@ let pref = {
     dir : {
         content: homedir() + "/loopbaseContent"
     },
-    theme: 'theme-purple'
+    theme: 'theme-purple',
+    compactMode: false
 }
 
 let appdataPath = join(app.getPath("appData"), "loopbase");

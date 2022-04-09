@@ -1,11 +1,11 @@
 .settings-window{
-    transition-duration: $animation-duration-alt;
-    transition-timing-function: $animation-timing;
+    transition-duration: var(--animation-duration-alt);
+    transition-timing-function: var(--animation-timing);
     @include glass(false, true);
     background: var(--glass-200);
     background: transparent;
-    width: calc(100vw - (2 * $side-padding));
-    height: calc(100vh - (2 * $side-padding) - 52px);
+    width: calc(100vw - (2 * var(--side-padding)));
+    height: calc(100vh - (2 * var(--side-padding) - 52px));
     max-width: 1200px;
     max-height: 900px;
     left: 50vw;
@@ -24,20 +24,20 @@
         border-bottom-right-radius: 0;
         border-top-right-radius: 0;
         border-right: none;
-        padding-top: $side-padding;
+        padding-top: var(--side-padding);
         a, h2{
             display: block;
-            padding-bottom: $item-gap;
-            padding-left: $side-padding;
-            padding-right: $side-padding;
+            padding-bottom: var(--item-gap);
+            padding-left: var(--side-padding);
+            padding-right: var(--side-padding);
         }
         a{
             display: flex;
             align-items: center;
-            gap: $item-gap;
+            gap: var(--item-gap);
             cursor: pointer;
-            transition-duration: $animation-duration;
-            transition-timing-function: $animation-timing;
+            transition-duration: var(--animation-duration);
+            transition-timing-function: var(--animation-timing);
             color: var(--foreground-200);
             &:hover{
                 color: var(--foreground-100);
@@ -51,56 +51,56 @@
     .content{
         @include glass(true, true);
         background: var(--soft-glass-200);
-        padding-left: $side-padding;
-        padding-right: $side-padding;
+        padding-left: var(--side-padding);
+        padding-right: var(--side-padding);
         border-bottom-left-radius: 0;
         border-top-left-radius: 0;
         border-left: 1px solid var(--seperator);
         flex: 1 1;
-        padding-top: $side-padding;
+        padding-top: var(--side-padding);
         overflow: auto;
         .inner-content{
-            min-height: calc(100% - ($item-scale + $item-gap + $side-padding * 2));
+            min-height: calc(100% - (var(--item-scale) + var(--item-gap) + var(--side-padding) * 2));
             .input-component{
                 width: 100%;
-                min-height: $item-scale + $item-gap;
+                min-height: calc(var(--item-scale) + var(--item-gap));
             }
             h1{
-                margin-bottom: $item-gap;
+                margin-bottom: var(--item-gap);
             }
             .section{
                 border-top: 1px solid var(--seperator);
                 > * {
-                    margin-bottom: $item-gap;
-                    margin-top: $item-gap;
+                    margin-bottom: var(--item-gap);
+                    margin-top: var(--item-gap);
                 }
                 > *:not(h2,h3){
-                    padding-left: $side-padding;
+                    padding-left: var(--side-padding);
                     box-sizing: border-box;
                 }
                 > p{
-                    margin-top: $item-gap;
-                    margin-bottom: $item-gap;
+                    margin-top: var(--item-gap);
+                    margin-bottom: var(--item-gap);
                     color: var(--foreground-300);
                     max-width: 700px;
                 }
                 h2{
                     color: var(--foreground-100);
-                    margin-top: $item-gap * 2;
+                    margin-top: calc(var(--item-gap) * 2);
                     display: flex;
-                    gap: $item-gap;
+                    gap: var(--item-gap);
                     align-items: center;
                 }
                 h3{
                     text-transform: uppercase;
                     color: var(--foreground-200);
-                    font-size: $font-size;
-                    margin-top: $item-gap * 2;
+                    font-size: var(--font-size);
+                    margin-top: calc(var(--item-gap) * 2);
                 }
                 .ico-heading{
                     background: var(--accent-1-100);
                     aspect-ratio: 1;
-                    height: $item-gap * 2;
+                    height: calc(var(--item-gap) * 2);
                     display: flex;
                     align-items: center;
                     border-radius: 50%;
@@ -117,7 +117,7 @@
         flex-direction: column wrap;
         justify-content: flex-end;
         align-items: center;
-        margin-bottom: $side-padding;
+        margin-bottom: var(--side-padding);
         .unsaved-warn{
             flex-grow: 1;
         }
@@ -126,11 +126,11 @@
 .close-x{
     color: var(--foreground-200);
     position: fixed;
-    right: $item-gap;
-    top: $item-gap;
+    right: var(--item-gap);
+    top: var(--item-gap);
     cursor: pointer;
-    transition-duration: $animation-duration;
-    transition-timing-function: $animation-timing;
+    transition-duration: var(--animation-duration);
+    transition-timing-function: var(--animation-timing);
     :hover{
         color: var(--foreground-100);
     }
@@ -139,9 +139,9 @@
     display: none;
 }
 #version-string{
-    padding-left: $side-padding;
-    padding-right: $side-padding;
+    padding-left: var(--side-padding);
+    padding-right: var(--side-padding);
     color: var(--foreground-300);
     margin-top: 0;
-    font-size: $font-size * .85;
+    font-size: calc(var(--font-size) * .85);
 }

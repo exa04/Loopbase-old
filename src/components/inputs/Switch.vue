@@ -26,6 +26,9 @@ export default {
             this.value = !this.value;
             this.$emit('update:modelValue', this.value);
         }
-    }
+    },
+    mounted() {
+        this.value = this.$props.modelValue;
+    },
 }
 </script>

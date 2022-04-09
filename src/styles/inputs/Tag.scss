@@ -4,33 +4,33 @@
 .tag-popup-leave-active,
 .tag-popup-l-enter-active,
 .tag-popup-l-leave-active {
-    transition: all $animation-duration-alt $animation-timing-alt;
+    transition: all var(--animation-duration-alt) var(--animation-timing-alt);
 }
 
 .tag-popup-enter-from, .tag-popup-leave-to{
-    transform: translateY($item-scale * 2 + $item-gap) !important;
+    transform: translateY(calc(var(--item-scale) * 2 + var(--item-gap))) !important;
     opacity: 0;
     box-shadow: 0px 0px 0px 0px #000 !important;
 }
 
 .tag-popup-enter-to, .tag-popup-leave-from{
-    transform: translateY($item-scale + $item-gap) !important;
+    transform: translateY(calc(var(--item-scale) + var(--item-gap))) !important;
     opacity: 1;
 }
 
 .tag-popup-l-enter-from, .tag-popup-l-leave-to{
-    transform: translate(-$side-padding, $item-scale * 2 + $item-gap) !important;
+    transform: translate(calc(var(--side-padding) * -1), calc(var(--item-scale) * 2 + var(--item-gap))) !important;
     opacity: 0;
     box-shadow: 0px 0px 0px 0px #000 !important;
 }
 
 .tag-popup-l-enter-to, .tag-popup-l-leave-from{
-    transform: translate(-$side-padding, $item-scale + $item-gap) !important;
+    transform: translate(calc(-1 * var(--side-padding)),calc(var(--item-scale) + var(--item-gap))) !important;
     opacity: 1;
 }
 .tags-container{
     margin: auto;
-    margin-top: $item-gap;
+    margin-top: var(--item-gap);
     .tag-duo{
         flex-shrink: 0;
     }
@@ -38,7 +38,7 @@
 .tags-container, .tags-left{
     display: flex;
     flex-grow: 1;
-    gap: $item-gap;
+    gap: var(--item-gap);
     flex-wrap: wrap;
 }
 .tags-left{
@@ -48,15 +48,15 @@
     float: left;
     display: flex;
     gap: 8px;
-    height: $item-scale;
+    height: var(--item-scale);
     padding: 8px;
     padding-top: 4px;
     padding-bottom: 4px;
-    border-radius: $radius;
+    border-radius: var(--radius);
     font-weight: 900;
     cursor: pointer;
-    transition-duration: $animation-duration;
-    transition-timing-function: $animation-timing;
+    transition-duration: var(--animation-duration);
+    transition-timing-function: var(--animation-timing);
     background: var(--background-300);
     &:hover{ background: var(--background-400); }
     &:active{ background: var(--background-300); }
@@ -92,17 +92,17 @@
     overflow: auto;
     height: fit-content;
     position: absolute;
-    transform: translateY($item-scale + $item-gap);
-    padding: $side-padding;
+    transform: translateY(calc(var(--item-scale) + var(--item-gap)));
+    padding: var(--side-padding);
     z-index: 2;
     > *{
-        margin-bottom: $item-gap / 2;
+        margin-bottom: calc(var(--item-gap) / 2);
         &:last-child{
             margin-bottom: 0;
         }
     }
     &.align-left{
-        transform: translate(-$side-padding, $item-scale + $item-gap);
+        transform: translate(calc(var(--side-padding) * -1), calc(var(--item-scale) + var(--item-gap)));
         right: 0;
     }
 }

@@ -122,6 +122,7 @@
                         </h2>
                         <h3>Theme</h3>
                         <p>Some features, like native title bar and compact mode, require restarting the app.</p>
+                        <p>{{prefs}}</p>
                         <Select
                             :options="[
                                 ['theme-chroma', 'Chroma'],
@@ -135,7 +136,12 @@
                             :selected="prefs.theme"
                             @selectOption="o => prefs.theme = o"
                         >Theme</Select>
-                        <Switch title="Compact mode" class="input-component big"/>
+                        <Switch
+                            title="Compact mode"
+                            class="input-component big"
+                            :modelValue="prefs.compactMode"
+                            @update:modelValue="v => prefs.compactMode = v"
+                        />
                         <Switch title="Reduced motion" class="input-component big"/>
                         <h3>Navigation</h3>
                         <Switch title="Native title bar" class="input-component big"/>

@@ -1,12 +1,14 @@
-$scale: 1;
-$font_scale: 1;
-
-$max-content-width: 1100px;
-$radius: 8.5px;
-$item-gap: 16px * $scale;
-$side-padding: $item-gap * 1.5;
-$gradient-s: 32px * $scale;
-$item-scale: 16px * $scale;
-$font-size: 15px * $font_scale;
-
-$profile-pic-large-size: $item-scale * 3 * $scale;
+.sizing-regular{
+    --scale: 1;
+    --font_scale: 1;
+    --heading-scale: 1.5;
+    
+    --max-content-width: 1100px;
+    --radius: 8.5px;
+    --item-gap: calc(16px * var(--scale));
+    --side-padding: calc(var(--item-gap) * 1.5);
+    --gradient-s: calc(32px * var(--scale));
+    --item-scale: calc(16px * var(--scale));
+    --font-size: calc(15px * var(--font_scale));
+    --profile-pic-large-size: calc(var(--item-scale) * 3 * var(--scale));
+}

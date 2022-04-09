@@ -4,22 +4,22 @@
     align-items: center;
     &.big{
         .switch-inner{
-            width: $radius * 3;
-            border-radius: $radius * 1.5;
+            width: calc(var(--radius) * 3);
+            border-radius: calc(var(--radius) * 1.5);
             &.active{
-                margin-left: $radius * 3;
+                margin-left: calc(var(--radius) * 3);
             }
         }
         .switch-outer{
-            width: $radius * 6;
-            height: $radius * 3;
-            border-radius: $radius * 1.5;
+            width: calc(var(--radius) * 6);
+            height: calc(var(--radius) * 3);
+            border-radius: calc(var(--radius) * 1.5);
         }
         :active{
             .switch-inner{
-                margin-left: $radius;
+                margin-left: var(--radius);
                 &.active{
-                    margin-left: $radius * 2;
+                    margin-left: calc(var(--radius) * 2);
                 }
             }
             .switch-outer{
@@ -30,31 +30,31 @@
     
 }
 .switch-inner{
-    width: $radius * 2;
+    width: calc(var(--radius) * 2);
     aspect-ratio: 1;
-    border-radius: $radius;
+    border-radius: var(--radius);
     background: var(--foreground-100);
-    transition-duration: $animation-duration;
-    transition-timing-function: $animation-timing-alt;
+    transition-duration: var(--animation-duration);
+    transition-timing-function: var(--animation-timing-alt);
     &.active{
-        margin-left: $radius * 2;
+        margin-left: calc(var(--radius) * 2);
     }
 }
 .switch-outer{
     flex-shrink: 0;
-    width: $radius * 4;
-    height: $radius * 2;
-    border-radius: $radius;
+    width: calc(var(--radius) * 4);
+    height: calc(var(--radius) * 2);
+    border-radius: var(--radius);
     background: var(--background-100);
     cursor: pointer;
-    transition-duration: $animation-duration;
-    transition-timing-function: $animation-timing;
+    transition-duration: var(--animation-duration);
+    transition-timing-function: var(--animation-timing);
     &.active{
         background: var(--accent-2-100);
     }
 }
 .switch-label{
     color: var(--foreground-200);
-    width: calc(100% - ($radius * 4));
+    width: calc(100% - var(--radius) * 4);
     flex-shrink: 1;
 }

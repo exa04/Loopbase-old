@@ -1,8 +1,8 @@
 .play-bar{
     @include glass(false, false);
     background: var(--glass-100);
-    padding: 0 $side-padding;
-    gap: $side-padding;
+    padding: 0 var(--side-padding);
+    gap: var(--side-padding);
     height: 90px;
     align-items: center;
     display: flex;
@@ -12,7 +12,7 @@
     }
 }
 .info-audio{
-    @include side-gradient(to right, $window-background);
+    @include side-gradient(to right, var(--window-background));
     display: flex;
     align-items: center;
     flex-grow: 2;
@@ -21,10 +21,10 @@
 .profile-picture{
     width: 36px;
     image-rendering: crisp-edges;
-    border-radius: $radius;
+    border-radius: var(--radius);
 }
 .audio-desc{
-    margin-left: $item-gap / 2;
+    margin-left: calc(var(--item-gap) / 2);
     div{
         width: max-content;
     }
@@ -34,7 +34,7 @@
 }
 .playback-controls{
     display: flex;
-    gap: $item-gap;
+    gap: var(--item-gap);
     align-items: center;
 }
 #volumeSlider{

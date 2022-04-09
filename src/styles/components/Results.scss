@@ -1,24 +1,24 @@
 .results{
-    padding-top: $side-padding / 2;
+    padding-top: calc(var(--side-padding) / 2);
     width: 100vw;
     height: fit-content;
 }
 #loading-section{
-    padding-top: $item-gap;
-    padding-bottom: 90px + $item-gap;
+    padding-top: var(--item-gap);
+    padding-bottom: calc(90px + var(--item-gap));
     margin: auto;
 }
 .result{
-    width: calc(100% - $side-padding * 2);
+    width: calc(100% - var(--side-padding) * 2);
     display: grid;
-    grid-template-columns: $profile-pic-large-size 1fr 1fr 5ch 8ch 7ch auto;
+    grid-template-columns: var(--profile-pic-large-size) 1fr 1fr 5ch 8ch 7ch auto;
     margin: auto;
-    padding: $item-gap/1.5;
-    gap: $item-gap;
+    padding: calc(var(--item-gap) / 1.5);
+    gap: var(--item-gap);
     align-items: center;
-    border-radius: $radius;
+    border-radius: var(--radius);
     .info-audio{
-        @include side-gradient(to right, $window-background);
+        @include side-gradient(to right, var(--window-background));
         flex-grow: 2;
 
         .desc-title{
@@ -30,13 +30,13 @@
         }
     }
     &:hover, &.playing{
-        background: $window-hover;
+        background: var(--background-300);
         .info-audio{
-            @include side-gradient(to right, $window-hover);
+            @include side-gradient(to right, var(--background-300));
         }
         .play-btn{
             opacity: .8;
-            background: --background-300;
+            background: var(--background-300);
         }
         .actions-result svg{
             stroke: var(--foreground-100);
@@ -44,16 +44,16 @@
         .desc-author{
             &:hover{
                 color: var(--foreground-100);
-                transition-duration: $animation-duration;
-                transition-timing-function: $animation-timing;
+                transition-duration: var(--animation-duration);
+                transition-timing-function: var(--animation-timing);
                 text-decoration-thickness: 2px;
                 text-decoration: underline solid;
             }
         }
         .mono-value{
             color: var(--foreground-100);
-            transition-duration: $animation-duration;
-            transition-timing-function: $animation-timing;
+            transition-duration: var(--animation-duration);
+            transition-timing-function: var(--animation-timing);
         }
     }
     &.playing{
@@ -62,8 +62,8 @@
             background: var(--accent-1-200);
         }
     }
-    transition-duration: $animation-duration;
-    transition-timing-function: $animation-timing;
+    transition-duration: var(--animation-duration);
+    transition-timing-function: var(--animation-timing);
 
     .mono-value{
         color: var(--foreground-200);
@@ -72,7 +72,7 @@
         margin-left: 0;
     }
     .actions-result{
-        width: 125px - $item-gap;
+        width: calc(125px - var(--item-gap));
         display: flex;
         justify-content: space-between;
         svg{
@@ -85,12 +85,12 @@
     flex-direction: row;
 }
 .profile-picture-large{
-    border-radius: $radius;
+    border-radius: var(--radius);
     aspect-ratio: 1;
-    width: $profile-pic-large-size;
+    width: var(--profile-pic-large-size);
 }
 .visualizer{
-    height: $profile-pic-large-size;
+    height: var(--profile-pic-large-size);
     width: 100%;
     background: #000;
     filter: invert(1);
@@ -98,7 +98,7 @@
     opacity: .5;
 }
 .icon-spacer{
-    width: $item-scale;
+    width: var(--item-scale);
 }
 .like{
     &.liked svg{
@@ -115,18 +115,18 @@
     }
 }
 .play-btn{
-    width: $profile-pic-large-size;
+    width: var(--profile-pic-large-size);
     aspect-ratio: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: -$profile-pic-large-size;
+    margin-left: calc(var(--profile-pic-large-size) * -1);
     opacity: 0;
     background: var(--background-300);
     svg{
         stroke: var(--foreground-100);
     }
-    border-radius: $radius;
-    transition-duration: $animation-duration;
-    transition-timing-function: $animation-timing;
+    border-radius: var(--radius);
+    transition-duration: var(--animation-duration);
+    transition-timing-function: var(--animation-timing);
 }
