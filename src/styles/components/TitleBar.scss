@@ -4,11 +4,11 @@
     -webkit-app-region: drag;
     justify-content: space-between;
     color: var(--foreground-100);
-    padding: 0 $side-padding;
+    padding: 0 var(--side-padding);
     height: 52px;
     display: flex;
     align-items: center;
-    gap: $item-gap;
+    gap: var(--item-gap);
     border-bottom: 1px solid var(--seperator);
     >*{
         -webkit-app-region: no-drag;
@@ -26,7 +26,7 @@
 }
 .actions{
     display: flex;
-    gap: $item-gap;
+    gap: var(--item-gap);
     .vue-feather, .vue-feather > svg {
         stroke: var(--foreground-200);
         cursor: pointer;

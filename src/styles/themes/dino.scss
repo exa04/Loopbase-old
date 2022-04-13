@@ -1,0 +1,53 @@
+.theme-dino{
+    // Basic colors: All others are derivatives of these
+
+    $background: #f8fffb;
+    $foreground: #5d957a;
+
+    --inverse-foreground: #fff;
+
+    --seperator: #93e9be;
+
+    $accent-1: #93e9be;
+    $accent-2: #238162;
+    $accent-3: #93e9be;
+    $accent-4: #238162;
+
+    // Generated colors
+
+    --accent-1-100: #{$accent-1};
+    --accent-1-200: #{darken($accent-1, 5%)};
+    --accent-1-300: #{darken($accent-1, 10%)};
+
+    --accent-2-100: #{$accent-2};
+    --accent-2-200: #{lighten($accent-1, 1%)};
+    --accent-2-300: #{lighten($accent-1, 2%)};
+
+    --accent-3-100: #{$accent-3};
+    --accent-3-200: #{lighten($accent-1, 5%)};
+    --accent-3-300: #{lighten($accent-1, 10%)};
+
+    --accent-4-100: #{$accent-4};
+    --accent-4-200: #{lighten($accent-1, 5%)};
+    --accent-4-300: #{lighten($accent-1, 10%)}; 
+
+    --background-100: #ffffff;
+    --background-200: #f8fffb;
+    --background-300: #dbffed;
+    --background-400: #93e9be;
+
+    --foreground-100: #{darken($foreground, 30%)};
+    --foreground-200: #{darken($foreground, 15%)};
+    --foreground-300: #{$foreground};
+
+    --glass-100: #dbffed;
+    --glass-200: #f8fffb;
+
+    --soft-glass-100: #f8fffb;
+    --soft-glass-200: #dbffed;
+
+    .visualizer{
+        filter: none !important;
+        mix-blend-mode: darken !important;
+    }
+}

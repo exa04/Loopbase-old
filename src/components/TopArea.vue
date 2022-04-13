@@ -52,6 +52,7 @@
                 >
                     <Switch
                         class="keyModeSwitch"
+                        :modelValue="filterValues.key[1] == 'm'"
                         @update:modelValue="v => filterValues.key[1] = (v ? 'm' : '')"
                         :title="'Mode: ' + (filterValues.key[1] == 'm' ? 'Minor' : 'Major')"
                     />

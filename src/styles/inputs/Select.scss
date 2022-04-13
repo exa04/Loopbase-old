@@ -2,7 +2,7 @@
 .select-popup-leave-active,
 .select-popup-l-enter-active,
 .select-popup-l-leave-active {
-    transition: all $animation-duration-alt $animation-timing-alt;
+    transition: all var(--animation-duration-alt) var(--animation-timing-alt);
 }
 
 .select-popup-enter-from, .select-popup-leave-to{
@@ -12,7 +12,7 @@
 }
 
 .select-popup-enter-to, .select-popup-leave-from{
-    transform: translateY(calc(2 * $item-gap + 50%));
+    transform: translateY(calc(2 * var(--item-gap) + 50%));
     opacity: 1;
 }
 
@@ -23,13 +23,13 @@
 }
 
 .select-popup-l-enter-to, .select-popup-l-leave-from{
-    transform: translateY(calc(2 * $item-gap + 50%));
+    transform: translateY(calc(2 * var(--item-gap) + 50%));
     opacity: 1;
 }
 
 .select-chevron{
-    transition-duration: $animation-duration;
-    transition-timing-function: $animation-timing-alt;
+    transition-duration: var(--animation-duration);
+    transition-timing-function: var(--animation-timing-alt);
 }
 .select-full{
     display: flex;
@@ -40,12 +40,12 @@
     @include glass(false, true);
     background: var(--glass-200);
     min-width: 200px;
-    right: $side-padding;
+    right: var(--side-padding);
     max-height: 50vh;
     overflow: visible;
     height: fit-content;
     position: absolute;
-    transform: translateY(calc(2 * $item-gap + 50%));
+    transform: translateY(calc(2 * var(--item-gap) + 50%));
 }
 .select-layout{
     display: flex;
@@ -59,7 +59,7 @@
 .select-btn{
     min-width: min-content;
     &.expanded{
-        min-width: 200px - $item-gap * 2;
+        min-width: calc(200px - var(--item-gap) * 2);
         justify-content: space-between;
         background: var(--accent-2-100);
         &:hover{
@@ -74,33 +74,33 @@
     .option{
         cursor: pointer;
         background: var(--background-300);
-        padding: $item-gap / 2;
+        padding: calc(var(--item-gap) / 2);
         border: 1px solid var(--background-300);
         border-bottom: 1px solid var(--background-200);
-        transition-duration: $animation-duration;
-        transition-timing-function: $animation-timing-alt;
+        transition-duration: var(--animation-duration);
+        transition-timing-function: var(--animation-timing-alt);
         color: var(--foreground-200);
         &:hover:not(.selected){
             background: var(--background-400);
-            border-radius: $radius;
+            border-radius: var(--radius);
             transform: scale(1.1);
             border: 1px solid var(--background-200);
             color: var(--foreground-100);
         }
         &:active:not(.selected){
             background: var(--background-300);
-            border-radius: $radius;
+            border-radius: var(--radius);
             transform: scale(1.05);
             border: 1px solid var(--background-200);
             color: var(--foreground-100);
         }
         &:first-child{
-            border-top-left-radius: $radius;
-            border-top-right-radius: $radius;
+            border-top-left-radius: var(--radius);
+            border-top-right-radius: var(--radius);
         }
         &:last-child{
-            border-bottom-left-radius: $radius;
-            border-bottom-right-radius: $radius;
+            border-bottom-left-radius: var(--radius);
+            border-bottom-right-radius: var(--radius);
         }
         &.selected{
             background: var(--accent-2-100);

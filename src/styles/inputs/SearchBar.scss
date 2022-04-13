@@ -8,29 +8,29 @@
     width: 437px;
     .inner svg{
         stroke: var(--foreground-200);
-        height: $font-size * .9;
+        height: calc(var(--font-size) * .9);
         stroke-width: 3.5;
     }
     background: var(--background-200);
-    border-radius: $radius;
+    border-radius: var(--radius);
     height: 26px;
-    transition-duration: $animation-duration;
-    transition-timing-function: $animation-timing;
+    transition-duration: var(--animation-duration);
+    transition-timing-function: var(--animation-timing);
     cursor: text;
     border: 1px rgba(255,255,255,.1) solid;
-    border-radius: $radius;
+    border-radius: var(--radius);
     box-shadow: inset 0px -3px 1px -2px rgba(255,255,255,.2);
 }
 .inner{
     display: flex;
     align-items: center;
     gap: 6px;
-    margin-left: $item-gap;
+    margin-left: var(--item-gap);
     height: 100%;
     width: 100%;
     max-width: 100%;
-    transition-duration: $animation-duration;
-    transition-timing-function: $animation-timing;
+    transition-duration: var(--animation-duration);
+    transition-timing-function: var(--animation-timing);
 }
 .input{
     background: transparent;

@@ -1,6 +1,6 @@
 <template>
     <div
-        :class="theme"
+        :class="theme + ' ' + (compactMode ? 'sizing-compact' : 'sizing-regular')"
         class="appRoot"
     >
         <Transition name="popup">
@@ -29,6 +29,7 @@
     import PlayBar from './components/PlayBar.vue';
     import Settings from './components/Settings.vue';
     import '@fontsource/rubik/400.css';
+    import '@fontsource/rubik/600.css';
     import '@fontsource/rubik/700.css';
     import '@ibm/plex/scss/ibm-plex.scss';
 
@@ -102,22 +103,27 @@
             async loadTheme(){
                 let prefs = await electron.ipcRenderer.invoke("getPrefs");
                 this.theme = prefs.theme;
+                this.compactMode = prefs.compactMode;
             }
         },
         data() {
             return {
                 settingsOpen: false,
-                theme: 'theme-dark'
+                theme: 'theme-dark',
+                compactMode: false
             };
         },
         async beforeCreate () {
             let prefs = await electron.ipcRenderer.invoke("getPrefs");
             this.theme = prefs.theme;
+            this.compactMode = prefs.compactMode;
         }
     }
 </script>
 
 <style lang="scss">
+    @import './styles/sizing-regular.scss';
+    @import './styles/sizing-compact.scss';
     @import './styles/globals.scss';
 
     @import './styles/themes/chroma.scss';
@@ -125,6 +131,7 @@
     @import './styles/themes/dracula.scss';
     @import './styles/themes/light.scss';
     @import './styles/themes/purple.scss';
+    @import './styles/themes/dino.scss';
 
     @import './styles/components/MainContent.scss';
     @import './styles/components/PlayBar.scss';
@@ -143,7 +150,7 @@
 
     .popup-enter-active,
     .popup-leave-active {
-        transition: all $animation-duration-alt $animation-timing-alt;
+        transition: all var(--animation-duration-alt) var(--animation-timing-alt);
     }
 
     .popup-enter-from, .popup-leave-to{
@@ -159,15 +166,15 @@
 
     body{
         margin: 0;
-        background: $window-background;
         overflow-y: overlay;
     }
+
     .appRoot {
         color: var(--foreground-100);
-        font-size: $font-size;
+        font-size: var(--font-size);
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        background: $window-background;
+        background: var(--background-200);
         .title-bar{
             top: 0;
         }
@@ -194,12 +201,17 @@
     }
 
     *::-webkit-scrollbar-thumb {
-        transition: $animation-duration;
+        transition: var(--animation-duration);
         background: --scroll-thumb-color;
         &:hover{
             background: --scroll-thumb-color-hover;
         }
         border-radius: 10px;
+    }
+    @media only screen and (max-width: 1200px) {
+        h1{
+            font-size: calc(var(--font-size) * var(--heading-scale) * var(--heading-scale) * var(--heading-scale) * var(--heading-scale) * var(--scale));
+        }
     }
     @media only screen and (max-width: 800px) {
         .mono-value{
@@ -209,9 +221,9 @@
             display: none;
         }
         .result{
-            grid-template-columns: $profile-pic-large-size auto 6ch 5ch;
-            gap: $item-gap / 1.5;
-            row-gap: $item-gap / 2;
+            grid-template-columns: var(--profile-pic-large-size) auto 6ch 5ch;
+            gap: calc(var(--item-gap) / 1.5);
+            row-gap: calc(var(--item-gap) / 2);
             grid-template-areas: 
                 "p d k b "
                 "v v a a ";
@@ -235,8 +247,8 @@
             }
         }
         .results-header{
-            grid-template-columns: $profile-pic-large-size auto 6ch 5ch;
-            gap: $item-gap / 1.5;
+            grid-template-columns: var(--profile-pic-large-size) auto 6ch 5ch;
+            gap: calc(var(--item-gap) / 1.5);
         }
         .settings-window{
             flex-direction: column;
@@ -266,7 +278,6 @@
         }
     }
     @media only screen and (max-width: 600px) {
-        h1{ font-size: $font-size * 5 * $scale; }
         .settings-window .content .inner-content .input-component {
             margin-left: 0px;
             width: 100%;
@@ -280,7 +291,7 @@
     }
     @media only screen and (max-width: 500px) {
         .result{
-            grid-template-columns: $profile-pic-large-size auto 6ch;
+            grid-template-columns: var(--profile-pic-large-size) auto 6ch;
             grid-template-rows: auto;
             grid-template-areas: 
                 "p d k"
@@ -292,8 +303,8 @@
             }
         }
         .results-header{
-            grid-template-columns: $profile-pic-large-size auto auto;
-            gap: $item-gap / 1.5;
+            grid-template-columns: var(--profile-pic-large-size) auto auto;
+            gap: calc(var(--item-gap) / 1.5);
             div:nth-of-type(3){
                 text-align: right;
                 &::after{
@@ -304,25 +315,25 @@
                 display: none;
             }
         }
-        h1{ font-size: $font-size * 4 * $scale; }
+        h1{ font-size: calc(var(--font-size) * var(--heading-scale) * var(--heading-scale) * var(--heading-scale) * var(--scale)); }
     }
     @media only screen and (max-width: 400px) {
         #topSearch{ display: none; }
         #bottomSearch{ display: block; }
-        h1{ font-size: $font-size * 3 * $scale; }
+        h1{ font-size: calc(var(--font-size) * var(--heading-scale) * var(--heading-scale) * var(--scale)); }
         .settings-window{
             .content, .sidebar a, .sidebar h2, #version-string{
-                padding-left: $item-gap;
-                padding-right: $item-gap;
+                padding-left: var(--item-gap);
+                padding-right: var(--item-gap);
             }
             .sidebar, .content{
-                padding-top: $item-gap;
+                padding-top: var(--item-gap);
             }
         }
     }
     @media only screen and (max-width: 300px) {
         .result{
-            grid-template-columns: $profile-pic-large-size auto;
+            grid-template-columns: var(--profile-pic-large-size) auto;
             grid-template-areas: 
                 "p k"
                 "p b"
@@ -333,8 +344,9 @@
         .hide-bp-300{
             display: none;
         }
-        h1{ font-size: $font-size * 2 * $scale; }
-        .settings-window .vue-feather{
+        h1{ font-size: calc(var(--font-size) * var(--scale) * var(--heading-scale)); }
+        .settings-window .vue-feather,
+        .settings-window .content .inner-content .section .ico-heading{
             display: none;
         }
     }
