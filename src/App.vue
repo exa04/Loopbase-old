@@ -202,9 +202,9 @@
 
     *::-webkit-scrollbar-thumb {
         transition: var(--animation-duration);
-        background: --scroll-thumb-color;
+        background: var(--scroll-thumb-color);
         &:hover{
-            background: --scroll-thumb-color-hover;
+            background: var(--scroll-thumb-color-hover);
         }
         border-radius: 10px;
     }
