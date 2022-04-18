@@ -1,5 +1,5 @@
 <p>
-  <img src="https://raw.githubusercontent.com/StarburstAudio/loopbase/main/public/icons/png/128x128.png" align="left">
+  <img src="https://raw.githubusercontent.com/StarburstAudio/loopbase/main/public/icons/png/256x256.png" align="left" width="128px">
 </p>
 
 # Loopbase
