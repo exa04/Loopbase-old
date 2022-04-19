@@ -1,10 +1,12 @@
 <template>
     <div class="top-area">
         <p ref="LibraryName" class="LibraryName">
-            {{query.keys == undefined || query.keys == "" ? library_name : "Search results for:"}}</p>
+            {{query.keys == undefined || query.keys == "" ? library_name : "Search results for:"}}
+        </p>
         <h1>
             <span :if="query.keys == undefined || query.keys == ''">{{query.keys}}</span>
             {{section_name}}
+            <span :if="!(query.author == undefined || query.author == '')">by {{query.author}}</span>
         </h1>
         <SearchBar
             placeholder="Search for loops..."
