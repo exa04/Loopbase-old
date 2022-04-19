@@ -210,6 +210,7 @@
                     date:           0,
                     genre:          0,
                     filterByKey:    false,
+                    author:         ''
                 },
                 query : {
 

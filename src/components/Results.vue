@@ -15,13 +15,22 @@
                     <vue-feather :type="res.mp3_url == playing && !paused ? 'pause' : 'play'" />
                 </div>
             </div>
-            <div
-                class="info-audio"
-                @click="playResult(res)"
-            >
+            <div class="info-audio">
                 <div class="audio-desc">
-                    <div ref="LoopName" class="desc-title">{{res.title}}</div>
-                    <div ref="AuthorName" class="desc-author subtext">{{res.author}}</div>
+                    <div
+                        ref="LoopName"
+                        class="desc-title"
+                        @click="playResult(res)"
+                    >
+                        {{res.title}}
+                    </div>
+                    <div
+                        ref="AuthorName"
+                        class="desc-author subtext"
+                        @click="openProfile(res)"
+                    >
+                        {{res.author}}
+                    </div>
                 </div>
             </div>
             <img
@@ -96,7 +105,8 @@
                     key:            ['c', ''],
                     date:           0,
                     genre:          0,
-                    filterByKey:    false
+                    filterByKey:    false,
+                    author:         ''
                 },
                 isInitial: false,
                 playing: "",
@@ -114,7 +124,8 @@
                     key:            [this.query.key[0], this.query.key[1]],
                     date:           this.query.date,
                     genre:          this.query.genre,
-                    filterByKey:    this.query.filterByKey
+                    filterByKey:    this.query.filterByKey,
+                    author:         this.query.author
                 }).then(res => {
                     // if(res.length < 0){
                     //     return;
@@ -196,6 +207,9 @@
                 playbar.loadSample(res);
                 this.playing = res.mp3_url;
                 this.paused = false;
+            },
+            openProfile(res){
+                console.log(res);
             }
         },
     }

@@ -34,6 +34,7 @@ function search(args){
         let key = args.filterByKey ? ("&mkey="+args.key[0]+args.key[1]) : "";
         var date = args.date == 0 ? '' : '&when=' + args.date;
         var genre = args.genre == 0 ? '' : '&gid=' + args.genre;
+        let author = args.author == '' ? '' : '&mid=' + args.author;
         axios.get(
             ('https://looperman.com/' + args.category
                 + '?page='+ args.page
@@ -44,7 +45,8 @@ function search(args){
                 + "&dir="+args.order[1]
                 + key
                 + "&ftempo="+args.tempo[0]
-                + "&ttempo="+args.tempo[1])
+                + "&ttempo="+args.tempo[1]
+                + author)
         ).then (res=> {
             const $ = cheerio.load(res.data);
             $('#body-left .player-wrapper').each((i, el) => {
@@ -52,6 +54,7 @@ function search(args){
                     title: $(el).find(".player-title").text(),
                     mp3_url: $(el).prop("rel"),
                     author: $(el).find(".icon-user").text(),
+                    author_url: $(el).find(".player-avatar > a").prop("href"),
                     profile_pic: $(el).find(".player-avatar a img").prop("src"),
                     waveform: $(el).find(".player-waveform-image").prop("src"),
                     web_link: $(el).find(".player-top > a").prop("href")
