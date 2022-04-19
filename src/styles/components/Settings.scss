@@ -5,7 +5,7 @@
     background: var(--glass-200);
     background: transparent;
     width: calc(100vw - (2 * var(--side-padding)));
-    height: calc(100vh - (2 * var(--side-padding) - 52px));
+    height: calc(100vh - (2 * var(--side-padding)) - var(--item-gap) * 2);
     max-width: 1200px;
     max-height: 900px;
     left: 50vw;
