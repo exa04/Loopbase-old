@@ -56,7 +56,8 @@
                     key:            topBarQuery.key,
                     date:           topBarQuery.date,
                     genre:          topBarQuery.genre,
-                    filterByKey:    (topBarQuery.key[0] != '')
+                    filterByKey:    (topBarQuery.key[0] != ''),
+                    author:         topBarQuery.author
                 };
 
                 // This matches every ocurrence of (NUMBER) BPM in the query

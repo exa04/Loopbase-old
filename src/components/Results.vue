@@ -209,7 +209,8 @@
                 this.paused = false;
             },
             openProfile(res){
-                console.log(res);
+                this.$parent.$refs.TopArea.$data.queryInfo.author = res.author;
+                this.$parent.$parent.search();
             }
         },
     }
