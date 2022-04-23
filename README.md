@@ -7,8 +7,8 @@
 [![Continuous Integration](https://github.com/StarburstAudio/loopbase/actions/workflows/CI.yml/badge.svg)](https://github.com/StarburstAudio/loopbase/actions/workflows/CI.yml)
 ![](https://img.shields.io/github/package-json/v/StarburstAudio/loopbase?color=purple)
 ![](https://img.shields.io/github/license/StarburstAudio/loopbase)
-![](https://img.shields.io/tokei/lines/github/StarburstAudio/loopbase)
-![](https://img.shields.io/github/downloads/StarburstAudio/loopbase/total)
+[![codebeat badge](https://codebeat.co/badges/760770d0-04c6-4f13-99f9-8ef3e23199ea)](https://codebeat.co/projects/github-com-starburstaudio-loopbase-main)
+[![Downloads](https://img.shields.io/github/downloads/StarburstAudio/loopbase/total)](https://github.com/StarburstAudio/loopbase/releases)
 
 With loopbase, you can browse samples on Looperman and download them. Just search for whatever you need, save samples, and drag them into your DAW from the app! Loopbase is not affiliated with Looperman.
 
