@@ -163,6 +163,26 @@
           </div>
         </Tag>
         <div
+          class="tag active"
+          v-if="!(query.author == undefined || query.author == '')"
+        >
+          <vue-feather type="user" size="18" />
+          <div>
+            User<span v-if="!(query.author == undefined || query.author == '')"
+              >: {{ query.author }}</span
+            >
+          </div>
+          <vue-feather
+            type="x"
+            size="18"
+            @click="
+              queryInfo.author = '';
+              this.$parent.$parent.search();
+            "
+            v-if="!(query.author == undefined || query.author == '')"
+          />
+        </div>
+        <div
           class="tag"
           @click.self="filterEnabled.genre = !filterEnabled.genre"
           :class="{ active: queryInfo.genre != 0 }"
