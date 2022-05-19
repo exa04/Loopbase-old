@@ -1,6 +1,14 @@
 "use strict";
 
-import { app, protocol, BrowserWindow, ipcMain, shell, dialog } from "electron";
+import {
+  app,
+  protocol,
+  BrowserWindow,
+  ipcMain,
+  shell,
+  dialog,
+  session,
+} from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS3_DEVTOOLS } from "electron-devtools-installer";
 import { search, downloadMP3 } from "./loopermanData";
@@ -86,6 +94,17 @@ app.on("activate", () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on("ready", async () => {
+  const filter = {
+    urls: ["https://*.looperman.com/*"],
+  };
+
+  session.defaultSession.webRequest.onBeforeSendHeaders(
+    filter,
+    (details, callback) => {
+      details.requestHeaders["Referer"] = "https://www.looperman.com/loops";
+      callback({ requestHeaders: details.requestHeaders });
+    }
+  );
   if (isDevelopment && !process.env.IS_TEST) {
     // Install Vue Devtools
     try {

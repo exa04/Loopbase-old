@@ -62,8 +62,8 @@ function search(args) {
             title: $(el).find(".player-title").text(),
             mp3_url: $(el).prop("rel"),
             author: $(el).find(".icon-user").text(),
-            author_url: $(el).find(".player-avatar > a").prop("href"),
-            profile_pic: $(el).find(".player-avatar a img").prop("src"),
+            author_url: $(el).find("player-top > div > a").prop("href"),
+            profile_pic: $(el).find("a .player-avatar").prop("src"),
             waveform: $(el).find(".player-waveform-image").prop("src"),
             web_link: $(el).find(".player-top > a").prop("href"),
           });
