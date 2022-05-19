@@ -8,11 +8,11 @@
       }}
     </p>
     <h1>
-      <span :if="query.keys == undefined || query.keys == ''">{{
+      <span v-if="query.keys == undefined || query.keys == ''">{{
         query.keys
       }}</span>
       {{ section_name }}
-      <span :if="!(query.author == undefined || query.author == '')"
+      <span v-if="!(query.author == undefined || query.author == '')"
         >by {{ query.author }}</span
       >
     </h1>
