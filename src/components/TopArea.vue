@@ -182,52 +182,54 @@
             v-if="!(query.author == undefined || query.author == '')"
           />
         </div>
-        <div
-          class="tag"
-          @click.self="filterEnabled.genre = !filterEnabled.genre"
-          :class="{ active: queryInfo.genre != 0 }"
-        >
+        <div>
           <div
-            @click="
-              filterEnabled.genre = !filterEnabled.genre;
-              filterValues.genre = queryInfo.genre;
-            "
+            class="tag"
+            @click.self="filterEnabled.genre = !filterEnabled.genre"
+            :class="{ active: queryInfo.genre != 0 }"
           >
-            Genre<span v-if="queryInfo.genre != 0" class="hide-bp-300"
-              >: {{ genrelist.find((e) => e[0] == queryInfo.genre)[1] }}</span
+            <div
+              @click="
+                filterEnabled.genre = !filterEnabled.genre;
+                filterValues.genre = queryInfo.genre;
+              "
             >
-          </div>
-          <vue-feather
-            type="x"
-            size="18"
-            @click="
-              queryInfo.genre = 0;
-              this.$parent.$parent.search();
-            "
-            v-if="queryInfo.genre != 0"
-          />
-        </div>
-        <Transition name="tag-popup">
-          <div class="tag-popout" v-if="filterEnabled.genre">
-            <h2>Genre</h2>
-            <div class="select">
-              <div
-                class="option"
-                v-for="genre in genrelist"
-                :key="genre[0]"
-                :class="{ selected: parseInt(genre[0]) == queryInfo.genre }"
-                @click="
-                  queryInfo.genre = parseInt(genre[0]);
-                  this.$parent.$parent.search();
-                  filterEnabled.genre = false;
-                  filterAdded.genre = true;
-                "
+              Genre<span v-if="queryInfo.genre != 0" class="hide-bp-300"
+                >: {{ genrelist.find((e) => e[0] == queryInfo.genre)[1] }}</span
               >
-                {{ genre[1] }}
+            </div>
+            <vue-feather
+              type="x"
+              size="18"
+              @click="
+                queryInfo.genre = 0;
+                this.$parent.$parent.search();
+              "
+              v-if="queryInfo.genre != 0"
+            />
+          </div>
+          <Transition name="tag-popup">
+            <div class="tag-popout" v-if="filterEnabled.genre">
+              <h2>Genre</h2>
+              <div class="select">
+                <div
+                  class="option"
+                  v-for="genre in genrelist"
+                  :key="genre[0]"
+                  :class="{ selected: parseInt(genre[0]) == queryInfo.genre }"
+                  @click="
+                    queryInfo.genre = parseInt(genre[0]);
+                    this.$parent.$parent.search();
+                    filterEnabled.genre = false;
+                    filterAdded.genre = true;
+                  "
+                >
+                  {{ genre[1] }}
+                </div>
               </div>
             </div>
-          </div>
-        </Transition>
+          </Transition>
+        </div>
       </div>
       <div class="tag-duo">
         <div @click="filterEnabled.sort = !filterEnabled.sort">
