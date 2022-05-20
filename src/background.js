@@ -13,7 +13,7 @@ import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS3_DEVTOOLS } from "electron-devtools-installer";
 import { search, downloadMP3 } from "./loopermanData";
 import * as fs from "fs";
-import { homedir } from "os";
+import { homedir, platform } from "os";
 import { join } from "path";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
@@ -167,6 +167,27 @@ ipcMain.handle("getDir", async (event, dir) => {
 
 ipcMain.handle("getVersion", async () => {
   return app.getVersion();
+});
+
+ipcMain.handle("getPlatform", async () => platform());
+
+ipcMain.handle("interactWindow", (event, interaction) => {
+  console.log(interaction == "close");
+  switch (interaction) {
+    case "close":
+      app.quit();
+      break;
+    case "resize":
+      if (!win.isMaximized()) {
+        win.maximize();
+        break;
+      }
+      win.unmaximize();
+      break;
+    case "minimize":
+      win.minimize();
+      break;
+  }
 });
 
 ipcMain.handle("fileExists", async (event, path) => {

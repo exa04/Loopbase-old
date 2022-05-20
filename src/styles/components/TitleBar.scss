@@ -10,27 +10,47 @@
     align-items: center;
     gap: var(--item-gap);
     border-bottom: 1px solid var(--seperator);
+    &.reverse{
+        flex-direction: row-reverse;
+    }
     >*{
         -webkit-app-region: no-drag;
+    }
+    svg{
+        transition-duration: var(--animation-duration);
+        transition-timing-function: var(--animation-timing);
+        stroke: var(--foreground-200);
+        &:hover {
+            stroke: var(--foreground-100);
+        }
     }
 }
 .window-btns {
     display: flex;
     gap: 8px;
+    > * {
+        cursor: pointer;
+    }
     div{
         width: 12px;
         height: 12px;
-        background: transparent;
+        background: green;
         border-radius: 6px;
     }
 }
-.actions{
+.actions {
     display: flex;
     gap: var(--item-gap);
-    .vue-feather, .vue-feather > svg {
-        stroke: var(--foreground-200);
-        cursor: pointer;
-        width: 18px !important;
-        aspect-ratio: 1;
+}
+.actions .vue-feather, .actions .vue-feather > svg {
+    cursor: pointer;
+    width: 18px !important;
+    aspect-ratio: 1;
+}
+.title-bar > .window-btns.win {
+    display: flex;
+    align-items: center;
+    svg {
+        width: inherit;
     }
 }
