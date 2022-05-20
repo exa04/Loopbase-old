@@ -1,6 +1,23 @@
 <template>
-  <div class="title-bar">
-    <div class="window-btns">
+  <div class="title-bar" :class="{ reverse: platform == 'win32' }">
+    <div class="window-btns win" v-if="platform == 'win32'">
+      <vue-feather
+        size="18"
+        type="minus"
+        @click="triggerWindowInteraction('minimize')"
+      />
+      <vue-feather
+        size="16"
+        type="square"
+        @click="triggerWindowInteraction('resize')"
+      />
+      <vue-feather
+        size="20"
+        type="x"
+        @click="triggerWindowInteraction('close')"
+      />
+    </div>
+    <div class="window-btns mac" v-else-if="platform == 'darwin'">
       <div></div>
       <div></div>
       <div></div>
@@ -36,10 +53,21 @@ export default {
     VueFeather,
     SearchBar,
   },
+  data() {
+    return {
+      platform: "",
+    };
+  },
   methods: {
     revealFile(f) {
       electron.ipcRenderer.invoke("revealFile", f);
     },
+    triggerWindowInteraction(interaction) {
+      electron.ipcRenderer.invoke("interactWindow", interaction);
+    },
+  },
+  async beforeCreate() {
+    this.platform = await electron.ipcRenderer.invoke("getPlatform");
   },
 };
 </script>
