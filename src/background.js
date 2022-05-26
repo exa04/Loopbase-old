@@ -55,6 +55,7 @@ async function createWindow() {
     title: "Loopbase",
     icon: join(__static, "icon.png"),
     titleBarStyle: "hidden",
+    frame: false,
     trafficLightPosition: { x: 21, y: 18 },
     webPreferences: {
       // Use pluginOptions.nodeIntegration, leave this alone
