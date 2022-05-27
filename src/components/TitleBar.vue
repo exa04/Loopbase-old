@@ -1,6 +1,26 @@
 <template>
-  <div class="title-bar" :class="{ reverse: platform == 'win32' }">
+  <div
+    class="title-bar"
+    :class="{ reverse: platform == 'win32' || platform == 'linux' }"
+  >
     <div class="window-btns win" v-if="platform == 'win32'">
+      <vue-feather
+        size="18"
+        type="minus"
+        @click="triggerWindowInteraction('minimize')"
+      />
+      <vue-feather
+        size="16"
+        type="square"
+        @click="triggerWindowInteraction('resize')"
+      />
+      <vue-feather
+        size="20"
+        type="x"
+        @click="triggerWindowInteraction('close')"
+      />
+    </div>
+    <div class="window-btns win" v-else-if="platform == 'linux'">
       <vue-feather
         size="18"
         type="minus"
