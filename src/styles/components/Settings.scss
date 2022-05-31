@@ -1,16 +1,22 @@
 .settings-window{
+    transition-property: transform;
     transition-duration: var(--animation-duration-alt);
     transition-timing-function: var(--animation-timing);
     @include glass(false, true);
     background: var(--glass-200);
     background: transparent;
+
     width: calc(100vw - (2 * var(--side-padding)));
+    margin-left: calc(-0.5 * (100vw - (2 * var(--side-padding))));
+
     height: calc(100vh - (2 * var(--side-padding)) - var(--item-gap) * 2);
+    margin-top: calc(-0.5 * (100vh - (2 * var(--side-padding)) - var(--item-gap) * 2));
+
+
     max-width: 1200px;
     max-height: 900px;
     left: 50vw;
     top: calc(50vh + 52px / 2);
-    transform: translate(-50%, -50%);
     position: fixed;
     z-index: 6;
     display: flex;

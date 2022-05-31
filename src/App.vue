@@ -160,14 +160,14 @@ export default {
 
 .popup-enter-from,
 .popup-leave-to {
-  transform: translate(-50%, calc(-50% + 64px)) scale(0.97);
+  transform: translateY(calc(64px)) scale(0.97);
   opacity: 0;
   box-shadow: 0px 0px 0px 0px #000;
 }
 
 .popup-enter-to,
 .popup-leave-from {
-  transform: translate(-50%, -50%) scale(1);
+  transform: none;
   opacity: 1;
 }
 
@@ -294,10 +294,10 @@ body {
     width: 100%;
   }
   .settings-window {
+    margin-left: -50vw;
     width: 100vw;
-    height: 100vh;
-    max-height: 100vh;
-    top: 50vh;
+    height: calc(100vh - (2 * var(--side-padding)));
+    margin-top: calc(-0.5 * (100vh - (2 * var(--side-padding))));
   }
 }
 @media only screen and (max-width: 500px) {
