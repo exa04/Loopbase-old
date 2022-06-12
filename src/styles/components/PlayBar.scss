@@ -52,6 +52,34 @@
     gap: calc(var(--item-gap) * 2);
     align-items: center;
 }
+#volume-btt-spacer, #volumeSlider-btt{
+    display: none;
+}
+#volume-btt-spacer{
+    width: calc(var(--item-gap) + 18px);
+}
+#volumeSlider-btt{
+    &:hover{
+        @include glass(true, true);
+        margin: -1px;
+        background-color: var(--background-400);
+        > .btt-slider {
+            opacity: 1;
+            height: 120px !important;
+        }
+    }
+    box-sizing: border-box;
+    position: absolute;
+    bottom: calc(45px - var(--item-gap) - 14px);
+    padding: var(--item-gap) !important;
+    > .btt-slider {
+        opacity: 0;
+        height: 0px !important;
+        margin-bottom: calc(var(--item-gap) * 1.5);
+        transition-duration: var(--animation-duration);
+        transition-timing-function: var(--animation-timing);
+    }
+}
 .side-playbar-controls{
     display: flex;
     justify-content: flex-end;

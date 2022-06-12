@@ -62,6 +62,89 @@
         :dragOnClick="true"
       />
     </div>
+    <div class="side-playbar-controls">
+      <vue-feather class="icon-btn hitbox-ico hide-bp-300" type="download" />
+      <vue-feather class="icon-btn hitbox-ico hide-bp-500" type="link" />
+      <vue-feather class="icon-btn hitbox-ico hide-bp-500" type="user" />
+      <vue-feather
+        class="icon-btn active hitbox-ico default-slider"
+        type="volume-x"
+        v-if="volume == 0"
+        @click="volume = prevVolume"
+      />
+      <div
+        v-else
+        @click="
+          prevVolume = volume;
+          volume = 0;
+        "
+        class="default-slider"
+        style="height: 18px"
+      >
+        <vue-feather
+          class="icon-btn hitbox-ico"
+          type="volume"
+          v-if="volume < 33"
+        ></vue-feather>
+        <vue-feather
+          class="icon-btn hitbox-ico"
+          type="volume-1"
+          v-else-if="volume < 67"
+        ></vue-feather>
+        <vue-feather
+          class="icon-btn hitbox-ico"
+          type="volume-2"
+          v-else-if="volume >= 67"
+        ></vue-feather>
+      </div>
+      <vue-slider
+        v-model="volume"
+        id="volumeSlider"
+        :min="0"
+        :max="100"
+        class="default-slider"
+      />
+      <div id="volume-btt-spacer"></div>
+      <div id="volumeSlider-btt">
+        <vue-slider
+          v-model="volume"
+          :min="0"
+          :max="100"
+          direction="btt"
+          class="btt-slider"
+        />
+        <vue-feather
+          class="icon-btn active hitbox-ico"
+          type="volume-x"
+          v-if="volume == 0"
+          @click="volume = prevVolume"
+        />
+        <div
+          v-else
+          @click="
+            prevVolume = volume;
+            volume = 0;
+          "
+          style="height: 18px margin-bottom = calc(var(--item-gap) * -1)"
+        >
+          <vue-feather
+            class="icon-btn hitbox-ico"
+            type="volume"
+            v-if="volume < 33"
+          ></vue-feather>
+          <vue-feather
+            class="icon-btn hitbox-ico"
+            type="volume-1"
+            v-else-if="volume < 67"
+          ></vue-feather>
+          <vue-feather
+            class="icon-btn hitbox-ico"
+            type="volume-2"
+            v-else-if="volume >= 67"
+          ></vue-feather>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
