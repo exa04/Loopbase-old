@@ -7,7 +7,7 @@
       :volume="volume / 100"
       @timeupdate="setPlaybackPos()"
     />
-    <div ref="InfoArea" class="info-audio">
+    <div ref="InfoArea" class="info-audio hide-bp-400">
       <img
         ref="ProfilePicture"
         :src="profile_picture"
@@ -18,64 +18,50 @@
         <div ref="ArtistName" class="desc-artist subtext">{{ info }}</div>
       </div>
     </div>
-    <div class="playback-controls">
-      <vue-feather
-        class="icon-btn"
-        :type="
-          this.$refs.audioPlayer == undefined || this.$refs.audioPlayer.paused
-            ? 'play'
-            : 'pause'
+    <div class="player-controls">
+      <div class="player-buttons">
+        <vue-feather class="icon-btn hitbox-ico" type="heart" />
+        <vue-feather class="icon-btn hitbox-ico" type="skip-back" />
+        <vue-feather
+          class="icon-btn hitbox-ico"
+          :type="
+            this.$refs.audioPlayer == undefined || this.$refs.audioPlayer.paused
+              ? 'play'
+              : 'pause'
+          "
+          :class="{
+            active: !(
+              this.$refs.audioPlayer == undefined ||
+              this.$refs.audioPlayer.paused
+            ),
+          }"
+          @click="togglePlay()"
+        />
+        <vue-feather class="icon-btn hitbox-ico" type="skip-forward" />
+        <vue-feather
+          class="icon-btn hitbox-ico"
+          type="repeat"
+          @click="loop = !loop"
+          :class="{ active: loop }"
+        />
+      </div>
+      <vue-slider
+        v-model="position"
+        id="playbackSlider"
+        ref="playbackSlider"
+        :lazy="true"
+        :min="0"
+        :max="1"
+        :interval="0.0001"
+        @drag-start="dragging = true"
+        @drag-end="
+          dragging = false;
+          positionToAudio();
         "
-        @click="togglePlay()"
+        tooltip="none"
+        :dragOnClick="true"
       />
     </div>
-    <vue-slider
-      v-model="position"
-      id="playbackSlider"
-      ref="playbackSlider"
-      :lazy="true"
-      :min="0"
-      :max="1"
-      :interval="0.0001"
-      @drag-start="dragging = true"
-      @drag-end="
-        dragging = false;
-        positionToAudio();
-      "
-      tooltip="none"
-      :dragOnClick="true"
-    />
-    <vue-feather
-      class="icon-btn"
-      type="volume-x"
-      v-if="volume == 0"
-      @click="volume = prevVolume"
-    />
-    <div
-      v-else
-      @click="
-        prevVolume = volume;
-        volume = 0;
-      "
-      style="height: 18px"
-    >
-      <vue-feather
-        class="icon-btn"
-        type="volume"
-        v-if="volume < 33"
-      ></vue-feather>
-      <vue-feather
-        class="icon-btn"
-        type="volume-1"
-        v-else-if="volume < 67"
-      ></vue-feather>
-      <vue-feather
-        class="icon-btn"
-        type="volume-2"
-        v-else-if="volume >= 67"
-      ></vue-feather>
-    </div>
-    <vue-slider v-model="volume" id="volumeSlider" :min="0" :max="100" />
   </div>
 </template>
 

@@ -10,21 +10,30 @@
     &.hidden{
         display: none;
     }
+    > * {
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: 0%;
+        box-sizing: border-box;
+    }
+    svg {
+        width: calc(var(--item-scale) * 1.2) !important;
+    }  
 }
 .info-audio{
     @include side-gradient(to right, var(--window-background));
     display: flex;
     align-items: center;
-    flex-grow: 2;
+    flex-grow: 1;
     height: 100%;
+    gap: var(--item-gap);
 }
 .profile-picture{
-    width: 36px;
+    width: var(--profile-pic-large-size);
     image-rendering: crisp-edges;
     border-radius: var(--radius);
 }
 .audio-desc{
-    margin-left: calc(var(--item-gap) / 2);
     div{
         width: max-content;
     }
@@ -32,14 +41,25 @@
     width: 10px;
     flex-grow: 1;
 }
-.playback-controls{
+.player-controls{
     display: flex;
-    gap: var(--item-gap);
+    flex-direction: column;
     align-items: center;
+    gap: calc(var(--item-gap) / 1.2);
+}
+.player-buttons{
+    display: flex;
+    gap: calc(var(--item-gap) * 2);
+    align-items: center;
+}
+.side-playbar-controls{
+    display: flex;
+    justify-content: flex-end;
+    gap: calc(var(--item-gap) * 1.5);
 }
 #volumeSlider{
     width: 120px !important;
 }
 #playbackSlider{
-    flex-grow: 2;
+    align-self: stretch;
 }
