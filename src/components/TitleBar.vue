@@ -5,18 +5,18 @@
   >
     <div class="window-btns win" v-if="platform == 'win32'">
       <vue-feather
+        class="hitbox-ico"
         size="18"
-        type="minus"
         @click="triggerWindowInteraction('minimize')"
       />
       <vue-feather
+        class="hitbox-ico"
         size="16"
-        type="square"
         @click="triggerWindowInteraction('resize')"
       />
       <vue-feather
+        class="hitbox-ico"
         size="20"
-        type="x"
         @click="triggerWindowInteraction('close')"
       />
     </div>
@@ -52,11 +52,13 @@
       <vue-feather
         size="24"
         type="folder"
+        class="hitbox-ico"
         @click="revealFile('')"
       ></vue-feather>
       <vue-feather
         size="24"
         type="settings"
+        class="hitbox-ico"
         @click="this.$emit('settingsOpen')"
       ></vue-feather>
     </div>

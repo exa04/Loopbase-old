@@ -16,20 +16,20 @@
     // Generated colors
 
     --accent-1-100: #{$accent-1};
-    --accent-1-200: #{mix($accent-1, $background, 20%)};
-    --accent-1-300: #{mix($accent-1, $background, 40%)};
+    --accent-1-200: #{mix($accent-1, $background, 60%)};
+    --accent-1-300: #{mix($accent-1, $background, 20%)};
 
     --accent-2-100: #{$accent-2};
-    --accent-2-200: #{mix($accent-2, $background, 20%)};
-    --accent-2-300: #{mix($accent-2, $background, 40%)};
+    --accent-2-200: #{mix($accent-2, $background, 60%)};
+    --accent-2-300: #{mix($accent-2, $background, 20%)};
 
     --accent-3-100: #{$accent-3};
-    --accent-3-200: #{mix($accent-3, $background, 20%)};
-    --accent-3-300: #{mix($accent-3, $background, 40%)};
+    --accent-3-200: #{mix($accent-3, $background, 60%)};
+    --accent-3-300: #{mix($accent-3, $background, 20%)};
 
     --accent-4-100: #{$accent-4};
-    --accent-4-200: #{mix($accent-4, $background, 20%)};
-    --accent-4-300: #{mix($accent-4, $background, 40%)};
+    --accent-4-200: #{mix($accent-4, $background, 60%)};
+    --accent-4-300: #{mix($accent-4, $background, 20%)};
 
     --background-100: #{darken($background, 16%)};
     --background-200: #{darken($background, 12%)};

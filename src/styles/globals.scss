@@ -7,6 +7,36 @@ $playbar-background: var(--background-100);
     width: var(--item-scale);
 }
 
+.hitbox-ico{
+    transition-duration: var(--animation-duration);
+    transition-timing-function: var(--animation-timing);
+    padding: calc(var(--item-gap) / 2);
+    margin: calc(-1 * var(--item-gap) / 2);
+    border-radius: 50%;
+    &:hover{
+        background-color: var(--accent-1-300);
+        > svg {
+            stroke: var(--foreground-100) !important;
+        }
+    }
+}
+
+.hitbox-ico.active {
+    &:hover {
+        background-color: var(--accent-1-300);
+        > svg {
+            stroke: var(--foreground-100);
+        }
+    }
+    > svg {
+        stroke: var(--background-100);
+    }
+    border-radius: 50%;
+    background-color: var(--accent-1-100);
+    padding: calc(var(--item-gap) / 2);
+    margin: calc(-1 * var(--item-gap) / 2);
+}
+
 h1,h2,h3,h4,h5,h6{
     padding: 0px;
     margin: 0px;
@@ -45,7 +75,7 @@ h1{
 
 // Animations
 :root{
-    --animation-duration: 270ms;
+    --animation-duration: 160ms;
     --animation-duration-alt: 380ms;
     --animation-timing: cubic-bezier(.4,0,.4,1);
     --animation-timing-alt: cubic-bezier(.45,.73,.26,1.54); // For "jiggly" animations (on geometric transforms, not on colors)
