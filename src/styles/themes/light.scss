@@ -55,4 +55,9 @@
         filter: none !important;
         mix-blend-mode: darken !important;
     }
+
+    #loading-indicator {
+        filter: unquote('invert()') !important;
+        mix-blend-mode: darken !important;
+    }
 }

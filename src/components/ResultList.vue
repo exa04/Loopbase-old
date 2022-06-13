@@ -83,7 +83,9 @@
     v-model:is-initial="isInitial"
     id="loading-section"
   >
-    <!-- TODO: Add a fancy loading indicator -->
+    <template #loading>
+      <LoadingIndicator />
+    </template>
   </VueEternalLoading>
 </template>
 
@@ -91,11 +93,13 @@
 import VueFeather from "vue-feather";
 const electron = window.require("electron");
 import { VueEternalLoading } from "@ts-pro/vue-eternal-loading";
+import LoadingIndicator from "./LoadingIndicator.vue";
 
 export default {
   components: {
     VueFeather,
     VueEternalLoading,
+    LoadingIndicator,
   },
   name: "ResultList",
   data() {
