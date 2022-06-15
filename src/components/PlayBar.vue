@@ -69,7 +69,21 @@
       />
     </div>
     <div class="side-playbar-controls">
-      <vue-feather class="icon-btn hitbox-ico hide-bp-300" type="download" />
+      <vue-feather
+        type="folder"
+        v-if="res.downloaded"
+        class="icon-btn hitbox-ico"
+        @click="
+          this.$parent.$refs.MainContent.$refs.Results.revealFile(res.localPath)
+        "
+      />
+      <vue-feather type="clock" v-else-if="res.downloading" class="icon-btn" />
+      <vue-feather
+        type="download"
+        v-else
+        class="icon-btn hitbox-ico"
+        @click="this.$parent.$refs.MainContent.$refs.Results.download(res)"
+      />
       <vue-feather class="icon-btn hitbox-ico hide-bp-500" type="link" />
       <vue-feather class="icon-btn hitbox-ico hide-bp-500" type="user" />
       <vue-feather
