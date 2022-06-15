@@ -1,5 +1,9 @@
 <template>
-  <div ref="PlayBar" class="play-bar" v-bind:class="{ hidden: title == '' }">
+  <div
+    ref="PlayBar"
+    class="play-bar"
+    v-bind:class="{ hidden: res.title == undefined }"
+  >
     <audio
       id="audioPlayer"
       ref="audioPlayer"
@@ -10,12 +14,14 @@
     <div ref="InfoArea" class="info-audio hide-bp-400">
       <img
         ref="ProfilePicture"
-        :src="profile_picture"
+        :src="res.profile_pic"
         class="profile-picture"
       />
       <div class="audio-desc">
-        <div ref="LoopName" class="desc-title">{{ title }}</div>
-        <div ref="ArtistName" class="desc-artist subtext">{{ info }}</div>
+        <div ref="LoopName" class="desc-title">{{ res.title }}</div>
+        <div ref="ArtistName" class="desc-artist subtext">
+          {{ res.author }} | {{ res.tempo }} | {{ res.key }}
+        </div>
       </div>
     </div>
     <div class="player-controls">
@@ -161,10 +167,6 @@ export default {
   props: {},
   methods: {
     loadSample(res) {
-      this.$data.title = res.title;
-      this.$data.info = res.author + " | " + res.tempo + " | " + res.key;
-      this.$data.profile_picture = res.profile_pic;
-
       let audio = document.getElementById("audioPlayer");
       if (audio == undefined) return;
       if (res.mp3_url == audio.src) {
@@ -178,7 +180,8 @@ export default {
         }
         return;
       }
-      audio.src = res.mp3_url;
+      this.$data.res = res;
+      audio.src = this.$data.res.mp3_url;
       audio.play();
     },
     togglePlay() {
@@ -221,9 +224,10 @@ export default {
       position: 0,
       volumePercent: 100,
       loop: false,
-      title: "",
+      res: {},
       info: "",
-      profile_picture: "",
+      url: "",
+      localUrl: "",
       volume: 100,
       prevVolume: 100,
       dragging: false,
