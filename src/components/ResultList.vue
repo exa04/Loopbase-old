@@ -58,12 +58,15 @@
           @click="revealFile(res.localPath)"
         />
         <vue-feather
+          type="clock"
+          v-else-if="res.downloading"
+          class="icon-btn"
+        />
+        <vue-feather
           type="download"
           v-else
           class="icon-btn"
-          @click="
-            download(res.mp3_url, res.localPath).then((res.downloaded = true))
-          "
+          @click="download(res)"
         />
         <vue-feather
           type="heart"
@@ -186,14 +189,17 @@ export default {
     openLink(link) {
       electron.ipcRenderer.invoke("openLink", link);
     },
-    async download(mp3_url, localPath) {
+    async download(res) {
+      res.downloading = true;
       return new Promise((resolve) => {
         electron.ipcRenderer
           .invoke("downloadMP3", {
-            url: mp3_url,
-            dest: localPath,
+            url: res.mp3_url,
+            dest: res.localPath,
           })
           .then(() => {
+            res.downloading = false;
+            res.downloaded = true;
             resolve();
           });
       });
