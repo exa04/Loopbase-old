@@ -10,21 +10,30 @@
     &.hidden{
         display: none;
     }
+    > * {
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: 0%;
+        box-sizing: border-box;
+    }
+    svg {
+        width: calc(var(--item-scale) * 1.2) !important;
+    }  
 }
 .info-audio{
     @include side-gradient(to right, var(--window-background));
     display: flex;
     align-items: center;
-    flex-grow: 2;
+    flex-grow: 1;
     height: 100%;
+    gap: var(--item-gap);
 }
 .profile-picture{
-    width: 36px;
+    width: var(--profile-pic-large-size);
     image-rendering: crisp-edges;
     border-radius: var(--radius);
 }
 .audio-desc{
-    margin-left: calc(var(--item-gap) / 2);
     div{
         width: max-content;
     }
@@ -32,14 +41,53 @@
     width: 10px;
     flex-grow: 1;
 }
-.playback-controls{
+.player-controls{
     display: flex;
-    gap: var(--item-gap);
+    flex-direction: column;
     align-items: center;
+    gap: calc(var(--item-gap) / 1.2);
+}
+.player-buttons{
+    display: flex;
+    gap: calc(var(--item-gap) * 2);
+    align-items: center;
+}
+#volume-btt-spacer, #volumeSlider-btt{
+    display: none;
+}
+#volume-btt-spacer{
+    width: calc(var(--item-gap) + 18px);
+}
+#volumeSlider-btt{
+    &:hover{
+        @include glass(true, true);
+        margin: -1px;
+        background-color: var(--background-400);
+        > .btt-slider {
+            opacity: 1;
+            height: 120px !important;
+        }
+    }
+    box-sizing: border-box;
+    position: absolute;
+    bottom: calc(45px - var(--item-gap) - 14px);
+    padding: var(--item-gap) !important;
+    > .btt-slider {
+        opacity: 0;
+        height: 0px !important;
+        margin-bottom: calc(var(--item-gap) * 1.5);
+        transition-duration: var(--animation-duration);
+        transition-timing-function: var(--animation-timing);
+    }
+}
+.side-playbar-controls{
+    display: flex;
+    justify-content: flex-end;
+    gap: calc(var(--item-gap) * 1.5);
 }
 #volumeSlider{
     width: 120px !important;
 }
 #playbackSlider{
-    flex-grow: 2;
+    align-self: stretch;
 }

@@ -1,5 +1,9 @@
 <template>
-  <div ref="PlayBar" class="play-bar" v-bind:class="{ hidden: title == '' }">
+  <div
+    ref="PlayBar"
+    class="play-bar"
+    v-bind:class="{ hidden: res.title == undefined }"
+  >
     <audio
       id="audioPlayer"
       ref="audioPlayer"
@@ -7,75 +11,178 @@
       :volume="volume / 100"
       @timeupdate="setPlaybackPos()"
     />
-    <div ref="InfoArea" class="info-audio">
+    <div ref="InfoArea" class="info-audio hide-bp-400">
       <img
         ref="ProfilePicture"
-        :src="profile_picture"
+        :src="res.profile_pic"
         class="profile-picture"
       />
       <div class="audio-desc">
-        <div ref="LoopName" class="desc-title">{{ title }}</div>
-        <div ref="ArtistName" class="desc-artist subtext">{{ info }}</div>
+        <div ref="LoopName" class="desc-title">{{ res.title }}</div>
+        <div ref="ArtistName" class="desc-artist subtext">
+          {{ res.author }} | {{ res.tempo }} | {{ res.key }}
+        </div>
       </div>
     </div>
-    <div class="playback-controls">
-      <vue-feather
-        class="icon-btn"
-        :type="
-          this.$refs.audioPlayer == undefined || this.$refs.audioPlayer.paused
-            ? 'play'
-            : 'pause'
+    <div class="player-controls">
+      <div class="player-buttons">
+        <vue-feather class="icon-btn hitbox-ico" type="heart" />
+        <vue-feather
+          class="icon-btn hitbox-ico"
+          type="skip-back"
+          @click="this.$parent.$refs.MainContent.$refs.Results.skip(-1)"
+        />
+        <vue-feather
+          class="icon-btn hitbox-ico"
+          :type="
+            this.$refs.audioPlayer == undefined || this.$refs.audioPlayer.paused
+              ? 'play'
+              : 'pause'
+          "
+          :class="{
+            active: !(
+              this.$refs.audioPlayer == undefined ||
+              this.$refs.audioPlayer.paused
+            ),
+          }"
+          @click="togglePlay()"
+        />
+        <vue-feather
+          class="icon-btn hitbox-ico"
+          type="skip-forward"
+          @click="this.$parent.$refs.MainContent.$refs.Results.skip(1)"
+        />
+        <vue-feather
+          class="icon-btn hitbox-ico"
+          type="repeat"
+          @click="loop = !loop"
+          :class="{ active: loop }"
+        />
+      </div>
+      <vue-slider
+        v-model="position"
+        id="playbackSlider"
+        ref="playbackSlider"
+        :lazy="true"
+        :min="0"
+        :max="1"
+        :interval="0.0001"
+        @drag-start="dragging = true"
+        @drag-end="
+          dragging = false;
+          positionToAudio();
         "
-        @click="togglePlay()"
+        tooltip="none"
+        :dragOnClick="true"
       />
     </div>
-    <vue-slider
-      v-model="position"
-      id="playbackSlider"
-      ref="playbackSlider"
-      :lazy="true"
-      :min="0"
-      :max="1"
-      :interval="0.0001"
-      @drag-start="dragging = true"
-      @drag-end="
-        dragging = false;
-        positionToAudio();
-      "
-      tooltip="none"
-      :dragOnClick="true"
-    />
-    <vue-feather
-      class="icon-btn"
-      type="volume-x"
-      v-if="volume == 0"
-      @click="volume = prevVolume"
-    />
-    <div
-      v-else
-      @click="
-        prevVolume = volume;
-        volume = 0;
-      "
-      style="height: 18px"
-    >
+    <div class="side-playbar-controls">
       <vue-feather
-        class="icon-btn"
-        type="volume"
-        v-if="volume < 33"
-      ></vue-feather>
+        type="folder"
+        v-if="res.downloaded"
+        class="icon-btn hitbox-ico"
+        @click="
+          this.$parent.$refs.MainContent.$refs.Results.revealFile(res.localPath)
+        "
+      />
+      <vue-feather type="clock" v-else-if="res.downloading" class="icon-btn" />
       <vue-feather
-        class="icon-btn"
-        type="volume-1"
-        v-else-if="volume < 67"
-      ></vue-feather>
+        type="download"
+        v-else
+        class="icon-btn hitbox-ico"
+        @click="this.$parent.$refs.MainContent.$refs.Results.download(res)"
+      />
       <vue-feather
-        class="icon-btn"
-        type="volume-2"
-        v-else-if="volume >= 67"
-      ></vue-feather>
+        class="icon-btn hitbox-ico hide-bp-500"
+        type="link"
+        @click="
+          this.$parent.$refs.MainContent.$refs.Results.openLink(res.web_link)
+        "
+      />
+      <vue-feather
+        class="icon-btn hitbox-ico hide-bp-500"
+        type="user"
+        @click="this.$parent.$refs.MainContent.$refs.Results.openProfile(res)"
+      />
+      <vue-feather
+        class="icon-btn active hitbox-ico default-slider"
+        type="volume-x"
+        v-if="volume == 0"
+        @click="volume = prevVolume"
+      />
+      <div
+        v-else
+        @click="
+          prevVolume = volume;
+          volume = 0;
+        "
+        class="default-slider"
+        style="height: 18px"
+      >
+        <vue-feather
+          class="icon-btn hitbox-ico"
+          type="volume"
+          v-if="volume < 33"
+        ></vue-feather>
+        <vue-feather
+          class="icon-btn hitbox-ico"
+          type="volume-1"
+          v-else-if="volume < 67"
+        ></vue-feather>
+        <vue-feather
+          class="icon-btn hitbox-ico"
+          type="volume-2"
+          v-else-if="volume >= 67"
+        ></vue-feather>
+      </div>
+      <vue-slider
+        v-model="volume"
+        id="volumeSlider"
+        :min="0"
+        :max="100"
+        class="default-slider"
+      />
+      <div id="volume-btt-spacer"></div>
+      <div id="volumeSlider-btt">
+        <vue-slider
+          v-model="volume"
+          :min="0"
+          :max="100"
+          direction="btt"
+          class="btt-slider"
+        />
+        <vue-feather
+          class="icon-btn active hitbox-ico"
+          type="volume-x"
+          v-if="volume == 0"
+          @click="volume = prevVolume"
+        />
+        <div
+          v-else
+          @click="
+            prevVolume = volume;
+            volume = 0;
+          "
+          style="height: 18px margin-bottom = calc(var(--item-gap) * -1)"
+        >
+          <vue-feather
+            class="icon-btn hitbox-ico"
+            type="volume"
+            v-if="volume < 33"
+          ></vue-feather>
+          <vue-feather
+            class="icon-btn hitbox-ico"
+            type="volume-1"
+            v-else-if="volume < 67"
+          ></vue-feather>
+          <vue-feather
+            class="icon-btn hitbox-ico"
+            type="volume-2"
+            v-else-if="volume >= 67"
+          ></vue-feather>
+        </div>
+      </div>
     </div>
-    <vue-slider v-model="volume" id="volumeSlider" :min="0" :max="100" />
   </div>
 </template>
 
@@ -92,10 +199,6 @@ export default {
   props: {},
   methods: {
     loadSample(res) {
-      this.$data.title = res.title;
-      this.$data.info = res.author + " | " + res.tempo + " | " + res.key;
-      this.$data.profile_picture = res.profile_pic;
-
       let audio = document.getElementById("audioPlayer");
       if (audio == undefined) return;
       if (res.mp3_url == audio.src) {
@@ -109,7 +212,8 @@ export default {
         }
         return;
       }
-      audio.src = res.mp3_url;
+      this.$data.res = res;
+      audio.src = this.$data.res.mp3_url;
       audio.play();
     },
     togglePlay() {
@@ -152,9 +256,10 @@ export default {
       position: 0,
       volumePercent: 100,
       loop: false,
-      title: "",
+      res: {},
       info: "",
-      profile_picture: "",
+      url: "",
+      localUrl: "",
       volume: 100,
       prevVolume: 100,
       dragging: false,

@@ -2,25 +2,34 @@
   <div class="results" ref="resultsArea">
     <div
       class="result"
-      v-for="res in resultsData"
+      v-for="(res, i) in resultsData"
       :key="res.mp3_url"
       @dragstart.prevent="if (res.downloaded) startDrag(res.localPath);"
       draggable="true"
-      :id="res.mp3_url"
-      :class="{ playing: res.mp3_url == playing }"
-      @click.self="playResult(res)"
+      :class="{
+        playing:
+          resultsData[playing] != null &&
+          res.mp3_url == resultsData[playing].mp3_url,
+      }"
+      @click.self="playResult(i)"
     >
       <div class="result-profile-pic">
         <img :src="res.profile_pic" class="profile-picture-large" />
-        <div class="play-btn icon-btn" @click="playResult(res)">
+        <div class="play-btn icon-btn" @click="playResult(i)">
           <vue-feather
-            :type="res.mp3_url == playing && !paused ? 'pause' : 'play'"
+            :type="
+              resultsData[playing] != null &&
+              res.mp3_url == resultsData[playing].mp3_url &&
+              !paused
+                ? 'pause'
+                : 'play'
+            "
           />
         </div>
       </div>
       <div class="info-audio">
         <div class="audio-desc">
-          <div ref="LoopName" class="desc-title" @click="playResult(res)">
+          <div ref="LoopName" class="desc-title" @click="playResult(i)">
             {{ res.title }}
           </div>
           <div
@@ -36,7 +45,7 @@
         class="visualizer"
         :src="res.waveform"
         draggable="false"
-        @click="playResult(res)"
+        @click="playResult(i)"
       />
       <div class="mono-value info-duration" style="">
         {{ res.duration }}0:00
@@ -58,12 +67,15 @@
           @click="revealFile(res.localPath)"
         />
         <vue-feather
+          type="clock"
+          v-else-if="res.downloading"
+          class="icon-btn"
+        />
+        <vue-feather
           type="download"
           v-else
           class="icon-btn"
-          @click="
-            download(res.mp3_url, res.localPath).then((res.downloaded = true))
-          "
+          @click="download(res)"
         />
         <vue-feather
           type="heart"
@@ -118,7 +130,7 @@ export default {
         author: "",
       },
       isInitial: false,
-      playing: "",
+      playing: Number,
       paused: true,
     };
   },
@@ -190,14 +202,17 @@ export default {
     openLink(link) {
       electron.ipcRenderer.invoke("openLink", link);
     },
-    async download(mp3_url, localPath) {
+    async download(res) {
+      res.downloading = true;
       return new Promise((resolve) => {
         electron.ipcRenderer
           .invoke("downloadMP3", {
-            url: mp3_url,
-            dest: localPath,
+            url: res.mp3_url,
+            dest: res.localPath,
           })
           .then(() => {
+            res.downloading = false;
+            res.downloaded = true;
             resolve();
           });
       });
@@ -215,16 +230,20 @@ export default {
     startDrag(path) {
       electron.ipcRenderer.send("ondragstart", path);
     },
-    playResult(res) {
+    playResult(i) {
       let playbar = this.$parent.$parent.$refs.PlayBar;
+      let res = this.resultsData[i];
       if (!this.paused && res.mp3_url == this.playing) {
         playbar.togglePlay();
         this.paused = true;
         return;
       }
       playbar.loadSample(res);
-      this.playing = res.mp3_url;
+      this.playing = i;
       this.paused = false;
+    },
+    skip(steps) {
+      if (this.playing != undefined) this.playResult(this.playing + steps);
     },
     openProfile(res) {
       this.$parent.$refs.TopArea.$data.queryInfo.author = res.author;
