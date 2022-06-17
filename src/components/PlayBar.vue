@@ -27,7 +27,11 @@
     <div class="player-controls">
       <div class="player-buttons">
         <vue-feather class="icon-btn hitbox-ico" type="heart" />
-        <vue-feather class="icon-btn hitbox-ico" type="skip-back" />
+        <vue-feather
+          class="icon-btn hitbox-ico"
+          type="skip-back"
+          @click="this.$parent.$refs.MainContent.$refs.Results.skip(-1)"
+        />
         <vue-feather
           class="icon-btn hitbox-ico"
           :type="
@@ -43,7 +47,11 @@
           }"
           @click="togglePlay()"
         />
-        <vue-feather class="icon-btn hitbox-ico" type="skip-forward" />
+        <vue-feather
+          class="icon-btn hitbox-ico"
+          type="skip-forward"
+          @click="this.$parent.$refs.MainContent.$refs.Results.skip(1)"
+        />
         <vue-feather
           class="icon-btn hitbox-ico"
           type="repeat"
@@ -84,8 +92,18 @@
         class="icon-btn hitbox-ico"
         @click="this.$parent.$refs.MainContent.$refs.Results.download(res)"
       />
-      <vue-feather class="icon-btn hitbox-ico hide-bp-500" type="link" />
-      <vue-feather class="icon-btn hitbox-ico hide-bp-500" type="user" />
+      <vue-feather
+        class="icon-btn hitbox-ico hide-bp-500"
+        type="link"
+        @click="
+          this.$parent.$refs.MainContent.$refs.Results.openLink(res.web_link)
+        "
+      />
+      <vue-feather
+        class="icon-btn hitbox-ico hide-bp-500"
+        type="user"
+        @click="this.$parent.$refs.MainContent.$refs.Results.openProfile(res)"
+      />
       <vue-feather
         class="icon-btn active hitbox-ico default-slider"
         type="volume-x"
