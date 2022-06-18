@@ -264,8 +264,10 @@ export default {
           this.skip(1);
           break;
         case " ":
-          e.preventDefault();
-          this.$parent.$parent.$refs.PlayBar.togglePlay();
+          if (e.target.nodeName != "INPUT") {
+            this.$parent.$parent.$refs.PlayBar.togglePlay();
+            e.preventDefault();
+          }
           break;
       }
     },
