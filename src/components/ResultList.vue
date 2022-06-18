@@ -263,6 +263,10 @@ export default {
         case "ArrowRight":
           this.skip(1);
           break;
+        case " ":
+          e.preventDefault();
+          this.$parent.$parent.$refs.PlayBar.togglePlay();
+          break;
       }
     },
   },
