@@ -134,6 +134,12 @@ export default {
       paused: true,
     };
   },
+  mounted() {
+    window.addEventListener("keydown", this.keyPress);
+  },
+  umnounted() {
+    window.removeEventListener("keydown", this.keyPress);
+  },
   methods: {
     load({ loaded }) {
       electron.ipcRenderer
@@ -248,6 +254,22 @@ export default {
     openProfile(res) {
       this.$parent.$refs.TopArea.$data.queryInfo.author = res.author;
       this.$parent.$parent.search();
+    },
+    keyPress(e) {
+      switch (e.key) {
+        case "ArrowLeft":
+          this.skip(-1);
+          break;
+        case "ArrowRight":
+          this.skip(1);
+          break;
+        case " ":
+          if (e.target.nodeName != "INPUT") {
+            this.$parent.$parent.$refs.PlayBar.togglePlay();
+            e.preventDefault();
+          }
+          break;
+      }
     },
   },
 };
