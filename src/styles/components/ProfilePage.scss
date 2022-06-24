@@ -28,6 +28,9 @@
         color: #fff;
         text-shadow: 0px 4px 8px #000;
       }
+      .subtext {
+        color: #fffa;
+      }
       .profile-image {
         width: calc(var(--profile-pic-large-size) * 2);
         border-radius: var(--radius);

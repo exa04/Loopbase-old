@@ -167,6 +167,9 @@
           <div class="info">
             <h1>{{ artist.username }}</h1>
             <p>{{ artist.tagline }}</p>
+            <p class="subtext">
+              Joined {{ artist.info.joined }} - From {{ artist.info.from }}
+            </p>
           </div>
         </div>
       </div>

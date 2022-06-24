@@ -29,6 +29,8 @@
               'A lot of different stuff, I don\'t have a musical project with a fixed aesthetic.',
             extra:
               'Design, program, do whatever I spontaneously decide to hyper-fixate upon, try to finish high school.',
+            from: 'Göttingen, Germany',
+            joined: 'Tue 3rd Oct 2017, 4 years ago',
             using: {
               instruments: 'computer!! beep boop!',
               software: 'FL Studio, Ableton Live, Bitwig, and a ton of VSTs',
