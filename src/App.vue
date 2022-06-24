@@ -15,7 +15,8 @@
     </Transition>
     <Transition name="popup">
       <ProfilePage
-        v-if="true"
+        v-if="profilePageOpen"
+        @close="profilePageOpen = false"
         :artist="{
           username: 'Example Artist',
           profilePicUrl:
@@ -151,6 +152,7 @@ export default {
   data() {
     return {
       settingsOpen: false,
+      profilePageOpen: true,
       theme: "theme-dark",
       compactMode: false,
     };

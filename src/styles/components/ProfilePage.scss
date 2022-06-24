@@ -43,4 +43,7 @@
   .inner-content {
     padding: 0 var(--side-padding);
   }
+  .close-x {
+    z-index: 1;
+  }
 }

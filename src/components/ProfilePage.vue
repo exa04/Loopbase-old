@@ -33,10 +33,15 @@
 </template>
 
 <script>
+import VueFeather from "vue-feather";
+
 export default {
   name: "ProfilePage",
   props: {
     artist: Object,
+  },
+  components: {
+    VueFeather,
   },
 };
 </script>
