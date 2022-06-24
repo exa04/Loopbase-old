@@ -13,6 +13,41 @@
         "
       />
     </Transition>
+    <Transition name="popup">
+      <ProfilePage
+        v-if="true"
+        :artist="{
+          username: 'Example Artist',
+          profilePicUrl:
+            'https://www.looperman.com/media/avatars/sml/looperman-avatar-03588536.jpg?d=1652701671',
+          tagline: 'This is an example tagline.',
+          info: {
+            about:
+              'Proident culpa ut eu fugiat mollit reprehenderit tempor officia quis aliqua deserunt qui consectetur exercitation.',
+            soundsLike:
+              'Magna incididunt nostrud do laboris Lorem veniam quis quis.',
+            extra:
+              'Aliquip et culpa proident irure ex quis incididunt incididunt commodo adipisicing ullamco tempor reprehenderit.',
+            using: {
+              instruments:
+                'Proident Lorem quis labore excepteur veniam id ipsum.',
+              software:
+                'Deserunt cupidatat aliquip non non aute nostrud eu labore velit sunt consequat.',
+              hardware:
+                'Qui irure nisi adipisicing mollit irure laboris consequat.',
+            },
+            fav: {
+              general:
+                'Cillum commodo labore incididunt proident cupidatat nisi magna ipsum cillum sit.',
+              albums:
+                'Ad eu irure sint exercitation deserunt cupidatat mollit velit incididunt nulla nisi ut eiusmod.',
+              artists:
+                'Labore id aliqua nisi non Lorem adipisicing officia commodo ex aliqua non.',
+            },
+          },
+        }"
+      />
+    </Transition>
     <TitleBar ref="TitleBar" @settingsOpen="settingsOpen = !settingsOpen" />
     <MainContent ref="MainContent" />
     <PlayBar ref="PlayBar" />
@@ -24,6 +59,7 @@ import TitleBar from "./components/TitleBar.vue";
 import MainContent from "./components/MainContent.vue";
 import PlayBar from "./components/PlayBar.vue";
 import Settings from "./components/Settings.vue";
+import ProfilePage from "./components/ProfilePage.vue";
 import "@fontsource/rubik/400.css";
 import "@fontsource/rubik/600.css";
 import "@fontsource/rubik/700.css";
@@ -37,6 +73,7 @@ export default {
     TitleBar,
     MainContent,
     PlayBar,
+    ProfilePage,
     Settings,
   },
   methods: {
@@ -140,6 +177,7 @@ export default {
 
 @import "./styles/components/MainContent.scss";
 @import "./styles/components/PlayBar.scss";
+@import "./styles/components/ProfilePage.scss";
 @import "./styles/components/Results.scss";
 @import "./styles/components/Settings.scss";
 @import "./styles/components/TitleBar.scss";
