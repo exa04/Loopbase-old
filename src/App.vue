@@ -18,32 +18,29 @@
         v-if="profilePageOpen"
         @close="profilePageOpen = false"
         :artist="{
-          username: 'Example Artist',
+          username: 'stxarixdust',
           profilePicUrl:
-            'https://www.looperman.com/media/avatars/sml/looperman-avatar-03588536.jpg?d=1652701671',
-          tagline: 'This is an example tagline.',
+            'https://www.looperman.com/media/avatars/med/looperman-avatar-02420154.jpg',
+          tagline: 'Audio dev and interdisciplinary designer',
           info: {
             about:
-              'Proident culpa ut eu fugiat mollit reprehenderit tempor officia quis aliqua deserunt qui consectetur exercitation.',
+              'Sound/Graphic/*-Designer, Musician. I also develop software. Getting into VST development.',
             soundsLike:
-              'Magna incididunt nostrud do laboris Lorem veniam quis quis.',
+              'A lot of different stuff, I don\'t have a musical project with a fixed aesthetic.',
             extra:
-              'Aliquip et culpa proident irure ex quis incididunt incididunt commodo adipisicing ullamco tempor reprehenderit.',
+              'Design, program, do whatever I spontaneously decide to hyper-fixate upon, try to finish high school.',
             using: {
-              instruments:
-                'Proident Lorem quis labore excepteur veniam id ipsum.',
-              software:
-                'Deserunt cupidatat aliquip non non aute nostrud eu labore velit sunt consequat.',
+              instruments: 'computer!! beep boop!',
+              software: 'FL Studio, Ableton Live, Bitwig, and a ton of VSTs',
               hardware:
-                'Qui irure nisi adipisicing mollit irure laboris consequat.',
+                'Ryzen 7 3700x octacore, 16gb RAM, 1TB SSD, GTX 1050ti, some old ThinkPad.',
             },
             fav: {
               general:
-                'Cillum commodo labore incididunt proident cupidatat nisi magna ipsum cillum sit.',
+                'iglooghost, 7038634357, varg, flume, sophie, bladee, ecco2k',
               albums:
-                'Ad eu irure sint exercitation deserunt cupidatat mollit velit incididunt nulla nisi ut eiusmod.',
-              artists:
-                'Labore id aliqua nisi non Lorem adipisicing officia commodo ex aliqua non.',
+                'drain gang - trash island, iglooghost - lei line eon, 1788-l - sentience, villovilduveta - langtan far vingar, porter robinson - worlds, 100 gecs - 1000 gecs',
+              artists: 'Whatever\'s on my Pinterest feed atm.',
             },
           },
         }"

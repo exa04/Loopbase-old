@@ -249,7 +249,11 @@ export default {
       this.paused = false;
     },
     skip(steps) {
-      if (this.playing != undefined) this.playResult(this.playing + steps);
+      let i = this.playing + steps;
+      if (this.playing != undefined) this.playResult(i);
+      this.$refs.resultsArea.children[i].scrollIntoView({
+        block: "center",
+      });
     },
     openProfile(res) {
       this.$parent.$refs.TopArea.$data.queryInfo.author = res.author;
