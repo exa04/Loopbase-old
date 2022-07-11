@@ -51,6 +51,9 @@
       padding-left: 0 !important;
       color: var(--foreground-100);
     }
+    .sidebar-section {
+      margin-bottom: var(--item-gap);
+    }
   }
   .content {
     overflow-x: hidden !important;
@@ -84,6 +87,7 @@
   .centered-btns {
     display: flex;
     justify-content: center;
+    gap: var(--item-gap);
     &.expand {
       margin-top: calc(var(--side-padding) * -.5);
     }
