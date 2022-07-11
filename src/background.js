@@ -12,6 +12,7 @@ import {
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS3_DEVTOOLS } from "electron-devtools-installer";
 import { search, downloadMP3 } from "./loopermanData";
+import { getGlobals } from "kde-globals-loader";
 import * as fs from "fs";
 import { homedir, platform } from "os";
 import { join } from "path";
@@ -217,6 +218,10 @@ ipcMain.handle("getPrefs", () => {
 ipcMain.handle("setPrefs", async (event, p) => {
   pref = p;
   return await fs.writeFileSync(prefsPath, JSON.stringify(p));
+});
+
+ipcMain.handle("getKDEPrefs", async () => {
+  return await getGlobals();
 });
 
 ipcMain.handle("openLink", async (event, url) => {

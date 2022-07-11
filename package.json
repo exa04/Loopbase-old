@@ -19,6 +19,7 @@
     "axios": "^0.27.2",
     "cheerio": "^1.0.0-rc.10",
     "core-js": "^3.8.3",
+    "kde-globals-loader": "^1.0.3",
     "p5": "^1.4.1",
     "vue": "^3.2.13",
     "vue-feather": "^2.0.0",
