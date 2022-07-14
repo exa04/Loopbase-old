@@ -205,6 +205,8 @@ export default {
   --foreground-300: v-bind("kdePrefs.colors.foreground[2]");
   --foreground-400: v-bind("kdePrefs.colors.foreground[3]");
 
+  --inverse-foreground: v-bind("kdePrefs.colors.background[0]");
+
   /*
   --glass-100: #{rgba(darken($background, 16%), 0.5)};
   --glass-200: #{rgba(darken($background, 12%), 0.5)};
