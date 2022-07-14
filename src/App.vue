@@ -1,10 +1,6 @@
 <template>
   <div
-    :class="
-      'theme' +
-      ' theme-kde-native ' +
-      (compactMode ? 'sizing-compact' : 'sizing-regular')
-    "
+    :class="theme + ' ' + (compactMode ? 'sizing-compact' : 'sizing-regular')"
     class="appRoot"
   >
     <Transition name="popup">
@@ -15,6 +11,8 @@
           settingsOpen = false;
           loadTheme();
         "
+        :kdeThemeName="kdePrefs.themeName"
+        :hasKdeTheme="kdePrefs.exists"
       />
     </Transition>
     <TitleBar ref="TitleBar" @settingsOpen="settingsOpen = !settingsOpen" />
@@ -121,6 +119,8 @@ export default {
       theme: "theme-dark",
       compactMode: false,
       kdePrefs: {
+        exists: false,
+        themeName: "System theme",
         colors: {
           accent: ["inherit", "inherit", "inherit", "inherit"],
           background: ["inherit", "inherit", "inherit", "inherit"],
@@ -135,6 +135,8 @@ export default {
     let prefs = await electron.ipcRenderer.invoke("getPrefs");
     let rawPrefs = await electron.ipcRenderer.invoke("getKDEPrefs");
     this.kdePrefs = {
+      exists: true,
+      themeName: rawPrefs.General.ColorScheme,
       colors: {
         accent: [
           `rgb(${rawPrefs["Colors:Selection"].BackgroundNormal})`,
