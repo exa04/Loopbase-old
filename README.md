@@ -5,7 +5,7 @@
 # Loopbase
 
 [![Continuous Integration](https://github.com/StarburstAudio/loopbase/actions/workflows/CI.yml/badge.svg)](https://github.com/StarburstAudio/loopbase/actions/workflows/CI.yml)
-![Version](https://img.shields.io/github/package-json/v/StarburstAudio/loopbase?color=purple)
+[![CodeQL](https://github.com/StarburstAudio/loopbase/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/StarburstAudio/loopbase/actions/workflows/codeql-analysis.yml)
 ![License](https://img.shields.io/github/license/StarburstAudio/loopbase)
 [![Codebeat](https://codebeat.co/badges/760770d0-04c6-4f13-99f9-8ef3e23199ea)](https://codebeat.co/projects/github-com-starburstaudio-loopbase-main)
 [![Downloads](https://img.shields.io/github/downloads/StarburstAudio/loopbase/total)](https://github.com/StarburstAudio/loopbase/releases)
