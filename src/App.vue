@@ -126,7 +126,8 @@ export default {
           background: ["inherit", "inherit", "inherit", "inherit"],
           foreground: ["inherit", "inherit", "inherit", "inherit"],
         },
-        font: "inherit",
+        font: ["inherit", 0],
+        monoFont: ["inherit", 0],
       },
     };
   },
@@ -154,7 +155,14 @@ export default {
           `rgb(${rawPrefs["Colors:Window"].ForegroundNormal})`,
         ],
       },
-      font: "inherit",
+      font: [
+        `"${rawPrefs.General.font.split(",")[0]}"`,
+        rawPrefs.General.font.split(",")[1],
+      ],
+      monoFont: [
+        `"${rawPrefs.General.fixed.split(",")[0]}"`,
+        rawPrefs.General.fixed.split(",")[1],
+      ],
     };
     this.theme = prefs.theme;
     this.compactMode = prefs.compactMode;
@@ -206,9 +214,16 @@ export default {
 
   --scroll-thumb-color: #{rgba($foreground, 25%)};
   --scroll-thumb-color-hover: #{rgba($foreground, 50%)}; */
+  font-family: v-bind("kdePrefs.font[0]") !important;
+  --kde-font-size: v-bind("kdePrefs.font[1] + 'px'");
+  --font-size: calc(var(--kde-font-size) * var(--font_scale) * 1.35) !important;
 }
 .theme-kde-native .results {
   background-color: v-bind("kdePrefs.colors.background[3]");
+}
+.theme-kde-native .mono-value {
+  font-family: v-bind("kdePrefs.monoFont[0]") !important;
+  font-size: v-bind("kdePrefs.monoFont[1]") !important;
 }
 </style>
 
