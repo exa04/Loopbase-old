@@ -49,8 +49,11 @@ h1{
 // Text
 
 *{
-    font-family: 'Rubik', Arial, Helvetica, sans-serif;
     user-select: none;
+}
+
+.appRoot:not(.theme-kde-native){
+    font-family: 'Rubik', Arial, Helvetica, sans-serif;
 }
 
 .subtext{

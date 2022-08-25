@@ -5,7 +5,7 @@
 # Loopbase
 
 [![Continuous Integration](https://github.com/StarburstAudio/loopbase/actions/workflows/CI.yml/badge.svg)](https://github.com/StarburstAudio/loopbase/actions/workflows/CI.yml)
-![Version](https://img.shields.io/github/package-json/v/StarburstAudio/loopbase?color=purple)
+[![CodeQL](https://github.com/StarburstAudio/loopbase/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/StarburstAudio/loopbase/actions/workflows/codeql-analysis.yml)
 ![License](https://img.shields.io/github/license/StarburstAudio/loopbase)
 [![Codebeat](https://codebeat.co/badges/760770d0-04c6-4f13-99f9-8ef3e23199ea)](https://codebeat.co/projects/github-com-starburstaudio-loopbase-main)
 [![Downloads](https://img.shields.io/github/downloads/StarburstAudio/loopbase/total)](https://github.com/StarburstAudio/loopbase/releases)
@@ -42,3 +42,16 @@ npm run electron:build  # Compiles the app to an executable
 ```
 
 If you run into an error, try running `nvm use 16` and then re-doing step 3.
+
+## 🙋 Contributing
+
+> If you've already contributed to open-source, you may not need to read this. The TL;DR is that Loopbase uses a feature-branch workflow. Your branch is to be prefixed with `feature-`
+
+If you want to contribute, feel free to look at the [issues](https://github.com/StarburstAudio/loopbase/issues) section. You can open an issue yourself if you have a suggestion or improvement. In that case, tag it as an `enhancement`. If your issue is with a bug or some other unexpected or unwanted behavior that you've noticed with the app, tag it as a `bug`.
+
+If you want to resolve issues, do the following:
+  * Ask to be assigned to the issue, continue if your request has been approved
+  * Clone the repository (if you haven't already)
+  * Create a new branch for the issue you're working on (prefix it with `feature-`)
+  * Implement your changes, commit and push them
+  * When you feel ready, open a pull request to have your changes merged

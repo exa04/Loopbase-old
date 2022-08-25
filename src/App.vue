@@ -11,6 +11,8 @@
           settingsOpen = false;
           loadTheme();
         "
+        :kdeThemeName="kdePrefs.themeName"
+        :hasKdeTheme="kdePrefs.exists"
       />
     </Transition>
     <Transition name="popup">
@@ -154,15 +156,118 @@ export default {
       profilePageOpen: true,
       theme: "theme-dark",
       compactMode: false,
+      kdePrefs: {
+        exists: false,
+        themeName: "System theme",
+        colors: {
+          accent: ["inherit", "inherit", "inherit", "inherit"],
+          background: ["inherit", "inherit", "inherit", "inherit"],
+          foreground: ["inherit", "inherit", "inherit", "inherit"],
+        },
+        font: ["inherit", 0],
+        monoFont: ["inherit", 0],
+      },
     };
   },
   async beforeCreate() {
     let prefs = await electron.ipcRenderer.invoke("getPrefs");
+    let rawPrefs = await electron.ipcRenderer.invoke("getKDEPrefs");
+    this.kdePrefs = {
+      exists: true,
+      themeName: rawPrefs.General.ColorScheme,
+      colors: {
+        accent: [
+          `rgb(${rawPrefs["Colors:Selection"].BackgroundNormal})`,
+          `rgb(${rawPrefs["Colors:Selection"].BackgroundNormal})`,
+          `rgb(${rawPrefs["Colors:Selection"].BackgroundNormal})`,
+          `rgb(${rawPrefs["Colors:Selection"].BackgroundNormal})`,
+        ],
+        background: [
+          `rgb(${rawPrefs.WM.activeBackground})`,
+          `rgb(${rawPrefs["Colors:Window"].BackgroundNormal})`,
+          `rgb(${rawPrefs["Colors:Button"].BackgroundNormal})`,
+          `rgb(${rawPrefs["Colors:View"].BackgroundNormal})`,
+        ],
+        foreground: [
+          `rgb(${rawPrefs["Colors:Window"].ForegroundNormal})`,
+          `rgb(${rawPrefs["Colors:Window"].ForegroundNormal})`,
+          `rgb(${rawPrefs["Colors:Window"].ForegroundNormal})`,
+          `rgb(${rawPrefs["Colors:Window"].ForegroundNormal})`,
+        ],
+      },
+      font: [
+        `"${rawPrefs.General.font.split(",")[0]}"`,
+        rawPrefs.General.font.split(",")[1],
+      ],
+      monoFont: [
+        `"${rawPrefs.General.fixed.split(",")[0]}"`,
+        rawPrefs.General.fixed.split(",")[1],
+      ],
+    };
     this.theme = prefs.theme;
     this.compactMode = prefs.compactMode;
   },
 };
 </script>
+
+<style>
+.theme-kde-native {
+  --accent-1-100: v-bind("kdePrefs.colors.accent[0]");
+  --accent-2-100: v-bind("kdePrefs.colors.accent[0]");
+  --accent-3-100: v-bind("kdePrefs.colors.accent[0]");
+  --accent-4-100: v-bind("kdePrefs.colors.accent[0]");
+
+  --accent-1-200: v-bind("kdePrefs.colors.accent[1]");
+  --accent-2-200: v-bind("kdePrefs.colors.accent[1]");
+  --accent-3-200: v-bind("kdePrefs.colors.accent[1]");
+  --accent-4-200: v-bind("kdePrefs.colors.accent[1]");
+
+  --accent-1-300: v-bind("kdePrefs.colors.accent[2]");
+  --accent-2-300: v-bind("kdePrefs.colors.accent[2]");
+  --accent-3-300: v-bind("kdePrefs.colors.accent[2]");
+  --accent-4-300: v-bind("kdePrefs.colors.accent[2]");
+
+  --background-100: v-bind("kdePrefs.colors.background[0]");
+  --background-200: v-bind("kdePrefs.colors.background[1]");
+  --background-300: v-bind("kdePrefs.colors.background[2]");
+  --background-400: v-bind("kdePrefs.colors.background[3]");
+
+  --soft-glass-100: v-bind("kdePrefs.colors.background[0]");
+  --soft-glass-200: v-bind("kdePrefs.colors.background[1]");
+
+  --glass-100: v-bind("kdePrefs.colors.background[0]");
+  --glass-200: v-bind("kdePrefs.colors.background[1]");
+
+  --foreground-100: v-bind("kdePrefs.colors.foreground[0]");
+  --foreground-200: v-bind("kdePrefs.colors.foreground[1]");
+  --foreground-300: v-bind("kdePrefs.colors.foreground[2]");
+  --foreground-400: v-bind("kdePrefs.colors.foreground[3]");
+
+  --inverse-foreground: v-bind("kdePrefs.colors.background[0]");
+
+  /*
+  --glass-100: #{rgba(darken($background, 16%), 0.5)};
+  --glass-200: #{rgba(darken($background, 12%), 0.5)};
+
+  --soft-glass-100: #{rgba(darken($background, 16%), 0.85)};
+  --soft-glass-200: #{rgba(darken($background, 12%), 0.85)};
+
+  // Scroll bars
+
+  --scroll-thumb-color: #{rgba($foreground, 25%)};
+  --scroll-thumb-color-hover: #{rgba($foreground, 50%)}; */
+  font-family: v-bind("kdePrefs.font[0]") !important;
+  --kde-font-size: v-bind("kdePrefs.font[1] + 'px'");
+  --font-size: calc(var(--kde-font-size) * var(--font_scale) * 1.35) !important;
+}
+.theme-kde-native .results {
+  background-color: v-bind("kdePrefs.colors.background[3]");
+}
+.theme-kde-native .mono-value {
+  font-family: v-bind("kdePrefs.monoFont[0]") !important;
+  font-size: v-bind("kdePrefs.monoFont[1]") !important;
+}
+</style>
 
 <style lang="scss">
 @import "./styles/sizing-regular.scss";

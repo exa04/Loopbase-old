@@ -113,14 +113,11 @@
           </p>
           <p>{{ prefs }}</p>
           <Select
-            :options="[
-              ['theme-chroma', 'Chroma'],
-              ['theme-dark', 'Dark'],
-              ['theme-dino', 'Dino'],
-              ['theme-dracula', 'Dracula'],
-              ['theme-light', 'Light'],
-              ['theme-purple', 'Purple'],
-            ]"
+            :options="
+              hasKdeTheme
+                ? themes.concat([['theme-kde-native', kdeThemeName]])
+                : themes
+            "
             class="input-component"
             :selected="prefs.theme"
             @selectOption="(o) => (prefs.theme = o)"
@@ -205,12 +202,30 @@ export default {
     Select,
     Switch,
   },
+  props: {
+    hasKdeTheme: {
+      type: Boolean,
+      default: false,
+    },
+    kdeThemeName: {
+      type: String,
+      default: "System theme",
+    },
+  },
   data() {
     return {
       version: String,
       prefs: Object,
       originalPrefs: Object,
       prefsLoaded: false,
+      themes: [
+        ["theme-chroma", "Chroma"],
+        ["theme-dark", "Dark"],
+        ["theme-dino", "Dino"],
+        ["theme-dracula", "Dracula"],
+        ["theme-light", "Light"],
+        ["theme-purple", "Purple"],
+      ],
     };
   },
   methods: {
@@ -229,7 +244,6 @@ export default {
     let prefs = await electron.ipcRenderer.invoke("getPrefs");
     this.prefs = JSON.parse(JSON.stringify(prefs));
     this.originalPrefs = JSON.parse(JSON.stringify(prefs));
-
     this.prefsLoaded = true;
   },
 };
