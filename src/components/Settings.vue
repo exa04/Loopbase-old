@@ -78,12 +78,19 @@
             :modelValue="prefs.keys.germanic"
             @update:modelValue="(v) => (prefs.keys.germanic = v)"
           />
+          <p>
+            Changes the name of the key "B" to "H". Turn this on if you are used
+            to the key labels used in countries like Germany.
+          </p>
           <Switch
             title="Mode accurate key labels"
             class="input-component big"
             :modelValue="prefs.keys.modeAccurate"
             @update:modelValue="(v) => (prefs.keys.modeAccurate = v)"
           />
+          <p>
+            Changes the accidentals (sharps and flats) based on key and mode.
+          </p>
           <h3>Searching</h3>
           <Switch title="Smart filters" class="input-component big" />
         </div>
@@ -111,15 +118,28 @@
             @selectOption="(o) => (prefs.theme = o)"
             >Theme</Select
           >
+          <p>Changes the overall look and feel of Loopbase.</p>
           <Switch
             title="Compact mode"
             class="input-component big"
             :modelValue="prefs.compactMode"
             @update:modelValue="(v) => (prefs.compactMode = v)"
           />
+          <p>
+            Squishes and scales down fonts, icons, and the like. This might be
+            useful if you have a low-DPI or otherwise small screen.
+          </p>
           <Switch title="Reduced motion" class="input-component big" />
+          <p>
+            Turns off animations for a snappier, dryer and slightly more
+            performant experience.
+          </p>
           <h3>Navigation</h3>
           <Switch title="Native title bar" class="input-component big" />
+          <p>
+            Turns off Loopbase's CSD (Client-Side Window Decorations) to use
+            your OS' title bar.
+          </p>
           <Switch title="Sidebar" class="input-component big" />
         </div>
         <div class="section">
