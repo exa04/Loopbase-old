@@ -58,8 +58,10 @@ function search(args) {
       .then((res) => {
         const $ = cheerio.load(res.data);
         $("#body-left .player-wrapper").each((i, el) => {
+          let title = $(el).find(".player-title").text();
+          title = title.slice(0, title.length / 2);
           results.push({
-            title: $(el).find(".player-title").text(),
+            title: title,
             mp3_url: $(el).prop("rel"),
             author: $(el).find(".icon-user").text(),
             author_url: $(el).find("player-top > div > a").prop("href"),
@@ -74,6 +76,7 @@ function search(args) {
           results[i].category = $($(el).find("a")[2]).text().slice(0, -6);
           results[i].key = $($(el).find("a")[5]).text().slice(6);
         });
+        console.log(results);
         reply(results);
       });
   });
