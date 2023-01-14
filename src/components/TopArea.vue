@@ -58,7 +58,10 @@
         <Tag
           title="Key"
           :additionalInfo="
-            queryInfo.key[0].charAt(0).toUpperCase() +
+            (queryInfo.key[0].charAt(0).toUpperCase() == 'B' &&
+            this.$parent.$parent.keyLabels.keys[6] == 'H'
+              ? 'H'
+              : 'B') +
             (queryInfo.key[0].charAt(1) == 's' ? '#' : '') +
             ' ' +
             (queryInfo.key[1] == 'm' ? 'Minor' : 'Major')

@@ -175,7 +175,12 @@ export default {
             if (oldKey == "Unknown") {
               r.key = "Unknown";
             } else {
-              r.key = oldKey[0] + (oldKey[1] == "#" ? "#" : " ");
+              if (
+                oldKey[0] == "B" &&
+                this.$parent.$parent.keyLabels.keys[6] == "H"
+              )
+                r.key = "H" + (oldKey[1] == "#" ? "#" : " ");
+              else r.key = oldKey[0] + (oldKey[1] == "#" ? "#" : " ");
               if (oldKey.slice(-1) == "m") {
                 r.key += " Minor";
               } else {
