@@ -116,14 +116,14 @@ export default {
       if (prefs.keys.germanic) {
         console.log("GERMANIC");
         this.keyLabels = {
-          sharps: ["C#", "D#", "X", "F#", "G#", "A#"],
+          sharps: ["C", "D", "X", "F", "G", "A"],
           keys: ["C", "D", "E", "F", "G", "A", "H"],
         };
         console.log(this.keyLabels);
       } else {
         console.log("NOT GERMANIC");
         this.keyLabels = {
-          sharps: ["C#", "D#", "X", "F#", "G#", "A#"],
+          sharps: ["C", "D", "X", "F", "G", "A"],
           keys: ["C", "D", "E", "F", "G", "A", "B"],
         };
       }
@@ -132,7 +132,7 @@ export default {
   data() {
     return {
       keyLabels: {
-        sharps: ["C#", "D#", "X", "F#", "G#", "A#"],
+        sharps: ["C", "D", "X", "F", "G", "A"],
         keys: ["C", "D", "E", "F", "G", "A", "B"],
       },
       settingsOpen: false,

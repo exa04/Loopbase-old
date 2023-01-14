@@ -96,7 +96,7 @@
                   'key-seperator': label == 'X',
                 }"
               >
-                {{ label != "X" ? label : "" }}
+                {{ label != "X" ? label + "#" : "" }}
               </div>
             </div>
             <div class="key-row">
