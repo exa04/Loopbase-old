@@ -9,7 +9,7 @@
         v-if="settingsOpen"
         @close="
           settingsOpen = false;
-          loadTheme();
+          reloadPrefs();
         "
         :kdeThemeName="kdePrefs.themeName"
         :hasKdeTheme="kdePrefs.exists"
@@ -107,14 +107,34 @@ export default {
       );
       this.$refs.MainContent.$refs.Results.reset();
     },
-    async loadTheme() {
+    async reloadPrefs() {
       let prefs = await electron.ipcRenderer.invoke("getPrefs");
+
       this.theme = prefs.theme;
       this.compactMode = prefs.compactMode;
+
+      if (prefs.keys.germanic) {
+        console.log("GERMANIC");
+        this.keyLabels = {
+          sharps: ["C#", "D#", "X", "F#", "G#", "A#"],
+          keys: ["C", "D", "E", "F", "G", "A", "H"],
+        };
+        console.log(this.keyLabels);
+      } else {
+        console.log("NOT GERMANIC");
+        this.keyLabels = {
+          sharps: ["C#", "D#", "X", "F#", "G#", "A#"],
+          keys: ["C", "D", "E", "F", "G", "A", "B"],
+        };
+      }
     },
   },
   data() {
     return {
+      keyLabels: {
+        sharps: ["C#", "D#", "X", "F#", "G#", "A#"],
+        keys: ["C", "D", "E", "F", "G", "A", "B"],
+      },
       settingsOpen: false,
       theme: "theme-dark",
       compactMode: false,
@@ -132,7 +152,6 @@ export default {
     };
   },
   async beforeCreate() {
-    let prefs = await electron.ipcRenderer.invoke("getPrefs");
     let rawPrefs = await electron.ipcRenderer.invoke("getKDEPrefs");
     this.kdePrefs = {
       exists: true,
@@ -166,8 +185,7 @@ export default {
         rawPrefs.General.fixed.split(",")[1],
       ],
     };
-    this.theme = prefs.theme;
-    this.compactMode = prefs.compactMode;
+    this.reloadPrefs();
   },
 };
 </script>

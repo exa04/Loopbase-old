@@ -26,10 +26,15 @@ let pref = {
   },
   theme: "theme-purple",
   compactMode: false,
+  keys: {
+    germanic: true,
+    modeAccurate: false,
+  }
 };
 
 let appdataPath = join(app.getPath("appData"), "loopbase");
 let prefsPath = join(appdataPath, "prefs.json");
+console.log(prefsPath);
 
 try {
   if (!fs.existsSync(appdataPath)) fs.mkdirSync(appdataPath);

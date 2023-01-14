@@ -76,7 +76,6 @@ function search(args) {
           results[i].category = $($(el).find("a")[2]).text().slice(0, -6);
           results[i].key = $($(el).find("a")[5]).text().slice(6);
         });
-        console.log(results);
         reply(results);
       });
   });

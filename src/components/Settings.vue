@@ -72,29 +72,17 @@
             These settings don't affect your actual keys, just the way that they
             are displayed.
           </p>
-          <div>
-            <div class="key-row sharps">
-              <div>C#</div>
-              <div>D#</div>
-              <div class="key-seperator"></div>
-              <div>F#</div>
-              <div>G#</div>
-              <div>A#</div>
-            </div>
-            <div class="key-row">
-              <div>C</div>
-              <div>D</div>
-              <div>E</div>
-              <div>F</div>
-              <div>G</div>
-              <div>A</div>
-              <div>B</div>
-            </div>
-          </div>
-          <Switch title="Germanic key labels" class="input-component big" />
+          <Switch
+            title="Germanic key labels"
+            class="input-component big"
+            :modelValue="prefs.keys.germanic"
+            @update:modelValue="(v) => (prefs.keys.germanic = v)"
+          />
           <Switch
             title="Mode accurate key labels"
             class="input-component big"
+            :modelValue="prefs.keys.modeAccurate"
+            @update:modelValue="(v) => (prefs.keys.modeAccurate = v)"
           />
           <h3>Searching</h3>
           <Switch title="Smart filters" class="input-component big" />

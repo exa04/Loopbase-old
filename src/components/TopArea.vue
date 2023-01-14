@@ -85,79 +85,28 @@
           <div>
             <div class="key-row sharps">
               <div
-                @click="filterValues.key[0] = 'cs'"
-                :class="{ selected: filterValues.key[0] == 'cs' }"
+                v-for="(label, i) in this.$parent.$parent.keyLabels.sharps"
+                :key="i"
+                @click="filterValues.key[0] = keyData.sharps[i]"
+                :class="{
+                  selected: filterValues.key[0] == keyData.sharps[i],
+                  'key-seperator': label == 'X',
+                }"
               >
-                C#
-              </div>
-              <div
-                @click="filterValues.key[0] = 'ds'"
-                :class="{ selected: filterValues.key[0] == 'ds' }"
-              >
-                D#
-              </div>
-              <div class="key-seperator"></div>
-              <div
-                @click="filterValues.key[0] = 'fs'"
-                :class="{ selected: filterValues.key[0] == 'fs' }"
-              >
-                F#
-              </div>
-              <div
-                @click="filterValues.key[0] = 'gs'"
-                :class="{ selected: filterValues.key[0] == 'gs' }"
-              >
-                G#
-              </div>
-              <div
-                @click="filterValues.key[0] = 'as'"
-                :class="{ selected: filterValues.key[0] == 'as' }"
-              >
-                A#
+                {{ label != "X" ? label : "" }}
               </div>
             </div>
             <div class="key-row">
               <div
-                @click="filterValues.key[0] = 'c'"
-                :class="{ selected: filterValues.key[0] == 'c' }"
+                v-for="(label, i) in this.$parent.$parent.keyLabels.keys"
+                :key="i"
+                @click="filterValues.key[0] = keyData.keys[i]"
+                :class="{
+                  selected: filterValues.key[0] == keyData.keys[i],
+                  'key-seperator': label == 'X',
+                }"
               >
-                C
-              </div>
-              <div
-                @click="filterValues.key[0] = 'd'"
-                :class="{ selected: filterValues.key[0] == 'd' }"
-              >
-                D
-              </div>
-              <div
-                @click="filterValues.key[0] = 'e'"
-                :class="{ selected: filterValues.key[0] == 'e' }"
-              >
-                E
-              </div>
-              <div
-                @click="filterValues.key[0] = 'f'"
-                :class="{ selected: filterValues.key[0] == 'f' }"
-              >
-                F
-              </div>
-              <div
-                @click="filterValues.key[0] = 'g'"
-                :class="{ selected: filterValues.key[0] == 'g' }"
-              >
-                G
-              </div>
-              <div
-                @click="filterValues.key[0] = 'a'"
-                :class="{ selected: filterValues.key[0] == 'a' }"
-              >
-                A
-              </div>
-              <div
-                @click="filterValues.key[0] = 'b'"
-                :class="{ selected: filterValues.key[0] == 'b' }"
-              >
-                B
+                {{ label != "X" ? label : "" }}
               </div>
             </div>
           </div>
@@ -301,9 +250,14 @@ export default {
     library_name: String,
     section_name: String,
     search_header: Boolean,
+    keyLabels: Object,
   },
   data() {
     return {
+      keyData: {
+        sharps: ["cs", "ds", "x", "fs", "gs", "as"],
+        keys: ["c", "d", "e", "f", "g", "a", "b"],
+      },
       queryInfo: {
         category: "loops",
         order: ["date", "d"],
