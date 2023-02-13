@@ -2,7 +2,7 @@
   <img src="https://raw.githubusercontent.com/StarburstAudio/loopbase/main/public/icons/png/256x256.png" align="left" width="128px">
 </p>
 
-# Loopbase
+# Loopbase (ON HOLD INDEFINITELY)
 
 [![Continuous Integration](https://github.com/StarburstAudio/loopbase/actions/workflows/CI.yml/badge.svg)](https://github.com/StarburstAudio/loopbase/actions/workflows/CI.yml)
 [![CodeQL](https://github.com/StarburstAudio/loopbase/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/StarburstAudio/loopbase/actions/workflows/codeql-analysis.yml)
