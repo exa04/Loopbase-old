@@ -15,6 +15,41 @@
         :hasKdeTheme="kdePrefs.exists"
       />
     </Transition>
+    <Transition name="popup">
+      <ProfilePage
+        v-if="profilePageOpen"
+        @close="profilePageOpen = false"
+        :artist="{
+          username: 'stxarixdust',
+          profilePicUrl:
+            'https://www.looperman.com/media/avatars/med/looperman-avatar-02420154.jpg',
+          tagline: 'Audio dev and interdisciplinary designer',
+          info: {
+            about:
+              'Sound/Graphic/*-Designer, Musician. I also develop software. Getting into VST development.',
+            soundsLike:
+              'A lot of different stuff, I don\'t have a musical project with a fixed aesthetic.',
+            extra:
+              'Design, program, do whatever I spontaneously decide to hyper-fixate upon, try to finish high school.',
+            from: 'Göttingen, Germany',
+            joined: 'Tue 3rd Oct 2017, 4 years ago',
+            using: {
+              instruments: 'computer!! beep boop!',
+              software: 'FL Studio, Ableton Live, Bitwig, and a ton of VSTs',
+              hardware:
+                'Ryzen 7 3700x octacore, 16gb RAM, 1TB SSD, GTX 1050ti, some old ThinkPad.',
+            },
+            fav: {
+              general:
+                'iglooghost, 7038634357, varg, flume, sophie, bladee, ecco2k',
+              albums:
+                'drain gang - trash island, iglooghost - lei line eon, 1788-l - sentience, villovilduveta - langtan far vingar, porter robinson - worlds, 100 gecs - 1000 gecs',
+              artists: 'Whatever\'s on my Pinterest feed atm.',
+            },
+          },
+        }"
+      />
+    </Transition>
     <TitleBar ref="TitleBar" @settingsOpen="settingsOpen = !settingsOpen" />
     <MainContent ref="MainContent" />
     <PlayBar ref="PlayBar" />
@@ -26,6 +61,7 @@ import TitleBar from "./components/TitleBar.vue";
 import MainContent from "./components/MainContent.vue";
 import PlayBar from "./components/PlayBar.vue";
 import Settings from "./components/Settings.vue";
+import ProfilePage from "./components/ProfilePage.vue";
 import "@fontsource/rubik/400.css";
 import "@fontsource/rubik/600.css";
 import "@fontsource/rubik/700.css";
@@ -39,6 +75,7 @@ export default {
     TitleBar,
     MainContent,
     PlayBar,
+    ProfilePage,
     Settings,
   },
   methods: {
@@ -136,6 +173,7 @@ export default {
         keys: ["C", "D", "E", "F", "G", "A", "B"],
       },
       settingsOpen: false,
+      profilePageOpen: true,
       theme: "theme-dark",
       compactMode: false,
       kdePrefs: {
@@ -263,6 +301,7 @@ export default {
 
 @import "./styles/components/MainContent.scss";
 @import "./styles/components/PlayBar.scss";
+@import "./styles/components/ProfilePage.scss";
 @import "./styles/components/Results.scss";
 @import "./styles/components/Settings.scss";
 @import "./styles/components/TitleBar.scss";
